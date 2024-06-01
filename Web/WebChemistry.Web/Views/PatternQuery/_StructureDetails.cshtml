@@ -1,0 +1,110 @@
+﻿<div class="mq-left-pane-wrap" data-bind="attr: { id:  id + '-structure-entries-wrap' }">
+    <div class="mq-details-section-header">
+        <div class="form-inline input-append pull-right" data-bind="attr: { id:  id + '-structure-filters-wrap' }">
+            <select data-bind="options: structuresDisplayFilters, optionsText: 'label', value: structuresFilterType" style="width: 200px; margin-right: 10px"></select>
+            <div style="display: inline-block">
+                <input type="text" title="Matches a regular expression." placeholder="Id filter..." data-bind="value: structuresFilterText, valueUpdate: 'input'" style="width: 160px">
+                <button class="btn" data-bind="click: function() { structuresFilterText(''); }"><i class="icon-remove"></i></button>
+            </div>
+        </div>
+
+        <h3>
+            PDB Entries
+            <small>
+                <!-- ko with: structuresViewCount -->
+                <span data-bind="text: 'Showing ' + mqResultUtils.pluralize(structures, 'PDB entry', 'PDB entries') + ' containing ' + mqResultUtils.pluralize(motifs, 'pattern', 'patterns')"></span>
+                <!-- ko if: structures > 0 -->
+                <a href="#" title="View in CSV format." data-bind="click: $parent.showStructureList"><i class="icon-list"></i></a>
+                <!-- /ko -->
+                <!-- /ko -->
+            </small>
+        </h3>
+    </div>
+
+    <!-- ko template: { name: 'active-filter-info-template', data: metadata.activeFilterInfo() } --><!-- /ko -->
+
+    <div class="mq-view-wrap" data-bind="attr: { id: id + '-structures-grid' }, click: setCurrentFromGrid"></div>
+
+    <div class="mq-color-legend">
+        <ul class="unstyled">
+            <li><div class="mq-structure-valid-bg">&nbsp;</div> No Issue</li>
+            <li><div class="mq-reader-warning-bg">&nbsp;</div> Input Warning</li>
+            <li><div class="mq-computation-warning-bg">&nbsp;</div> Query Warning</li>
+            <li><div class="mq-structure-error-bg">&nbsp;</div> Error</li>
+        </ul>
+    </div>
+    <div style="clear: both"></div>
+
+    <a href="#meta-filters" class="alert alert-info" style="display: block; margin: 0 0 10px 0; font-size: 9pt; padding-left: 6px; padding-top: 4px; padding-bottom: 4px; border-radius: 0">
+        @*<a class="close" data-dismiss="alert" href="#" style="top: 0">&times;</a>*@
+        <b>TIP:</b> Applying a filter in the Metadata Filter section below will keep only the rows of interest and add the corresponding metadata columns to this table.
+    </a>
+</div>
+
+<div data-bind="attr: { id: id + '-structure-details-wrap'}" style="margin-top: 20px">
+    <div class="mq-details-section-header" style="margin-top: 0">
+        <h3>PDB Entry <!-- ko with: currentStructure --><small data-bind="text: Id"></small><!-- /ko --></h3>
+    </div>
+
+    <div class="row mq-right-pane-wrap">
+        <!-- ko with: currentStructure -->
+        <div class="span4 mq-motif-details-text">
+            <dl>
+                <dt>Info</dt>
+                <dd>
+                    <a href="#" target="_blank" data-bind="attr: { href: '//www.ebi.ac.uk/pdbe/entry/pdb/' + Id }">PDBe.org</a>
+                    <small>
+                        | <a href="#" target="_blank" data-bind="attr: { href: PatternQueryActions.ligandValidationAction.replace('-id-', Id) }" title="Ligand and non-standard residues validation.">Validator<sup>DB</sup></a>
+                        @*via <a href="@Url.Action("Index", "ValidatorDb")" target="_blank">Validator<sup>DB</sup></a>*@
+                    </small><br />
+                    <span data-bind="text: AtomCount"></span> atoms in <span data-bind="text: ResidueCount"></span> residues
+                </dd>
+                <dt>Patterns</dt>
+                <dd>
+                    <span data-bind="html: PatternCount"></span> <a href="#" data-bind="attr: { onclick: 'javascript:showMotifsByStructure(event, \'' + $parent.id + '\', \'' + Id + '\')' }">show</a>
+                </dd>
+                <dt><abbr title="The time it took to load the PDB entry to memory.">Load Timing</abbr></dt>
+                <dd>
+                    <span data-bind="html: LoadTimingMs"></span> ms
+                </dd>
+                <dt><abbr title="The time it took to execute the query on this PDB Entry.">Query Timing</abbr></dt>
+                <dd>
+                    <span data-bind="html: QueryTimingMs"></span> ms
+                </dd>
+            </dl>
+        </div>
+
+        <div class="span4 mq-motif-details-text">
+            <dl>
+                <dt><abbr title="Errors that occured while processing the PDB entry.">Errors</abbr></dt>
+                <dd>
+                    <!-- ko if: ErrorType === 'None' -->None<!-- /ko -->
+                    <!-- ko if: ErrorType !== 'None' --><span class="mq-structure-error" data-bind="text: '[' + ErrorType + '] '+ ErrorMessage"></span><!-- /ko -->
+                </dd>
+                <dt><abbr title="Potential issues that arose during the query execution.">Query Warnings</abbr></dt>
+                <dd>
+                    <!-- ko if: ComputationWarnings.length === 0 -->None<!-- /ko -->
+                    <!-- ko if: true -->
+                    <ul class="mq-computation-warning" data-bind="foreach: ComputationWarnings">
+                        <li data-bind="text: $data"></li>
+                    </ul>
+                    <!-- /ko -->
+                </dd>
+                <dt><abbr title="Potential issues/warnings regarding the input file with the PDB entry.">Input Warnings</abbr></dt>
+                <dd>
+                    <!-- ko if: ReaderWarnings.length === 0 -->None<!-- /ko -->
+                    <!-- ko if: true -->
+                    <ul class="mq-reader-warning" data-bind="foreach: ReaderWarnings">
+                        <li data-bind="text: $data"></li>
+                    </ul>
+                    <!-- /ko -->
+                </dd>
+            </dl>
+        </div>
+
+        <div class="span4 mq-motif-details-text">
+            <!-- ko template: { name: 'metadata-details-template', data: Metadata } --><!-- /ko -->
+        </div>
+        <!-- /ko -->
+    </div>
+</div>

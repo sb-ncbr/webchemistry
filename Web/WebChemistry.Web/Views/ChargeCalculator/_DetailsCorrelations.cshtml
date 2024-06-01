@@ -1,0 +1,105 @@
+﻿<div id="details-correlation-wrap">
+    <div class="details-controls">
+        <div id="charges-corr-controls">
+            <div id="charges-corr-ag" class="input-entry input-append input-prepend">
+                <span class="add-on"><abbr title="Atomic or residue level resolution.">Atom Grouping</abbr></span>
+                <select data-bind="options: dataModel.partitionNames, value: correlations.currentPartitionName"></select>
+            </div>
+
+            <div id="charges-corr-xy">
+                <div class="input-entry input-append input-prepend">
+                    <span class="add-on"><abbr title="Set of charges on X axis.">X Axis</abbr></span>
+                    <select data-bind="options: computedChargeNames, value: correlations.xAxis"></select>
+                </div>
+                <div class="input-entry input-append input-prepend">
+                    <span class="add-on"><abbr title="Set of charges on Y axis.">Y Axis</abbr></span>
+                    <select data-bind="options: computedChargeNames, value: correlations.yAxis"></select>
+                </div>
+            </div>
+
+            <div id="charges-corr-range">
+                <div class="input-entry input-append input-prepend" style="height: 30px">
+                    <label for="charges-corr-xAxisRange" class="add-on">
+                        <input type="checkbox" name="charges-corr-xAxisRange" id="charges-corr-xAxisRange" data-bind="checked: correlations.customXAxis" />
+                        <abbr style="cursor: pointer" title="Set a specific range for the X axis.">X Range</abbr>
+                    </label>
+                    <div class="charges-corr-range-element">
+                        <input type="text" data-bind="value: correlations.customXAxisMin, valueUpdate: 'input', enable: correlations.customXAxis" />
+                        <input type="text" data-bind="value: correlations.customXAxisMax, valueUpdate: 'input', enable: correlations.customXAxis" />
+                    </div>
+                </div>
+
+                <div class="input-entry input-append input-prepend" style="height: 30px">
+                    <label for="charges-corr-yAxisRange" class="add-on">
+                        <input type="checkbox" name="charges-corr-yAxisRange" id="charges-corr-yAxisRange" data-bind="checked: correlations.customYAxis" />
+                        <abbr style="cursor: pointer" title="Set a specific range for the Y axis.">Y Range</abbr>
+                    </label>
+                    <div class="charges-corr-range-element">
+                        <input type="text" data-bind="value: correlations.customYAxisMin, valueUpdate: 'input', enable: correlations.customYAxis" />
+                        <input type="text" data-bind="value: correlations.customYAxisMax, valueUpdate: 'input', enable: correlations.customYAxis" />
+                    </div>
+                </div>
+            </div>
+
+            <div style="width: 475px; margin-bottom: 5px" data-bind="visible: correlations.customAxisShowUpdate">
+                <button class="btn btn-block btn-primary" data-bind="click: correlations.updateRanges, text: correlations.customAxisUpdateLabel, enable: correlations.customAxisUpdateEnable">Update Ranges</button>
+            </div>
+
+            <!-- ko if: (!correlations.ignoreMaxDataPoints() && correlations.tooManyDataPoints()) || correlations.ignoreMaxDataPoints  -->
+            <div id="charges-corr-warn">
+                <!-- ko if: !correlations.ignoreMaxDataPoints() && correlations.tooManyDataPoints() -->
+                <div id="too-many-points-warning" class="alert alert-info alert-block">
+                    Showing only the first <b><span data-bind="text: correlations.maxDataPoints"></span> <abbr title="Points with the largest absolute difference in charge value.">outliers</abbr></b>
+                    of <span data-bind="text:correlations.dataPointCount"></span> data points.<br />
+                    <a href="#" data-bind="click: correlations.removeTheLimit" style="font-weight: bold">Remove the limit</a> at the risk of making the application slow.<br />
+                    Alternatively, please use R, Excel, or similar.
+                </div>
+                <!-- /ko -->
+                <!-- ko if: correlations.ignoreMaxDataPoints -->
+                <div id="too-many-points-warning" class="alert alert-info alert-block">
+                    Showing <span data-bind="text:correlations.dataPointCount"></span> data points. This might slow down the application.<br />
+                    <a href="#" data-bind="click: correlations.addTheLimit" style="font-weight: bold">Re-enable the limit</a> of <span data-bind="text: correlations.maxDataPoints"></span> data points.
+                </div>
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+        </div>
+
+        <hr />
+
+        <div id="charges-corr-raw">
+            <div class="input-append input-prepend">
+                <span class="add-on" style="margin-left: 1px; border-radius: 4px"><abbr title="Comparison between set of charges on X axis and all other sets of charges available for this molecule.">Raw Data</abbr></span>
+            </div>
+
+            <table class="table table-striped" style="table-layout: fixed">
+                <thead>
+                    <tr>
+                        <th style="width: 160px">Y Axis</th>
+                        @*<th>#</th>*@
+                        <th title="Pearson">R<sup>2</sup></th>
+                        <th title="Spearman">&rho;</th>
+                        <th title="RMSD">&delta;<sup>2</sup></th>
+                        <th title="Absolute difference sum">Diff.</th>
+                    </tr>
+                </thead>
+                <!-- ko with: correlations.rawData -->
+                <tbody data-bind="foreach: $data">
+                    <tr>
+                        <td class="chc-set-id-col" data-bind="text: DependentId, attr: { title: DependentId }"></td>
+                        @*<td data-bind="text: $data['DataPointCount'] !== null ? $data['DataPointCount'] : ''"></td>*@
+                        <td data-bind="text: $data['PearsonCoefficient'] !== null ? $data['PearsonCoefficient'].toFixed(3) : ''"></td>
+                        <td data-bind="text: $data['SpearmanCoefficient'] !== null ? $data['SpearmanCoefficient'].toFixed(3) : ''"></td>
+                        <td data-bind="text: $data['Rmsd'] !== null ? $data['Rmsd'].toFixed(3) : ''"></td>
+                        <td data-bind="text: $data['AbsoluteDifferenceSum'] !== null ? $data['AbsoluteDifferenceSum'].toFixed(3) : ''"></td>
+                    </tr>
+                </tbody>
+                <!-- /ko -->
+            </table>
+        </div>
+    </div>
+    
+    <div class="details-plot-wrap">
+        <div id="details-correlation-plot" class="details-plot"></div>
+    </div>
+</div>

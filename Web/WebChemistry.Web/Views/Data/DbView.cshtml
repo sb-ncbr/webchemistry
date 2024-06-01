@@ -1,0 +1,98 @@
+﻿@model WebChemistry.Web.Models.DatabaseViewListModel
+
+@{
+    ViewBag.Title = "My Database Views";
+}
+
+<div class="page-header">
+  <h1>Database Views</h1>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <a class="btn" href="@Url.Action("DbView", new { operation = "Create" })">Create View</a>
+    </div>
+
+    
+    <div class="span12">
+    @if (Model.Entries.Count == 0)
+    {
+        <p class="alert alert-info" style="margin-top:12px">You have no database views.</p>
+    }
+    else
+    {
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Database</th>
+                <th>Description</th>
+                <th>Size</th>
+                <th>Filters</th>
+                <th>Actions</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var db in Model.Entries)
+            {
+            <tr>
+                <td class="db-name">@{ /* <a href="@Url.Action("DbView", new { operation = "Details", id = db.View.Id })">*/} @db.View.Name @{ /*</a> Html.Raw(db.IsDefault ? "<span class=\"label\">Default</span>" : "") */ }</td>
+                <td class="db-name">@db.Database.Name</td>
+                <td class="db-description"><div>@Html.Raw(db.View.Description.Replace("\n", "<br />").Replace("\r", ""))</div></td>
+                <td class="view-size">@db.Stats.MoleculeCount</td>
+                <td class="view-filters">
+                    @if (db.FilterCount == 0)
+                    { 
+                    <span>None</span>
+                    }
+                    else
+                    { 
+                    <abbr title="@db.FilterStringHtml">@db.FilterCount.ToString()</abbr>
+                    }
+                </td>
+                <td class="db-actions">
+                    @*<a class="btn btn-small" href="@Url.Action("DbView", new { operation = "MoleculeList", id = db.View.Id })" rel="tooltip" data-placement="bottom" title="Show Molecule List" target="_blank"><i class="icon-list"></i></a>*@
+
+                    <div class="btn-group">
+                        <a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="icon-list"></i>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("DbView", new { operation = "MoleculeList", id = db.View.Id })" target="_blank">Molecule List</a></li>
+                            <li><a href="@Url.Action("DbView", new { operation = "MoleculeMetadata", id = db.View.Id })">Molecule Metadata (CSV)</a></li>
+                        </ul>
+                        @if (!db.IsDefault)
+                        {
+                            <a class="btn btn-small btnDelete" href="@Url.Action("DbView", new { operation = "Delete", id = db.View.ShortId })" rel="tooltip" data-placement="bottom" title="Delete View"><i class="icon-remove"></i></a>
+                        }
+                    </div>
+                    @*<a class="btn btn-small" href="@Url.Action("DbView", new { operation = "MoleculeList", id = db.View.Id })" rel="tooltip" data-placement="bottom" title="Show Molecule List" target="_blank"><i class="icon-list"></i></a>*@
+                    @{ /* <a class="btn btn-small" href="#" rel="tooltip" data-placement="bottom" title="Download Molecules"><i class="icon-download"></i></a> */ }
+                </td>
+                <td></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    }
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/Confirm.js")
+
+    <script type="text/javascript">
+        $(function () {
+            $(".btnDelete").click(function (e) {
+                e.preventDefault();
+                self = this;
+                WebChem.confirmFormAction({
+                    message: "Do you really want to delete this view?",
+                    onYes: function () { window.location.href = self.href; }
+                });
+            });
+        });
+    </script>
+}

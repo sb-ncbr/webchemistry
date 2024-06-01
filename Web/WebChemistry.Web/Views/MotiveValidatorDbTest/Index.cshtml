@@ -1,0 +1,126 @@
+﻿@{
+    ViewBag.Title = "MotiveValidator DB";
+}
+
+@section CustomMeta {
+    <meta name="robots" content="nofollow" />
+}
+
+@section CustomStyles {
+    @Styles.Render("~/Content/themes/base/css")
+    @Styles.Render("~/Content/slickgrid")
+    @Styles.Render("~/Content/MotiveValidator/css")
+}
+
+<div class="page-header">
+    <h1>
+        MotiveValidator<sup>DB</sup><br />
+        <small>
+            Database of validation results for ligands and residues in Protein Data Bank.
+        </small>
+    </h1>
+</div>
+
+<div style="margin-bottom: 15px">
+    <p>
+        <strong>MotiveValidator<sup>DB</sup></strong> contains precomputed <a href="@Url.Action("Index", "MotiveValidator")" target="_blank">validation</a> results for ligands and residues in the
+        <a href="//www.pdb.org" target="_blank">Protein Data Bank</a>. The database is updated on a weekly basis.
+    </p>
+    <p>
+        The residues deemed relevant for validation are all ligands and residues with reasonable size (more than six heavy atoms), with the exception of amino acids and nucleotides.
+        The validation is performed using <a href="@Url.Action("Index", "MotiveValidator")" target="_blank">MotiveValidator</a>, and the residue models from
+        <a href="//www.wwpdb.org/ccd.html" target="_blank">wwPDB Chemical Component Dictionary</a> (wwPDB CCD) are used as reference structures for validation.
+    </p>
+</div>
+
+<div class="tabbable" style="margin-top: 20px">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#pdborg" data-toggle="tab">Protein Data Bank</a></li>
+        <li><a href="#wwpdbdict" data-toggle="tab">wwPDB Chemical Component Dictionary Audit<sup>beta</sup></a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="pdborg">
+
+            <p style="font-style: italic">
+                Database last updated <b>@(ViewBag.LastUpdated)</b>:
+                <b>@ViewBag.StructureCount</b> <small>entries from PDB.org,</small> <b><span id="motifCount"></span></b> <small>residues relevant for validation,</small>
+                <b>@ViewBag.AnalyzedCount</b> <small>residue models from wwPDB CCD.</small>
+            </p>
+
+            <div class="form-inline" id="loopup-form" style="margin-top: 10px">
+                <div class="input-append input-prepend">
+                    <input class="id-input" type="text" placeholder="Comma separated list of residue names (3-letter codes) or PDB IDs (4-letter codes). Max 10." data-bind="value: id, valueUpdate: 'input', enter: lookup" />
+                    <button class="btn btn-large" data-bind="click: lookup, enable: canLookup"><b>Lookup</b></button>
+                </div>
+            </div>
+
+            <div class="tabbable" style="margin-top: 20px">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#summary" data-toggle="tab">Summary</a></li>
+                    <li><a href="#model-details" data-toggle="tab">Details by Residue</a></li>
+                    <li><a href="#structure-details" data-toggle="tab">Details by PDB Entry</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="summary">
+                        <div id="summary-plot"></div>
+                    </div>
+                    <div class="tab-pane" id="model-details">
+                        <div class="form-inline">
+                            <div class="input-append pull-right" id="model-details-view-filter">
+                                <input type="text" placeholder="Name Filter..." data-bind="disable: false, value: filterString, valueUpdate: 'input'" disabled>
+                                <button class="btn" data-bind="disable: false, click: function() { filterString(''); }" disabled><i class="icon-remove"></i></button>
+                            </div>
+                            <a class="btn" href="@Url.Action("Download", new { id = "CsvModelSummary" })"><i class="icon-download-alt"></i> <b>Download CSV Data</b></a>
+                        </div>
+                        <div id="model-details-view"></div>
+                    </div>
+                    <div class="tab-pane" id="structure-details">
+                        <div class="form-inline">
+                            <div class="input-append pull-right" id="structure-details-view-filter">
+                                <input type="text" placeholder="ID or Model Filter..." data-bind="disable: false, value: filterString, valueUpdate: 'input'" disabled>
+                                <button class="btn" data-bind="disable: false, click: function() { filterString(''); }" disabled><i class="icon-remove"></i></button>
+                            </div>
+                            <a class="btn" href="@Url.Action("Download", new { id = "CsvStructureSummary" })"><i class="icon-download-alt"></i> <b>Download CSV Data</b></a>
+                        </div>
+                        <div id="structure-details-view"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="wwpdbdict" style="position: relative">
+            @Html.Partial("_Audit")
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_AuditDetails")
+
+@*<div style="text-align:right">
+        <small style="color: #909090">
+            Database last updated @(ViewBag.LastUpdated), @ViewBag.AnalyzedCount models analyzed in @ViewBag.StructureCount structures.
+        </small>
+    </div>*@
+
+@section jqueryui {
+    @Scripts.Render("~/bundles/jqueryui")
+    <script type="text/javascript">
+        $.widget.bridge('uibutton', $.ui.button);
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+    </script>
+}
+
+@section scripts {
+    <script type="text/javascript">
+        var ValidatorDbParams = {
+            summaryJson: "@Html.Raw(ViewBag.SummaryJson.Replace("\"", "\\\""))",
+            modelSummary: "@Url.Action("Download", new { id = "ModelSummary" })",
+            structureSummary: "@Url.Action("Download", new { id = "StructureSummary" })",
+            perStructureAction: "@Url.Action("ByStructure", new { id = "-id-" })",
+            perModelAction: "@Url.Action("ByModel", new { id = "-id-" })",
+            auditAction: "@Url.Action("AuditData")",
+        };
+    </script>
+    @Scripts.Render("~/bundles/validatordb-index")
+}

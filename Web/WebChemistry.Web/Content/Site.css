@@ -1,0 +1,284 @@
+﻿body {
+    /*padding-top: 60px;  60px to make the container go all the way to the bottom of the topbar */
+}
+
+/* skype shit preventer */
+span.skype_pnh_container {display:none !important;}
+span.skype_pnh_print_container, span[class^="skype_pnh_print_container"] {display:inline !important;}
+
+.navbar {
+    z-index: 10;
+}
+
+#help-actions-wrap {
+    position: fixed; top: 60px; right: -4px; z-index: 15000;
+}
+
+#help-actions-wrap .btn:last-child {
+    border-radius: inherit 0 0 inherit
+}
+
+#main-navbar ul.nav li.dropdown:hover ul.dropdown-menu{
+    display: block;
+}
+
+/*a.menu:after, .dropdown-toggle:after {
+  content: none;
+}*/
+
+.navbar .dropdown-menu {
+ margin-top: -3px;
+}
+
+ul.app-index a {
+    color:black;
+    display: block;
+    padding: 10px 10px 10px 10px
+}
+
+ul.app-index .app-name {
+    font-weight: bold;
+}
+
+.app-name-silverlight {
+    font-weight: bold !important;
+    font-size: smaller !important; 
+    color: #888 !important
+}
+
+.app-name-silverlight :hover {
+    color: white;
+}
+
+
+ul.app-index a:hover {
+    color:white;
+    background: #0080C1;
+}
+
+.app-description {
+    font-size: 8pt;
+    line-height: 5px;
+    font-weight: normal;
+}
+
+.app-panel {
+    float: left;
+    margin-left: 12px;
+    line-height: 14px;
+    font-weight: bold;
+}
+
+.app-clear {
+    clear: both;
+    height: 1px;
+    max-height: 1px;
+}
+
+.dropdown-menu .menu-header {
+    padding: 4px 12px 8px 12px;
+    font-weight: bold;
+    color: black;
+    font-size: 12pt
+}
+
+.dropdown-apps li a {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.table .db-name {
+    width: 150px;
+}
+
+.table .cell-center {
+    text-align: center;
+    padding: 3px 3px;
+}
+
+.table .cell-small-padding {
+    padding: 2px
+}
+
+
+/*.table .row-progress td {
+    position: relative;
+    background: blue;
+}
+
+.table .row-progress td::before {
+    content: "Test";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 100%;
+    background-color: red;
+    z-index: -1;
+}*/
+
+.table-atoms-details {
+    font-size: 8pt;
+    border-spacing: 0;
+}
+
+.table .db-description {
+    width: 220px;
+}
+
+.table .db-description div {
+    max-width: 220px;
+    word-wrap: break-word;
+}
+
+.table .db-size {
+    width: 160px;
+}
+
+.table .view-size {
+    width: 80px;
+}
+
+.table .view-filters {
+    width: 160px;
+}
+
+.table .db-updated {
+    width: 200px;
+}
+
+.table .db-actions {
+    width: 120px;
+    text-align: left;
+}
+
+.atlas-app-sitebar {
+    padding: 0;
+    position: fixed;
+    top: 60px;
+    width: 220px;
+    bottom: 0px;
+    margin-left: 0px;
+    overflow-y: auto;
+}
+
+.atlas-app-summary {
+    padding: 18px 20px 20px 0px;
+    position: fixed;
+    top: 42px;
+    right: 0px;
+    left: 260px;
+    bottom: 0px;
+    overflow-y: auto;
+}
+
+.atlas-app-top-list-entry {
+    margin-right: 10px
+}
+
+/* Validation helpers */
+
+.field-validation-error {
+    color: #e80c4d;
+    font-weight: bold;
+    margin-left: 10px;
+    vertical-align: central
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #e80c4d;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #e80c4d;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.silverlight-control-host {
+    position: fixed;
+    text-align:center;
+    top: 41px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    padding-top: 0px;
+    border: 0px solid #aaa;
+}
+
+.silverlight-control-host object {
+    width: 100%;
+    height: 100%;
+}
+
+.wicon-mq {
+  background-position: 0      0;
+}
+
+.btn-intro {
+    width:100px;
+    text-align: left
+}
+
+ul.intro > li {
+    margin-bottom: 4px;
+}
+
+input.result-input {
+  font-size: 12pt;
+  font-weight: bold;
+  min-height: 34px;
+  display: block;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.recently-submitted-computations {
+    padding-bottom: 5px !important
+}
+
+.recently-submitted-computations a {
+    /*color: #468847 !important*/
+}
+
+.recently-submitted-computations hr {
+    margin: 10px 0 10px 0;
+    width: 100%;
+}
+
+.recently-submitted-computations h5 {
+    margin: 0 0 10px 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd
+}
+
+/*.recently-submitted-computations {
+    position: relative;
+}
+
+.recently-submitted-computations .recently-submitted-header {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 35px;
+    background: #BDCCB7;
+    border-bottom: 1px solid #ccc;
+    -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px 4px 0 0;
+}*/

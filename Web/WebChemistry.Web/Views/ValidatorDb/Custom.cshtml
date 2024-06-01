@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "ValidatorDB";
+}
+
+@section CustomMeta {
+    <meta name="robots" content="nofollow" />
+}
+
+@section CustomStyles {
+    @*@Styles.Render("~/Content/themes/base/css")*@
+    @Styles.Render("~/Content/slickgrid/css")
+    @Styles.Render("~/Content/MotiveValidator/css")
+}
+
+<div class="page-header">
+    <h1>
+        Validator<sup>DB</sup><br />
+        <small>
+            Search
+        </small>
+    </h1>
+</div>
+
+<div id="mainView" data-bind="template: { name: template().name, data: template().data }">
+</div>
+
+<script type="text/html" id="empty-template">
+    <div></div>
+</script>
+
+<script type="text/html" id="error-template">
+    <h2>Error</h2>
+    <div data-bind="text: message">
+    </div>
+</script>
+
+<script type="text/html" id="busy-template">
+    <div id="busySpinner" style="height: 150px"></div>
+    <div style="margin-top: 5px; padding-bottom: 20px; text-align:center"><span style="font-weight: bold; font-size: 20px" data-bind="html: message"></span></div>
+</script>
+
+<script type="text/html" id="result-template">
+    <div>
+        <!-- ko if: stats['ModelCount'] > 0 -->
+        <div class="alert alert-success alert-block">
+            Results retrieved on <b>@(ViewBag.ComputedDate)</b>:
+            <b data-bind="text: stats['StructureCount']"></b> <small>entries from PDBe.org,</small> <b data-bind="text: stats['MotiveCount']"></b> <small>molecules relevant for validation,</small>
+            <b data-bind="text: stats['ModelCount']"></b> <small>models from wwPDB CCD.</small>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if: hasMissingStructures || hasMissingModels -->
+        <div class="alert alert-error alert-block">
+            <b><abbr title="PDB Entries/molecules that were queried for and are not present in the database.">Not present in the database:</abbr></b>
+            <ul>
+                <!-- ko if: hasMissingStructures -->
+                <li>
+                    <b data-bind="text: missing.Structures.length"></b> <b>PDB Entrie(s)</b> 
+                    <a target="_blank" title="View list" data-bind="attr: { href: missingStructuresHref }"><i class="icon icon-list"></i></a> 
+                    <span data-bind="text: missingStructuresString"></span>
+                </li>
+                <!-- /ko -->
+                <!-- ko if: hasMissingModels -->
+                <li>
+                    <b data-bind="text: missing.Models.length"></b> <b>Molecule(s)</b>
+                    <a target="_blank" title="View list" data-bind="attr: { href: missingModelsHref }"><i class="icon icon-list-alt"></i></a>
+                    <span data-bind="text: missingModelsString"></span>
+                </li>
+                <!-- /ko -->
+            </ul>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if: stats['ModelCount'] === 0 -->
+        <div class="alert alert-error alert-block">No data available for display.</div>
+        <!-- /ko -->
+
+        <!-- ko if: stats['ModelCount'] > 0 -->
+        <!-- ko stopBinding: true -->
+        <div class="tabbable" style="margin-top: 20px">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#summary" data-toggle="tab">Overview</a></li>
+                <li><a href="#model-details" data-toggle="tab">Details by Molecule</a></li>
+                <li><a href="#structure-details" data-toggle="tab">Details by PDB Entry</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="summary">
+                    <div id="summary-plot"></div>
+                    <div class="overview-categories-warning">Only categories with at least 0.5% representation are shown. Use the CSV link to view all data.</div>
+                </div>
+                @Html.Partial("_DetailsTabs")
+            </div>
+        </div>
+        <!-- /ko  -->
+        <!-- /ko  -->
+    </div>
+</script>
+
+
+<script type="text/html" id="column-labels-template">
+    <hr style="margin: 0 0 5px 0" />
+    <ul class="unstyled" style="color: white;">
+        <li style="float: left; display: inline-block; margin-bottom: 2px; margin-right: 2px"><button class="btn btn-small btn-link" style="padding: 0" title="Add/remove columns by clicking on the checkboxes."><i class="icon-question-sign"></i></button></li>
+        <!-- ko foreach: columnArray -->
+        <li style="float: left; padding: 1px 3px; margin-right: 2px; display: inline-block; margin-bottom: 2px" data-bind="style: { background: MotiveValidatorGlobals[field].color }">
+            <label class="checkbox" data-bind="attr: { title: $data['toolTip'] }" style="margin: 0; cursor: pointer" data-placement="top">
+                <input type="checkbox" data-bind="checked: isSelected" />
+                <span data-bind="html: name" style="font-size: 9pt"></span>
+            </label>
+        </li>
+        <!-- /ko -->
+        <li style="float: left; display: inline-block; margin-bottom: 2px"><button class="btn btn-small btn-inverse" style="padding: 2px 4px" data-bind="click: resetColumns" title="Reset Columns"><i class="icon-repeat icon-white"></i></button></li>
+    </ul>
+    <div style="clear: both"></div>
+</script>
+
+@section jqueryui {
+    @Scripts.Render("~/bundles/jqueryui")
+    <script type="text/javascript">
+        $.widget.bridge('uibutton', $.ui.button);
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+    </script>
+}
+
+@section scripts {
+    <script type="text/javascript">
+        var ValidatorDbParams = {
+            isFinished: @(ViewBag.IsFinished.ToString().ToLower()),
+            statusAction: "@Url.Action("CustomStatus", new { id = ViewBag.Id })",
+            resultAction: "@Url.Action("CustomResult", new { id = ViewBag.Id })",
+
+            modelSummary: "@Url.Action("CustomDownload", new { id = ViewBag.Id, what = "ModelSummary" })",
+            structureSummary: "@Url.Action("CustomDownload", new { id = ViewBag.Id, what = "StructureSummary" })",
+            perStructureAction: "@Url.Action("CustomByStructure", new { id = ViewBag.Id, what = "-id-" })",
+            perModelAction: "@Url.Action("CustomByModel", new {  id = ViewBag.Id, what = "-id-" })",
+        };
+    </script>
+    @Scripts.Render("~/bundles/validatordb-index-custom")
+}

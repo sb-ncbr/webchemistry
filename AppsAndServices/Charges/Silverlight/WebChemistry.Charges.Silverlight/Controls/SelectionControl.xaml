@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="WebChemistry.Charges.Silverlight.Controls.SelectionControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:commonControls="clr-namespace:WebChemistry.Silverlight.Controls;assembly=WebChemistry.Silverlight.Common"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="460">
+    
+    <StackPanel x:Name="LayoutRoot">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <HyperlinkButton FontWeight="Bold" Padding="0" Margin="0"
+                                 Command="{Binding SelectCommand,Mode=OneTime}" CommandParameter="BeginAdd" Click="addButton_Click_1"
+                                 Visibility="{Binding IsGlobal,Converter={StaticResource UIVisibilityConverter}}">Global Selection</HyperlinkButton>
+                <HyperlinkButton FontWeight="Bold" Padding="0" Margin="0"
+                                 Command="{Binding SelectCommand,Mode=OneTime}" CommandParameter="BeginAdd" Click="addButton_Click_1"
+                                 Visibility="{Binding IsGlobal,Converter={StaticResource UIVisibilityConverter},ConverterParameter='negate'}">Selection</HyperlinkButton>
+                <!--TextBlock FontWeight="Bold" Visibility="{Binding IsGlobal,Converter={StaticResource UIVisibilityConverter}, ConverterParameter='negate'}">Selection</TextBlock-->
+                <!--HyperlinkButton FontWeight="Bold" Command="{Binding SelectCommand,Mode=OneTime}" CommandParameter="BeginAdd" x:Name="addButton" Click="addButton_Click_1">+</HyperlinkButton-->
+            </StackPanel>
+            <TextBlock Grid.Column="1" Visibility="{Binding IsGlobal,Converter={StaticResource UIVisibilityConverter}, ConverterParameter='negate'}"
+                       ><Run Text="{Binding SelectedCount, FallbackValue=0}" Foreground="Green" /><Run 
+                                     Text="/" Foreground="#AAAAAA" /><Run 
+                                     Text="{Binding Structure.Structure.Atoms.Count, Mode=OneTime, FallbackValue=0}" Foreground="#FF888888"/><Run 
+                                     Text=" " /><Run 
+                                     Text="{Binding SelectionString, FallbackValue='Empty'}" FontSize="11" /></TextBlock>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                <CheckBox MinWidth="0" IsChecked="{Binding IsAdditive, Mode=TwoWay}"
+                          Visibility="{Binding QueryVisible, Converter={StaticResource UIVisibilityConverter}}">Additive</CheckBox>
+                <HyperlinkButton Margin="4 0 0 0" Command="{Binding SelectCommand,Mode=OneTime}" CommandParameter="Clear" Padding="0">Clear</HyperlinkButton>
+            </StackPanel>
+        </Grid>
+        
+        <Grid Grid.ColumnSpan="2" Grid.Row="1" Margin="0 2 0 0" Visibility="{Binding QueryVisible, Converter={StaticResource UIVisibilityConverter}}">
+
+            <commonControls:QueryInputControl QueryString="{Binding QueryString, Mode=TwoWay}" x:Name="queryInput" Type="MotiveSeq"
+                                              RunCommand="{Binding SelectCommand,Mode=OneTime}" RunCommandParameter="Add" />
+            
+            <HyperlinkButton Padding="8 2" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Margin="2 0 0 0"
+                             Command="{Binding SelectCommand,Mode=OneTime}" CommandParameter="Add"
+                    FontWeight="Bold"
+                    >Add</HyperlinkButton>
+        </Grid>
+    </StackPanel>
+</UserControl>

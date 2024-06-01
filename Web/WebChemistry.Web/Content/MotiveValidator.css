@@ -1,0 +1,453 @@
+﻿input.id-input {
+    font-size: 12pt;
+    font-weight: bold;
+    min-height: 40px;
+    max-height: 40px;
+    width: 795px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#summary-plot, #wwpdbdict-summary-plot {
+    height: 490px;
+}
+
+#model-details-view, #structure-details-view, #wwpdbdict-details-view {
+    margin-top: 8px;
+    height: 320px;
+    background: #f0f0f0;
+    font-family: Arial;
+    font-size: 9pt;
+}
+
+.details-cell {
+    padding: 1px 2px 1px 3px;
+}
+
+.numeric-details-cell {
+    padding: 1px 5px 1px 2px;
+    text-align: right;
+}
+
+/*.light-details-cell {
+    background: #fafafa;            
+}
+
+.summary-details-cell {
+    background: #f3f3f3;            
+}
+
+.error-details-cell {
+    background: #f8d5d5;            
+}
+
+.chirality-details-cell {
+    background: #e9f6c8;            
+}
+
+.warning-details-cell {
+    background: #d3e5fa;            
+}*/
+
+.details-cell-separator {
+    border-right: 1px solid #999;
+}
+
+.details-cell-thick-separator {
+    border-right: 2px solid #999;
+}
+
+.mv-header-default {
+    background: #eee !important;
+    color: black
+}
+
+.mv-header-base {
+    font-size: 7pt;
+}
+
+.mv-result-header-base {
+    font-size: 8pt;
+}
+
+/*.mv-header-base .slick-column-name {
+    display: block;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    height: 30px;
+}*/
+
+/*.mv-header-base .slick-sort-indicator, .mv-result-header-base .slick-sort-indicator {
+    float: none !important;
+    right: 6px !important;
+    position: absolute !important;
+}*/
+
+
+/*.table-mv-details {
+    border: 1px solid #fff  !important;
+}
+
+.table-mv-details th, .table-mv-details td {
+    border-left: 1px solid #fff !important;
+}*/
+
+.table .mv-summary-header-cell {    
+    text-align: center;
+    padding: 3px 3px;
+    vertical-align: middle;
+}
+
+.table .mv-summary-header-cell a {
+    color: white !important;
+}
+
+.table .mv-summary-header-cell a:hover {
+    color: white !important;
+}
+
+.table .mv-summary-cell {    
+    padding: 1px 5px;
+    text-align: center;
+    vertical-align: middle;
+    width: 10%;
+    color: black;
+    text-shadow: 1px 1px white;
+}
+
+.table .mv-summary-cell:hover {
+    background: #666 !important;
+    color: white !important;
+    text-shadow: 1px 1px black;
+}
+
+.table .mv-summary-cell:hover a {
+    background: #666 !important;
+    color: white !important;
+    text-shadow: 1px 1px black;
+}
+
+.table .mv-summary-cell a {
+    width: 100%;
+    display: inline-block;
+    color: black !important;
+}
+
+.table .mv-summary-cell a:hover {
+    color: white !important;
+    text-decoration: none;
+    text-shadow: 1px 1px black;
+}
+
+.table .summary-cell {
+    background: #333;
+    position: relative;
+    text-align: center;
+    padding: 3px;
+}
+
+.table .summary-cell:hover {
+    background: #424242 !important;
+}
+
+.table .cell-progress {
+    text-align: center;
+    padding: 0;
+    background: #555;
+}
+
+.table .cell-progress > div {
+    position: relative; width: 100%; height: 100%;
+}
+
+.table .cell-progress .cell-progress-wrap {
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; z-index:-1; background: #EFEFEF  /*background: #D9FC9D*/
+}
+
+.table .cell-progress .cell-progress-bar {
+    position: absolute; bottom: 0; left: 0; width: 33%; height: 100%; z-index:-1; background: #BBB  /* background: #A6C96A*/
+}
+
+.table .cell-progress .cell-progress-content {
+    padding: 3px 3px 3px 3px
+}
+
+
+.validator-summary-header {    
+    color: white;
+}
+
+.validator-summary-header small {
+    color: white
+}
+
+.validator-summary-header a {
+    color: gray;
+    border-bottom: 1px gray dotted;
+}
+
+.validator-summary-header a:hover {
+    color: gray;
+    text-decoration: none;
+    border-bottom: 1px gray solid;
+}
+
+.validator-summary-error-link {
+    color: #999999;
+    border-bottom: 1px #999999 dotted;
+}
+
+.validator-summary-error-link:hover {
+    color: #999999;
+    text-decoration: none;
+    border-bottom: 1px #999999 solid;
+}
+
+.nav-pills li.active a {
+    color: white !important
+}
+
+.highcharts-tooltip span {
+    height:auto;
+    width: 300px;
+    overflow:auto;
+    white-space:normal !important;
+}
+
+.motive-details-labelbox {
+    width: 12px; display: inline-block; height: 12px;
+}
+
+.details-big-hide-overflow {
+        overflow: hidden;
+    }
+
+    .details-small-visualizer {
+        margin-top: 5px;
+        width: 350px;
+        height: 285px;
+        position: absolute;
+    }
+
+        .details-small-visualizer canvas {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 35px;
+            bottom: 0;
+        }
+
+    .details-big-visualizer {
+        background: white;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: 20px 15px 0 15px;
+        z-index: 10000;
+    }
+
+        .details-big-visualizer canvas {
+            position: absolute;
+            text-align: center;
+            left: 0;
+            right: 0;
+            top: 35px;
+            bottom: 0;
+        }
+
+.details-controls {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+}
+
+.details-controls select {
+    width: calc(100% - 93px);
+}
+
+.details-controls button {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.valdb-sample-list dt {
+    float: left;
+}
+
+.valdb-sample-list dd {
+    background: #f3f3f3;
+    margin-bottom: 10px;
+    margin-left: 64px;
+    padding: 5px 10px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    /*text-shadow: 1px 1px white*/
+}
+
+.valdb-sample-list a.btn {
+    width: 55px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.valdb-step-by-step-sample {
+    background: #f3f3f3;
+    margin-bottom: 10px;
+    padding: 10px 10px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+
+.valdb-step-by-step-sample h4 {
+    margin: 0;
+}
+
+.overview-categories-warning {
+    background: #fff;
+    text-align: center; 
+    color: #777; 
+    font-size: x-small;
+    border-radius: 0 0 6px 6px
+}
+
+/*
+IMPORTANT:
+In order to preserve the uniform grid appearance, all cell styles need to have padding, margin and border sizes.
+No built-in (selected, editable, highlight, flashing, invalid, loading, :focus) or user-specified CSS
+classes should alter those!
+*/
+
+.slick-header-column {
+    background: #eee !important;
+    color: black;
+    border-right: 1px solid silver;
+}
+
+.slick-header-columns {
+  background: #eee !important;
+  border-bottom: 1px solid silver;
+}
+
+
+.slick-headerrow {
+  background: #fafafa;
+}
+
+.slick-headerrow-column {
+  background: #fafafa;
+  border-bottom: 0;
+  height: 100%;
+}
+
+.slick-row.ui-state-active {
+  background: #F5F7D7;
+}
+
+.slick-row {
+  position: absolute;
+  background: white;
+  border: 0px;
+  line-height: 20px;
+}
+
+.slick-row.selected {
+  z-index: 10;
+  background: #DFE8F6;
+}
+
+.slick-cell {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.slick-group {
+  border-bottom: 2px solid silver;
+}
+
+.slick-group-toggle {
+  background-color: transparent
+}
+
+.slick-group-toggle.expanded {
+  background: url(../Images/collapse.gif) no-repeat center center;
+}
+
+.slick-group-toggle.collapsed {
+  background: url(../Images/expand.gif) no-repeat center center;
+}
+
+.slick-group-totals {
+  color: gray;
+  background: white;
+}
+
+.slick-cell.selected {
+  /*background-color: beige;*/
+}
+
+.slick-cell.active {
+  border-color: gray;
+  border-style: solid;
+}
+
+.slick-sortable-placeholder {
+  background: silver !important;
+}
+
+.slick-row.odd {
+  background: #fafafa;
+}
+
+.slick-row.ui-state-active {
+  background: #F5F7D7;
+}
+
+.slick-row.loading {
+  opacity: 0.5;
+  filter: alpha(opacity = 50);
+}
+
+.slick-cell.invalid {
+  border-color: red;
+  -moz-animation-duration: 0.2s;
+  -webkit-animation-duration: 0.2s;
+  -moz-animation-name: slickgrid-invalid-hilite;
+  -webkit-animation-name: slickgrid-invalid-hilite;  
+}
+
+@-moz-keyframes slickgrid-invalid-hilite {
+  from { box-shadow: 0 0 6px red; }
+  to { box-shadow: none; }
+}
+
+@-webkit-keyframes slickgrid-invalid-hilite {
+  from { box-shadow: 0 0 6px red; }
+  to { box-shadow: none; }
+}
+
+.tab-guide-header button {
+    display: none;
+}
+
+.tab-guide-header {
+    position: relative;
+}
+
+.tab-guide-header.active a {
+    padding-right: 50px !important;
+}
+
+.tab-guide-header.active button {
+    display: block !important;
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    z-index: 9999;
+}

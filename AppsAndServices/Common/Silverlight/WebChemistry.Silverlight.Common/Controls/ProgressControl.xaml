@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="WebChemistry.Silverlight.Controls.ProgressControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="600">
+
+    <Grid x:Name="LayoutRoot" Visibility="{Binding Visibility}">
+        <Grid Opacity="0.75" Background="#FFEEEEEE" />
+
+        <Border  Width="400" VerticalAlignment="Center" Background="White" Padding="10" CornerRadius="6" BorderThickness="1" BorderBrush="#FFCCCCCC">
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Center" FontWeight="Bold" Text="{Binding Progress.StatusText,Mode=OneWay,FallbackValue='Working...'}" TextWrapping="Wrap" TextAlignment="Center" />
+                <Grid Margin="0,8,0,0" Visibility="{Binding ProgressVisibility,FallbackValue=Visible}">
+                    <ProgressBar Minimum="0" Maximum="{Binding Progress.Length, Mode=TwoWay}" Value="{Binding Progress.Current, Mode=TwoWay}" Height="24" IsIndeterminate="{Binding Progress.IsIndeterminate, FallbackValue='True', Mode=TwoWay}" />
+                    <TextBlock HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center"
+                               Visibility="{Binding Progress.IsIndeterminate, Converter={StaticResource UIVisibilityConverter}, ConverterParameter=negate}"><Run 
+                                   Text=""/><Run Text="{Binding Progress.Current, FallbackValue=0}" /><Run Text=" / " /><Run Text="{Binding Progress.Length, FallbackValue=1}" /></TextBlock>
+                </Grid>
+                <Grid Margin="0,6,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock VerticalAlignment="Center" Visibility="{Binding TimerVisibility}"><Run Text="Time Elapsed: " /><Run Text="{Binding ElapsedString, FallbackValue=0.0s}" /></TextBlock>
+                    <Button Grid.Column="1" Command="{Binding AbortCommand}" IsEnabled="{Binding Progress.CanCancel}">Abort</Button>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

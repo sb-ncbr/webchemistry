@@ -1,0 +1,81 @@
+﻿
+
+<script type="text/html" id="motif-details-template">
+    <div class="details-data-wrap" data-bind="attr: { id: id + '-details-data' }">
+        <h4 class="mq-details-header">
+            <span data-bind="text: summary.Id"></span>
+            <small><span data-bind="text: mqResultUtils.pluralize(summary.PatternCount, 'pattern', 'patterns') + ' in ' + mqResultUtils.pluralize(summary.StructureWithPatternsCount, 'PDB entry', 'PDB entries')"></span></small>
+        </h4>
+        <div class="tabbable">
+            <ul class="nav nav-tabs" style="margin-bottom: 5px">
+                <li class="active pull-right tab-guide-header">
+                    <button class="btn btn-small btn-success" title="Interactive guide." data-bind="click: function() { startResultIntro('#motifTab', id); }"><i class="icon icon-white icon-question-sign"></i></button>
+                    <a data-bind="attr: { href: '#' + id + '-motifs-tab' }" href="#" data-details-by="motif" data-toggle="tab">By Pattern</a>
+                </li>
+                <li class="pull-right tab-guide-header">
+                    <button class="btn btn-small btn-success" title="Interactive guide." data-bind="click: function() { startResultIntro('#pdbTab', id); }"><i class="icon icon-white icon-question-sign"></i></button>
+                    <a data-bind="attr: { href: '#' + id + '-structures-tab' }" data-details-by="structure" data-toggle="tab">By PDB Entry</a>
+                </li>
+            </ul>
+            <div class="mq-query-string-header">
+                <code data-bind="text: mqResultUtils.prettifyQuery(summary.QueryString)" style="white-space: pre-wrap"></code>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane active" data-bind="attr: { id: id + '-motifs-tab' }">
+                    @Html.Partial("_PatternDetails")
+                </div>
+
+                <div class="tab-pane" data-bind="attr: { id: id + '-structures-tab' }">
+                    @Html.Partial("_StructureDetails")
+                </div>
+            </div>
+            <div class="mq-motif-3d-large-overlay hide"></div>
+        </div>
+        <div data-bind="attr: { id: id + '-metadata-selection-wrap' }">
+            @Html.Partial("_MetadataDetails")        
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="metadata-details-template">
+
+    <ul class="unstyled meta-details-items">
+        <!-- ko foreach: _.keys($data).sort() -->
+        <!-- ko with: { propName: mqFilterData.filterMapByProperty[$data] ? mqFilterData.filterMapByProperty[$data].name : $data, propDesc: mqFilterData.filterMapByProperty[$data] ? mqFilterData.filterMapByProperty[$data].description : $data, value: mqResultUtils.formatMetadataValue($parent[$data]) } -->
+        <li>
+            <div>
+                <span>
+                    <abbr data-bind="text: propName, attr: { title: propDesc }"></abbr>
+                </span>
+            </div>
+            <div>
+                <span data-bind="text: value, attr: { title: value }"></span>
+            </div>
+        </li>
+        <!-- /ko -->
+        <!-- /ko -->
+    </ul>
+
+    @*<dl>
+        <!-- ko foreach: _.keys($data).sort() -->
+        <dt>
+            <abbr data-bind="text: mqFilterData.filterMapByProperty[$data] ? mqFilterData.filterMapByProperty[$data].name : $data, attr: { title: mqFilterData.filterMapByProperty[$data] ? mqFilterData.filterMapByProperty[$data].description : $data }"></abbr>
+        </dt>
+        <dd data-bind="text: mqResultUtils.formatMetadataValue($parent[$data])"></dd>
+        <!-- /ko -->
+    </dl>*@
+</script>
+
+<script type="text/html" id="active-filter-info-template">
+    <!-- ko if: length > 0  -->
+    <div class="mq-active-filter-info">
+        <ul class="unstyled">
+            <li><span>Metadata Filters</span> <button class="btn btn-link btn-small" data-bind="click: $parent.metadata.remove"><i class="icon-remove icon-white"></i></button></li>
+            <!-- ko foreach: $data -->
+            <li data-bind="attr: { title: values.join('; ') }"><span data-bind="text: mqFilterData.filterMapByProperty[prop] ? mqFilterData.filterMapByProperty[prop].name : prop"></span> <small data-bind="text: values.length"></small></li>
+            <!-- /ko -->
+        </ul>
+    </div>
+    <div style="clear: both"></div>
+    <!-- /ko -->
+</script>

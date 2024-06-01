@@ -1,0 +1,274 @@
+﻿@{
+    ViewBag.Title = "PatternQuery";
+}
+
+@section CustomMeta {
+    <meta name="robots" content="nofollow" />
+}
+
+@section CustomStyles {
+    @Styles.Render("~/Content/PatternQueryIndex/css")
+}
+
+<div class="page-header">
+    <h1>PatternQuery<br /><small>Find atom patterns in molecular databases</small></h1>
+</div>
+
+<div class="btn-group" id="help-actions-wrap">
+    <button class="btn btn-success btn-large" onclick="startConfigIntro('global')" title="Interactive Guide" data-placement="bottom"><i class="icon icon-white icon-question-sign"></i> Guide</button>
+    @*<a class="btn btn-success btn-large" href="#" target="_blank" title="1st time user presentation" data-placement="bottom">First Time User</a>*@
+    <a class="btn btn-success btn-large" href="//webchem.ncbr.muni.cz/Wiki/PatternQuery:UserManual" target="_blank" title="Wiki page with detailed information" data-placement="bottom">Wiki Manual</a>
+</div>
+
+<div style="margin-bottom: 35px">
+    <p>
+        @*<b>PatternQuery</b> (MQ) is a user friendly chemical language primarily designed for defining structural patterns. MQ combines the clarity and brevity of programming languages with the
+            versatility of natural language, aiming for an efficient inclusion of chemical and biochemical knowledge into the definition of structural patterns. MQ allows definitions based
+            on chemical connectivity and three-dimensional structure at the same time. Additionally, in the case of molecules based on residue chains (such as proteins, nucleic acids,
+            saccharides, etc.), MQ allows the user to include any amount of information regarding the residue level structure directly into the definition of the patterns.*@
+        <b>PatternQuery</b> is an interactive, user-friendly, and platform independent web service enabling the user to effectively define, extract, and analyze structural patterns or biomolecular complexes
+        using the <b>PatternQuery language</b>. Such analysis is particularly useful not only in the structural and functional assignment of uncharacterized or newly determined proteins, but also represents
+        a key point in rational design and engineering of novel functional sites, and comparative protein structural analyses.
+    </p>
+
+    <div class="alert alert-success" style="text-align: center; margin: 20px 0 35px 0">
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
+
+        <b>What can I do with PatternQuery? <a href="#samples-tab" onclick="javascript:  $('#samplesTabBtn').click()">See the Samples</a></b> in the tab below.
+    </div>
+
+    <p>
+        <b>PatternQuery</b> is currently available in 3 modes:
+
+        <ul>
+            <li>
+                <a style="font-weight: bold" href="#" onclick="javascript: event.preventDefault(); $('#explorerTabLink').click()">
+                    Explorer
+                </a> &ndash; a playground for querying small data sets, analyzing patterns, and tweaking queries.
+            </li>
+            <li>
+                <a style="font-weight: bold" href="#" onclick="javascript: event.preventDefault(); $('#submitTabBtn').click()">
+                    Service
+                </a> for querying the entire <a href="//www.pdbe.org" target="_blank">Protein Data Bank</a>.
+            </li>
+            <li>
+                <a style="font-weight: bold" href="#" onclick="javascript: event.preventDefault(); $('#cmdTabLink').click()">
+                    Command Line Version
+                </a> for querying custom databases.
+            </li>
+        </ul>
+    </p>
+
+
+    <p style="text-align: center; margin: 20px 0; font-weight: bold">
+        The <button class="btn btn-success btn-small" onclick="startConfigIntro('global')" title="Interactive Guide" data-placement="bottom"><i class="icon icon-white icon-question-sign"></i> Guide</button>
+        button in the top right corner of the page is a good place to start using the service.
+    </p>
+</div>
+
+
+<div class="tabbable">
+    <ul class="nav nav-tabs" id="mq-main-tab-headers">
+        <li class="active"><a href="#introduction-tab" data-toggle="tab">Quick Help</a></li>
+        <li id="samples-header"><a href="#samples" name="samples-tab" data-toggle="tab" id="samplesTabBtn">Samples</a></li>
+
+        <li style="margin-left: 20px" id="explorer-header"><a href="#explorer-tab" data-toggle="tab" id="explorerTabLink" style="color: #F89507 "><b>Query Playground</b></a></li>
+
+        <li id="submit-header" class="tab-guide-header">
+            <button onclick="startConfigIntro('#submitComputation');" class="btn btn-small btn-success" title="Interactive guide."><i class="icon icon-white icon-question-sign"></i></button>
+            <a href="#submitComputation" data-toggle="tab" id="submitTabBtn" style="color: #F89507 "><b>Query Protein Data Bank</b></a>
+        </li>
+
+        <li id="cmd-header" style="margin-left: 20px"><a href="#cmdVersion" data-toggle="tab" id="cmdTabLink">Command Line Version &amp; Plug-in</a></li>
+
+        <li id="support-header" class="pull-right"><a href="#support-tab" data-toggle="tab" id="supportTabLink">Support</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="introduction-tab">
+            <p>
+                Welcome to <b>PatternQuery submission page</b>. Access different tabs for running the PQ service for the detection of structural patterns
+                over the whole <a href="//www.pdbe.org" target="_blank">Protein Data Bank</a> or in your own data set of molecular structures.
+            </p>
+
+            <p>
+                Different sections of the web page offer interactive guides indicated by <button style="margin-top: -2px" onclick="startConfigIntro('global')" class="btn btn-success btn-small" title="Click me for guide."><i class="icon icon-white icon-question-sign"></i></button>
+                which give a quick walk through all the main elements of the page.
+                @*Further help is provided by the info icons <button class="btn btn-link btn-small" style="padding: 0 1px; margin-top: -4px" title="Hover or click me for help."><i class="icon icon-question-sign"></i></button>.*@
+                Many tool tips are available by hovering over any graphical or textual element in the interface. If you require further assistance, do not hesitate to contact us via email (david.sehnal<img src="~/Images/at.png">mail.muni.cz)
+                or use the <a href="#" onclick="javascript: event.preventDefault(); $('#supportTabLink').click()">support</a> tab.
+            </p>
+
+            <p>
+                Refer to the <a target="_blank" href="//webchem.ncbr.muni.cz/Wiki/PatternQuery:UserManual">Wiki Manual</a> for any clarifications
+                (especially <a target="_blank" href="//webchem.ncbr.muni.cz/Wiki/PatternQuery:Service_Organization">User Interface</a> and the
+                <a target="_blank" href="//webchem.ncbr.muni.cz/Wiki/PatternQuery:Language_Reference">language reference</a>).
+            </p>
+
+            <hr />
+
+            <p style="text-align: center">
+                <a href="//webchem.ncbr.muni.cz/Wiki/PatternQuery:How_to_build_a_query" target="_blank" id="mq-quick-example-link" title="View guide..."><img src="~/Content/PatternQuery/images/pq-queryhighlight.png" alt="Query Explanation" /></a>
+            </p>
+
+            <p>
+                <b>PatternQuery</b> relies on an internal chemical language. The image gives an example of a query composed in the PatternQuery language.
+                It identifies residues containing pyran rings (typically sugars and sugar derivatives), and retrieves each such residue together with all residues within 3&Aring; of it.
+                To learn more about how the language works, you can start with the <a href="//webchem.ncbr.muni.cz/Wiki/PatternQuery:Principles" target="_blank">language principles</a> or
+                <a href="//webchem.ncbr.muni.cz/Wiki/PatternQuery:How_to_build_a_query" target="_blank">this guide</a> describing how to build a query.
+            </p>
+
+            <p>
+                If you found <b>PatternQuery</b> helpful, please cite:<br />
+                <small>
+                    Sehnal, D., Pravda, L., Ionescu C.-M., Svobodová Vařeková, R. and Koča, J. (2015)
+                    <a href="//dx.doi.org/10.1093/nar/gkv561" target="_blank">PatternQuery: web application for fast detection of biomacromolecular structural patterns in the entire Protein Data Bank</a>. Nucleic Acids Res., 43, W383–W388.
+                </small>
+            </p>
+
+            <hr />
+
+            <p style="text-align: center">
+                <img src="~/Images/elixirlogo.png" alt="ELIXIR logo" style="height: 70px" /><br />
+                <small>
+                    PatternQuery is a part of services provided by <a href="https://www.elixir-czech.cz/" target="_blank">ELIXIR</a> &ndash;
+                    European research infrastructure for biological information.
+                    For other services provided by ELIXIR's Czech Republic Node visit <a href="https://www.elixir-czech.cz/services" target="_blank">www.elixir-czech.cz/services</a>.
+                </small>
+            </p>
+
+        </div>
+
+        <div class="tab-pane" id="samples">
+            @Html.Partial("_Samples")
+        </div>
+
+        <div class="tab-pane" id="submitComputation">
+            <h3 style="margin-top: 0">
+                PatternQuery Service
+            </h3>
+            <div style="margin-bottom: 20px; font-style: italic">
+                Use the PatternQuery Service to search for structural patterns throughout the entire <b>Protein Data Bank</b>.
+            </div>
+
+            <div class="alert alert-success" style="text-align: center; margin: 0; border-radius: 4px 4px 0 0">
+                <a class="close" data-dismiss="alert" href="#">&times;</a>
+
+                To begin, use the <button onclick="startConfigIntro('#submitComputation');" class="btn btn-small btn-success" title="Interactive guide." style="font-weight: bold"><i class="icon icon-white icon-question-sign"></i> Guide</button>
+                and see the <a href="//webchem.ncbr.muni.cz/Wiki/PatternQuery:Use_Cases" style="font-weight: bold" target="_blank">examples</a>
+                and the <a href="//webchem.ncbr.muni.cz/Wiki/PatternQuery:Language_Reference" style="font-weight: bold" target="_blank">language reference</a>. If you need more help, feel free to
+                <a href='#' onclick='javascript: event.preventDefault(); $("#supportTabLink").click()' class="btn btn-small btn-success" style="font-weight: bold">ask.</a>
+            </div>
+
+            <div id="config-wrap">
+                @Html.Partial("_Configure")
+            </div>
+        </div>
+
+        <div class="tab-pane" id="explorer-tab">
+
+
+            <h3 style="margin-top: 0">
+                PatternQuery Explorer
+            </h3>
+            <div style="margin-bottom: 20px; font-style: italic">
+                Use PatternQuery Explorer to search for structural patterns in small datasets or snippets of the PDB, to analyze the patterns, or just to tweak queries that you plan to run on the entire PDB.
+            </div>
+
+
+            <div class="mq-hover-highlight">
+
+                <div style="text-align: center">
+                    <a href="#" title="Create PatternQuery Explorer Session" data-bind="click: createSession"><img src="~/Content/PatternQuery/images/mqe_screen.jpg" /></a>
+                </div>
+
+                <div class="form-inline">
+                    <button class="btn btn-primary btn-large btn-block" style="border-radius: 4px 4px 0 4px;" data-bind="enable: canCreate, click: createSession, html: buttonLabel">
+                        <b>Create PatternQuery Explorer Session</b>
+                    </button>
+                    <div style="text-align: right">
+                        <input style="border-radius: 0 0 3px 3px;" type="text" placeholder="Optional session name..." data-bind="enable: canCreate, value: sessionName, valueUpdate: 'input', executeOnEnter: createSession" maxlength="25" />
+                    </div>
+                </div>
+
+            </div>
+
+            @Helpers.RecenlySubmittedComputations("PatternQueryExplorer", "PatternQueryActions.explorerSessionAction", typeSingular: "session", typePlural: "sessions", submitText: "created")
+
+            @*<div class="form-inline" style="margin-top: 40px">
+                    <a href="@Url.Action("MotiveExplorer", "App")" target="_blank" class="btn btn-primary" style="padding: 4px 0; width: 300px; display: inline-block;">
+                        <b>MotiveExplorer</b> <small>Go to App</small>
+                    </a>
+                </div>*@
+
+            @*<p style="margin-top: 10px">
+                    <b>MotiveExplorer</b> a Silverlight application that works on Windows and MacOS. Only user submitted data can be queried. The computations are executed on the user's computer and no data is relayed to our server.
+                </p>*@
+        </div>
+
+        <div class="tab-pane" id="support-tab">
+            @Html.Partial("_SupportSubmit")
+        </div>
+
+        <div class="tab-pane" id="cmdVersion">
+            <h3 style="margin-top: 0">PatternQuery Command Line Version</h3>
+            <div style="margin-bottom: 20px; font-style: italic">
+                Run the PatternQuery Service on custom databases. For usage instructions, please consult the
+                <a href="//webchem.ncbr.muni.cz/Wiki/PatternQuery:UserManual" target="_blank">Wiki page</a>.
+            </div>
+            <a href="@Url.Action("DownloadService")" class="btn btn-primary"><i class="icon-download icon-white"></i> Current Version (@ViewBag.ServiceVersion)</a>
+            <a href="@Url.Action("CmdExample")" class="btn btn-success" title="Download a ZIP file (0.4MB) with example configuration and data for the command line tool.">
+                <i class="icon-question-sign icon-white"></i> Example Data &amp; Configuration
+            </a>
+            <br />
+
+            <div class="form-inline" id="versionsDownload" style="margin-top: 10px">
+                <span>All Versions (<a href="@Url.Action("ChangeLog")" target="_blank">change log</a>): </span>
+                <select data-bind="options: versionList, optionsText: 'caption', value: currentVersion" style="width: 130px"></select>
+                <a data-bind="attr: { href: currentVersion().link  }" class="btn" style="margin-right: 6px"><i class="icon-download"></i> Download</a>
+            </div>
+            <hr />
+            <h4 style="margin-top: 0">
+                PyMOL Visualization Plug-in                
+            </h4>
+            <div style="margin-bottom: 10px; font-style: italic">
+                A simple PyMOL plug-in for generating images similar to the ones shown in the <a href="#samples-tab" onclick="javascript:  $('#samplesTabBtn').click()">Samples</a> tab.
+            </div>
+            <a href="@Url.Action("PyMolVisualizationPlugin")" class="btn btn-primary">
+                <i class="icon-download icon-white"></i> Download the Plug-in
+            </a>
+            <br />
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+    @{ var versions = string.Join(",", System.Linq.Enumerable.Select(ViewBag.AllVersions, new Func<WebChemistry.Framework.Core.AppVersion, string>(v => string.Format("{{ link : '{0}', caption: '{1}' }}", Url.Action("DownloadService", new { id = v }), v)))); }
+
+        var appVersions = [ @Html.Raw(versions) ];
+        var PatternQueryActions = {
+            validateQueryAction: "@Url.Action("ValidateQuery")",
+            databaseAction: "@Url.Action("Database", new { id = "-type-" })",
+            submitAction: "@Url.Action("Submit")",
+            resultAction: "@Url.Action("Result", new { id = "-id-" })",
+            createSessionAction: "@Url.Action("ExplorerCreate", new { id = "-name-" })",
+            explorerSessionAction: "@Url.Action("Explorer", new { id = "-id-" })",
+        };
+        var MqDatabaseInfo = {
+            lastUpdated: "@ViewBag.DbLastUpdated",
+            structureCount: @ViewBag.DbStructureCount
+            };
+        var PatternQuerySupportActions = {
+            token: '@ViewBag.SupportToken',
+            submitAction: "@Url.Action("SupportSubmit")",
+            supportAction: "@Url.Action("Support", new { id = "-id-"} )"
+        };
+        var AceEditorConfig = {
+            path: "@Url.Content("~/Scripts/ace/")"
+        };
+    </script>
+
+    @Scripts.Render(@Url.Action("AutoCompletionInfo", new { v = Url.Encode(WebChemistry.Queries.Core.Query.Version.ToString()) }))
+    @Scripts.Render("~/bundles/PatternQueryIndex")
+    @Scripts.Render("~/bundles/aceTools")
+}

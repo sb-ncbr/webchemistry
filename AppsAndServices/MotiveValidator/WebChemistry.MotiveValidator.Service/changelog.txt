@@ -1,0 +1,63 @@
+﻿== 1.1.23.12.27 ==
+* Fixed a bug in the mmCIF parser.
+
+== 1.1.21.12.14 ==
+* Fixed bug in mmCIF parser.
+
+== 1.1.15.5.8 ==
+* Added additional categories for analyzing naming errors.
+* Removed MOL output for analyzed motifs.
+
+== 1.1.15.5.12 ==
+* Fixed an error reporting bug where the program would crash when incorrect model input was provided instead of reporting the error.
+
+== 1.1.15.4.15 ==
+* Added additional naming analysis (flags Has_DuplicateNames, Has_NonIsomorphicNaming, Has_NonBoundarySubstitutionOrForeign).
+* Extended data model for analysis entry with additional properties (DuplicateNames, NonBoundarySubstitutionAndForeignAtoms, UnmatchedModelNames).
+
+== 1.1.14.11.28 ==
+* Changes in PDB parser - atom names no longer need to be unique per each residue.
+
+== 1.1.14.11.7 ==
+* Improved formatting for missing rings.
+
+== 1.1.14.11.2 ==
+* Added support for loading Component Dictionary files to the command line version.
+* Added support for loading gzipped files.
+
+== 1.1.14.10.25 ==
+* Added support for a database mode (to compute ValidatorDB).
+* Fixed a bug in Command Line Mode PDB model loading.
+* Added a warning for parsing PDB/mmCIF files regarding different names on a single residue.
+* Bug fix in data model.
+* Better error for mmCIF structures with missing coordinates.
+* Added HasAll_BadChirality_Other category.
+* Fixed a bug in computing bad chirality categories.
+* Merged disconnected and degenerate categories into a single one.
+* Added support for more detailed chirality analysis (Broke backwards compatibility in the process).
+* Added support for custom DB aggregates.
+* More clever handling of planar chiral atoms.
+* Added categories for Degenerate and Disconnected motifs.
+
+== 1.1.14.6.6 ==
+* Changed how the chirality is calculated. Should be faster and more accurate.
+* Added planarity warnings for chirality errors on near planar atoms.
+* Added ZeroRmsd and AlternateLocation statistics.
+* PDBx/mmCIF is now the preferred format for both models and structures.
+* Added support for database mode.
+* Support for exporting of not analyzed motifs.
+* Web: UI Tweaks.
+
+== 1.0.14.3.27 ==
+* Improved support for PDBx/mmCIF files.
+
+== 1.0.14.3.19 ==
+* Added warnings for unusual CONECT records in PDB files.
+* Added support for PDBx/mmCIF files.
+* Added support for large inputs that require more than 2GB of RAM.
+
+== 1.0.14.1.26 ==
+* Added atom substitution support for S and P (was just C, N, O before).
+
+== 1.0.14.1.22 ==
+* Initial release.

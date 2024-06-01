@@ -1,0 +1,159 @@
+﻿@*<li class="menu-header">Motif Analysis</li>*@
+
+
+<li>
+    <a href="https://litemol.org" target="_blank">
+        <div style="float: left"><i class="icon-heart"></i></div>
+        <div class="app-panel">LiteMol<br /> <span class="app-description">A powerful 3D molecular viewer</span> </div>
+        <div class="app-clear"></div>
+    </a>
+</li>
+
+<li class="divider"></li>
+
+<li>
+    <a href="@Url.Action("Index", "PatternQuery")">
+        <div style="float: left"><i class="icon-PatternQuery"></i></div>
+        <div class="app-panel">PatternQuery<br /> <span class="app-description">Find atom patterns in molecular databases</span> </div>
+        <div class="app-clear"></div>
+    </a>
+</li>
+<li>
+    <a href="https://webchem.ncbr.muni.cz/CoordinateServer" target="_blank">
+        <div style="float: left"><i class="icon-signal"></i></div>
+        <div class="app-panel">CoordinateServer<br /> <span class="app-description">Streaming of 3D molecular data</span> </div>
+        <div class="app-clear"></div>
+    </a>
+</li>
+<li>
+    <a href="https://webchem.ncbr.muni.cz/DensityServer" target="_blank">
+        <div style="float: left"><i class="icon-screenshot"></i></div>
+        <div class="app-panel">DensityServer<br /> <span class="app-description">Streaming of 3D experimental data</span> </div>
+        <div class="app-clear"></div>
+    </a>
+</li>
+<li>
+    <a href="https://acc2.ncbr.muni.cz">
+        <div style="float: left"><i class="icon-star"></i></div>
+        <div class="app-panel">@WebChemistry.Web.Controllers.ChargeCalculatorController.AppName <span style="color: #28a745"> II</span><br /> <span class="app-description">Compute, compare, and visualize atomic charges</span> </div>
+        <div class="app-clear"></div>
+    </a>
+</li>
+@*<li>
+    <a href="@Url.Action("MotiveExplorer", "App")">
+        <div style="float: left"><i class="icon-motiveexplorer"></i></div> 
+        <div class="app-panel">MotiveExplorer <span class="app-name-silverlight">Silverlight</span><br/> <span class="app-description">Tune queries and find motifs in custom structures</span> </div>
+        <div class="app-clear"></div>
+    </a>
+</li>*@
+
+<li class="divider"></li>
+
+<li>
+    <a href="@Url.Action("Index", "MotiveValidator")">
+        <div style="float: left"><i class="icon-check"></i></div> 
+        <div class="app-panel">MotiveValidator<br/> <span class="app-description">Validate residues, ligands, and molecular fragments</span> </div>
+        <div class="app-clear"></div>
+    </a>
+</li>
+<li>
+    <a href="@Url.Action("Index", "ValidatorDb")">
+        <div style="float: left"><i class="icon-ok-circle"></i></div>
+        <div class="app-panel">Validator<sup>DB</sup><br /> <span class="app-description">PDB database validated using MotiveValidator</span> </div>
+        <div class="app-clear"></div>
+    </a>
+</li>
+<li>
+    <a href="https://valtrendsdb.biodata.ceitec.cz/" target="_blank">
+        <div style="float: left"><i class="icon-indent-left"></i></div>
+        <div class="app-panel">ValTrends<sup>DB</sup><br /> <span class="app-description">Discover trends in structure quality</span> </div>
+        <div class="app-clear"></div>
+    </a>
+</li>
+@*<li>
+    <a href="@Url.Action("Index", "MotiveAtlas")">
+        <div style="float: left"><i class="icon-motiveatlas"></i></div> 
+        <div class="app-panel">MotiveAtlas<sup>beta</sup><br/> <span class="app-description">Browse various precomputed motifs</span> </div>
+        <div class="app-clear"></div>
+    </a>
+</li>*@
+
+@*<li>
+    <a href="@Url.Action("Charges", "App")">
+        <div style="float: left"><i class="icon-charges"></i></div> 
+        <div class="app-panel">ChargeCalculator <span class="app-name-silverlight">Silverlight</span><br/> <span class="app-description">Compute and compare charges</span> </div>
+        <div class="app-clear"></div>
+    </a>
+</li>*@
+
+<li class="divider"></li>
+
+<li>
+    <a href="@Url.Action("Mole", "App")">
+        <div style="float: left"><i class="icon-mole"></i></div> 
+        <div class="app-panel">MOLE 2.5<br/> <span class="app-description">Compute and analyze channels</span> </div>
+        <div class="app-clear"></div>
+    </a>
+</li>
+
+<li class="divider"></li>
+
+<li>
+    <a href="@Url.Action("CrocoBLAST", "App")">
+        <div style="float: left"><i class="icon-fire"></i></div>
+        <div class="app-panel">CrocoBLAST<br /> <span class="app-description">Local sequence alignment</span> </div>
+        <div class="app-clear"></div>
+    </a>
+</li>
+
+
+
+@if (Request.IsAuthenticated)
+{
+<li class="divider"></li>
+
+<li>
+    <a href="@Url.Action("Index", "Data")">
+        <div style="float: left"><i class="icon-data"></i></div> 
+        <div class="app-panel">Databases<br/> <span class="app-description">Browse available databases and create views</span> </div>
+        <div class="app-clear"></div>
+    </a>
+</li>
+}
+
+
+@* @if (Request.IsAuthenticated)
+                        {
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" id="dServices" role="button" data-toggle="dropdown" data-target="#" href="#"><i class="icon-tasks icon-white"></i> Services</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="@Url.Action("Index", "PatternQuery")"><i class="icon-PatternQuery"></i> PatternQuery</a></li>
+                                    <li><a href="@Url.Action("Index", "MotiveAtlas")"><i class="icon-motiveatlas"></i> MotiveAtlas</a></li>
+                                    <li><a href="@Url.Action("Index", "MotiveValidator")"><i class="icon-check"></i> MotiveValidator</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="@Url.Action("Index", "Data")"><i class="icon-data"></i> Data</a></li>
+                                </ul>
+                            </li>  
+                                           
+                            <li class="dropdown">
+                                <a role="button" data-toggle="dropdown" href="#"><i class="icon-th-large icon-white"></i> Apps</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="@Url.Action("MotiveExplorer", "App")"><i class="icon-motiveexplorer"></i> MotiveExplorer</a></li>
+                                    <li><a href="@Url.Action("SiteBinder", "App")"><i class="icon-sitebinder"></i> SiteBinder</a></li>
+                                    <li><a href="@Url.Action("Charges", "App")"><i class="icon-charges"></i> Charges</a></li>
+                                    <li><a href="@Url.Action("Mole", "App")"><i class="icon-mole"></i> MOLE</a></li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="dropdown">
+                                <a role="button" data-toggle="dropdown" href="#"><i class="icon-th-large icon-white"></i> Apps</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="@Url.Action("MotiveExplorer", "App")"><i class="icon-motiveexplorer"></i> MotiveExplorer</a></li>
+                                    <li><a href="@Url.Action("SiteBinder", "App")"><i class="icon-sitebinder"></i> SiteBinder</a></li>
+                                    <li><a href="@Url.Action("Charges", "App")"><i class="icon-charges"></i> Charges</a></li>
+                                    <li><a href="@Url.Action("Mole", "App")"><i class="icon-mole"></i> MOLE</a></li>
+                                </ul>
+                            </li>
+                        }*@

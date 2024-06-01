@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7439A025-3A82-4270-8647-7E0F006BD065}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebChemistry.Queries.Core</RootNamespace>
+    <AssemblyName>WebChemistry.Queries.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Interactive, Version=1.1.10823.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Ix_Experimental-Main.1.1.10823\lib\Net4\System.Interactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Combinations.cs" />
+    <Compile Include="Context.cs" />
+    <Compile Include="HashTrie.cs" />
+    <Compile Include="Language.cs" />
+    <Compile Include="MetaQueries\Functions.cs" />
+    <Compile Include="MetaQueries\MetaQuery.cs" />
+    <Compile Include="MetaQueries\Values.cs" />
+    <Compile Include="Motive.cs" />
+    <Compile Include="MotiveExtensions.cs" />
+    <Compile Include="MotiveProximityTree.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\Base.cs" />
+    <Compile Include="Queries\Caching.cs" />
+    <Compile Include="Queries\Countables.cs" />
+    <Compile Include="Queries\Functional.cs" />
+    <Compile Include="Queries\Geometry.cs" />
+    <Compile Include="Queries\Logic.cs" />
+    <Compile Include="Queries\Metadata.cs" />
+    <Compile Include="Queries\Misc.cs" />
+    <Compile Include="Queries\Topology.cs" />
+    <Compile Include="Queries\Tunnels.cs" />
+    <Compile Include="Queries\Values.cs" />
+    <Compile Include="Query.cs" />
+    <Compile Include="QueryBuilder.cs" />
+    <Compile Include="TypeSystem\QueryTypes.cs" />
+    <Compile Include="Symbols\Categories.cs" />
+    <Compile Include="Symbols\Descriptors.cs" />
+    <Compile Include="Symbols\Table.cs" />
+    <Compile Include="TypeSystem\TypeSystem.cs" />
+    <Compile Include="TypeSystem\TypeUnification.cs" />
+    <Compile Include="Utils\CatalyticSiteAtlas.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Framework\Net\WebChemistry.Framework.Core\WebChemistry.Framework.Core.csproj">
+      <Project>{2a6559f9-cd2b-496c-b774-935fec3ed0e4}</Project>
+      <Name>WebChemistry.Framework.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tunnels\WebChemistry.Tunnels.Core\WebChemistry.Tunnels.Core.csproj">
+      <Project>{e6e2bf63-7b87-4c44-96c3-aad4460149fe}</Project>
+      <Name>WebChemistry.Tunnels.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

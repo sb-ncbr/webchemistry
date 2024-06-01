@@ -1,0 +1,1 @@
+$cfgs = dir -r  | ? {$_.name -eq "packages.config"}; $output = "packages/"; foreach ($cfg in $cfgs) { Start-Process NuGet\NuGet.exe -ArgumentList @("install",$cfg.FullName,"-outputDirectory",$output) -wait -NoNewWindow -PassThru; }

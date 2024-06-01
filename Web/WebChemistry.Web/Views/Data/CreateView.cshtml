@@ -1,0 +1,104 @@
+﻿@*@model WebChemistry.Web.Models.CreateDatabaseViewModel*@
+
+@{
+    ViewBag.Title = "Create Database View";
+}
+
+<div class="page-header">
+    @*<button class="btn btn-success btn-large pull-right hide" id="guideBtn"><i class="icon icon-white icon-question-sign"></i> Guide</button>*@
+    <h1 id="top">Data <small>Create Database View</small></h1>
+</div>
+
+<div id="mainView">
+    <div class="form">
+        <h4>Name</h4>
+        <div>
+            <input type="text" class="span4" data-bind="value: name, valueUpdate: 'input'" name="name" />
+        </div>
+
+        <h4>Description</h4>
+        <div>
+            <input type="text" class="span12" data-bind="value: description" name="description" />
+        </div>
+
+        <h4>Database</h4>
+        <div>
+            <select class="span4" data-bind="options: availableDatabases, value: database, optionsText: 'name'" name="database"></select>
+        </div>
+
+        
+        <h4>Filters</h4>
+        <div data-bind="if: filtersModel.filters().length > 0">
+            <div class="input-append">
+                <select class="span2" data-bind="options: filtersModel.filters(), value: filtersModel.currentFilter, optionsText: 'name'" name="filterProperty"></select>
+                <select class="span2" data-bind="options: filtersModel.currentFilter().comparisonTypes, value: filtersModel.comparisonType, optionsText: 'text'" name="comparisonType"></select>
+                <input class="span7" type="text" id="filterValue" data-bind="value: filtersModel.value, valueUpdate: 'input', enter: addFilter" name="filterValue" />
+                <button class="btn" data-bind="click: addFilter, enable: filtersModel.value().length > 0 && canAddFilter()">Add</button>
+            </div>
+            <div class="alert alert-info" style="padding-right: 8px; padding-top: 8px; padding-bottom: 8px" data-bind="click: function() { $('.propertyHelp').toggle(); }">
+                <button class="btn btn-link pull-right" style="margin-top: -3px"><i class="icon icon-question-sign"></i></button>
+                <div style="font-style: italic;" data-bind="text: filtersModel.currentFilter().description"></div>
+                <ul style="margin-top: 10px" data-bind="if: filtersModel.currentFilter() && filtersModel.currentFilter().type === filterTypeString" class="propertyHelp hide">
+                    <li>The value might contain expression with | (or), &amp; (and), ^ (xor), and ! (not) operators.</li>
+                    <li>For example <code>Zn | Ca | Mn</code> means that the structure must contain one of the listed atoms.</li>
+                    <li><code>HIS & !CYS</code> would indicate that the structure must contain HIS, but not CYS residue.</li>
+                    <li>Values containing spaces or any of the operators (including '(' and ')') must be enclosed in ", for example <code>"Protein Complex" | "DNA Complex"</code>.</li>
+                    <li>The comparison is not case sensitive.</li>
+                </ul>
+                <ul style="margin-top: 10px" data-bind="if: filtersModel.currentFilter() && filtersModel.currentFilter().type === filterTypeNumeric" class="propertyHelp hide">
+                    <li>The value must be a number.</li>
+                </ul>
+                <ul style="margin-top: 10px" data-bind="if: filtersModel.currentFilter() && filtersModel.currentFilter().type === filterTypeDate" class="propertyHelp hide">
+                    <li>The value must be a date in the format yyyy-m-d, for example 2007-7-23.</li>
+                </ul>
+            </div>   
+        </div>
+        <div data-bind="if: filtersModel.filters().length === 0">
+            No more filters to add.
+        </div>
+
+        <div data-bind="if: addedFilters().length > 0">
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 120px">Property</th>
+                            <th style="width: 120px">Comparison</th>
+                            <th>Value</th>
+                            <th style="width: 20px"></th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: addedFilters">
+                        <tr>
+                            <td style="font-style: italic" data-bind="text: filter.name"></td>
+                            <td data-bind="text: comparisonType.text"></td>
+                            <td><code data-bind="text: value"></code></td>
+                            <td><button title="Remove" style="padding: 0; margin: -3px 0 0 0" class="btn btn-link btn-small" data-bind="click: remove"><i class="icon icon-remove"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br/>
+        <button class="btn btn-large btn-block btn-primary" id="upload-btn" data-bind="enable: canCreate, click: create"><span data-bind="text: createLabel"></span></button>
+        <div style="margin-top: 8px" class="alert alert-error" data-bind="visible: showCreateError">
+            <span data-bind="text: createErrorText"></span>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        var CreateViewParams = {
+            createAction: "@Url.Action("CreateView")",
+            listAction: "@Url.Action("DbView", "Data", new { operation = "list" })",
+            availableDatabases: [
+            @foreach (Tuple<string, string> db in ViewBag.Databases)
+            {
+                @: { name: '@db.Item1.Replace("'", "\\'")', id: '@db.Item2' },
+            }]
+        };
+    </script>
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/CreateDbView")
+}

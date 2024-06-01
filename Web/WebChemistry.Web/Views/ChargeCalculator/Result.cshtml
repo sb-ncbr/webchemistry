@@ -1,0 +1,193 @@
+﻿@{
+    ViewBag.Title = WebChemistry.Web.Controllers.ChargeCalculatorController.AppName + " - Result";
+}
+
+@section CustomStyles {
+    @*@Styles.Render("~/Content/themes/base/css")*@
+    @Styles.Render("~/Content/slickgrid/css")
+    @Styles.Render("~/Content/ChargeCalculator/css")
+}
+
+<div class="page-header">
+    <h1 id="top">@WebChemistry.Web.Controllers.ChargeCalculatorController.AppName <small>Result</small></h1>
+</div>
+
+<div class="btn-group" id="help-actions-wrap">
+    <button class="btn btn-success btn-large" onclick="startResultIntro();" title="Interactive Guide"><i class="icon icon-white icon-question-sign" data-placement="bottom"></i> Guide</button>
+    <a class="btn btn-large btn-success" href="//webchem.ncbr.muni.cz/Wiki/ChargeCalculator:FAQ" target="_blank" title="Frequently asked questions" data-placement="bottom">FAQ</a>
+    <a class="btn btn-success btn-large" href="//webchem.ncbr.muni.cz/Wiki/ChargeCalculator:UserManual" target="_blank" title="Wiki user manual" data-placement="bottom">Wiki</a>
+</div>
+
+<div id="mainView" data-bind="template: { name: template().name, data: template().data }">
+</div>
+
+<script type="text/html" id="empty-template">
+    <div></div>
+</script>
+
+<script type="text/html" id="error-template">
+    <h2>Error</h2>
+    <div data-bind="text: message">
+    </div>
+</script>
+
+<script type="text/html" id="busy-template">
+    <div id="busySpinner" style="height: 150px"></div>
+    <div style="margin-top: 5px; padding-bottom: 20px; text-align:center"><span style="font-weight: bold; font-size: 20px" data-bind="html: message"></span></div>
+    <div style="text-align:center" data-bind="visible: showCancel">
+        <button class="btn btn-info" style="margin-bottom: 10px" data-bind="click: cancel">
+            Cancel Computation
+        </button>
+    </div>
+</script>
+
+<script type="text/html" id="canceled-template">
+    <div style="margin-top: 5px; padding-bottom: 20px; text-align:center">
+        <span style="font-weight: bold; font-size: 20px">
+            Computation canceled.
+        </span>
+    </div>
+</script>
+
+<script type="text/html" id="result-template">
+    <div id="result-address-and-download">
+        <div>
+            @*<i>You can come back to the result later using this URL:</i><br/>*@
+            <small style="color: #aaa">You can come back to the result later using this URL. The result will not be deleted before @(ViewBag.OnlineUntil).</small>
+            <input class="result-input"
+                   type="text" value="@Url.Action("Result", "ChargeCalculator", new { id = ViewBag.Id }, Request.Url.Scheme)" id="resultUrl" />
+        </div>
+
+        <div class="row-fluid">
+            <div class="btn-group span4">
+                <a class="btn btn-info btn-large dropdown-toggle btn-block" data-toggle="dropdown" href="#">
+                    <i class="icon-download-alt icon-white"></i> <strong>Download Input</strong>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="@Url.Action("Download", new { id = ViewBag.Id, type = "Config" })" target="_blank">Configuration</a></li>
+                    <li><a href="@Url.Action("Download", new { id = ViewBag.Id, type = "Structures" })">Structures</a></li>
+                </ul>
+            </div>
+            <a class="btn btn-large btn-info span8"
+               href="@Url.Action("Download", new { id = ViewBag.Id, type = "Result" })"><i class="icon-download-alt icon-white"></i><strong>Download Result</strong><small id="charges-result-size"></small></a>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="tabbable">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#summary" data-toggle="tab">Results</a></li>
+            <li data-bind="if: Errors.length + Warnings.length > 0">
+                <!-- ko if: Errors.length > 0 && Warnings.length > 0 -->
+                <a href="#errors" data-toggle="tab" data-bind="if: Errors.length > 0 && Warnings.length > 0">
+                    Errors (<span data-bind="text: Errors.length"></span>) / Warnings (<span data-bind="text: Warnings.length"></span>)
+                </a>
+                <!-- /ko -->
+                <!-- ko if: Errors.length > 0 && Warnings.length === 0 -->
+                <a href="#errors" data-toggle="tab">
+                    Errors (<span data-bind="text: Errors.length"></span>)
+                </a>
+                <!-- /ko -->
+                <!-- ko if: Errors.length === 0 && Warnings.length > 0 -->
+                <a href="#errors" data-toggle="tab" data-bind="if: Errors.length === 0 && Warnings.length > 0">
+                    Warnings (<span data-bind="text: Warnings.length"></span>)
+                </a>
+                <!-- /ko -->
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="summary">
+                <div class="alert alert-success alert-block" style="margin-bottom: 20px">
+                    Computation took <span style="font-weight: bold" data-bind="text: (TimingMs / 1000).toFixed(0) + 's'"></span>
+                    on <abbr title="Date and time the computation was created. In universal time." style="font-weight: bold">@ViewBag.DateCreated</abbr>
+                    using service version <span data-bind="text: Version"></span>.
+                </div>
+                @*<h3 class="charges-config-section-header"><small>Click molecule Id to display, analyze, and visualize data in a new window</small></h3>*@
+                <div style="color: #999; font-size: 12px">Click Id to display, analyze, and visualize data in a new window.</div>
+                <div id="results-view"></div>
+            </div>
+            <div class="tab-pane" id="errors" data-bind="if: Errors.length + Warnings.length > 0">
+                <dl>
+                    <dt data-bind="if: Errors.length > 0">Errors</dt>
+                    <dd data-bind="if: Errors.length > 0">
+                        <ul class="error-list" data-bind="foreach: Errors">
+                            <li data-bind="text: $data"></li>
+                        </ul>
+                    </dd>
+
+                    <dt data-bind="if: Warnings.length > 0">Warnings</dt>
+                    <dd data-bind="if: Warnings.length > 0">
+                        <ul class="error-list" data-bind="foreach: Warnings">
+                            <li data-bind="text: $data"></li>
+                        </ul>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    @*<pre data-bind="text: JSON.stringify($data, null, 2)"></pre>*@
+</script>
+
+<div id="errors-modal" class="modal hide" tabindex="-1" role="dialog" style="overflow:hidden; width: 640px; height: 350px; margin-left: -240px; margin-top: -175px">
+    <!-- ko with: entry -->
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">
+            <span data-bind="text: Id, style: { color: color }"></span>
+        </h3>
+    </div>
+    <div class="modal-body" style="max-height: 280px; padding-top: 0px">
+        <dl class="of-list">
+            <dt data-bind="if: Errors.length > 0">Errors</dt>
+            <dd data-bind="if: Errors.length > 0">
+                <ul class="error-list" data-bind="foreach: Errors">
+                    <li data-bind="text: $data"></li>
+                </ul>
+            </dd>
+
+            <dt data-bind="if: ReaderWarnings.length > 0">Input Warnings</dt>
+            <dd data-bind="if: ReaderWarnings.length > 0">
+                <ul class="error-list" data-bind="foreach: ReaderWarnings">
+                    <li data-bind="text: $data"></li>
+                </ul>
+            </dd>
+
+            <dt data-bind="if: ComputationWarnings.length > 0">Computation Warnings</dt>
+            <dd data-bind="if: ComputationWarnings.length > 0">
+                <ul class="error-list" data-bind="foreach: ComputationWarnings">
+                    <li data-bind="text: $data"></li>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+    <!-- /ko -->
+</div>
+
+@*@section jqueryui {
+        @Scripts.Render("~/bundles/jqueryui")
+        <script type="text/javascript">
+            $.widget.bridge('uibutton', $.ui.button);
+            $.widget.bridge('uitooltip', $.ui.tooltip);
+        </script>
+    }*@
+
+@section scripts {
+    <script type="text/javascript">
+
+        var ChargeCalculatorParams = {
+            isFinished: @ViewBag.IsFinished.ToString().ToLower(),
+            resultSize: "@ViewBag.ResultSize",
+            summaryAction: "@Url.Action("Summary", new { id = ViewBag.Id })",
+            killAction: "@Url.Action("Kill", new { id = ViewBag.Id })",
+            statusAction: "@Url.Action("Status", new { id = ViewBag.Id })",
+            detailsAction: "@Url.Action("Result", new { id = ViewBag.Id, structure = "-id-" })"
+        };
+    </script>
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/jqdrag")
+    @Scripts.Render("~/bundles/slickgrid-ChargeCalculatorConfig")
+    @Scripts.Render("~/bundles/ChargeCalculatorResult")
+}
+

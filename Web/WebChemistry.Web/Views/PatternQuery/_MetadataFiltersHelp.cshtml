@@ -1,0 +1,57 @@
+﻿<div class="mq-filter-help">
+    <button class="btn btn-link pull-right" data-bind="click: function(d, e) { parent.showHelp(!parent.showHelp()); }" style="margin-top: -3px; color: #999" data-placement="bottom">
+        View possible input <i class="icon icon-question-sign"></i>
+    </button>
+    <div>
+        <span style="font-style: italic;" data-bind="html: filter().description"></span> @*:: <span data-bind="text: filter().propertyType"></span>*@
+    </div>
+    <!-- ko if: filter() && filter().type === mqFilterData.filterTypeRing -->
+    <ul data-bind="visible: parent.showHelp">
+        <li>Use the ring syntax <code>&#64;(E1, E2, ...)</code>, for example <code>&#64;(N,C,N,C,C)</code>.</li>
+        <li>The value might contain expression with | (or), &amp; (and), ^ (xor), and ! (not) operators.</li>
+        <li>For example <code>&#64;(C,C,C,C,O) | &#64;(C,C,C,C,C,O)</code> means that the structure must contain one of the listed ring fingerprints.</li>
+        <li><code>&#64;(C,C,C,C,O) & !&#64;(C,C,C,C,C,O)</code> means that the structure must contain C<sub>4</sub>O, but not C<sub>5</sub>O ring.</li>
+        <li>The comparison is not case sensitive.</li>
+    </ul>
+    <!-- /ko -->
+    <!-- ko if: filter() && filter().type === mqFilterData.filterTypeString && comparisonType().value !== 'StringRegex' -->
+    <ul data-bind="visible: parent.showHelp">
+        <!-- ko foreach: filter().customInfo -->
+        <li data-bind="html: $data"></li>
+        <!-- /ko -->
+        <li><b>Values containing spaces or non alphanumeric characters must be enclosed in <code>"</code></b>, for example <code>"Protein Complex"</code> or <code>"X-RAY"</code>.</li>
+        <li>
+            The value might contain expression with | (or), &amp; (and), ^ (xor), and ! (not) operators.
+            For example, <code>A | B</code> means that the value can be either A or B.
+            <code>X & !Y</code> means that the value can be equal to/contain X, but not Y.
+        </li>
+        <li>The comparison is not case sensitive.</li>
+    </ul>
+    <!-- /ko -->
+    <!-- ko if: filter() && filter().type === mqFilterData.filterTypeString && comparisonType().value === 'StringRegex' -->
+    <ul data-bind="visible: parent.showHelp">
+        <!-- ko foreach: filter().customInfo -->
+        <li data-bind="html: $data"></li>
+        <!-- /ko -->
+        <li>The value must be a valid regular expression.</li>
+        <li>The comparison is not case sensitive.</li>        
+    </ul>
+    <!-- /ko -->
+    <!-- ko if: filter() && filter().type === mqFilterData.filterTypeNumeric -->
+    <ul data-bind="visible: parent.showHelp">
+        <!-- ko foreach: filter().customInfo -->
+        <li data-bind="html: $data"></li>
+        <!-- /ko -->
+        <li>The value must be a number.</li>
+    </ul>
+    <!-- /ko -->
+    <!-- ko if: filter() && filter().type === mqFilterData.filterTypeDate -->
+    <ul data-bind="visible: parent.showHelp">
+        <!-- ko foreach: filter().customInfo -->
+        <li data-bind="html: $data"></li>
+        <!-- /ko -->
+        <li>The value must be a date in the format yyyy-m-d, for example 2007-7-23.</li>
+    </ul>
+    <!-- /ko -->
+</div>
+<div style="clear:both"></div>

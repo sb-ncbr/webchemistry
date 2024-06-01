@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Silverlight", "Silverlight", "{F2C217A7-C6A9-41E4-ADFB-9213CCF94725}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Net", "Net", "{9CBC59F1-1110-4824-877C-9D1DC3698091}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.Framework.Visualization", "Net\WebChemistry.Framework.Visualization\WebChemistry.Framework.Visualization.csproj", "{0AFDFFFB-26D1-4967-88CE-4499A1929E06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.Silverlight.Common", "Silverlight\WebChemistry.Silverlight.Common\WebChemistry.Silverlight.Common.csproj", "{A4E66246-2177-4658-B883-42F5A2611499}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.Framework.Visualization", "Silverlight\WebChemistry.Framework.Visualization\WebChemistry.Framework.Visualization.csproj", "{3AFEDC7F-F1E5-4D94-884F-AE92CF1AF001}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0AFDFFFB-26D1-4967-88CE-4499A1929E06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AFDFFFB-26D1-4967-88CE-4499A1929E06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AFDFFFB-26D1-4967-88CE-4499A1929E06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AFDFFFB-26D1-4967-88CE-4499A1929E06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4E66246-2177-4658-B883-42F5A2611499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4E66246-2177-4658-B883-42F5A2611499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4E66246-2177-4658-B883-42F5A2611499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4E66246-2177-4658-B883-42F5A2611499}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AFEDC7F-F1E5-4D94-884F-AE92CF1AF001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AFEDC7F-F1E5-4D94-884F-AE92CF1AF001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AFEDC7F-F1E5-4D94-884F-AE92CF1AF001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AFEDC7F-F1E5-4D94-884F-AE92CF1AF001}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A4E66246-2177-4658-B883-42F5A2611499} = {F2C217A7-C6A9-41E4-ADFB-9213CCF94725}
+		{3AFEDC7F-F1E5-4D94-884F-AE92CF1AF001} = {F2C217A7-C6A9-41E4-ADFB-9213CCF94725}
+		{0AFDFFFB-26D1-4967-88CE-4499A1929E06} = {9CBC59F1-1110-4824-877C-9D1DC3698091}
+	EndGlobalSection
+EndGlobal

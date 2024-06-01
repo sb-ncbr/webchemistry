@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "MotiveValidator - Result";
+}
+
+@section CustomStyles {
+    @*@Styles.Render("~/Content/themes/base/css")*@
+    @Styles.Render("~/Content/slickgrid/css")
+    @Styles.Render("~/Content/MotiveValidator/css")
+}
+
+<div class="page-header">
+    <div class="pull-right form-inline">
+        <a class="btn" target="_blank" href="@Url.Action("Data", new { id = ViewBag.Id })"
+           title="View/download raw JSON data for the result." id="result-download-json">
+            <i class="icon icon-briefcase"></i> JSON
+        </a>
+        <div class="btn-group">
+            <button class="btn btn-success" onclick="startResultIntro(true);"><i class="icon icon-white icon-question-sign"></i> Guide</button>
+            @*<a class="btn btn-success" href="//webchem.ncbr.muni.cz/Wiki/MotiveValidator:Specifics_Page" target="_blank">Wiki</a>*@
+        </div>
+    </div>
+    <h1 id="result-header">MotiveValidator <small>Result</small></h1>
+</div>
+
+<div id="mainView" data-bind="template: { name: template().templateName, data: template().data }">
+</div>
+
+@Html.Partial("~/Views/MotiveValidatorShared/_SummaryElements.cshtml")
+@Html.Partial("~/Views/MotiveValidatorShared/_MotiveDetails.cshtml")
+
+@section scripts {
+    <script type="text/javascript">
+        var validatorParams = { isFinished: @ViewBag.IsFinished.ToString().ToLower(), dataAction: "@Url.Action("Data", new { id = ViewBag.Id })", isRunningAction: "@Url.Action("IsRunning", new { id = ViewBag.Id })", statusAction: "@Url.Action("Status", new { id = ViewBag.Id })", structureAction: "@Url.Action("Structure", new { id = ViewBag.Id })" };
+    </script>
+    @Scripts.Render("~/bundles/validator-result")
+}

@@ -1,0 +1,203 @@
+﻿@{
+    ViewBag.Title = "PatternQuery - Result";
+}
+
+@section CustomStyles {
+    @*@Styles.Render("~/Content/themes/base/css")*@
+    @Styles.Render("~/Content/slickgrid/css")
+    @Styles.Render("~/Content/PatternQueryResult/css")
+}
+
+<div class="page-header">
+    <h1 id="top">PatternQuery <small>Result</small></h1>
+</div>
+
+<div class="btn-group" id="help-actions-wrap">
+    <button class="btn btn-success btn-large" onclick="startResultIntro();" title="Interactive Guide" data-placement="bottom"><i class="icon icon-white icon-question-sign"></i> Guide</button>
+    <a class="btn btn-success btn-large" href="//webchem.ncbr.muni.cz/Wiki/PatternQuery:UserManual" target="_blank" title="Wiki page with detailed information" data-placement="bottom">Wiki</a>
+</div>
+
+<div id="mainView" data-bind="template: { name: template().name, data: template().data }">
+</div>
+
+<script type="text/html" id="empty-template">
+    <div></div>
+</script>
+
+<script type="text/html" id="error-template">
+    <h2>Error</h2>
+    <div data-bind="text: message">
+    </div>
+</script>
+
+<script type="text/html" id="failed-template">
+    <h2>Computation Failed</h2>
+    <div data-bind="text: message">
+    </div>
+</script>
+
+<script type="text/html" id="busy-template">
+    <div id="busySpinner" style="height: 150px"></div>
+    <div style="margin-top: 5px; padding-bottom: 20px; text-align:center"><span style="font-weight: bold; font-size: 20px" data-bind="html: message"></span></div>
+    <div style="text-align:center" data-bind="visible: showCancel">
+        <button class="btn btn-info" style="margin-bottom: 10px" data-bind="click: cancel">
+            Cancel Computation
+        </button>
+    </div>
+</script>
+
+<script type="text/html" id="canceled-template">
+    <div style="margin-top: 5px; padding-bottom: 20px; text-align:center">
+        <span style="font-weight: bold; font-size: 20px">
+            Computation canceled.
+        </span>
+    </div>
+</script>
+
+<script type="text/html" id="old-version-template">
+    <div>
+        @*<i>You can come back to the result later using this URL:</i><br/>*@
+        <small style="color: #aaa">You can come back to the result later using this URL. The result will not be deleted before @(ViewBag.OnlineUntil).</small>
+        <input class="result-input"
+               type="text" value="@Url.Action("Result", "PatternQuery", new { id = ViewBag.Id }, Request.Url.Scheme)" id="resultUrl" />
+    </div>
+
+    <a class="btn btn-large btn-info btn-block"
+       href="@Url.Action("Download", new { id = ViewBag.Id })">
+        <i class="icon-download-alt icon-white"></i><strong>Download Result</strong>
+        <small data-bind="text: resultSize"></small>
+    </a>
+    <!-- ko if: /mac/i.test(navigator.platform) -->
+    <div class="alert alert-danger" style="margin: 5px 0 0 0; font-size: 9pt; padding-left: 6px; padding-top: 4px; padding-bottom: 4px; text-align: center">
+        <a class="close" data-dismiss="alert" href="#" style="top: 0">&times;</a>
+        We have detected that you are using MacOS. To unpack the downloaded ZIP file, please use
+        <a href="https://itunes.apple.com/us/app/the-unarchiver/id425424353" target="_blank" style="font-weight: bold">The Unarchiver</a> or a similar software.<br />
+        For reasons unknown to us, the default MacOS extractor does not work.
+    </div>
+    <!-- /ko -->
+    <br />
+
+    <div class="alert alert-info alert-block">
+        The result cannot be displayed because it was computed by an outdated version of the service (<span data-bind="text: current" style="font-weight: bold"></span>).
+        The minimum version required is <span data-bind="text: required" style="font-weight: bold"></span>. The result can still be downloaded and processed outside this user interface.
+    </div>
+</script>
+
+<script type="text/html" id="result-template">
+    <div id="mq-result-header-wrap">
+        <div>
+            @*<i>You can come back to the result later using this URL:</i><br/>*@
+            <small style="color: #aaa">You can come back to the result later using this URL. The result will not be deleted before @(ViewBag.OnlineUntil).</small>
+            <input class="result-input"
+                   type="text" value="@Url.Action("Result", "PatternQuery", new { id = ViewBag.Id }, Request.Url.Scheme)" id="resultUrl" />
+        </div>
+
+        <a class="btn btn-large btn-info btn-block"
+           href="@Url.Action("Download", new { id = ViewBag.Id })">
+            <i class="icon-download-alt icon-white"></i><strong>Download Result</strong>
+            <small data-bind="text: resultSize"></small>
+        </a>
+        <!-- ko if: /mac/i.test(navigator.platform) -->
+        <div class="alert alert-danger" style="margin: 5px 0 0 0; font-size: 9pt; padding-left: 6px; padding-top: 4px; padding-bottom: 4px; text-align: center">
+            <a class="close" data-dismiss="alert" href="#" style="top: 0">&times;</a>
+            We have detected that you are using MacOS. To unpack the downloaded ZIP file, please use
+            <a href="https://itunes.apple.com/us/app/the-unarchiver/id425424353" target="_blank" style="font-weight: bold">The Unarchiver</a> or a similar software.<br />
+            For reasons unknown to us, the default MacOS extractor does not work.
+        </div>
+        <!-- /ko -->
+    </div>
+
+    <br />
+
+    <div class="tabbable">
+        <ul class="nav nav-tabs">
+            <li class="active" id="mq-summary-header"><a href="#summary-tab" data-toggle="tab" data-tabs="main">Summary</a></li>
+            <li id="mq-details-header"><a href="#details-tab" data-toggle="tab" data-tabs="main">Details</a></li>
+            <li id="mq-input-header" class="pull-right"><a href="#input-tab" data-toggle="tab" data-tabs="main">Queried PDB Entries</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="summary-tab">
+                @Html.Partial("_Summary")
+            </div>
+            <div class="tab-pane" id="details-tab">
+
+                <div class="tabbable">
+                    <div class="mq-section-header-wrap">
+                        <ul class="nav nav-pills">
+                            <li class="disabled"><a href="#" data-bind="click: function() { }">Query</a></li>
+                            <!-- ko foreach: summary.Queries -->
+                            <li><a data-toggle="tab" data-bind="click: show, attr: { href: '#' + detailsModel.id + '-tab', 'data-query-tab-header': detailsModel.id }"><span data-bind="text: Id"></span> <small><span data-bind="text: PatternCount"></span>/<span data-bind="text: StructureCount"></span></small></a></li>
+                            <!-- /ko -->
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane active">
+                            <div style="color: #424242; text-align: center; margin: 60px 0 55px 0;">
+                                <span style="background: #ececec; border-radius: 4px; padding: 8px 14px"><i class="icon-question-sign"></i> Please select the query you wish to view the details for.</span>
+                            </div>
+                        </div>
+                        <!-- ko foreach: summary.Queries -->
+                        <div class="tab-pane" data-bind="attr: { id: detailsModel.id + '-tab' }">
+                            <div class="details-result-view">
+                                <!-- ko with: detailsModel  -->
+                                <!-- ko if: isInitialized() && !failedToDownload() --><!-- ko template: { name: 'motif-details-template', data: $data } --><!-- /ko --><!-- /ko -->
+                                <!-- ko if: failedToDownload -->
+                                <div class="alert alert-error alert-block">
+                                    Ooops, failed to download the details data. Try to <a href="@Url.Action("Result", "PatternQuery", new { id = ViewBag.Id })">refresh</a> the page or try again later.
+                                </div>
+                                <!-- /ko -->
+                                <!-- ko if: !isInitialized() -->
+                                <div class="spinner-host"></div>
+                                <!-- /ko -->
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="input-tab" class="tab-pane">
+                @Html.Partial("_InputDetails")
+            </div>
+        </div>
+        <a onclick=""></a>
+    </div>
+    @*<pre data-bind="text: JSON.stringify($data, null, 2)"></pre>*@
+</script>
+
+@Html.Partial("_ResultDetails")
+
+@*@section jqueryui {
+        @Scripts.Render("~/bundles/jqueryui")
+        <script type="text/javascript">
+            $.widget.bridge('uibutton', $.ui.button);
+            $.widget.bridge('uitooltip', $.ui.tooltip);
+        </script>
+    }*@
+
+@section scripts {
+    <script type="text/javascript">
+        var includeYearToFilters = true;
+        var PatternQueryActions = {
+            isFinished: @ViewBag.IsFinished.ToString().ToLower(),
+            resultSize: "@ViewBag.ResultSize",
+            summaryAction: "@Url.Action("Summary", new { id = ViewBag.Id })",
+            killAction: "@Url.Action("Kill", new { id = ViewBag.Id })",
+            statusAction: "@Url.Action("Status", new { id = ViewBag.Id })",
+            detailsAction: "@Url.Action("Details", new { id = ViewBag.Id, query = "-query-" })",
+            inputDetailsAction: "@Url.Action("InputDetails", new { id = ViewBag.Id })",
+            ligandValidationAction: "@Url.Action("ByStructure", "ValidatorDb", new { id = "-id-" })",
+            motifSourceProvider: function (q, m, format, action) {
+                var uri = "@Html.Raw(Url.Action("PatternSource", new { id = ViewBag.Id, query = "-q-", pattern = "-m-", format = "-f-", type = "-a-" }))";
+                return uri.replace("-q-", encodeURIComponent(q)).replace("-m-", encodeURIComponent(m)).replace("-f-", encodeURIComponent(format || "pdb")).replace("-a-", encodeURIComponent(action || "view"))
+            },
+            moleculeValidationProvider: function (s, m) {
+                var uri = "@Html.Raw(Url.Action("Molecule", "ValidatorDb", new { id = "-s-", what = "-m-" }))";
+                return uri.replace("-s-", encodeURIComponent(s)).replace("-m-", encodeURIComponent(m))
+            }
+        };
+    </script>
+    @Scripts.Render("~/bundles/PatternQueryResult")
+}
+

@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = @ViewBag.Label + " - ValidatorDB";
+}
+
+@section CustomStyles {
+    @Styles.Render("~/Content/themes/base/css")
+    @Styles.Render("~/Content/slickgrid/css")
+    @Styles.Render("~/Content/MotiveValidator/css")
+    @Styles.Render("~/Content/MotiveValidatorMolecule.css")
+}
+
+<div class="page-header">
+    <div class="pull-right form-inline">
+        <a class="btn" target="_blank" href="@ViewBag.DataAction"
+           title="View/download raw JSON data for the result." id="result-download-json">
+            <i class="icon icon-briefcase"></i> JSON
+        </a>
+        <div class="btn-group">
+            <a class="btn btn-success" href="//webchem.ncbr.muni.cz/Wiki/ValidatorDB:Specifics_page" target="_blank">Wiki Manual</a>
+        </div>
+    </div>
+    <h1 id="result-header">
+        Validator<sup>DB</sup> <small>@ViewBag.Label</small>        
+    </h1>
+
+</div>
+
+<div id="mainView" data-bind="template: { name: template().templateName, data: template().data }">
+</div>
+
+<script type="text/html" id="empty-template">
+    <div></div>
+</script>
+
+<script type="text/html" id="fail-template">
+    <div style="margin-top: 5px; padding-bottom: 20px; text-align:center"><span style="font-weight: bold; font-size: 20px; color:red" data-bind="html: message"></span></div>
+</script>
+
+@Html.Partial("~/Views/MotiveValidatorShared/_MotiveDetails.cshtml")
+
+@section scripts {
+    <script type="text/javascript">
+        var validatorParams = {
+            validationDataJson: "@Html.Raw(ViewBag.ValidationData.Replace("\"", "\\\""))",
+            structureDataJson: "@Html.Raw(ViewBag.StructureData.Replace("\\","\\\\").Replace("\"", "\\\""))",
+            structureAction: "@Url.Action("Structure")",
+            isSingleMoleculeValidation: true,
+            isFinished: true
+        };
+    </script>
+    @Scripts.Render("~/bundles/validator-result")
+}

@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "MotiveValidator DB - " + @ViewBag.AllNames;
+}
+
+@section CustomStyles {
+    @Styles.Render("~/Content/themes/base/css")
+    @Styles.Render("~/Content/slickgrid")
+}
+
+<div class="page-header">
+    <h1 id="top">
+        MotiveValidator<sup>DB</sup>
+        @if (@ViewBag.PresentNames.Length > 0) { 
+        <br /><small>@ViewBag.Header - @ViewBag.PresentNames</small>
+        }
+</h1>
+</div>
+
+@if (ViewBag.MissingNames.Length > 0)
+{
+    <div class="alert alert-block alert-danger">
+        No data found for <b>@ViewBag.MissingNames</b>.
+    </div>
+}
+    
+<div id="result" data-bind="template: { name: templateName, data: data }">
+</div>
+
+<script type="text/html" id="busy-template">
+    <div id="busySpinner" style="height: 150px"></div>
+    <div style="margin-top: 5px; padding-bottom: 20px; text-align:center"><span style="font-weight: bold; font-size: 20px" data-bind="text: message"></span></div>
+</script>
+
+<script type="text/html" id="fail-template">
+    <div style="margin-top: 5px; padding-bottom: 20px; text-align:center"><span style="font-weight: bold; font-size: 20px; color:red" data-bind="text: message"></span></div>
+</script>
+
+@Html.Partial("~/Views/MotiveValidatorShared/_SummaryElements.cshtml")
+@Html.Partial("~/Views/MotiveValidatorShared/_MotiveDetails.cshtml")
+
+@section scripts {
+    <script type="text/javascript">
+        var validatorParams = { 
+            isFinished: true, 
+            dataAction: "@Url.Action(ViewBag.DataAction, new { id = ViewBag.DataId })", 
+            structureAction: "@Url.Action("Structure")" };
+    </script>
+    @Scripts.Render("~/bundles/validator-result")
+}

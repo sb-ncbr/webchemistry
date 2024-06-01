@@ -1,0 +1,194 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="description" content="WebChemistry is a set of apps and services for chemical and biological computations, mostly focused on analysis of 3D structural motifs." />
+    <meta name="keywords" content="MOLE, SiteBinder, EEM Charges, PatternQuery, MotiveExplorer, MotiveValidator, MotiveAtlas" />
+    <meta name="author" content="David Sehnal" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+    <title>@ViewBag.Structure - @WebChemistry.Web.Controllers.ChargeCalculatorController.AppName | WebChemistry</title>
+
+    @Styles.Render("~/Content/css")
+    @*@Styles.Render("~/Content/themes/base/css")*@
+    @Styles.Render("~/Content/slickgrid/css")
+    @Styles.Render("~/Content/ChargeCalculator/css")
+</head>
+<body style="height: 100%; overflow: hidden">
+    <div id="mainView" data-bind="template: { name: template().name, data: template().data }">
+    </div>
+
+    <script type="text/html" id="empty-template">
+        <div></div>
+    </script>
+
+    <script type="text/html" id="error-template">
+        <div style="margin-left: 14px">
+            <h2>Error</h2>
+            <div data-bind="text: message">
+            </div>
+        </div>
+    </script>
+
+    <script type="text/html" id="busy-template">
+        <div id="busySpinner" style="height: 150px"></div>
+        <div style="margin-top: 5px; padding-bottom: 20px; text-align:center"><span style="font-weight: bold; font-size: 20px" data-bind="text: message"></span></div>
+    </script>
+
+    <script type="text/html" id="result-template">
+        <div id="details-wrap">
+            <div style="z-index: 10000001; position: relative" class="pull-left" id="details-header">@ViewBag.Structure</div>
+            <div class="pull-right form-inline" id="details-orig-computation">
+                <a target="_blank" class="btn btn-info btn-small" href="@Url.Action("Result", new { id = ViewBag.Id, structure = (string)null } )" title="Open the synopsis page in new tab.">Back to Molecule List</a>
+                <a class="btn btn-success btn-small" id="downloadBtn" style="margin-right: 15px" href="@Url.Action("Download", new { id = ViewBag.Id, type = "Result" })"><i class="icon-download-alt icon-white"></i><strong>Download Data (All Results)</strong> <small>@ViewBag.ResultSize</small> </a>
+
+                <span class="btn-group">
+                    <button class="btn btn-success btn-small" onclick="startDetailsIntro();" data-placement="bottom" title="Interactive Guide"><i class="icon icon-white icon-question-sign"></i> <strong>Guide</strong></button>
+                    <a class="btn btn-success btn-small" href="//webchem.ncbr.muni.cz/Wiki/ChargeCalculator:UserManual" target="_blank" title="Wiki user manual">Wiki</a>
+                </span>
+            </div>
+            <div class="tabbable" id="details-tabs">
+                <ul class="nav nav-tabs" id="charges-header-highlight">
+                    <li class="active tab-guide-header">
+                        <button onclick="startDetailsIntro('#summary');" class="btn btn-small btn-success"><i class="icon icon-white icon-question-sign"></i></button>
+                        <a href="#summary" data-toggle="tab" id="summaryTabLink">Summary</a>
+                    </li>
+                    <li class="tab-guide-header" data-bind="if: computedChargeNames.length > 0">
+                        <button onclick="startDetailsIntro('#data');" class="btn btn-small btn-success"><i class="icon icon-white icon-question-sign"></i></button>
+                        <a href="#data" data-toggle="tab" id="dataTabLink">Raw Data</a>
+                    </li>
+                    <li class="tab-guide-header" data-bind="if: computedChargeNames.length > 0">
+                        <button onclick="startDetailsIntro('#aggregates');" class="btn btn-small btn-success"><i class="icon icon-white icon-question-sign"></i></button>
+                        <a href="#aggregates" data-toggle="tab" id="aggregatesTabLink">Analyze</a>
+                    </li>
+                    <li class="tab-guide-header" data-bind="if: computedChargeNames.length > 1">
+                        <button onclick="startDetailsIntro('#correlations');" class="btn btn-small btn-success"><i class="icon icon-white icon-question-sign"></i></button>
+                        <a href="#correlations" data-toggle="tab" id="correlationsTabLink">Compare</a>
+                    </li>
+                    <li class="tab-guide-header" data-bind="if: computedChargeNames.length > 0">
+                        <button onclick="startDetailsIntro('#model3d');" class="btn btn-small btn-success"><i class="icon icon-white icon-question-sign"></i></button>
+                        <a href="#model3d" data-toggle="tab" id="view3dTabLink">3D Model</a>
+                    </li>
+                </ul>
+                <div class="tab-content" style="height: calc(100% - 60px);">
+                    <div class="tab-pane active" id="summary" >
+                        @*<h3>Details for <span data-bind="text: Summary.Id"></span></h3>*@
+                        <table class="table" style="width: 100%;">
+                            <tr>
+                                <td style="width: 50%" id="basic-info">
+                                    <dl>
+                                        <dt id="charges-view-options">@ViewBag.Structure</dt>
+                                        <dd>
+                                            <div class="btn-group">
+                                                <a href="@Html.Raw(Url.Action("Source", new { id = ViewBag.Id, structure = @ViewBag.Structure }))"
+                                                   class="btn btn-small" target="_blank" title="View the input file in text format." data-placement="bottom"><i class="icon icon-file"></i>View</a>
+                                                <a href="@Html.Raw(Url.Action("Source", new { id = ViewBag.Id, structure = @ViewBag.Structure, download = "true" }))"
+                                                   class="btn btn-small" title="Download the input file in text format." data-placement="bottom"><i class="icon icon-download"></i>Download</a>
+                                            </div>
+                                        </dd>
+                                        <dt>Atoms</dt>
+                                        <dd id="charges-view-atoms"><span data-bind="html: atomCountHtml"></span> (<span data-bind="text: atomCount"></span> total)</dd>
+                                        <!-- ko if: $data['presentTotalCharges'] && $data['presentTotalCharges'].length > 0 -->
+                                        <dt>Total Charge</dt>
+                                        <dd id="charges-view-tc"><span data-bind="html: presentTotalCharges"></span></dd>
+                                        <!-- /ko -->
+                                        <dt>Timing</dt>
+                                        <dd id="charges-view-timing"><span data-bind="text: Summary.TimingMs"></span> ms</dd>
+                                        <dt data-bind="if: computedChargeNames.length > 0">
+                                            <abbr title="Each set of charges results from a single job, and is identified by the EEM parameter set, computation method and total molecular charge.">
+                                                Computed Charges
+                                            </abbr>
+                                        </dt>
+                                        <dd id="charges-view-comp-charges" data-bind="if: computedChargeNames.length > 0">
+                                            <ul class="error-list" data-bind="foreach: computedChargeNames">
+                                                <li data-bind="text: $data"></li>
+                                            </ul>
+                                        </dd>
+                                    </dl>
+                                </td>
+                                <td style="width: 50%" id="comp-warnings">
+                                    <dl>                                       
+                                        <dt data-bind="if: Summary.Errors.length > 0"><abbr title="Serious issues that occured during the computation.">Errors</abbr> (<span data-bind="text: Summary.Errors.length"></span>)</dt>
+                                        <dd data-bind="if: Summary.Errors.length > 0">
+                                            <ul class="error-list charges-color-error" data-bind="foreach: Summary.Errors">
+                                                <li data-bind="text: $data"></li>
+                                            </ul>
+                                        </dd>
+                                        <dt data-bind="if: Summary.ReaderWarnings.length > 0"><abbr title="Potential issues in the input file.">Processing Warnings</abbr> (<span data-bind="text: Summary.ReaderWarnings.length"></span>)</dt>
+                                        <dd data-bind="if: Summary.ReaderWarnings.length > 0">
+                                            <ul class="error-list charges-color-warning" data-bind="foreach: Summary.ReaderWarnings">
+                                                <li data-bind="text: $data"></li>
+                                            </ul>
+                                        </dd>
+                                        <dt data-bind="if: Summary.ComputationWarnings.length > 0"><abbr title="Potential issues during calculation.">Computation Warnings</abbr> (<span data-bind="text: Summary.ComputationWarnings.length"></span>)</dt>
+                                        <dd data-bind="if: Summary.ComputationWarnings.length > 0">
+                                            <ul class="error-list charges-color-warning" data-bind="foreach: Summary.ComputationWarnings">
+                                                <li data-bind="text: $data"></li>
+                                            </ul>
+                                        </dd>
+
+                                    </dl>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="data" data-bind="if: computedChargeNames.length > 0">
+                        <div class="input-append input-prepend pull-right" id="model-details-view-filter">
+                            <span class="add-on" style="margin-right: 5px; padding-left: 5px; width: auto; font-weight: normal" title="Table row count fitting filter selection."><span data-bind="text: dataModel.rowCount"></span> elements</span>
+                            <input type="text" placeholder="Label Filter..." data-bind="value: dataModel.labelFilter, valueUpdate: 'input'">
+                            <button class="btn" data-bind="click: function() { dataModel.labelFilter(''); }"><i class="icon-remove"></i></button>
+                        </div>
+
+                        <div class="input-append input-prepend pull-left" style="margin-left: 1px" id="charges-raw-grouping">
+                            <span class="add-on"><abbr title="Atomic or residue level resolution.">Atom Grouping</abbr></span>
+                            <select data-bind="options: dataModel.partitionNames, value: dataModel.currentPartitionName" style="width: 200px"></select>
+                        </div>
+                        <div id="details-data-view">
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="correlations" data-bind="if: computedChargeNames.length > 1">
+                        @Html.Partial("_DetailsCorrelations")
+                    </div>
+                    <div class="tab-pane" id="aggregates" data-bind="if: computedChargeNames.length > 0">
+                        @Html.Partial("_DetailsAggregates")
+                    </div>
+                    <div class="tab-pane" id="model3d" data-bind="if: computedChargeNames.length > 0" style="overflow: hidden">
+                        @Html.Partial("_Details3D")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*<pre data-bind="text: JSON.stringify($data, null, 2)"></pre>*@
+    </script>
+
+    @Html.Partial("_AnalyticsAndDevWarning")
+
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/jqueryui")
+    <script type="text/javascript">
+        $.widget.bridge('uibutton', $.ui.button);
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+    </script>*@
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/LiteMol")
+    <script type="text/javascript">
+        var displayPoweredBy = false;
+        @*var _gaq = _gaq || [], pluginUrl = "//www.google-analytics.com/plugins/ga/inpage_linkid.js"; _gaq.push(["_require", "inpage_linkid", pluginUrl]); _gaq.push(["_setAccount", "UA-39161552-1"]); _gaq.push(["_trackPageview"]); (function () { var a = document.createElement("script"); a.type = "text/javascript"; a.async = !0; a.src = ("https:" == document.location.protocol ? "https://ssl" : "//www") + ".google-analytics.com/ga.js"; var b = document.getElementsByTagName("script")[0]; b.parentNode.insertBefore(a, b) })();*@
+
+        var ChargeCalculatorParams = {
+            dataAction: "@Url.Action("DetailsData", new { id = ViewBag.Id, structure = @ViewBag.Structure  })",
+            LiveMolPrefix: "@Url.Content("~/Scripts/LiveMol")"
+        };
+    </script>
+    @Scripts.Render("~/bundles/ChargeCalculatorDetails")
+</body>
+
+</html>

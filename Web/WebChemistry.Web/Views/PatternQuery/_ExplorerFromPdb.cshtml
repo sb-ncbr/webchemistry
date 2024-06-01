@@ -1,0 +1,206 @@
+﻿<div id="mq-explorer-from-pdb-bg"></div>
+
+<button id="mq-explorer-from-pdb-close" data-bind="click: hide" class="btn btn-link"><i class="icon-remove"></i></button>
+
+<div class="tabbable" id="mq-explorer-from-pdb-content">
+    <div class="mq-section-header-wrap">
+        <ul class="nav nav-pills" style="margin: 0">
+            <li class="active" id="mq-filter-pdb-header">
+                <a href="#filter-tab" style="font-weight: bold" data-toggle="tab" data-placement="bottom" data-dotooltip title="Add a selection of PDB entries based on properties such as atom count or EC numbers.">
+                    Filtered by Metadata
+                    <!-- ko if: dataSource() === 'Filtered' -->
+                    <span style="font-weight: normal; font-size: smaller; font-style: italic" data-bind="text: filtersModel.filterCount()"></span>
+                    <!-- /ko -->
+                </a>
+            </li>
+            <li id="mq-list-pdb-header">
+                <a href="#list-tab" style="font-weight: bold" data-toggle="tab" data-placement="bottom" data-dotooltip title="Add PDB entries from a list of identifers.">
+                    PDB ID List
+                    <!-- ko if: dataSource() === 'List' -->
+                    <span style="font-weight: normal; font-size: smaller; font-style: italic" data-bind="text: listModel.enteredCountText"></span>
+                    <!-- /ko -->
+                </a>
+            </li>
+
+            <li class="pull-right" data-bind="visible: dataSource() === 'Filtered'" style="margin-right: 40px">
+                <button onclick="startExplorerIntro('#filteredPDBEntries');" class="btn btn-small btn-success" title="Interactive guide."><i class="icon icon-white icon-question-sign"></i> Guide</button>
+            </li>
+            <li class="pull-right" data-bind="visible: dataSource() === 'List'" style="margin-right: 40px">
+                <button onclick="startExplorerIntro('#listPDBEntries');" class="btn btn-small btn-success" title="Interactive guide."><i class="icon icon-white icon-question-sign"></i> Guide</button>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane" id="list-tab">
+            <!-- ko with: listModel -->
+            <div id="pdbListMissingEntries" class="alert alert-error alert-block" data-bind="visible: hasMissingEntries">
+                <span>
+                    Our PDBe.org database mirror does not contain <a href="#" id="showMissingListEntriesLink" target="_blank" title="Show list" data-bind="text: missingEntryCountText, attr: { href: missingEntryLink }"></a>.
+                    These entries either do not exist, are obsolete, or were added very recently.
+                </span><br />
+                <button class="btn btn-danger" data-bind="click: removeMissingEntries">Remove Missing Entries</button>
+            </div>
+
+            <div class="control-group" id="mq-explorer-pdblist" style="height: calc(100% - 30px)">
+                <textarea class="mq-dblist-text" rows="3" data-bind="value: listText, valueUpdate: 'input'"></textarea>
+            </div>
+            <div style="float: left; color: #B94A48; font-size: 9pt; padding-left: 8px">
+                <span data-bind="text: errorMessage"></span>
+            </div>
+            <div style="text-align:right">
+                <span style="font-size: 9pt;">
+                    A list of PDB entry identifiers, separated by a new line or a comma
+                    (e.g. <abbr title="Click to enter example." style="cursor: pointer" data-bind="click: function() { listText('1tqn,3d12'); }"><span style="font-family: 'Courier New'">1tqn,3d12</span></abbr>).
+                </span>
+                <button class="btn btn-success btn-small" data-bind="click: function () { $('#pdbListHelp').toggle(); }" title="Click for help." style="border-radius: 0"><i class="icon-white icon-question-sign"></i></button>
+            </div>
+
+            <div id="pdbListHelp" class="hide">
+                For example, you may  paste a list of pre-filtered PDB IDs (e.g., by organism, molecular weight, etc.) from PDB.org:
+                <ol style="margin-bottom: 0">
+                    <li>Go to <a style="font-weight: bold" href="//pdb.org/pdb/search/advSearch.do" target="_blank">PDB.org Search</a> and enter your search criteria.</li>
+                    <li>Run the search and list the results using the option 'Reports: List selected IDs'.</li>
+                    <li>Copy-paste the result into the text area above.</li>
+                </ol>
+            </div>
+            <!-- /ko -->
+        </div>
+        <div class="tab-pane active" id="filter-tab">
+            <div id="mq-explorer-filter-table-wrap">
+                <table class="table mq-query-table table-striped" id="mq-pdb-filter-table">
+                    <thead>
+                        <tr>
+                            <th class="mq-filter-col">Category</th>
+                            <th class="mq-filter-comparison-col">Comparison</th>
+                            <th class="mq-filter-text-col">Value</th>
+                            <th class="mq-action-col"></th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: filtersModel.filters">
+                        <!-- ko template: { data: $data, name: 'filter-template' } --><!-- /ko -->
+                    </tbody>
+                </table>
+            </div>
+            <div data-bind="visible: filtersModel.filterCount() > 0">
+                <div id="filters-preview">
+                    <!-- ko template: { data: filtersModel.preview, name: 'filter-preview-template' } --><!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="mq-explorer-from-pdb-actions">
+    <div id="mq-explorer-from-pdb-actions-bg"></div>
+    <div id="mq-explorer-from-pdb-count">
+        <span data-bind="text: selectedCountString"></span>
+    </div>
+    <!-- ko if: dataSource() === 'Filtered' -->
+    <div class="control-group" id="mq-explorer-add-wrapper">
+        <button class="btn btn-primary btn-large" data-bind="click: addDisplayed, enable: canAddDisplayed" id="mq-explorer-add-displayed"><i class="icon-white icon-plus"></i> Add Displayed</button><button style="width: auto !important" class="btn btn-primary btn-large" data-bind="click: addSelected, enable: canAdd" id="mq-explorer-add-selected">Selected</button>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: dataSource() !== 'Filtered' -->
+    <div class="control-group">
+        <button class="btn btn-primary btn-large" data-bind="click: addEntries, enable: canAdd" id="mq-explorer-add-selected"><i class="icon-white icon-plus"></i> Add Entries</button>
+    </div>
+    <!-- /ko -->
+</div>
+
+<script type="text/html" id="filter-template">
+    <!-- ko if: !isAdded() -->
+    <tr data-bind="attr: { id: 'filter-' + serial }">
+        <td class="mq-filter-col" id="mq-filter-col-active">
+            <select data-bind="options: availableFilters, value: filter, optionsText: 'name'" name="filterProperty"></select>
+        </td>
+        <td class="mq-filter-comparison-col" id="mq-filter-comparison-col-active">
+            <select data-bind="options: filter().comparisonTypes, value: comparisonType, optionsText: 'text'" name="comparisonType" style="font-weight: bold; color: #DD1144"></select>
+        </td>
+        <td class="mq-filter-text-col" id="mq-filter-text-col-active">
+            <div class="control-group">
+                <input type="text" placeholder="Value..." maxlength="5000" data-bind="value: filterText, valueUpdate: 'input', executeOnEnter: add" />
+            </div>
+        </td>
+        <td class="mq-action-col" id="mq-filter-add-col-active">
+            <button class="btn btn-primary btn-block" data-bind="click: add, enable: canAdd">Add <i class="icon-plus icon-white"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <!-- ko template: { data: $data, name: 'filter-help-template' } --><!-- /ko -->
+        </td>
+    </tr>
+    <!-- /ko -->
+    <!-- ko if: isAdded() -->
+    <tr>
+        <td class="mq-filter-col-added mq-added">
+            <span data-bind="text: filter().name"></span>
+        </td>
+        <td class="mq-filter-comparison-col mq-added">
+            <span data-bind="text: comparisonType().text"></span>
+        </td>
+        <td class="mq-filter-text-col mq-added">
+            <code data-bind="text: filterText"></code>
+        </td>
+        <td class="mq-action-col">
+            <button class="btn btn-block" data-bind="click: remove" title="Remove"><i class="icon-minus"></i></button>
+        </td>
+    </tr>
+    <!-- /ko -->
+</script>
+
+
+<script type="text/html" id="filter-help-template">
+    @Html.Partial("_MetadataFiltersHelp")
+</script>
+
+<script type="text/html" id="filter-preview-template">
+    <span class="btn-group pull-right">
+        <a class="btn" href="#" target="_blank" data-bind="disable: fullListHref() === '#', attr: { href: fullListHref }" title="Show full list of filtered entry identifiers."><i class="icon-list"></i> Show Full List</a>
+        <a class="btn" href="#" target="_blank" data-bind="disable: fullMetadataHref() === '#', attr: { href: fullMetadataHref }" title="Download full list of filtered entry identifiers, including the metadata, in CSV format.">With Metadata</a>
+        @*<button class="btn" data-bind="click: clear" title="Clear the preview."><i class="icon-remove"></i></button>*@
+    </span>
+    <div id="mq-explorer-filters-preview">
+        <div style="display: inline-block; background: #CCC">
+            <button style="margin-left: -1px" class="btn btn-info" title="Get random 15 matches." data-bind="disable: isRefreshing, click: refreshRandom15">Get Random 15</button><button class="btn btn-info" style="margin-left: 7px" title="Get first 15 matches (sorted by PDB ID)." data-bind="disable: isRefreshing, click: refreshTop15">First 15</button><button class="btn" style="padding-left: 6px; padding-right: 6px" title="Get previous 15 matches." data-bind="enable: canPage, click: prevPage"><i class="icon-chevron-left"></i></button><input type="text" data-bind="enable: canPage, value: pageNumber, executeOnEnter: gotoPage, valueUpdate: 'input'" style="margin: 0; width: 45px; border: none; border-radius: 0; text-align: center" /><input type="text" data-bind="enable: canPage, value: pageCount" style="margin: 0; width: 55px; border: none; border-radius: 0; text-align: center; background: #ccc; box-shadow: none; cursor: default" readonly /><button class="btn" style="padding-left: 6px; padding-right: 6px" title="Go to page." data-bind="enable: canPage, click: gotoPage"><i class="icon-share-alt"></i></button><button class="btn" style="padding-left: 6px; padding-right: 6px" title="Get next 15 matches." data-bind="enable: canPage, click: nextPage"><i class="icon-chevron-right"></i></button>
+        </div>
+        <span id="filter-match-count" data-bind="text: structureCountString"></span>
+    </div>
+    <!-- ko with: state -->
+    <!-- ko if: $data['hasError'] -->
+    <div id="filter-errors-wrap">
+        <ul data-bind="foreach: errors">
+            <li data-bind="text: $data"></li>
+        </ul>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: $data['hasData'] -->
+    <div id="filter-preview-data">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th><button class="btn btn-link btn-small" title="Check/uncheck all." style="padding: 0" data-bind="click: $parent.toggleFilterSelection"><i class="icon-check"></i></button></th>
+                    <th>
+                        <!-- ko with: idColumn -->
+                        <a href="#" data-bind="click: $parent.sortData, attr: { title: tooltip }, text: header"></a>
+                        <!-- /ko -->
+                    </th>
+                    <!-- ko foreach: cols  -->
+                    <th><a href="#" data-bind="click: $parent.sortData, attr: { title: tooltip }, text: header"></a></th>
+                    <!-- /ko -->
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: data">
+                <tr>
+                    <td><input type="checkbox" data-bind="checked: sel" /></td>
+                    <td><a data-bind="text: id, attr: { href: '//www.ebi.ac.uk/pdbe/entry/pdb/' + id }" target="_blank"></a></td>
+                    <!-- ko foreach: cols  -->
+                    <td data-bind="html: render($parent), attr: { title: getter($parent) }, css: numeric ? 'mq-text-align-right' : ''"></td>
+                    <!-- /ko -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+</script>

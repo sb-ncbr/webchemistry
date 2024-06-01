@@ -1,0 +1,62 @@
+﻿<div class="mq-details-section-header">
+    <h3>
+        Metadata Filter
+        <small data-bind="text: metadata.selectionLabel"></small>
+        @*<span class="btn-group pull-right">
+            <button class="btn" data-bind="click: metadata.clear" title="Clear selection."><i class="icon-remove"></i> Clear Selection</button>
+        </span>*@
+    </h3><a name="meta-filters"></a>
+</div>
+
+<div>
+    <div id="metadata-selection">
+        <ul class="thumbnails">
+            <!-- ko foreach: metadata.data -->
+            <li class="span3">
+                <div data-bind="css: isSelected() ? 'thumbnail mq-checked' : 'thumbnail'">
+                    <label class="checkbox" data-bind="attr: { title: description }" style="margin: 0;" data-placement="top">
+                        <input type="checkbox" data-bind="checked: isSelected" />
+                        <span data-bind="text: prettyName" style="font-size: 9pt; font-weight: bold"></span>
+                        <span class="pull-right" data-bind="text: entries.length" style="font-size: 8pt; color: #888"></span>
+                    </label>
+                </div>
+            </li>
+            <!-- /ko -->
+        </ul>
+        <div style="clear: both"></div>
+    </div>
+
+    <ul class="thumbnails mq-metadata-thumbnails" data-bind="foreach: metadata.selectedData">
+        <li class="span3">
+            <div class="thumbnail">
+                <a href="#" class="pull-right" title="Remove" data-bind="click: unselect" style="margin-top: 1px"><i class="icon-remove"></i></a>
+                <a href="#" class="pull-left" title="Toggle selection" data-bind="click: toggleSelection"><i class="icon-check"></i></a>
+                <span class="pull-left" title="Selected/Total Count" style="color: #888 !important; margin-right: 5px; margin-left: 5px"><span data-bind="html: selectedCount" style="font-size: 9pt"></span>/<span data-bind="html: entries.length" style="font-size: 9pt"></span></span>
+                <div class="mq-metadata-thumbnail-header">
+                    <div data-bind="text: prettyName"></div>
+                </div>
+                <ul class="unstyled">
+                    <!-- ko foreach: filteredEntries -->
+                    <li style="clear: both">
+                        <label class="checkbox" data-bind="attr: { title: $parent.valueFormatter(Value) }" style="margin: 0; cursor: pointer" data-placement="top">
+                            <input type="checkbox" data-bind="checked: isSelected" />
+                            <span data-bind="html: $parent.valueFormatter(Value)" style="font-size: 9pt"></span>
+                            <span class="pull-right" title="Pattern/PDB Entry Count" style="color: #888 !important"><span data-bind="html: PatternCount" style="font-size: 9pt"></span>/<span data-bind="html: StructureCount" style="font-size: 9pt"></span></span>
+                        </label>
+                    </li>
+                    <!-- /ko -->
+                </ul>
+                <div class="mq-regex-metadata-filter">
+                    <input type="text" title="Matches a regular expression." placeholder="Filter values using regexp..." data-bind="value: filterText, valueUpdate: 'input'">
+                    <button class="btn btn-link" data-bind="click: function () { filterText(''); }, visible: filterText().length > 0"><i class="icon-remove"></i></button>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <div style="clear: both"></div>
+</div>
+
+<div class="btn-group mq-apply-filters-buttons">
+    <button class="btn" data-bind="click: metadata.clear" title="Clear selection."><i class="icon-remove"></i> Remove Filters</button>
+    <button class="btn btn-primary" data-bind="click: metadata.update, html: metadata.applyLabel, enable: metadata.canApply" title="Apply the currently selected filters. The filters will be applied to the data table above."><i class="icon-filter icon-white"></i> Apply Filters</button>
+</div>

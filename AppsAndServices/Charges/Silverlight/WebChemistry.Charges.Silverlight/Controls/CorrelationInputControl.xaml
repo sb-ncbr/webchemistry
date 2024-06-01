@@ -1,0 +1,255 @@
+﻿<UserControl x:Class="WebChemistry.Charges.Silverlight.Controls.CorrelationInputControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:System="clr-namespace:System;assembly=mscorlib" 
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:controls="clr-namespace:WebChemistry.Charges.Silverlight.Controls"
+    xmlns:common="clr-namespace:WebChemistry.Silverlight.Common;assembly=WebChemistry.Silverlight.Common"
+    xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+    mc:Ignorable="d"
+    d:DesignHeight="800" d:DesignWidth="460">
+
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Grid.Resources>
+            <Style TargetType="sdk:DataGridRowGroupHeader" x:Key="CorrelationListGroupHeaderStyle">
+                <Setter Property="Cursor" Value="Arrow"/>
+                <Setter Property="IsTabStop" Value="False"/>
+                <Setter Property="Background" Value="{StaticResource GrayBrush7}" />
+                <Setter Property="Height" Value="22"/>
+                <Setter Property="SublevelIndent" Value="0"/>
+                <Setter Property="ItemCountVisibility" Value="Collapsed"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="sdk:DataGridRowGroupHeader">
+                            <sdk:DataGridFrozenGrid x:Name="Root" Background="{TemplateBinding Background}">
+                                <sdk:DataGridFrozenGrid.Resources>
+                                    <ControlTemplate x:Key="ToggleButtonTemplate" TargetType="ToggleButton">
+                                        <Grid Background="Transparent">
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroup x:Name="CommonStates">
+                                                    <VisualState x:Name="Normal"/>
+                                                    <VisualState x:Name="MouseOver">
+                                                        <Storyboard>
+                                                            <ColorAnimation Duration="0" To="#FFAAAAAA" Storyboard.TargetProperty="(Stroke).Color" Storyboard.TargetName="CollapsedArrow"/>
+                                                            <ColorAnimation Duration="0" To="#FFAAAAAA" Storyboard.TargetProperty="(Fill).Color" Storyboard.TargetName="ExpandedArrow"/>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                    <VisualState x:Name="Pressed">
+                                                        <Storyboard>
+                                                            <ColorAnimation Duration="0" To="#FFAAAAAA" Storyboard.TargetProperty="(Stroke).Color" Storyboard.TargetName="CollapsedArrow"/>
+                                                            <ColorAnimation Duration="0" To="#FFAAAAAA" Storyboard.TargetProperty="(Fill).Color" Storyboard.TargetName="ExpandedArrow"/>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                    <VisualState x:Name="Disabled">
+                                                        <Storyboard>
+                                                            <DoubleAnimation Duration="0" To=".5" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="CollapsedArrow"/>
+                                                            <DoubleAnimation Duration="0" To=".5" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="ExpandedArrow"/>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                                <VisualStateGroup x:Name="CheckStates">
+                                                    <VisualState x:Name="Checked"/>
+                                                    <VisualState x:Name="Unchecked">
+                                                        <Storyboard>
+                                                            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility" Storyboard.TargetName="CollapsedArrow">
+                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility" Storyboard.TargetName="ExpandedArrow">
+                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                            </VisualStateManager.VisualStateGroups>
+                                            <Path x:Name="CollapsedArrow" Data="F1 M 0,0 L 0,1 L .6,.5 L 0,0 Z" HorizontalAlignment="Center" Stretch="Uniform" Stroke="#FF666666" Visibility="Collapsed" VerticalAlignment="Center" Width="5"/>
+                                            <Path x:Name="ExpandedArrow" Data="F1 M 0,1 L 1,1 L 1,0 L 0,1 Z" Fill="#FF666666" HorizontalAlignment="Center" Stretch="Uniform" VerticalAlignment="Center" Width="6"/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </sdk:DataGridFrozenGrid.Resources>
+                                <sdk:DataGridFrozenGrid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </sdk:DataGridFrozenGrid.ColumnDefinitions>
+                                <sdk:DataGridFrozenGrid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
+                                </sdk:DataGridFrozenGrid.RowDefinitions>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CurrentStates">
+                                        <VisualState x:Name="Regular"/>
+                                        <VisualState x:Name="Current" />
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+                                <Rectangle x:Name="IndentSpacer" Grid.Column="1" Grid.Row="1"/>
+                                <ToggleButton x:Name="ExpanderButton" Grid.Column="2" Height="15" IsTabStop="False" Margin="2,0,0,0" Grid.Row="1" Template="{StaticResource ToggleButtonTemplate}" Width="15"/>
+
+                                <StackPanel Grid.Column="3" HorizontalAlignment="Left" Margin="0,1,0,1" Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" MinWidth="10">
+                                    <!--TextBlock x:Name="ItemCountElement" Margin="4,0,0,0" Width="0" Visibility="{TemplateBinding ItemCountVisibility}"/>
+                                    <TextBlock Text="{Binding ItemCount}" Foreground="#FF666666" /-->
+                                    <TextBlock Text="Pivot: " Foreground="#FF666666" />
+                                    <TextBlock Margin="4,0,0,0" Text="{Binding Name}" TextWrapping="NoWrap" TextTrimming="WordEllipsis">
+                                                        <ToolTipService.ToolTip>
+                                                            <TextBlock Text="{Binding Name}" MaxWidth="250" MaxHeight="100" TextWrapping="Wrap" TextTrimming="WordEllipsis" />
+                                                        </ToolTipService.ToolTip>
+                                                    </TextBlock>
+                                </StackPanel>
+
+                                <!--StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="4" Margin="0 1 0 0">
+                                    <HyperlinkButton Height="20" Padding="4,0" Content="All" IsTabStop="False" ToolTipService.ToolTip="Select whole group" Foreground="#FF424242" VerticalAlignment="Center" ToolTipService.Placement="Top" HorizontalAlignment="Right" Margin="0,0,0,0" CommandParameter="{Binding}" Command="{Binding DataContext.SelectGroupCommand, ElementName=LayoutRoot}" />
+                                    <HyperlinkButton Height="20" Padding="4,0" Content="None" IsTabStop="False" ToolTipService.ToolTip="Unselect whole group" Foreground="#FF424242" VerticalAlignment="Center" ToolTipService.Placement="Top" HorizontalAlignment="Right" Margin="0,0,4,0" CommandParameter="{Binding}" Command="{Binding DataContext.UnselectGroupCommand, ElementName=LayoutRoot}" />
+                                </StackPanel-->
+                                <sdk:DataGridRowHeader x:Name="RowHeader" sdk:DataGridFrozenGrid.IsFrozen="True" Grid.RowSpan="3"/>
+                            </sdk:DataGridFrozenGrid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Padding="0 3" Command="{Binding ExportCommand, Mode=OneTime}" ToolTipService.ToolTip="Export correlation data for all structures.">
+                    <!--i:Interaction.Behaviors>
+                        <common:ContextDropdownBehavior />
+                    </i:Interaction.Behaviors>
+                    <toolkit:ContextMenuService.ContextMenu>
+                        <toolkit:ContextMenu Margin="0">
+                            <toolkit:MenuItem Header="CSV Data" Command="{Binding ExportCommand, Mode=OneTime}" CommandParameter="Data" />
+                            <toolkit:MenuItem Header="CSV All Computed" Command="{Binding ExportCommand, Mode=OneTime}" CommandParameter="Plots" />
+                        </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu-->
+                    Export
+                </Button>
+                <!--  Command="{Binding CsvToClipboardCommand, Mode=OneTime}"  -->
+                <Button Margin="2 0 0 0" Grid.Column="1" Padding="0 3" ToolTipService.ToolTip="Copy CSV data to clipboard."
+                        Command="{Binding CopyToClipboardCommand, Mode=OneTime}">
+                    <!--i:Interaction.Behaviors>
+                        <common:ContextDropdownBehavior />
+                    </i:Interaction.Behaviors>
+                    <toolkit:ContextMenuService.ContextMenu>
+                        <toolkit:ContextMenu Margin="0">
+                            <toolkit:MenuItem Header="CSV Current Summary" Command="{Binding CopyToClipboardCommand, Mode=OneTime}" CommandParameter="CSVSummary" />
+                            <toolkit:MenuItem Header="CSV Current Data" Command="{Binding CopyToClipboardCommand, Mode=OneTime}" CommandParameter="CSVCurrentData" />
+                        </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu-->
+                    Copy CSV to Clipboard
+                </Button>
+            </Grid>
+
+            <Grid Margin="0 2 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Border Padding="7 2 7 4" CornerRadius="0" BorderThickness="0" Background="{StaticResource GrayBrush7}">
+                    <CheckBox Grid.Column="1" IsChecked="{Binding SelectionOnly, Mode=TwoWay}" ToolTipService.ToolTip="Compute correlations on selected atoms.">Selection Only</CheckBox>
+                </Border>
+
+                <Button Margin="2 0 0 0"  Command="{Binding CorrelateCommand, Mode=OneTime}" Foreground="{StaticResource HighlightBrush}" Grid.Column="1" Padding="24 0"
+                            ToolTipService.ToolTip="Recompute the correlations. For example if the selection has changed." Height="25">Recompute</Button>
+            </Grid>
+
+            <Border Padding="5 2 5 2" Margin="0 2 0 0" BorderThickness="1"  BorderBrush="{StaticResource GrayBrush7}" Background="{StaticResource GrayBrush7}">
+                <controls:SelectionControl DataContext="{Binding AnalyzeViewModel.CurrentStructure.Selection}" />
+            </Border>
+
+            <Grid Margin="0 2 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <ComboBox ItemsSource="{Binding OrderTypes, Mode=OneTime}" SelectedIndex="{Binding OrderTypeIndex, Mode=TwoWay}"></ComboBox>
+                <Button Grid.Column="1" ToolTipService.ToolTip="Toggle Collapse/Expand groups." Margin="2 0 0 0" Padding="6 0" VerticalAlignment="Stretch"
+                            Click="ToggleGroupsClick">T</Button>
+            </Grid>
+        </StackPanel>
+
+        <sdk:DataGrid Grid.Row="1"
+                      ItemsSource="{Binding CorrelationsView, Mode=OneWay}" AutoGenerateColumns="False" x:Name="dataView" Margin="0 2 0 0">
+            <sdk:DataGrid.RowGroupHeaderStyles>
+                <Style TargetType="sdk:DataGridRowGroupHeader" BasedOn="{StaticResource CorrelationListGroupHeaderStyle}" />
+            </sdk:DataGrid.RowGroupHeaderStyles>
+            <sdk:DataGrid.Columns>
+                <sdk:DataGridTemplateColumn Header="Charges" Width="120" CanUserReorder="False" IsReadOnly="True">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <HyperlinkButton Content="{Binding DependentCharges.Result.Parameters.Set.Name}" Margin="8 3 2 3" Padding="0" ToolTipService.ToolTip="{Binding DependentCharges.Result.Parameters.Set.Name}"
+                                             Command="{Binding SetCurrentCommand}" CommandParameter="{Binding}" FontSize="13"/>
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
+
+                <sdk:DataGridTemplateColumn Header="Parameters" Width="120" CanUserReorder="False" IsReadOnly="True">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DependentMethodId}" Margin="2 3" Padding="0" FontSize="12"
+                                             ToolTipService.ToolTip="{Binding DependentMethodId}" VerticalAlignment="Bottom"
+                                             />
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
+
+                <sdk:DataGridTemplateColumn Header="R²" SortMemberPath="PearsonCoefficient" CanUserSort="True" Width="40" CanUserReorder="False" IsReadOnly="True">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding FormattedPearsonCoefficient}" Margin="2 3" FontSize="11" VerticalAlignment="Bottom" Foreground="Green" />
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
+
+                <sdk:DataGridTemplateColumn Header="ρ" SortMemberPath="SpearmanCoefficient" CanUserSort="True" Width="40" CanUserReorder="False" IsReadOnly="True">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding FormattedSpearmanCoefficient}" Margin="2 3" FontSize="11" VerticalAlignment="Bottom" Foreground="Purple" />
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
+
+                <sdk:DataGridTemplateColumn Header="δ²" SortMemberPath="Rmsd" CanUserSort="True" Width="40" CanUserReorder="False" IsReadOnly="True">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding FormattedRmsd}" Margin="2 3" FontSize="11" VerticalAlignment="Bottom" Foreground="Brown" />
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
+
+                <sdk:DataGridTemplateColumn Header="Diff." Width="50" SortMemberPath="AbsoluteDifferenceSum" CanUserSort="True" CanUserReorder="False" IsReadOnly="True">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding FormattedAbsoluteDifferenceSum}" Margin="2 3" FontSize="11" VerticalAlignment="Bottom" Foreground="Blue" />
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
+
+
+                <sdk:DataGridTemplateColumn Header="#" SortMemberPath="DataPoint.Count" CanUserSort="True" Width="40*" CanUserReorder="False" IsReadOnly="True">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DataPoints.Count}" Margin="2 3" FontSize="11" VerticalAlignment="Bottom" />
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
+            </sdk:DataGrid.Columns>
+        </sdk:DataGrid>
+    </Grid>
+</UserControl>

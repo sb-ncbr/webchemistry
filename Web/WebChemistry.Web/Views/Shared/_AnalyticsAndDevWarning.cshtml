@@ -1,0 +1,26 @@
+﻿@if (Request.Url.Host.StartsWith("webchemdev", StringComparison.OrdinalIgnoreCase))
+{
+    <script type="text/javascript">
+        var __glgAnalyticsId = "UA-52587367-1";
+    </script>
+    if (ViewBag.IsReviewMode == null || ViewBag.IsReviewMode == false)
+    {
+        <div class="alert alert-danger" style="position: fixed; right: 0; bottom: 0; margin-bottom: 0; border-radius: 3px 0 0 0; border: 0; padding-top: 3px; padding-bottom: 3px; padding-left: 10px">
+            <span style="font-size:9pt" class="pull-left">This is the development version of the WebChemistry platform. For the stable version (not all apps might be present due to being in development), please go to <a href="//webchem.ncbr.muni.cz" target="_blank">webchem.ncbr.muni.cz</a>.</span>
+            <a href="#" class="pull-right close" style="margin-top: 2px" data-dismiss="alert">&times;</a>
+        </div>
+    }
+}
+else if (!Request.Url.Host.StartsWith("localhost", StringComparison.OrdinalIgnoreCase))
+{
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TDQGK4X0KQ"></script>
+    <script type="text/javascript">
+        var __glgAnalyticsId = "G-TDQGK4X0KQ";
+    </script>
+}
+else
+{
+    <script type="text/javascript">
+        var __glgAnalyticsId = "";
+    </script>
+}

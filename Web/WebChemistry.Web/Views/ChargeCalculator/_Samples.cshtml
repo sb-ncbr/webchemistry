@@ -1,0 +1,195 @@
+﻿<div class="tabbable" id="charges-samples">
+    <div style="background: #F5F5F5; padding: 6px 19px; border-radius: 6px">
+        <ul class="nav nav-pills" style="margin: 0">
+            <li class="disabled" style="width: 90px"><a href="#" style="font-weight: bold; color: black !important; padding-left: 0 !important">Sample</a></li>
+            <li class="active"><a href="#druglike-tab" style="font-weight: bold" data-toggle="tab" id="paraSampleBtn">Paracetamol</a></li>
+            <li><a href="#bio-tab" style="font-weight: bold" data-toggle="tab" id="protegrinSampleBtn">Protegrin-1</a></li>
+            <li><a href="#complex-tab" style="font-weight: bold" data-toggle="tab" id="proteoSampleBtn">Proteasome</a></li>
+        </ul>
+    </div>
+    <div class="tab-content">
+
+        <div class="tab-pane active" id="druglike-tab" style="text-align: justify">
+            <img src="~/Content/ChargeCalculator/acc-para.jpg" style="float: right; margin: 0 0 5px 15px; height: 150px" />
+
+            <h3>
+                Paracetamol
+                <small>Drug-like molecule</small>
+                <span class="btn-group">
+                    <a class="btn btn-primary btn-small" title="Inspect the results of a computation with preset parameters." target="_blank" href="@Url.Action("Result", new { id = "Paracetamol" })"><i class="icon-search icon-white"></i> Browse Data</a>
+                    <button class="btn btn-success btn-small" title="Start a new computation with preset parameters." data-bind="click: function() {  $('#charges-submit-tab-link').click(); doExample(exampleDataMap['Paracetamol']) }, disable: loadingExample"><i class="icon-play icon-white"></i> Try It Yourself</button>
+                </span>
+            </h3>
+
+            <p>
+                @*N-acetyl-p-aminophenol, commonly known as <a href="//ligand-expo.rcsb.org/reports/T/TYL/index.html" target="_blank">paracetamol</a>, is a widely used analgesic and antipyretic.*@
+                N-acetyl-p-aminophenol, commonly known as <a href="//www.ebi.ac.uk/pdbe-srv/pdbechem/chemicalCompound/show/TYL" target="_blank">paracetamol</a>, is a widely used analgesic and antipyretic.
+                Its mechanism of action is believed to be the inhibition of the protein cyclooxygenase 2, regulating the production of pro-inflamatory compounds.
+                The metabolic break down of paracetamol has
+                been the subject of intense study, since it holds the key to both its therapeutic action and toxicity...
+                <a href="#drug-more" onclick="var $t = $(this); $t.text($t.text() === '[show more]' ? '[show less]' : '[show more]'); $('#drug-more').toggle();">[show more]</a>
+            </p>
+
+            <div id="drug-more" class="hide">
+                <p>
+                    We have computed atomic charges in paracetamol (ideal model coordinates from wwPDB CCD entry TYL).
+                    The default ACC settings were used. Specifically, the total molecular charge was 0. The EEM parameter
+                    set Ouy2009_elem covered the NPA charge definition at the B3LYP/6-31G* level of theory, and was developed for small molecules.
+                    NPA charges generally support qualitative chemical concepts like induction and conjugation.
+                    The full EEM matrix was solved in double precision. The computation took less than 1s.
+                </p>
+
+                <p>
+                    A quick analysis (e.g., sorting according to atomic charge value in the Raw Data tab) reveals that the phenolic H (position HO<sub>4</sub>)
+                    is the most acidic proton (highest  positive charge) in the molecule. This suggests a faster and easier dissociation of this O-H bond.
+                    Indeed, <a href="//www.ncbi.nlm.nih.gov/pubmed/17227290" target="_blank" title="View source publication...">up to 90%</a> of metabolic degradation happens at position HO<sub>4</sub>
+                    (glucuronidation, sulphonation). Additionally, <a href="//www.ncbi.nlm.nih.gov/pubmed/17227290" target="_blank" title="View source publication...">up to 15%</a> of metabolic degradation
+                    involves oxidation at the phenolic (HO<sub>4</sub>) and amidic positions (HN), the two most positive H in the paracetamol molecule.
+                    While paracetamol is  a very small molecule with few polar sites, the same principle can be applied in reasoning out highly
+                    reactive sites in more complex molecules.
+                </p>
+
+                <p>
+                    In general, it is a good idea to try several charge definitions. One or more of these might prove useful in further modeling studies.
+                    If you plan to run molecular dynamics, it is good to use charges which are compatible with the particular force field you plan to use.
+                    For instance, if the force field is known to use atomic charges based on electrostatic potential mapping, pick at least one EEM parameter
+                    set developed with this charge definition.
+                </p>
+
+                <a name="drug-more"></a>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="bio-tab" style="text-align: justify">
+            <img src="~/Content/ChargeCalculator/acc-protegrin.jpg" style="float: right; margin: 0 0 5px 15px; height: 150px" />
+
+            <h3>
+                Protegrin-1
+                <small>Antimicrobial peptide</small>
+                <span class="btn-group">
+                    <a class="btn btn-primary btn-small" title="Inspect the results of a computation with preset parameters." target="_blank" href="@Url.Action("Result", new { id = "Protegrin" })"><i class="icon-search icon-white"></i> Browse Data</a>
+                    <button class="btn btn-success btn-small" title="Start a new computation with preset parameters." data-bind="click: function() {  $('#charges-submit-tab-link').click(); doExample(exampleDataMap['Protegrin']) }, disable: loadingExample"><i class="icon-play icon-white"></i> Try It Yourself</button>
+                </span>
+            </h3>
+
+            <p>
+                Protegrins are a family of antimicrobial peptides active against a wide range of pathogens.
+                Protegrin-1 (PG1) has been intensely studied for its potential in treating infections caused by
+                antibiotic resistant bacteria. PG1 shows activity against several pathogens, but also
+                toxicity against the host. Useful mutations are those which maintain the antimicrobial activity,
+                and at the same time reduce toxicity...
+                <a href="#bio-more" onclick="var $t = $(this); $t.text($t.text() === '[show more]' ? '[show less]' : '[show more]'); $('#bio-more').toggle();">[show more]</a>
+            </p>
+
+            <div id="bio-more" class="hide">
+                <p>
+                    We calculated atomic charges in PG1 using ACC (coordinates from NMR model 1 of the PDB entry 1PG1).
+                    The total molecular charge was +7, owing to the many ARG residues. The EEM parameter set used was EX-NPA_6-31Gd_gas,
+                    which covered the NPA charge definition at the HF/6-31G* level of theory, and was developed for proteins.
+                    However, it was necessary to  add to this set EEM parameters for deuterium (D), because this element was present in the input file.
+                    The EEM parameters for D were identical to the parameters for H. The full EEM matrix was solved in double precision.
+                    The computation took less than 1s.
+                </p>
+
+                <p>
+                    PG1 contains 18 residues, and rather than  analyzing atomic charges, we analyzed the residue charges, which are also reported by
+                    ACC (in all tabs, select the grouping Residues). PG1 is special because of its high positive charge. It contains 6 ARG residues.
+                    However, not all  have the same charge. In particular, ARG at positions 4 and 9 have the least positive charge (around +0.5e),
+                    whereas the rest have much higher positive charge (over +0.8e). Such results suggest that  mutations of ARG into a neutral
+                    residue at positions 4 or 9 would have a lower effect than mutations at positions 1, 10, 11 or 18.
+                </p>
+
+                <p>
+                    A quick literature search reveals that many mutants of PG1 have been studied.
+                    Indeed, <a href="//www.ncbi.nlm.nih.gov/pubmed/15629531" target="_blank">Ostberg and Kastnessis</a>
+                    found that the mutation of ARG 4 into a neutral residue alters the antimicrobial activity against
+                    C. albicans significantly less than the mutation of ARG 10. Such biologically relevant
+                    insight can be gained by analyzing the residue charges on a single structure of PG1.
+                </p>
+
+                <a name="bio-more"></a>
+            </div>
+
+        </div>
+
+        <div class="tab-pane" id="complex-tab" style="text-align: justify">
+            <img src="~/Content/ChargeCalculator/acc-proteo.jpg" style="float: right; margin: 0 0 5px 15px; height: 120px" />
+
+            <h3>
+                Proteasome
+                <small>Biomacromolecular complex</small>
+                <span class="btn-group">
+                    <a class="btn btn-primary btn-small" title="Inspect the results of a computation with preset parameters." target="_blank" href="@Url.Action("Result", new { id = "Proteasome" })"><i class="icon-search icon-white"></i> Browse Data</a>
+                    <button class="btn btn-success btn-small" title="Start a new computation with preset parameters." data-bind="click: function() {  $('#charges-submit-tab-link').click(); doExample(exampleDataMap['Proteasome']) }, disable: loadingExample"><i class="icon-play icon-white"></i> Try It Yourself</button>
+                </span>
+            </h3>
+
+            <p>
+                The 26S proteasome is a large biomacromolecular complex which facilitates the targeted degradation
+                of intracellular proteins, and thus plays an essential role in keeping protein homeostasis. It
+                consists of a catalytic particle, made up of alpha rings and beta rings, controlled by regulatory particles,
+                which are made up of a number of proteins. The proteasome is an intricate molecular  machine which requires complex
+                regulation to unfold and deubiquitilate the substrate, and push it  through the catalytic machinery...
+                <a href="#complex-more" onclick="var $t = $(this); $t.text($t.text() === '[show more]' ? '[show less]' : '[show more]'); $('#complex-more').toggle();">[show more]</a>
+            </p>
+
+            <div id="complex-more" class="hide">
+                <p>
+                    Necessarily, the proteasome undergoes large conformational changes
+                    during its operation. However, due to its size, such changes are very
+                    difficult to study. Recent work by <a href="//www.ncbi.nlm.nih.gov/pubmed/24706844" target="_blank">Unverdorben et. al</a> in
+                    the field of cryo-electron microscopy has lead to the discovery of intermediate conformers during the
+                    initial binding of ubiquitylated substrates. While the conformational
+                    changes in the regulatory particle are easily distinguishable, the
+                    changes in the catalytic particle are very subtle, due to the fact that
+                    all studied conformers refer to the initial phase of substrate binding.
+                </p>
+
+                <p>
+                    Using ACC, we calculated atomic charges in the 3 conformers of the 26S proteasome that are available
+                    in the Protein Data Bank (PDB IDs 4CR2, 4CR3, 4CR4). The default ACC settings were used.
+                    Specifically, the total molecular charge was considered neutral for all conformers.
+                    The EEM parameter set used was EX-NPA_6-31Gd_gas, which covered the NPA charge definition at
+                    the HF/6-31G* level of theory, and was developed for proteins. The computation method was EEM Cutoff Cover,
+                    with a cutoff radius of 12Å. The computation took 130s.
+                </p>
+
+                <p>
+                    The calculation produced 3 sets of atomic charges, one for each conformer. Since the proteasome is very large,
+                    we analyzed  the residue charges, which are also reported by ACC, and subsequently the charges for the various
+                    subunits that make up the proteasome. Note that information about the subunits is given in the COMPND records
+                    of the PDB entries used here. Residues with the chain identifier 1-7 correspond to subunits beta 1-7.
+                    Residues with the chain identifier A-G correspond to subunits alpha 1-7. Finally, residues with the chain
+                    identifier H-Z correspond to regulatory subunits. Therefore, the total charge for a specific subunit or
+                    particle can be obtained as the sum of the charges for the residues with the corresponding chain identifiers.
+                    We thus followed the change in total charge for the regulatory particle, the catalytic particle,
+                    then separately for the alpha and beta rings.
+                </p>
+
+                <p>
+                    The first observation was that, during the conformational changes from state 1, to state 2, and then to state 3,
+                    a significant amount of electron  density is transferred between the catalytic particle and the regulatory particle.
+                    This suggests that, even though there is no significant movement observed for the catalytic particle, allosteric
+                    information is exchanged with the catalytic particle, and this information can be tracked at the electrostatic level.
+                    The next observation is that significant information is disseminated not only  horizontally (within the alpha ring, or within the beta ring),
+                    but also vertically. In the overall transition it  appears that the alpha ring loses electron density to the regulatory particle. By checking the
+                    intermediate state 2 it is possible to see that there is also transfer between the alpha ring and beta ring.
+                    This vertical shuttling of electron density within the catalytic particle suggests that the
+                    activity of alpha and beta subunits may cross-correlate. Such phenomena have indeed been reported.
+                </p>
+
+                <p>
+                    For example, <a href="//www.ncbi.nlm.nih.gov/pubmed/23544109" target="_blank">O'Hara et. al</a> found that subunits alpha5 and beta1 may
+                    translocate together, while <a href="//www.ncbi.nlm.nih.gov/pubmed/24040035" target="_blank">Cron et. al</a> found that knockdown of alpha1
+                    leads to loss of chymotrypsin activity associated with beta5. Further analysis can even  yield the residues involved
+                    in the allosteric regulation, as those residues which exhibit a high variation  in total charge (e.g., approximately 10 sites on the Rpn-13 regulatory subunit).
+                    This case study shows  how a brief calculation using only a crude structural approximation can give insight regarding allosteric
+                    regulation in large biomolecular complexes.
+                </p>
+
+                <a name="complex-more"></a>
+            </div>
+
+        </div>
+    </div>
+</div>

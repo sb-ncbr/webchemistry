@@ -1,0 +1,29 @@
+﻿@helper RecenlySubmittedComputations(string appName, string compAction, string id = "recently-submitted", string typeSingular = "job", string typePlural = "jobs", string submitText = "submitted")
+{
+    <div id="@id" class="recently-submitted">
+        <!-- ko with: RecentlySubmittedComputations.getSubmitted('@appName') -->        
+        <div class="well recently-submitted-computations" style="margin-top: 10px;">
+            <button type="button" class="close" title="Dismiss. Hides search history until you reload the page." data-bind="click: function(data, event) { $(event.target).closest('.close').tooltip('hide'); $('#@id').remove(); }"><i class="icon-remove"></i></button>
+            <button type="button" class="close" style="margin-right: 10px" title="Clear the list. This does not remove the results."
+                    data-bind="click: function(data, event) { if (confirm('Do you really want to clear the list?\n\nThis does not remove the results.')) { $(event.target).closest('.close').tooltip('hide'); $('#@id').remove(); RecentlySubmittedComputations.clear('@appName'); } }">
+                <i class="icon-trash"></i>
+            </button>
+            <h5>
+                Last <span data-bind="text: ($data.submitted.length == 1 ? '@typeSingular' :  $data.submitted.length + ' @typePlural')"></span>
+                <abbr title="The list is stored locally in your browser and not shared with anyone. Only the 10 latest @typePlural are stored.">you</abbr> @submitText
+            </h5>
+            <!-- ko if: $data.submitted.length > 0 -->
+            <ul data-bind="foreach: $data.submitted">
+                <li>
+                    <a style="font-weight: bold" data-bind="text: $data['hint'] ? hint : id, attr: { href: @(compAction).replace('-id-', id) }" target="_blank"></a>
+                    on <span data-bind="text: (function () { try { return new Date(timestamp).toLocaleString(); } catch (e) { return 'Unknown'; } })()"></span>
+                </li>
+            </ul>
+            <!-- /ko -->
+            <!-- ko if: $data.submitted.length === 0 -->
+            No @typePlural were @submitText yet.
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+    </div>
+}

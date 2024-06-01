@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Computations History";
+}
+
+<h2>Computations History</h2>
+
+<div class="container">
+<p>@ViewBag.TotalCount computations total.</p>
+
+<ul>
+    @foreach (var group in ViewBag.ComputationsByDay)
+    {
+        <li>
+            <b>@group.Item1.ToShortDateString()</b> (@group.Item2.Length)<br/>
+            @foreach (var c in group.Item2)
+            {
+                <span>@c.DateCreated.ToShortTimeString() <a href="@Url.Action("Result", new { id = c.ShortId})">@c.ShortId</a> from @c.Source</span><br/>
+            }
+        </li>
+    }
+</ul>
+</div>

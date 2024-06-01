@@ -1,0 +1,74 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Silverlight", "Silverlight", "{E512BF4A-B0C7-4AB5-A676-5306297D44C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{5E1AF932-1E85-492B-9652-294C45970FA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.Queries.Core", "WebChemistry.Queries.Core\WebChemistry.Queries.Core.csproj", "{7439A025-3A82-4270-8647-7E0F006BD065}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{E5A456FE-2486-49D7-9BF3-488FEB0D9888}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.Queries.Core", "Silverlight\WebChemistry.Queries.Core\WebChemistry.Queries.Core.csproj", "{12C1E241-FF43-4781-B934-5B447535558E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.Queries.Silverlight", "Silverlight\WebChemistry.Queries.Silverlight\WebChemistry.Queries.Silverlight.csproj", "{E16182FD-4AD7-4053-B58B-F7B2F791B5A7}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WebChemistry.Queries.Silverlight.Web", "Silverlight\WebChemistry.Queries.Silverlight.Web\WebChemistry.Queries.Silverlight.Web.vbproj", "{5DB9787F-0A6B-488D-8D0D-7642EA604D4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.Queries.Service.Base", "Service\WebChemistry.Queries.Service.Base\WebChemistry.Queries.Service.Base.csproj", "{E58550A0-807F-44F4-8066-CCC880012317}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.Queries.Service.Core", "Service\WebChemistry.Queries.Service.Core\WebChemistry.Queries.Service.Core.csproj", "{26EDA426-C199-44FC-88E5-F1B2CE808A50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.Queries.Service", "Service\WebChemistry.Queries.Service\WebChemistry.Queries.Service.csproj", "{436ECE93-E48A-428F-A6BB-94DB9189144A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7439A025-3A82-4270-8647-7E0F006BD065}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7439A025-3A82-4270-8647-7E0F006BD065}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7439A025-3A82-4270-8647-7E0F006BD065}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7439A025-3A82-4270-8647-7E0F006BD065}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5A456FE-2486-49D7-9BF3-488FEB0D9888}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5A456FE-2486-49D7-9BF3-488FEB0D9888}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5A456FE-2486-49D7-9BF3-488FEB0D9888}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5A456FE-2486-49D7-9BF3-488FEB0D9888}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12C1E241-FF43-4781-B934-5B447535558E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12C1E241-FF43-4781-B934-5B447535558E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12C1E241-FF43-4781-B934-5B447535558E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12C1E241-FF43-4781-B934-5B447535558E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E16182FD-4AD7-4053-B58B-F7B2F791B5A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E16182FD-4AD7-4053-B58B-F7B2F791B5A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E16182FD-4AD7-4053-B58B-F7B2F791B5A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E16182FD-4AD7-4053-B58B-F7B2F791B5A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DB9787F-0A6B-488D-8D0D-7642EA604D4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DB9787F-0A6B-488D-8D0D-7642EA604D4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DB9787F-0A6B-488D-8D0D-7642EA604D4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DB9787F-0A6B-488D-8D0D-7642EA604D4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E58550A0-807F-44F4-8066-CCC880012317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E58550A0-807F-44F4-8066-CCC880012317}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E58550A0-807F-44F4-8066-CCC880012317}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E58550A0-807F-44F4-8066-CCC880012317}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26EDA426-C199-44FC-88E5-F1B2CE808A50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26EDA426-C199-44FC-88E5-F1B2CE808A50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26EDA426-C199-44FC-88E5-F1B2CE808A50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26EDA426-C199-44FC-88E5-F1B2CE808A50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{436ECE93-E48A-428F-A6BB-94DB9189144A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{436ECE93-E48A-428F-A6BB-94DB9189144A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{436ECE93-E48A-428F-A6BB-94DB9189144A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{436ECE93-E48A-428F-A6BB-94DB9189144A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{12C1E241-FF43-4781-B934-5B447535558E} = {E512BF4A-B0C7-4AB5-A676-5306297D44C8}
+		{E16182FD-4AD7-4053-B58B-F7B2F791B5A7} = {E512BF4A-B0C7-4AB5-A676-5306297D44C8}
+		{5DB9787F-0A6B-488D-8D0D-7642EA604D4F} = {E512BF4A-B0C7-4AB5-A676-5306297D44C8}
+		{E58550A0-807F-44F4-8066-CCC880012317} = {5E1AF932-1E85-492B-9652-294C45970FA4}
+		{26EDA426-C199-44FC-88E5-F1B2CE808A50} = {5E1AF932-1E85-492B-9652-294C45970FA4}
+		{436ECE93-E48A-428F-A6BB-94DB9189144A} = {5E1AF932-1E85-492B-9652-294C45970FA4}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,13 @@
+###################
+*.zip
+*.suo
+*.xap
+*.dll
+*.pubxml*
+*.htm
+*.vs
+obj/
+bin/
+AppsBin/
+ClientBin/
+packages/

@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="WebChemistry.Charges.Silverlight.Views.AnalyzeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:System="clr-namespace:System;assembly=mscorlib" 
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:controls="clr-namespace:WebChemistry.Charges.Silverlight.Controls"
+    xmlns:common="clr-namespace:WebChemistry.Silverlight.Common;assembly=WebChemistry.Silverlight.Common"
+    xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+    mc:Ignorable="d"
+    d:DesignHeight="800" d:DesignWidth="460">
+
+    <Grid x:Name="LayoutRoot" Background="White">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical">
+            <Border Padding="5 2 5 2" BorderThickness="1"  BorderBrush="{StaticResource GrayBrush7}" Background="{StaticResource GrayBrush7}" MinHeight="27">
+                <controls:SelectionControl DataContext="{Binding Session.GlobalSelection}" VerticalAlignment="Center" />
+            </Border>
+
+            <Grid Margin="0 2 0 0">
+                <ComboBox Padding="90 5 20 5" ItemsSource="{Binding Session.StructuresView}" SelectedItem="{Binding CurrentStructure, Mode=TwoWay}" />
+                <TextBlock VerticalAlignment="Center" IsHitTestVisible="False" Width="80" HorizontalAlignment="Left" Margin="6 0 0 0" FontWeight="Bold">Structure</TextBlock>
+            </Grid>
+
+            <StackPanel Visibility="{Binding CurrentStructure, Converter={StaticResource UIVisibilityConverter}}">
+                <Grid Margin="0 2 0 0">
+                    <ComboBox Padding="90 5 20 5" ItemsSource="{Binding Session.ComputedPartitions}" SelectedItem="{Binding CurrentPartition, Mode=TwoWay}" />
+                    <TextBlock VerticalAlignment="Center" IsHitTestVisible="False" Width="80" HorizontalAlignment="Left" Margin="6 0 0 0" FontWeight="Bold">Partition</TextBlock>
+                </Grid>               
+                           
+            </StackPanel>
+
+            <Rectangle Height="1" Fill="{StaticResource GrayBrush8}" Margin="0 2 0 0" />
+        </StackPanel>
+
+        <TextBlock Grid.Row="1" TextWrapping="Wrap" TextAlignment="Left" Foreground="#FF787878" FontSize="11" VerticalAlignment="Top" 
+                           IsHitTestVisible="False" HorizontalAlignment="Left" Margin="6"
+                           Visibility="{Binding CurrentStructure, Converter={StaticResource UIVisibilityConverter},ConverterParameter='negate'}">
+                    - Select a structure.
+        </TextBlock>
+
+        <sdk:TabControl Grid.Row="1" SelectionChanged="anylysisTabs_SelectionChanged" x:Name="anylysisTabs" Padding="0 2 0 0" Margin="0 2 2 4" BorderBrush="{StaticResource GrayBrush7}"
+                        Visibility="{Binding CurrentStructure, Converter={StaticResource UIVisibilityConverter}}">
+            <sdk:TabItem x:Name="correlateTab">
+                <sdk:TabItem.Header>
+                    <TextBlock>
+                        <Run Text="Correlate" />
+                    </TextBlock>
+                </sdk:TabItem.Header>
+                <controls:CorrelationInputControl Margin="0" DataContext="{Binding CorrelationViewModel}" />
+            </sdk:TabItem>
+            <sdk:TabItem x:Name="aggregateTab">
+                <sdk:TabItem.Header>
+                    <TextBlock>
+                        <Run Text="Aggregates" />
+                    </TextBlock>
+                </sdk:TabItem.Header>
+                <controls:AggregateInputControl Margin="0" DataContext="{Binding AggregateViewModel}" />
+            </sdk:TabItem>
+        </sdk:TabControl>
+    </Grid>
+</UserControl>

@@ -1,0 +1,10 @@
+option batch abort
+option confirm off
+open dave@webchem.ncbr.muni.cz
+cd D
+cd WebChemUtils
+cd Temp
+put bin\Platform.7z
+put bin\Extract.bat
+put bin\UpdateSvc_master.bat
+exit

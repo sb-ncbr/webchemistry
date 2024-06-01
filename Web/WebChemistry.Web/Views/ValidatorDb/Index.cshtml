@@ -1,0 +1,170 @@
+﻿@{
+    ViewBag.Title = "ValidatorDB";
+}
+
+@section CustomMeta {
+    <meta name="robots" content="nofollow" />
+}
+
+@section CustomStyles {
+    @*@Styles.Render("~/Content/themes/base/css")*@
+    @Styles.Render("~/Content/slickgrid/css")
+    @Styles.Render("~/Content/MotiveValidator/css")
+}
+
+<div class="page-header" style="margin-bottom: 20px">
+    <div class="pull-right btn-group">
+        <button class="btn btn-success" onclick="startDbIndexIntro();" title="Interactive Guide"><i class="icon icon-white icon-question-sign"></i> Guide</button>
+        <a class="btn btn-success" href="//www.slideshare.net/lukypravda/validatordb-first-time-user-guide-37728902" target="_blank" title="1st time user presentation">
+        
+         User</a>
+        <a class="btn btn-success" href="//webchem.ncbr.muni.cz/Wiki/ValidatorDB:UserManual" target="_blank" title="Wiki page with detailed information">Wiki Manual</a>
+    </div>
+    <h1>
+        Validator<sup>DB</sup><br />
+        <small style="font-size: 16pt">
+            Database of validation results for ligands and non-standard residues in the Protein Data Bank.
+        </small>
+    </h1>
+</div>
+
+<div class="alert alert-success alert-block" id="validation-totals" style="margin-bottom: 6px">
+    Database last updated <b>@(ViewBag.LastUpdated)</b>:
+    <b>@ViewBag.StructureCount</b> <small>entries from PDBe.org,</small> <b><span id="motifCount"></span></b> <small>molecules relevant for validation,</small>
+    <b>@ViewBag.AnalyzedCount</b> <small>models from wwPDB CCD.</small>
+</div>
+
+<div style="font-size: 8pt; margin: 0 6px; line-height: 9pt; color: #777">
+    The molecules deemed relevant for validation are all ligands and non-standard residues with reasonable size (more than six heavy atoms). Standard amino acids and nucleotides are not covered.
+    The validation is performed against models from wwPDB Chemical Component Dictionary (wwPDB CCD). The database is updated weekly.
+</div>
+
+<div>
+    <div class="tabbable" style="margin-top: 20px">
+        <ul class="nav nav-tabs" id="all-tab-headers">
+            <li class="active"><a href="#introduction-tab" data-toggle="tab">Quick Help</a></li>
+            <li id="samples-header"><a href="#samples" data-toggle="tab">Samples</a></li>
+            <li id="custom-tab-header" style="margin-left: 60px; font-weight: bold;"><a href="#custom-analysis" data-toggle="tab">Search</a></li>
+            <li id="entry-tab-header" class="pull-right"><a href="#structure-details" data-toggle="tab"><b>Details by PDB Entry</b></a></li>
+            <li id="residues-tab-header" class="pull-right"><a href="#model-details" data-toggle="tab"><b>Details by Molecule</b></a></li>
+            <li id="overview-tab-header" class="pull-right"><a href="#summary" data-toggle="tab"><b>Overview</b></a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="introduction-tab">
+                <p>
+                    This is the <b>Validator<sup>DB</sup> synopsis page</b>. Access different tabs for overviews and statistical evaluation of the
+                    validation results, in graphical or tabular form.
+                    Specific results can be examined in deeper detail by accessing the <b>Validator<sup>DB</sup> specifics page</b>.
+                </p>
+
+                <p>
+                    Different sections of the web page offer interactive guides indicated by <button style="margin-top: -2px" class="btn btn-success btn-small" title="Click me for guide." onclick="startDbIndexIntro();"><i class="icon icon-white icon-question-sign"></i></button>
+                    which give a quick walk through all the main elements of the page.
+                    Further help is provided by the info icons
+                    <button class="btn btn-link btn-small" style="padding: 0 1px; margin-top: -4px" title="Hover or click me for help."><i class="icon icon-question-sign"></i></button>.
+                    Many tool tips are available by hovering over any graphical or textual element in the interface.
+                </p>
+                <p>
+                    Refer to the <a href="//webchem.ncbr.muni.cz/Wiki/ValidatorDB:UserManual" target="_blank">Wiki Manual</a> for any clarifications
+                    (especially <a href="//webchem.ncbr.muni.cz/Wiki/ValidatorDB:Terminology" target="_blank">Terminology</a> and <a href="//webchem.ncbr.muni.cz/Wiki/ValidatorDB:UI" target="_blank">User Interface</a>).
+                </p>
+
+                <div class="alert-info alert alert-block" style="text-align: center; padding-top: 6px; padding-bottom: 6px; margin-bottom: 0; margin-top: 20px">
+                    <a class="close" data-dismiss="alert" href="#">&times;</a>
+                    <b>First Time User?</b> <i>Check out the <a style="font-weight: bold" href="//www.slideshare.net/lukypravda/validatordb-first-time-user-guide-37728902" target="_blank">First Time User Presentation</a>.</i>
+                </div>
+
+                <div style="margin-top: 20px">
+                    <a href="//webchem.ncbr.muni.cz/Platform/AppsBin/ValidatorDB/ValidatorDB_plugin.zip" class="btn btn-block"><i class="icon-download"></i> <strong>PyMOL and Chimera plug-in</strong> <small>[13 KB]</small></a>
+                    <p style="text-align: center">
+                        <i>For more information about the plug-in usage, please refer to the <a href="//webchem.ncbr.muni.cz/Wiki/ValidatorDB:Plugin" target="_blank">wiki</a>.</i>
+                    </p>
+                </div>
+
+                <p style="margin-top:20px">
+                    If you found Validator<sup>DB</sup> helpful, please cite:<br />
+                    <small>
+                        Sehnal, D., Svobodová Vařeková, R., Pravda, L., Ionescu, C.-M., Geidl, S., Horský, V., Jaiswal, D., Wimmerová, M. and Koča, J.: 
+                        <a href="//dx.doi.org/10.1093/nar/gku1118" target="_blank">
+                            ValidatorDB: database of up-to-date validation results for ligands and non-standard residues from the Protein Data Bank.
+                        </a>
+                        Nucleic Acids Res. 43, D369–D375 (2015).
+                    </small>
+                </p>
+
+                <hr />
+
+                <p style="text-align: center">
+                    <img src="~/Images/elixirlogo.png" alt="ELIXIR logo" style="height: 70px" /><br />
+                    <small>
+                        Validator<sup>DB</sup> is a part of services provided by <a href="https://www.elixir-czech.cz/" target="_blank">ELIXIR</a> &ndash;
+                        European research infrastructure for biological information.
+                        For other services provided by ELIXIR's Czech Republic Node visit <a href="https://www.elixir-czech.cz/services" target="_blank">www.elixir-czech.cz/services</a>.
+                    </small>
+                </p>
+            </div>
+            <div class="tab-pane" id="samples">
+                @Html.Partial("_Samples")
+            </div>
+            <div class="tab-pane" id="summary">
+                <div id="summary-plot"></div>
+                <div class="overview-categories-warning">Only categories with at least 0.5% representation are shown. Use the CSV link to view all data.</div>
+            </div>
+            @Html.Partial("_DetailsTabs")
+
+            <div class="tab-pane" id="custom-analysis">
+                @Html.Partial("_Search")
+            </div>
+        </div>
+    </div>
+
+    @*<hr />
+
+        <div class="form-inline" id="lookup-form" style="margin-top: 10px">
+            <div class="input-append input-prepend">
+                <button class="btn btn-large" data-bind="click: lookup, enable: canLookup, text: lookupButtonLabel" style="font-weight: bold; width: 144px">Quick Lookup</button>
+                <input class="id-input" type="text" placeholder="Comma separated list of only residue 3-letter codes or only PDB 4-letter codes. Max 10." data-bind="value: id, valueUpdate: 'input', enter: lookup" />
+            </div>
+        </div>*@
+</div>
+
+<script type="text/html" id="column-labels-template">
+    <hr style="margin: 0 0 5px 0" />
+    <ul class="unstyled" style="color: white;">
+        <li style="float: left; display: inline-block; margin-bottom: 2px; margin-right: 2px"><button class="btn btn-small btn-link" style="padding: 0" title="Add/remove columns by clicking on the checkboxes."><i class="icon-question-sign"></i></button></li>
+        <!-- ko foreach: columnArray -->
+        <li style="float: left; padding: 1px 3px; margin-right: 2px; display: inline-block; margin-bottom: 2px" data-bind="style: { background: MotiveValidatorGlobals[field].color }">
+            <label class="checkbox" data-bind="attr: { title: $data['toolTip'] }" style="margin: 0; cursor: pointer" data-placement="top">
+                <input type="checkbox" data-bind="checked: isSelected" />
+                <span data-bind="html: name" style="font-size: 9pt"></span>
+            </label>
+        </li>
+        <!-- /ko -->
+        <li style="float: left; display: inline-block; margin-bottom: 2px"><button class="btn btn-small btn-inverse" style="padding: 2px 4px" data-bind="click: resetColumns" title="Reset Columns"><i class="icon-repeat icon-white"></i></button></li>
+    </ul>
+    <div style="clear: both"></div>
+</script>
+
+@*@section jqueryui {
+        @Scripts.Render("~/bundles/jqueryui")
+        <script type="text/javascript">
+            $.widget.bridge('uibutton', $.ui.button);
+            $.widget.bridge('uitooltip', $.ui.tooltip);
+        </script>
+    }*@
+
+@section scripts {
+    <script type="text/javascript">
+        var ValidatorDbParams = {
+            summaryJson: "@Html.Raw(ViewBag.SummaryJson.Replace("\"", "\\\""))",
+            modelSummary: "@Url.Action("Download", new { id = "ModelSummary" })",
+            structureSummary: "@Url.Action("Download", new { id = "StructureSummary" })",
+            perStructureAction: "@Url.Action("ByStructure", new { id = "-id-" })",
+            perModelAction: "@Url.Action("ByModel", new { id = "-id-" })",
+            searchAction: "@Url.Action("Search", "ValidatorDb", new { }, Request.Url.Scheme)",
+            customAnalysisAction: "@Url.Action("ComputeCustom")",
+            customAnalysisResultAction: "@Url.Action("Custom", "ValidatorDb", new { id = "-id-" }, Request.Url.Scheme)"
+        };
+    </script>
+    @Scripts.Render("~/bundles/validatordb-index")
+}

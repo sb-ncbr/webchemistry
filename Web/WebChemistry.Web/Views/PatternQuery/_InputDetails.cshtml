@@ -1,0 +1,107 @@
+﻿
+<!-- ko with: inputModel -->
+<!-- ko if: viewState() === 'New' -->
+<div class="spinner-host"></div>
+<!-- /ko -->
+<!-- ko if: viewState() === 'DownloadFailed' -->
+<div class="alert alert-error alert-block">
+    Ooops, failed to download the details data. Try to <a href="@Url.Action("Result", "PatternQuery", new { id = ViewBag.Id })">refresh</a> the page or try again later.
+</div>
+<!-- /ko -->
+<!-- ko if: viewState() === 'Initialized' -->
+
+<div style="font-style: italic; font-size: 9pt; color: #777">
+    This tab provides general information about all PDB entries that were queried, including the ones that do not contain any patterns.<br/>To see the extracted patterns, please use the Details tab.
+</div>
+
+
+<div class="mq-details-section-header">
+    <div class="input-append pull-right">
+        <select data-bind="options: displayFilters, optionsText: 'label', value: filterType" style="width: 200px; margin-right: 10px"></select>
+        <div style="display: inline-block">
+            <input type="text" title="Matches a regular expression." placeholder="Entry id filter..." data-bind="value: filterText, valueUpdate: 'input'" style="width: 160px">
+            <button class="btn" data-bind="click: function() { filterText(''); }"><i class="icon-remove"></i></button>
+        </div>
+    </div>
+
+    <h3>
+        PDB Entries
+        <small>
+            <span data-bind="text: 'Showing ' + mqResultUtils.pluralize(viewCount(), 'PDB entry', 'PDB entries')"></span>
+            <!-- ko if: viewCount() > 0 -->
+            <a href="#" title="View in CSV format." data-bind="click: showCsvList"><i class="icon-list"></i></a>
+            <!-- /ko -->
+        </small>
+    </h3>
+</div>
+
+<div id="input-details-grid" class="mq-view-wrap" data-bind="click: setCurrentFromGrid"></div>
+
+<div class="mq-color-legend">
+    <ul class="unstyled">
+        <li><div class="mq-structure-valid-bg">&nbsp;</div> No Issue</li>
+        <li><div class="mq-reader-warning-bg">&nbsp;</div> Input Warning</li>
+        <li><div class="mq-structure-error-bg">&nbsp;</div> Error</li>
+    </ul>
+</div>
+
+<div class="mq-details-section-header">
+    <h3>PDB Entry <!-- ko with: currentStructure --><small data-bind="text: Id"></small><!-- /ko --></h3>
+</div>
+
+<div class="row mq-right-pane-wrap">
+    <!-- ko with: currentStructure -->
+    <div class="span4 mq-motif-details-text">
+        <dl>
+            <dt>Info</dt>
+            <dd>
+                <a href="#" target="_blank" data-bind="attr: { href: '//www.ebi.ac.uk/pdbe/entry/pdb/' + Id }">PDBe.org</a>
+                <small>
+                    | <a href="#" target="_blank" data-bind="attr: { href: PatternQueryActions.ligandValidationAction.replace('-id-', Id) }" title="Ligand and non-standard residues validation.">Validator<sup>DB</sup></a>
+                </small>
+            </dd>
+            <dt>Patterns</dt>
+            <dd>
+                <span data-bind="html: PatternCount"></span>
+            </dd>
+            <dt><abbr title="The time it took to load the PDB entry to memory.">Load Timing</abbr></dt>
+            <dd>
+                <span data-bind="html: LoadTimingMs"></span> ms
+            </dd>
+            <dt><abbr title="The time it took to execute all queries on this PDB Entry.">Query Timing</abbr></dt>
+            <dd>
+                <span data-bind="html: QueryTimingMs"></span> ms
+            </dd>
+        </dl>
+    </div>
+    
+    <div class="span4 mq-motif-details-text">
+        <dl>
+            <dt><abbr title="Potential issues/warnings regarding the input file with the PDB entry.">Input Warnings</abbr></dt>
+            <dd>
+                <!-- ko if: ReaderWarnings.length === 0 -->None<!-- /ko -->
+                <!-- ko if: true -->
+                <ul class="mq-reader-warning" data-bind="foreach: ReaderWarnings">
+                    <li data-bind="text: $data"></li>
+                </ul>
+                <!-- /ko -->
+            </dd>
+        </dl>
+    </div>
+
+
+    <div class="span4 mq-motif-details-text">
+        <dl>
+            <dt><abbr title="Errors that occured while processing the PDB entry.">Errors</abbr></dt>
+            <dd>
+                <!-- ko if: ErrorType === 'None' -->None<!-- /ko -->
+                <!-- ko if: ErrorType !== 'None' --><span class="mq-structure-error" data-bind="text: '[' + ErrorType + '] '+ ErrorMessage"></span><!-- /ko -->
+            </dd>
+        </dl>
+    </div>
+    <!-- /ko -->
+</div>
+
+<!-- /ko -->
+
+<!-- /ko -->

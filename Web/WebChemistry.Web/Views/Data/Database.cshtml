@@ -1,0 +1,63 @@
+﻿@model WebChemistry.Web.Models.DatabaseListModel
+
+@{
+    ViewBag.Title = "My Databases";
+}
+
+<div class="page-header">
+  <h1>Databases</h1>
+</div>
+
+<div class="row">
+    @{ /*<div class="span12">
+        <a class="btn" href="@Url.Action("Database", new { operation = "Create" })">Create Database</a>
+    </div> */ }
+
+    
+    <div class="span12">
+    @if (Model.Databases.Count == 0)
+    {
+        <p class="alert alert-info" style="margin-top:12px">You have no databases.</p>
+    }
+    else
+    {
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Size</th>
+                <th>Last Updated</th>
+                @{ /*<th>Actions</th>*/ }
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var db in Model.Databases)
+            {
+            <tr>
+                <td class="db-name">@db.Item1.Name</td>
+                <td class="db-description"><div>@Html.Raw(db.Item1.Description.Replace("\n", "<br />").Replace("\r", ""))</div></td>
+                <td class="db-size">@db.Item2.MoleculeCount (@((((double)db.Item2.SizeInBytes) / (1024L * 1024L * 1024L)).ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)) GB)</td>
+                <td class="db-updated">@db.Item2.LastUpdated.ToLocalTime()</td>
+                @{ /* <td class="db-actions">
+                    @if (db.Item1.IsLocked())
+                    {
+                        <span class="btn btn-small" data-placement="bottom" title="The database is locked."><i class="icon-lock"></i></span>
+                    }
+                    else                    
+                    {
+                        <a class="btn btn-small" href="#" rel="tooltip" data-placement="bottom" title="Upload structures"><i class="icon-upload"></i></a>
+                        <a class="btn btn-small" href="#" rel="tooltip" data-placement="bottom" title="Delete database"><i class="icon-remove"></i></a>
+                    }
+                </td> */ }
+                <td></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="alert alert-info"><strong>Tip</strong> To view or download data from a database, use <a href="@Url.Action("DbView")">Database Views</a>.</div>
+    }
+    </div>
+</div>

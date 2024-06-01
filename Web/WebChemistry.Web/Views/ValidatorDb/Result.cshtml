@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = @ViewBag.AllNames + " - ValidatorDB";
+}
+
+@section CustomStyles {
+    @*@Styles.Render("~/Content/themes/base/css")*@
+    @Styles.Render("~/Content/slickgrid/css")
+    @Styles.Render("~/Content/MotiveValidator/css")
+}
+
+<div class="page-header">
+    <div class="pull-right form-inline">
+        <a class="btn" target="_blank" href="@ViewBag.DataAction"
+           title="View/download raw JSON data for the result." id="result-download-json">
+            <i class="icon icon-briefcase"></i> JSON
+        </a>
+        <div class="btn-group">
+            <button class="btn btn-success" onclick="startResultIntro();"><i class="icon icon-white icon-question-sign"></i> Guide</button>            
+            <a class="btn btn-success" href="//webchem.ncbr.muni.cz.cz/Wiki/ValidatorDB:Specifics_page" target="_blank">Wiki Manual</a>
+        </div>
+    </div>
+    <h1 id="result-header">
+        Validator<sup>DB</sup>
+        @if (ViewBag.IsSearch != true && ViewBag.PresentNames.Length > 0)
+        {
+            <br /><small>@ViewBag.Header - @Html.Encode(ViewBag.PresentNames) @(ViewBag.IsCustom == true ? " | Custom Search" : "")</small>
+        }
+        else if (ViewBag.IsSearch == true)
+        {
+            <br /><small>Search - @Html.Encode(ViewBag.SearchCriteria)</small>
+            @*<span style="color: #999; font-size: 12pt; line-height: 13pt">
+            @if (ViewBag.SearchStructures.Length > 0)
+            {
+                <br /><span>PDB Entries: @Html.Encode(ViewBag.SearchStructures)</span>
+            }
+            @if (ViewBag.SearchModels.Length > 0)
+            {
+                <br /><span>Molecules: @Html.Encode(ViewBag.SearchModels)</span>
+            }
+            </span>*@
+        }
+</h1>
+
+</div>
+
+@if (ViewBag.MissingNames.Length > 0)
+{
+    <div class="alert alert-block alert-danger">
+        No data found for <b>@ViewBag.MissingNames</b>.
+    </div>
+}
+
+<div id="mainView" data-bind="template: { name: template().templateName, data: template().data }">
+</div>
+
+@Html.Partial("~/Views/MotiveValidatorShared/_SummaryElements.cshtml")
+@Html.Partial("~/Views/MotiveValidatorShared/_MotiveDetails.cshtml")
+
+@section scripts {
+    <script type="text/javascript">
+        var validatorParams = {
+            isFinished: true,
+            dataAction: "@Html.Raw(ViewBag.DataAction)",
+            structureAction: "@Url.Action("Structure")"
+        };
+    </script>
+    @Scripts.Render("~/bundles/validator-result")
+}

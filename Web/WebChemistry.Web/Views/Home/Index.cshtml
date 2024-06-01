@@ -1,0 +1,215 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+@section CustomStyles {
+    @Styles.Render("~/Content/Home.css")
+}
+
+<div id="appsCarousel" class="carousel slide">
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="~/Images/litemol_carousel.jpg" alt="">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1><a href="https://litemol.org" target="_blank">LiteMol</a></h1>
+                    <p class="lead">A powerful 3D molecular viewer.</p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/Images/mole_carousel.jpg" alt="">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1><a href="@Url.Action("Mole", "App")">MOLE 2.0</a></h1>
+                    <p class="lead">Compute tunnels and their physico-chemical properties.</p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/Images/sitebinder_carousel.jpg" alt="">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1><a href="@Url.Action("SiteBinder", "App")">SiteBinder</a></h1>
+                    <p class="lead">Superimpose up to thousands of 3D structural fragments.</p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/Images/charges_carousel.jpg" alt="">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1><a href="https://acc2.ncbr.muni.cz/">Atomic Charge Calculator <span style="color: #28a745"> II</span></a></h1>
+                    <p class="lead">Conformationally dependent atomic charges of quantum mechanics quality.</p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/Images/explorer_carousel.jpg" alt="">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1><a href="@Url.Action("Index", "PatternQuery")">PatternQuery</a></h1>
+                    <p class="lead">Find atom patterns in molecules using the PatternQuery language.</p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/Images/validator_carousel.jpg" alt="">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1><a href="@Url.Action("Index", "MotiveValidator")">MotiveValidator</a></h1>
+                    <p class="lead">Validate residues, ligands, and molecular fragments.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#appsCarousel" data-slide="prev" style="color: black">&lsaquo;</a>
+    <a class="right carousel-control" href="#appsCarousel" data-slide="next" style="color: black">&rsaquo;</a>
+</div>
+
+<div class="container">
+    <h1 style="margin-top: 0px">WebChemistry <small>Services and Apps</small></h1>
+    <br>
+
+    <h3 style="margin-bottom: 0px; margin-top: 0px">3D Molecular Visualization</h3>
+    <hr style="margin: 0; padding: 0">
+    <ul class="unstyled app-index">
+        <li>
+            <a href="https://litemol.org" target="_blank">
+                <div style="float: left"><i class="icon-heart"></i></div>
+                <div class="app-panel"><span class="app-name">LiteMol</span><br /> <span class="app-description">A powerful 3D molecular viewer</span> </div>
+                <div class="app-clear"></div>
+            </a>
+        </li>
+    </ul>
+
+        <h3 style="margin-bottom: 0px; margin-top: 0px">3D Molecular Data Identification and Analysis</h3>
+        <hr style="margin: 0; padding: 0">
+        <ul class="unstyled app-index">
+            <li>
+                <a href="@Url.Action("Index", "PatternQuery")">
+                    <div style="float: left"><i class="icon-PatternQuery"></i></div>
+                    <div class="app-panel"><span class="app-name">PatternQuery</span><br /> <span class="app-description">Find atom patterns in molecular databases</span> </div>
+                    <div class="app-clear"></div>
+                </a>
+            </li>
+
+            <li>
+                <a href="https://webchem.ncbr.muni.cz/CoordinateServer" target="_blank">
+                    <div style="float: left"><i class="icon-signal"></i></div>
+                    <div class="app-panel"><span class="app-name">CoordinateServer</span><br /> <span class="app-description">Streaming of 3D molecular data</span> </div>
+                    <div class="app-clear"></div>
+                </a>
+            </li>
+            <li>
+                <a href="https://webchem.ncbr.muni.cz/DensityServer" target="_blank">
+                    <div style="float: left"><i class="icon-screenshot"></i></div>
+                    <div class="app-panel"><span class="app-name">DensityServer</span><br /> <span class="app-description">Streaming of 3D experimental data (e.g., X-ray or CryoEM)</span> </div>
+                    <div class="app-clear"></div>
+                </a>
+            </li>
+
+            @*<li>
+                    <a href="@Url.Action("MotiveExplorer", "App")">
+                        <div style="float: left"><i class="icon-motiveexplorer"></i></div>
+                        <div class="app-panel"><span class="app-name">MotiveExplorer</span> <span class="app-name-silverlight">Silverlight</span><br/> <span class="app-description">Tune queries and find motifs in custom structures</span> </div>
+                        <div class="app-clear"></div>
+                    </a>
+                </li>*@
+
+            <li>
+                <a href="https://acc2.ncbr.muni.cz">
+                    <div style="float: left"><i class="icon-star"></i></div>
+                    <div class="app-panel"><span class="app-name">@WebChemistry.Web.Controllers.ChargeCalculatorController.AppName </span><span style="color: #28a745">II</span><br /> <span class="app-description">Conformationally dependent atomic charges of quantum mechanics quality</span> </div>
+                    <div class="app-clear"></div>
+                </a>
+            </li>
+        </ul>
+
+    <h3 style="margin-bottom: 0px; margin-top: 0px">3D Molecular Data Validation</h3>
+    <hr style="margin: 0; padding: 0">
+    <ul class="unstyled app-index">        
+        <li>
+            <a href="@Url.Action("Index", "MotiveValidator")">
+                <div style="float: left"><i class="icon-check"></i></div>
+                <div class="app-panel"><span class="app-name">MotiveValidator</span><br /> <span class="app-description">Validate residues, ligands, and molecular fragments</span> </div>
+                <div class="app-clear"></div>
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "ValidatorDb")">
+                <div style="float: left"><i class="icon-ok-circle"></i></div>
+                <div class="app-panel"><span class="app-name">Validator<sup>DB</sup></span><br /> <span class="app-description">Ligands in PDB database, validated using MotiveValidator</span> </div>
+                <div class="app-clear"></div>
+            </a>
+        </li>
+        <li>
+            <a href="https://valtrendsdb.biodata.ceitec.cz/" target="_blank">
+                <div style="float: left"><i class="icon-indent-left"></i></div>
+                <div class="app-panel"><span class="app-name">ValTrends<sup>DB</sup></span><br /> <span class="app-description">Discover trends in structure quality</span> </div>
+                <div class="app-clear"></div>
+            </a>
+        </li>
+    </ul>
+
+        @*<h3 style="margin-bottom: 0px">Structural Fragment Comparison</h3>
+        <hr style="margin: 0; padding: 0">
+        <ul class="unstyled app-index">
+            <li>
+                <a href="@Url.Action("SiteBinder", "App")">
+                    <div style="float: left"><i class="icon-sitebinder"></i></div>
+                    <div class="app-panel"><span class="app-name">SiteBinder</span> <span class="app-name-silverlight">Silverlight</span><br /> <span class="app-description">Superimpose and analyze structural fragments</span> </div>
+                    <div class="app-clear"></div>
+                </a>
+            </li>
+        </ul>*@
+
+        @*<h3 style="margin-bottom: 0px">Charge Computation</h3>
+        <hr style="margin: 0; padding: 0">
+        <ul class="unstyled app-index">
+
+            <li>
+                <a href="@Url.Action("Index", "ChargeCalculator")">
+                    <div style="float: left"><i class="icon-star"></i></div>
+                    <div class="app-panel"><span class="app-name">@WebChemistry.Web.Controllers.ChargeCalculatorController.AppName</span><br /> <span class="app-description">Conformationally dependent atomic charges of quantum mechanics quality</span> </div>
+                    <div class="app-clear"></div>
+                </a>
+            </li>
+
+            
+        </ul>*@
+
+        <h3 style="margin-bottom: 0px">Channel Computation</h3>
+        <hr style="margin: 0; padding: 0">
+        <ul class="unstyled app-index">
+            <li>
+                <a href="@Url.Action("Mole", "App")">
+                    <div style="float: left"><i class="icon-mole"></i></div>
+                    <div class="app-panel"><span class="app-name">MOLE 2.5</span><br /> <span class="app-description">Compute and analyze channels</span> </div>
+                    <div class="app-clear"></div>
+                </a>
+            </li>
+        </ul>
+
+        <h3 style="margin-bottom: 0px">Local Sequence Alignment</h3>
+        <hr style="margin: 0; padding: 0">
+        <ul class="unstyled app-index">
+            <li>
+                <a href="@Url.Action("CrocoBLAST", "App")">
+                    <div style="float: left"><i class="icon-fire"></i></div>
+                    <div class="app-panel"><span class="app-name">CrocoBLAST</span><br /> <span class="app-description">Optimized parallel implementation of local sequence alignment algorithms</span> </div>
+                    <div class="app-clear"></div>
+                </a>
+            </li>
+        </ul>
+</div>
+
+@section scripts {
+    <script>
+        !function ($) {
+            $(function () {
+                $('#appsCarousel').carousel()
+            })
+        }(window.jQuery)
+    </script>
+}

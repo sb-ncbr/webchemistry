@@ -1,0 +1,180 @@
+﻿<div class="tabbable">
+    <div style="background: #F5F5F5; padding: 6px 19px; border-radius: 6px">
+        <ul class="nav nav-pills" style="margin: 0">
+            <li class="disabled" style="width: 90px"><a href="#" style="font-weight: bold; color: black !important; padding-left: 0 !important">Category</a></li>
+            <li class="active"><a href="#molecules-tab" style="font-weight: bold" data-toggle="tab">Molecules</a></li>
+            <li><a href="#pdb-tab" style="font-weight: bold" data-toggle="tab">PDB Entries</a></li>
+            <li><a href="#stepbystep-tab" style="font-weight: bold" data-toggle="tab">Step-by-step</a></li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane active" id="molecules-tab">
+            <h3>
+                Molecules
+                <small>
+                    Examples of molecules which exhibit errors either very commonly, or very rarely throughout the PDB.
+                </small>
+            </h3>
+
+            <dl style="margin-top: 15px" class="valdb-sample-list">
+                <dt>
+                    <a class="btn btn-info" href="@Url.Action("ByModel", new { id = "CLA" })" target="_blank">CLA</a>
+                </dt>
+                <dd>
+                    <small>
+                        <b>Incomplete structure and chirality errors on carbon</b><br />
+                        Chlorophyll a (CLA) is an important green pigment used in oxygenic photosynthesis. In contrast to its paramount importance, it is structurally one of the worst determined ligands in the PDB. More than half of the CLA molecules found in the PDB are incomplete, in general missing the entire hydrocarbon tail. A fifth of the molecules which are complete exhibit at least one chirality error on a carbon atom (especially C8). Overall, only 20% of CLA molecules are complete and correct.
+                    </small>
+                </dd>
+                <dt>
+                    <a class="btn btn-info" href="@Url.Action("ByModel", new { id = "DMU" })" target="_blank">DMU</a>
+                </dt>
+                <dd>
+                    <small>
+                        <b>Incomplete structure and chirality errors on carbon</b><br />
+                        n-Dodecyl-β-D-Maltoside (DMU) is a detergent used for the solubilization of membrane proteins to preserve their activity. Almost 40% of DMU molecules in the PDB are incomplete, missing rings or the hydrocarbon tail. Over a third of the structurally complete molecules exhibit multiple chirality issues.
+                    </small>
+                </dd>
+                <dt>
+                    <a class="btn btn-info" href="@Url.Action("ByModel", new { id = "NAP" })" target="_blank">NAP</a>
+                </dt>
+                <dd>
+                    <small>
+                        <b>Missing rings</b><br />
+                        The nicotinamide-adenine-dinucleotide phosphate (NAP) is an important cofactor in anabolic reactions. Approximately 8% of NAP molecules are incomplete, missing ring atoms. In the majority of cases, entire parts of the molecule are missing, rather than just a few atoms.
+                    </small>
+                </dd>
+                <dt>
+                    <a class="btn btn-info" href="@Url.Action("ByModel", new { id = "MLT" })" target="_blank">MLT</a>
+                </dt>
+                <dd>
+                    <small>
+                        <b>Chirality errors on carbon</b><br />
+                        D-malate (MLT) is the metabolic product of the naturally occurring L-malate (LMT). All the MLT molecules in the PDB are complete. However more than 40% of them exhibit wrong chirality on the C2 carbon, indicating that they are, in fact, incorrectly annotated LMTs.
+                    </small>
+                </dd>
+                <dt>
+                    <a class="btn btn-info" href="@Url.Action("ByModel", new { id = "ATP" })" target="_blank">ATP</a>
+                </dt>
+                <dd>
+                    <small>
+                        <b>Chirality errors on phosphorus</b><br />
+                        Adenosine triphosphate (ATP) is a coenzyme used for transporting chemical energy within cells for metabolism. Perhaps due to the fact that it is heavily studied, just a fraction of the ATP molecules in the PDB have incomplete structure.
+                    </small>
+                </dd>
+                <dt>
+                    <a class="btn btn-info" href="@Url.Action("ByModel", new { id = "HEM" })" target="_blank">HEM</a>
+                </dt>
+                <dd>
+                    <small>
+                        <b>Low error rate</b><br />
+                        This example illustrates a representative well-determined ligand, as almost all  protoporphyrin ix molecules containing Fe (HEM) are structurally complete. All reported chirality errors lie on the planar Fe atom, most likely a result of slightly different puckering of the heme plane, and not a real chirality error.
+                    </small>
+                </dd>
+                <dt>
+                    <a class="btn btn-info" href="@Url.Action("ByModel", new { id = "FAD" })" target="_blank">FAD</a>
+                </dt>
+                <dd>
+                    <small>
+                        <b>Low error rate</b><br />
+                        Another example of a structurally well-determined ligand is the redox cofactor FAD (flavin-adenine dinucleotide). Again, almost all the FAD molecules in the PDB are structurally complete. Less than 3% of the validated FAD molecules exhibit chirality errors on carbon atoms.
+                    </small>
+                </dd>
+            </dl>
+        </div>
+        <div class="tab-pane" id="pdb-tab">
+            <h3>
+                PDB Entries
+                <small>
+                    Examples of PDB entries having a high ratio of errors.
+                </small>
+            </h3>
+
+            <dl style="margin-top: 15px" class="valdb-sample-list">
+                <dt>
+                    <a class="btn btn-info" href="@Url.Action("ByStructure", new { id = "2h6o" })" target="_blank">2H6O</a>
+                </dt>
+                <dd>
+                    <small>
+                        <b>Missing atoms and chirality errors on carbon</b><br />
+                        <i>Viral envelope glycoprotein</i><br />
+                        The glycoprotein gp350, enabling virus attachment, is highly covered by polyglycans. Validation identified foreign atoms in 90% of these residues, indicating  long and branched oligosaccharides. A few residues exhibit substitutions (NAG, NDG) at the points of attachment of the polyglycan to the protein. About 15% of the polyglycan residues are incomplete (NAG, MAN), and 25% have incorrect chirality at position C1 (mostly MAN, FUC).
+                    </small>
+                </dd>
+                <dt>
+                    <a class="btn btn-info" href="@Url.Action("ByStructure", new { id = "2f6a" })" target="_blank">2F6A</a>
+                </dt>
+                <dd>
+                    <small>
+                        <b>Chirality errors on carbon</b><br />
+                        <i>Collagen complex structure</i><br />
+                        A fragment of the collagen-binding adhesin is complexed with collagen fibrils containing 47 (2S,4R)-4-hydroxyproline (HYP) molecules, none correct. 5 HYP molecules are incomplete, as they lie at the carboxyl end of 5 out of the 6 polypeptide chains which make up the two triple-helical collagen fibrils. All HYP molecules exhibit a chirality error on the CG carbon, and thus the (2S,4S)-4-hydroxyproline isomer (HZP) should be used in the PDB file instead. Additional analysis of the electron density map revealed that the input orientation of the hydroxyl groups at the CG carbons in the crystal structure is indeed incorrect and they should be present in the 4R stereochemistry.
+                    </small>
+                </dd>
+                <dt>
+                    <a class="btn btn-info" href="@Url.Action("ByStructure", new { id = "1rwt" })" target="_blank">1RWT</a>
+                </dt>
+                <dd>
+                    <small>
+                        <b>Incomplete residues and chirality errors on carbon and phosphorus</b><br />
+                        <i>Spinach major light-harvesting complex</i><br />
+                        The major light-harvesting complex of photosystem II contains a variety of ligands, especially chlorophyll a and b. On average, one third of chlorophyll molecules are incomplete, missing part of the hydrocarbon tail due to its high flexibility and therefore, difficult identification in the crystal structure. Chirality issues are reported for 25% of chlorophylls and residual lipids.
+                    </small>
+                </dd>
+            </dl>
+        </div>
+        <div class="tab-pane" id="stepbystep-tab">
+            <h3>
+                Step-by-step Guides
+                <small>
+                    Step-by-step guides for retrieving validation results from Validator<sup>DB</sup>.
+                </small>
+            </h3>
+
+            <div class="valdb-step-by-step-sample">
+                <h4>
+                    <span class="pull-right">
+                        <a href="//youtu.be/sQsmIiYVasc" class="btn btn-primary" target="_blank"><i class="icon-film icon-white"></i> Video</a>
+                        <a href="//www.slideshare.net/lukypravda/validatordb-search-by-pdb" class="btn btn-info" target="_blank"><i class="icon-align-justify icon-white"></i> Slides</a>
+                    </span>
+                    Search by PDB Entry<br />
+                    <small>Showcases validation results for molecules in selected PDB entries.</small>
+                </h4>
+            </div>
+
+            <div class="valdb-step-by-step-sample">
+                <h4>
+                    <span class="pull-right">
+                        <a href="//youtu.be/MhGKUyJEPEM" class="btn btn-primary" target="_blank"><i class="icon-film icon-white"></i> Video</a>
+                        <a href="//www.slideshare.net/lukypravda/search-by-moleculeidentifier" class="btn btn-info" target="_blank"><i class="icon-align-justify icon-white"></i> Slides</a>
+                    </span>
+                    Search by Molecule Identifier<br />
+                    <small>Showcases validation results for selected molecules.</small>
+                </h4>
+            </div>
+
+            <div class="valdb-step-by-step-sample">
+                <h4>
+                    <span class="pull-right">
+                        <a href=" //youtu.be/CdvgHbbpN7c" class="btn btn-primary" target="_blank"><i class="icon-film icon-white"></i> Video</a>
+                        <a href="//www.slideshare.net/lukypravda/search-by-annotation" class="btn btn-info" target="_blank"><i class="icon-align-justify icon-white"></i> Slides</a>
+                    </span>
+                    Search by Molecule Annotation<br />
+                    <small>Showcases validation results for molecules with specific annotations.</small>
+                </h4>
+            </div>
+
+            <div class="valdb-step-by-step-sample">
+                <h4>
+                    <span class="pull-right">
+                        <a href="//youtu.be/clCghNhBbFk" class="btn btn-primary" target="_blank"><i class="icon-film icon-white"></i> Video</a>
+                        <a href="//www.slideshare.net/lukypravda/search-by-all" class="btn btn-info" target="_blank"><i class="icon-align-justify icon-white"></i> Slides</a>
+                    </span>
+                    Search by PDB Entry and Molecule Annotation<br/>
+                    <small>Showcases validation results for molecules with specific annotations, from selected PDB entries.</small>
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+

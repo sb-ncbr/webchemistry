@@ -1,0 +1,13 @@
+﻿<li class="dropdown">
+    <a class="dropdown-toggle" role="button" data-target="#" href="@Url.Action("Index")" style="color:white;"><i class="icon-hdd icon-white"></i> <strong>Data</strong> <b class="caret"></b></a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dServices">
+        @{ /*<li><a href="@Url.Action("Operations", new { operation = (string)null })"><i class="icon-cog"></i> Operations</a></li> 
+        <li class="divider"></li>
+        <li><a href="@Url.Action("Database", new { operation = (string)null })"><i class="icon-folder-open"></i> Databases</a></li> */ }
+        <li><a href="@Url.Action("DbView", new { operation = (string)null })"><i class="icon-filter"></i> Database Views</a></li>
+        @{ /* <li><a href="@Url.Action("Propertie", new { operation = (string)null })"><i class="icon-list-alt"></i> Properties</a></li> 
+        <li><a href="@Url.Action("Repositorie", new { operation = (string)null })"><i class="icon-file"></i> Repositories</a></li> */ }
+        <li class="divider"></li>
+        <li><a href="@Url.Action("Database", new { operation = "Public" })"><i class="icon-folder-close"></i> Public Databases</a></li>
+    </ul>
+</li>    

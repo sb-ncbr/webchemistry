@@ -1,0 +1,3 @@
+﻿namespace WebChemistry.Framework.Core
+{
+}

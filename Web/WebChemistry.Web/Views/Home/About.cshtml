@@ -1,0 +1,164 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+<div class="page-header">
+    <h1>About WebChemistry</h1>
+</div>
+
+<p>WebChemistry is a set of apps and services for chemical and biological computations, mostly focused on analysis of 3D structural patterns.</p>
+
+@*<div class="row-fluid">
+        <h3>Contact</h3>
+        david.sehnal<img src="~/Images/at.png">mail.muni.cz
+    </div>*@
+
+
+<style>
+    .author-list dd:not(:last-child) {
+        margin-bottom: 20px;
+    }
+    
+    .publications-list, .author-list {
+        margin-top: 0;
+    }
+
+        .publications-list dt {
+            margin-bottom: 5px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .publications-list dd {
+            margin-left: 1px;
+        }
+
+            .publications-list dd:not(:last-child) {
+                margin-bottom: 20px;
+            }
+
+            .publications-list dd p {
+                border-left: 2px solid #AAA;
+                padding-left: 6px;
+            }
+
+                .publications-list dd p:hover {
+                    border-left: 4px solid #08C;
+                }
+</style>
+
+
+
+<div class="tabbable" style="margin-top: 40px">
+    <ul class="nav nav-tabs" id="mq-main-tab-headers">
+        <li class="active"><a href="#contact-tab" data-toggle="tab">Contact</a></li>
+        <li><a href="#publications-tab" data-toggle="tab">Publications</a></li>
+        <li><a href="#team-tab" data-toggle="tab">Team</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="contact-tab">
+            For questions regarding WebChemistry, please contact webchemistryhelp<img src="~/Images/at.png">gmail.com.
+        </div>
+
+        <div class="tab-pane" id="team-tab">
+            <dl class="author-list">
+                <dt>
+                    David Sehnal
+                </dt>
+                <dd>
+                    Development
+                </dd>
+                <dt>
+                    Crina-Maria Ionescu, Lukáš Pravda
+                </dt>
+                <dd>
+                    Feedback, testing, and documentation
+                </dd>
+                <dt>
+                    Radka Svobodová Vařeková
+                </dt>
+                <dd>
+                    Feedback and testing
+                </dd>
+                @*<dt>
+                    Jaroslav Koča
+                </dt>
+                <dd>
+                    Honorary mention of the professor
+                </dd>*@
+            </dl>
+        </div>
+
+        <div class="tab-pane" id="publications-tab">
+            <dl class="publications-list">
+                <dt>
+                    PhD Thesis
+                </dt>
+                <dd>
+                    <p>PhD thesis dealing with the approaches used in the WebChemistry services can be found <a href="https://is.muni.cz/th/140435/fi_d/?lang=en" target="_blank">here</a>.</p>
+                </dd>
+                <dt>
+                    PatternQuery
+                </dt>
+                <dd>
+                    <p>
+                        Sehnal, D., Pravda, L., Ionescu C.-M., Svobodová Vařeková, R. and Koča, J. (2015)
+                        <a href="//dx.doi.org/10.1093/nar/gkv561" target="_blank">PatternQuery: web application for fast detection of biomacromolecular structural patterns in the entire Protein Data Bank</a>. Nucleic Acids Res., 43, W383–W388.
+                    </p>
+                </dd>
+                <dt>
+                    MotiveValidator
+                </dt>
+                <dd>
+                    <p>
+                        Svobodová Vařeková, R., Jaiswal, D., Sehnal, D., Ionescu, C.-M., Geidl, S., Pravda, L., Horský, V., Wimmerová, M. and Koča, J. (2014)
+                        <a href="//dx.doi.org/10.1093/nar/gku426" target="_blank">MotiveValidator: interactive web-based validation of ligand and residue structure in biomolecular complexes</a>. Nucleic Acids Res., 42, W227–33.
+                    </p>
+                </dd>
+                <dt>
+                    ValidatorDB
+                </dt>
+                <dd>
+                    <p>
+                        Sehnal, D., Svobodová Vařeková, R., Pravda, L., Ionescu, C.-M., Geidl, S., Horský, V., Jaiswal, D., Wimmerová, M. and Koča, J. (2015)
+                        <a href="//dx.doi.org/10.1093/nar/gku1118" target="_blank">ValidatorDB: database of up-to-date validation results for ligands and non-standard residues from the Protein Data Bank.</a> Nucleic Acids Res. 43, D369–D375.
+                    </p>
+                </dd>
+                <dt>
+                    MOLE
+                </dt>
+                <dd>
+                    <p>
+                        Sehnal, D., Vařeková, R.S., Berka, K., Pravda, L., Navrátilová, V., Banáš, P., Ionescu, C.M., Otyepka, M. and Koča, J. (2013) MOLE 2.0:
+                        <a href="//dx.doi.org/10.1186/1758-2946-5-39" target="_blank">Advanced approach for analysis of biomacromolecular channels.</a> J. Cheminform., 5, 39.
+                    </p>
+                    <p>
+                        Berka, K., Hanák, O., Sehnal, D., Banáš, P., Navrátilová, V., Jaiswal, D., Ionescu, C.M., Svobodová Vařeková, R., Koča, J., and Otyepka, M. (2012)
+                        <a href="//dx.doi.org/10.1093/nar/GKS363" target="_blank">MOLEonline 2.0: Interactive Web-based Analysis of Biomacromolecular Channels.</a> Nucleic Acid Research, 40(W1): W222-W227.
+                    </p>
+                    <p>
+                        Pravda, L., Berka, K., Svobodová Vařeková, R., Sehnal, D., Banáš, P., Laskowski, R., Koča, J. and Otyepka, M. (2014)
+                        <a href="//dx.doi.org/10.1186%2Fs12859-014-0379-x" target="_blank">Anatomy of enzyme channels.</a> BMC bioinformatics, 15:379.
+                    </p>
+                </dd>
+                <dt>
+                    AtomicChargeCalculator
+                </dt>
+                <dd>
+                    <p>
+                        Ionescu,C.-M., Sehnal,D., Falginella,F.L., Pant,P., Pravda,L., Bouchal,T., Vařeková,R.S., Geidl,S. and and Koča,J. (2015)
+                        <a href="//dx.doi.org/10.1186/s13321-015-0099-x" target="_blank">AtomicChargeCalculator: Interactive Web-based calculation of atomic charges in large biomolecular complexes and drug like molecules.</a> J. Cheminform., 7, 50.
+                    </p>
+                </dd>
+                <dt>
+                    SiteBinder
+                </dt>
+                <dd>
+                    <p>
+                        Sehnal, D., Svobodová Vařeková, R., Huber, H. J., Geidl, S., Ionescu, C. M., Wimmerová, M. and Koča, J. (2012)
+                        <a href="//dx.doi.org/10.1021/ci200444d" target="_blank">SiteBinder: An improved approach for comparing multiple protein structural motifs.</a> J. Chem. Inf. Model., 52(2), 343–359.
+                    </p>
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>

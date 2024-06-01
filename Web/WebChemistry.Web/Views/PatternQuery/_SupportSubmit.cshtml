@@ -1,0 +1,46 @@
+﻿<div id="mq-support">
+    <h3 style="margin-top: 0">
+        PatternQuery Support
+    </h3>
+
+    <div class="mq-support-header">
+        If you need help constructing a query or just have a general question, feel free to use this form. We will try to get back to you as soon as possible,
+        definitely sooner than <abbr title="For values of never approaching 1 to 7 days.">never</abbr>.<br /><br />
+
+        <span style="font-style: normal">
+            <b>Your request for support will be assigned a unique URL.</b><br />
+            <small>
+                If you provide an email address, we will be able to notify you when we respond to your request.
+                Otherwise, you will just have to come back to that URL and check for an answer.
+                Your email won't be shared with any 3rd party.
+            </small>
+        </span>
+    </div>
+
+    <div class="mq-support-email">
+        <input type="email" id="email" data-bind="value: email, valueUpdate: 'input'" placeholder="Optional email..." />
+    </div>
+
+    <div class="mq-support-title">
+        <input type="text" data-bind="value: title, valueUpdate: 'input'" placeholder="Title..." maxlength="50" />
+    </div>
+
+    <div class="mq-support-message">
+        <textarea rows="4" data-bind="value: message, valueUpdate: 'input'" placeholder="Please describe your issue here."></textarea>
+    </div>
+    <div class="mq-support-message-label">
+        Supports <a href="//en.wikipedia.org/wiki/Markdown#Example" target="_blank">Markdown</a>
+    </div>
+
+    <div class="mq-support-question">
+        <div data-bind="text: question"></div>
+        <input type="text" id="answer" data-bind="value: answer, valueUpdate: 'input'" />
+    </div>
+    <!-- ko if: errorText().length > 0 -->
+    <div class="alert alert-info alert-block" data-bind="text: errorText()"></div>
+    <!-- /ko -->
+
+    <button class="btn btn-large btn-block btn-primary" data-bind="click: submit, enable: canSubmit, text: submitLabel">Submit</button>
+
+    @Helpers.RecenlySubmittedComputations("PatternQuerySupport", "PatternQuerySupportActions.supportAction", typeSingular: "support request", typePlural: "support requests", submitText: "submitted")
+</div>

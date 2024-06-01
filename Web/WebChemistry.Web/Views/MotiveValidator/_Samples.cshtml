@@ -1,0 +1,68 @@
+﻿@if (Request.Url.Host.StartsWith("webchemdev", StringComparison.OrdinalIgnoreCase))
+{
+    <p>Samples are not available in the development version. For the stable version, please go to <a href="//webchem.ncbr.muni.cz/Platform/MotiveValidator" target="_blank">webchem.ncbr.muni.cz/Platform/MotiveValidator</a>.</p>
+}
+else
+{ 
+<dt>
+    <a class="btn btn-small btn-success" href="@Url.Action("Result", new { id = "ProteinsWithCHD" })" target="_blank">Proteins with CHD</a>
+</dt>
+<dd>
+    <small>
+        This case study illustrates the basic structural analysis of residues or ligands using <b>Residue Validation</b>. The analysis allows to extract and explicitly
+        log the structural problems in each of almost 300 instances of <i>cholic acid</i> (CHD) that appears as a ligand with over 50 protein structures.
+        Note that more than one residue can be validated at a time, either by uploading several model residues, or by specifying more residue names in the PDBeChem search bar.
+    </small>
+</dd>
+<dt style="margin-top: 10px">
+    <a class="btn btn-small btn-success" href="@Url.Action("Result", new { id = "LectinsWithMAN" })" target="_blank">Lectins with MAN</a>
+</dt>
+<dd>
+    <small>
+        This case study illustrates a fully automatic analysis of lectins using <b>Sugar Validation</b>. Lectins are proteins involved in biological recognition.
+        This analysis allows to quickly identify, sort and validate all carbohydrates that can be found cocrystalized with <i>&alpha;-D-mannose</i> (MAN) ligands in lectins.
+    </small>
+</dd>
+<dt style="margin-top: 10px">
+    <a class="btn btn-small btn-success" href="@Url.Action("Result", new { id = "ComplexedGlycoprotein" })" target="_blank">Complexed Glycoprotein (3D12)</a>
+</dt>
+<dd>
+    <small>
+        This case study illustrates a fully automatic analysis of multiple carbohydrates in a single structure (PDB ID <i>3D12</i>) using <b>Sugar Validation</b>.
+        This task is challenging from the validation point of view because the complex of the Nipah G attachment glycoprotein and its receptor ephrin B contains 30 ligands,
+        originating from 11 different carbohydrates.
+    </small>
+</dd>
+<dt style="margin-top: 10px">
+    <a class="btn btn-small btn-success" href="@Url.Action("Result", new { id = "MotifsMAN" })" target="_blank">MAN Motifs</a>
+</dt>
+<dd>
+    <small>
+        This case study illustrates a <b>Motif/Fragment Validation</b> analysis for a very large set of structures containing <i>&alpha;-D-mannose</i> (MAN) residues occurring in
+        Protein Data Bank (snapshot from January 9<sup>th</sup> 2014). Note that each motif contains not only a MAN residue, but also any atoms that were found bound to the MAN
+        residue via one or two bonds in the input structure. This analysis is very efficient at quickly identifying and logging structural problems in large data sets,
+        such as all instances of MAN in the Protein Data Bank.
+    </small>
+</dd>
+<dt style="margin-top: 10px">
+    <a class="btn btn-small btn-success" href="@Url.Action("Result", new { id = "MotifsNAG" })" target="_blank">NAG Motifs</a>
+</dt>
+<dd>
+    <small>
+        This case study illustrates a <b>Motif/Fragment Validation</b> analysis for a very large set of structures containing <i>N-acetyl-D-glucosamine</i> (NAG) residues occurring in the
+        Protein Data Bank (snapshot from January 9<sup>th</sup> 2014). NAG is the second most common ligand in the Protein Data Bank, amounting to more than 23 000 instances of NAG
+        in almost 4000 protein structures (almost 5 times the number of MAN motifs). This analysis shows all possible types of errors and warnings that can be reported by MotiveValidator.
+    </small>
+</dd>
+<dt style="margin-top: 10px">
+    <a class="btn btn-small btn-success" href="@Url.Action("Result", new { id = "MotifsBCL" })" target="_blank">BCL Motifs</a>
+</dt>
+<dd>
+    <small>
+        This case study illustrates a <b>Motif/Fragment Validation</b> analysis for a set of structures containing <i>bacteriochlorophyll a</i> (BCL) residues occurring in
+        Protein Data Bank (snapshot from January 9<sup>th</sup> 2014). BCL is a very complex ligand with many chiral centres. A BCL residue includes a Mg ion, several adjacent rings
+        and a long hydrocarbon side chain. Note that each motif contains not only a BCL residue, but also any atoms that were found bound to the BCL residue via one or two bonds
+        in the input structure. This analysis allows to study all parts of the BCL structure in detail in all cases.
+    </small>
+</dd>
+}

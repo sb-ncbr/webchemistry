@@ -1,0 +1,12 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Theme/Styles.xaml"/>
+        <ResourceDictionary Source="Theme/CoreStyles.xaml"/>
+        <ResourceDictionary Source="Theme/SDKStyles.xaml" />
+        <ResourceDictionary Source="Theme/ToolkitStyles.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

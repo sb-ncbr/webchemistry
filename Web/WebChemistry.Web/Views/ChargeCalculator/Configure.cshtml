@@ -1,0 +1,339 @@
+﻿@{
+    ViewBag.Title = WebChemistry.Web.Controllers.ChargeCalculatorController.AppName + " - Configure Computation";
+}
+
+@section CustomStyles {
+    @Styles.Render("~/Content/themes/base/css")
+    @Styles.Render("~/Content/slickgrid/css")
+    @Styles.Render("~/Content/ChargeCalculatorConfig/css")
+}
+
+<div class="page-header">    
+    <h1 id="top">@WebChemistry.Web.Controllers.ChargeCalculatorController.AppName <small>Computation Setup</small></h1>
+</div>
+
+<div class="btn-group" id="help-actions-wrap">
+    <button class="btn btn-large btn-success" onclick="startConfigIntro();" title="Interactive guide that will walk you through the steps of the calculation" data-placement="bottom"><i class="icon icon-white icon-question-sign"></i> Guide</button>
+    <a class="btn btn-large btn-success" href="//webchem.ncbr.muni.cz/Wiki/ChargeCalculator:FAQ" target="_blank" title="Frequently asked questions" data-placement="bottom">FAQ</a>
+    <a class="btn btn-large btn-success" href="//webchem.ncbr.muni.cz/Wiki/ChargeCalculator:UserManual" target="_blank" title="Wiki user manual" data-placement="bottom">Wiki</a>
+</div>
+
+<div id="mainView" data-bind="template: { name: template().name, data: template().data }">
+</div>
+
+<script type="text/html" id="empty-template">
+    <div></div>
+</script>
+
+<script type="text/html" id="busy-template">
+    <div id="busySpinner" style="height: 150px"></div>
+    <div style="margin-top: 5px; padding-bottom: 20px; text-align:center"><span style="font-weight: bold; font-size: 20px" data-bind="text: message"></span></div>
+</script>
+
+<script type="text/html" id="config-template">
+    <!-- ko if: (data['Entries'] || []).length > 0 -->
+    <div id="result-address">
+        @*<i>You can come back to the result later using this URL:</i><br/>*@
+        <small style="color: #aaa">You can come back to this page later using this URL. Note that once the computation has been executed, you won't be able to change the parameters.</small>
+        <input class="result-input"
+               type="text" value="@Url.Action("Result", "ChargeCalculator", new { id = ViewBag.Id }, Request.Url.Scheme)" id="resultUrl" />
+    </div>
+    <!-- /ko -->
+    <!-- ko if: (data['Entries'] || []).length === 0 -->
+    <h3>
+        No input data available.<br />
+        If you used a ZIP file as input, it might be corrupted or using an unsupported format.
+    </h3>
+    <!-- /ko -->
+
+    <div data-bind="if: (data['Entries'] || []).length > 0">
+
+        <button class="btn btn-success btn-block btn-large" onclick="startConfigIntro();" title="Interactive Guide" style="font-weight: bold"><i class="icon icon-white icon-question-sign"></i> Guide me through the main stages of the setup</button>
+
+        @if (!string.IsNullOrEmpty(ViewBag.Example))
+        {
+            <!-- ko if: window['ChargesExample'] -->
+            <div class="alert alert-success alert-block" style="text-align: center; margin-top: 10px">
+                <p style="font-weight: bold">Sample data have been loaded, all necessary parameters have been set, and the calculation is ready to start.</p>
+
+                <p>
+                    Click <button class="btn btn-primary btn-small" onclick="ChargesExample.startGuide();" title="Interactive Guide">Here</button> for a brief explanation for this particular computation setup.
+                    Try the <button class="btn btn-success btn-small" onclick="startConfigIntro();" title="Interactive Guide"><i class="icon icon-white icon-question-sign"></i> Guide</button> for more general explanations.
+                </p>
+            </div>
+            <!-- /ko -->
+        }
+
+        @*<div data-bind="visible: showDefaultExecute">
+                <button title="Start the computation with default parameters." class="btn btn-large btn-block btn-info" id="upload-btn" data-bind="enable: canCompute(), click: compute">Compute using Default Parameters</button>
+            </div>*@
+
+        <!-- ko if: showDefaultExecute -->
+        <div id="quickComputeWrapper" style="margin-bottom: 20px">
+            <h2 class="charges-config-section-header">Quick Compute</h2>
+            <div class="alert alert-info" style="text-align: center; margin-bottom: 5px">
+                <b>Execute the computation using default configuration.</b><br />
+                <b style="color: darkred">Note that most default setups assume all molecules are neutral.</b><br />
+                <small>Making any changes to the input removes this option (refreshing this page brings it back).</small>
+            </div>
+            <button class="btn btn-large btn-primary btn-block" id="upload-btn" data-bind="enable: canCompute(), click: compute"><span data-bind="text: computeButtonLabel()"></span></button>
+            <div data-bind="with: computationSummary" style="margin-top: 5px">
+                The computation on <span style="font-weight: bold" data-bind="text: chargesPluralize(structureCount(), 'molecule', 'molecules')"></span>,
+                with <span style="font-weight: bold" data-bind="text: chargesPluralize(selectedSetCount(), 'EEM parameter set', 'EEM parameter sets')"></span>,
+                using <span style="font-weight: bold" data-bind="text:  chargesPluralize(methodCount(), 'method', 'methods')"></span>,
+                will require <abbr style="font-weight: bold" data-bind="text: chargesPluralize(jobCount(), 'job', 'jobs')" title="A job is defined by `Molecule,TotalCharge,Set,Method`, e.g. `1qtn,6,RS2-EX,Full EEM`."></abbr>.<br />
+                Selected EEM parameter sets:<br />
+                <span data-bind="html: selectedSetsString"></span>
+            </div>
+
+            <div style="border-bottom: 1px solid #CCC; height: 1px; width: 100%; margin-top: 20px"></div>
+        </div>
+        <!-- /ko -->
+
+        <div id="structuresWrapper">
+            <h2 class="charges-config-section-header">Molecules <button class="btn btn-small btn-inverse" data-bind="click: refreshStructures, visible: showRefreshStructures" title="Undo remove."><i class="icon-refresh icon-white"></i></button></h2>
+            <div class="data-grid-custom" id="structuresView"></div>
+            <div class="form-inline" id="totalChargeWrapper" style="margin-top: 10px">
+                <div class="input-append input-prepend">
+                    <span class="add-on">Total Charge for All Molecules </span>
+                    <input type="text" data-bind="value: globalTotalCharge, valueUpdate: 'input', executeOnEnter: applyGlobalTotalCharge" style="width: 280px" placeholder="One or more comma separed values..." />
+                    <button class="btn" data-bind="click: applyGlobalTotalCharge">Apply</button>
+                </div>
+            </div>
+            <div class="alert alert-error alert-block" style="margin: 10px 0 0 0; padding-top: 8px; padding-bottom: 8px" data-bind="visible: tooManyTotalChargesMessage">
+                <span data-bind="text: tooManyTotalChargesMessage"></span>
+            </div>
+        </div>
+        @*<button data-bind="click: debugConfig">Debug config</button>*@
+        <br />
+        <div id="setsWrapper">
+            <h2 class="charges-config-section-header">
+                EEM Parameter Sets<button class="btn-link btn btn-small" style="padding: 0" title="Click to show guide for this section." data-bind="click: function() { startConfigIntro('setsWrapper'); }"><i class="icon-question-sign"></i></button>
+                <span class="form-inline">
+                    <button class="btn btn-small btn-inverse" data-bind="click: addParameterSet, visible: showAllSets" title="Add a parameter set."><i class="icon icon-white icon-plus-sign"></i> Add</button>
+                </span>
+                <small><span data-bind="text: computationSummary.selectedSetCount"></span> selected</small>
+                <span class="form-inline pull-right">
+                    <label class="checkbox" id="usefulSetsWrapper" data-bind="visible: showAllSets"><input type="checkbox" data-bind="checked: showOnlyUsefulSets" /> Show only sets with all required parameters</label>
+                    <label class="checkbox"><input type="checkbox" data-bind="checked: showAllSets" /> Show sets</label>
+                </span>
+            </h2>
+            <!-- ko if: defaultSet -->
+            <div class="form-inline">
+                <!-- ko with: defaultSet -->
+                <label class="checkbox">
+                    <input type="checkbox" id="defaultSetCheck" data-bind="checked: sel" />
+                    <span class="label label-info">Default</span>
+                    <span style="font-weight: bold" data-bind="text: Name"></span> (<span data-bind="text: approach"></span> for <span data-bind="text: $data['Target']"></span>) by <span style="font-style: italic" data-bind="text: $data['Author']"></span>
+                </label>
+                <!-- /ko -->
+                <label>
+                    <small>[<a href="#" data-bind="click: function() { currentParameterSet(defaultSet); showAllSets(!showAllSets()); }">more</a>]</small>
+                </label>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: noSetAvailable -->
+            <div class="alert alert-info">
+                We were unable to automatically determine a default set for your computation. Please select or add an appropriate one yourself.
+            </div>
+            <!-- /ko -->
+            <div class="container" data-bind="visible: showAllSets" style="margin-top: 10px">
+                <div class="row">
+                    <div class="span7" style="position: relative">
+                        <div style="position: absolute; right: 0; z-index:1000"><button class="btn btn-link" title="Toggle groups." data-bind="click: toggleSetGroups"><i class="icon icon-th-list"></i></button></div>
+                        <div class="data-grid-custom" style="height: 300px" id="setsView"></div>
+                    </div>
+                    <div class="span5">
+                        <div style="height: 30px;">
+                            <div class="pull-right" data-bind="visible: currentParameterSet()['Name']"><a href="#" target="_blank" class="btn btn-inverse btn-small" id="viewSetDataLink" title="Opens new tab with full description of the set.">View XML</a></div>
+                            <h4 style="margin-top: 0; padding-top: 0">Set Details <small data-bind="text: currentParameterSet()['Name']"></small></h4>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div data-bind="with: currentParameterSet()" style="height: 270px; max-height: 270px; overflow-y: auto;">
+                            <div data-bind="if: !$data['Properties']">No set selected. Click on a set name to view details.</div>
+                            <ul data-bind="foreach: $data['Properties']" class="unstyled">
+                                <li><span style="font-weight: bold" data-bind="text: $data[0]"></span><br /><span data-bind="text: $data[1]"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div id="methodsWrapper">
+            <h2 class="charges-config-section-header">
+                Computation Methods<button class="btn-link btn btn-small" style="padding: 0" title="Click to show guide for this section." data-bind="click: function() { startConfigIntro('methodsWrapper'); }"><i class="icon-question-sign"></i></button>
+                <button class="btn btn-small btn-inverse" data-bind="click: addComputationMethod, enable: computationSummary.methodCount() <= 9" title="Add a computation method." data-placement="top"><i class="icon icon-white icon-plus-sign"></i> Add</button>
+                <small><span data-bind="text: computationSummary.methodCount"></span> selected</small>
+            </h2>
+            <div>
+                <div class="data-grid-custom" style="height: 105px" id="methodsView"></div>
+            </div>
+            <div class="alert alert-info alert-block" style="margin: 10px 0 0 0; padding-top: 8px; padding-bottom: 8px" data-bind="visible: computationSummary.methodCount() > 9">
+                A maximum of 10 different methods can be applied in one run.
+            </div>
+        </div>
+
+        <br />
+        <div id="summaryWrapper">
+            <h2 class="charges-config-section-header">
+                Computation Summary and Execution
+            </h2>
+            <div data-bind="with: computationSummary">
+                The computation on <span style="font-weight: bold" data-bind="text: chargesPluralize(structureCount(), 'molecule', 'molecules')"></span>,
+                with <span style="font-weight: bold" data-bind="text: chargesPluralize(selectedSetCount(), 'EEM parameter set', 'EEM parameter sets')"></span>,
+                using <span style="font-weight: bold" data-bind="text:  chargesPluralize(methodCount(), 'method', 'methods')"></span>,
+                will require <abbr style="font-weight: bold" data-bind="text: chargesPluralize(jobCount(), 'job', 'jobs')" title="A job is defined by `Molecule,TotalCharge,Set,Method`, e.g. `1qtn,6,RS2-EX,Full EEM`."></abbr>.<br />
+                Selected EEM parameter sets:<br /><span data-bind="html: selectedSetsString"></span>
+            </div>
+        </div>
+        <br />
+        <div id="computeWrapper">
+            <button class="btn btn-large btn-block btn-primary" id="upload-btn" data-bind="enable: canCompute(), click: compute"><span data-bind="text: computeButtonLabel()"></span></button>
+        </div>
+
+        @*<h4>Details</h4>
+            <div data-bind="with: currentStructure()">
+                <pre data-bind="text: JSON.stringify($data, null, 2)"></pre>
+            </div>*@
+    </div>
+
+    @*<div class="alert alert-info alert-block alert-config-can-compute pull-right">
+            <span data-bind="text: computeButtonLabel"></span>
+        </div>*@
+    @*<pre data-bind="text: JSON.stringify($data.data, null, 2)"></pre>*@
+</script>
+
+<div id="addMethodModal" class="modal hide" tabindex="-1" role="dialog" style="overflow:hidden; width: 640px; margin-left: -320px; margin-top: -170px">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">
+            Add Computation Method
+        </h3>
+    </div>
+    <div class="modal-body">
+        <div class="form">
+            <select data-bind="options: availableMethods, value: selectMethod, optionsText: 'name'" name="method"></select>
+            <div><span style="font-style: italic" data-bind="text: selectMethod().description"></span> [<a data-bind="attr: { href: '//webchem.ncbr.muni.cz/Wiki/' + selectMethod().wikiLink }" target="_blank">more</a>]</div>
+            <h4>Options</h4>
+            <div data-bind="if: selectMethod().value !== 'Eem'">
+                <label for="radius">Cutoff Radius:</label>
+                <input type="text" data-bind="value: selectRadius,valueUpdate: 'input'" name="radius" />
+            </div>
+            <label class="checkbox"><input type="checkbox" data-bind="checked: selectIgnoreWaters" /> Ignore Waters</label>
+            <label for="precision">Precision:</label>
+            <select data-bind="options: availablePrecisions, value: selectPrecision, optionsText: 'value'" name="precision"></select>
+            <div><span style="font-style: italic" data-bind="text: selectPrecision().description"></span></div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span class="pull-left" data-bind="text: addError" style="color:red">Warning/error</span>
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-primary" data-bind="click: addNewMethod, enable: isValid">Add</button>
+    </div>
+</div>
+
+<div id="addSetModal" class="modal hide" tabindex="-1" role="dialog" style="overflow:hidden; width: 800px; margin-left: -400px; margin-top: -300px">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">
+            Add Parameter Set
+        </h3>
+    </div>
+    <div class="modal-body">
+        <div style="margin-bottom: 5px; font-size: 9pt">The attribute <code>ParameterSet Name</code> must be a unique set name. Multiple sets can be added enclosed by the <code>&lt;Sets&gt;</code> tag.</div>
+        <textarea id="setXmlEditor" style="width: 740px;"></textarea>
+    </div>
+    <div class="modal-footer">
+        <span class="pull-left" data-bind="text: addError" style="color:red">Warning/error</span>
+        <button class="btn" data-dismiss="modal" aria-hidden="true" data-bind="click: cancel">Cancel</button>
+        <button class="btn btn-primary" data-bind="click: addSet, enable: addEnabled, text: addLabel"></button>
+    </div>
+</div>
+
+<div id="structureDetailsModal" class="modal hide" tabindex="-1" role="dialog" style="overflow:hidden; width: 640px; height: 350px; margin-left: -320px; margin-top: -175px">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">
+            <span data-bind="text: currentStructure().StructureId, style: { color: currentStructure().color }"></span>
+            <!-- ko if: currentStructure().IsValid -->
+            <span class="btn-group">
+                <a class="btn btn-small" target="_blank" title="View the input file in text format." data-placement="bottom" data-bind="attr: { href: ChargeCalculatorParams.srcAction.replace('-name-', encodeURIComponent(currentStructure().StructureId))  }"><i class="icon icon-file"></i> View</a>
+                <a class="btn btn-small" title="Download the input file in text format." data-placement="bottom" data-bind="attr: { href: ChargeCalculatorParams.srcDlAction.replace('-name-', encodeURIComponent(currentStructure().StructureId))  }"><i class="icon icon-download"></i> Download</a>
+            </span>
+            <!-- /ko -->
+        </h3>
+    </div>
+    <div class="modal-body">
+        <div data-bind="with: currentStructure">
+            <!-- ko if: $data['ErrorText'] -->
+            <dl>
+                <dt>Error</dt>
+                <dd data-bind="text: $data['ErrorText']" style="color: red"></dd>
+            </dl>
+            <!-- /ko -->
+            <!-- ko if: !$data['ErrorText'] -->
+            <dl>
+                <dt>Atoms</dt>
+                <dd data-bind="html: $data['atomCountHtml'] + ' (' + $data['atomCount'] + ' total)'"></dd>
+                @*<dt>Suggested Charge</dt>
+                    <dd data-bind="html: $data['SuggestedCharge']"></dd>*@
+                <dt style="margin-top: 5px;">Reference Charges</dt>
+                <dd>
+                    <!-- ko if: $data['refChargeCount'] -->
+                    <span data-bind="text: $data['refChargeString']"></span>
+                    <!-- /ko -->
+                    <!-- ko if: !$data['refChargeCount'] -->
+                    None loaded.
+                    <!-- /ko -->
+                    <!-- ko if: $data['refChargeWarningCount'] > 0 -->
+                    <span style="font-style: italic">Warnings:</span> <span data-bind="text: $data['refChargeWarningString']"></span>
+                    <!-- /ko -->
+                </dd>
+                <dt style="margin-top: 5px;">Warnings</dt>
+                <dd>
+                    <!-- ko if: $data['warningCount'] > 0 -->
+                    <ul data-bind="foreach: $data['Warnings']" style="color: #DB890F">
+                        <li data-bind="text: $data"></li>
+                    </ul>
+                    <!-- /ko -->
+                    <!-- ko if: $data['warningCount'] === 0 -->
+                    None
+                    <!-- /ko -->
+                </dd>
+            </dl>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+
+@section jqueryui {
+    @Scripts.Render("~/bundles/jqueryui")
+    <script type="text/javascript">
+        $.widget.bridge('uibutton', $.ui.button);
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+    </script>
+}
+
+@section scripts {
+    @if (!string.IsNullOrEmpty(ViewBag.Example))
+    {
+        @Scripts.Render("~/Scripts/ChargeCalculator/examples/" + ViewBag.Example.ToLowerInvariant() + ".js")
+    }
+
+    <script type="text/javascript">
+        var ChargeCalculatorParams = {
+            isFinished: @ViewBag.IsFinished.ToString().ToLower(),
+            dataAction: "@Url.Action("AnalysisData", new { id = ViewBag.ComputationId })",
+            statusAction: "@Url.Action("Status", new { id = ViewBag.ComputationId })",
+            srcAction: '@Url.Action("Source", new { id = ViewBag.ChargeComputationId, structure = "-name-" })',
+            srcDlAction: '@Html.Raw(Url.Action("Source", new { id = ViewBag.ChargeComputationId, structure = "-name-", download = "true" }))',
+            computeAction: "@Url.Action("Compute", new { id = ViewBag.ChargeComputationId })",
+            validateSetAction: "@Url.Action("ValidateSet")" };
+    </script>
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/jqdrag")
+    @Scripts.Render("~/bundles/slickgrid-ChargeCalculatorConfig")
+    @Scripts.Render("~/bundles/ChargeCalculatorConfig")
+}
+

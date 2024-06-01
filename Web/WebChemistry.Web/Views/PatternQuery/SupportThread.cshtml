@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "PatternQuery Support";
+}
+
+@section CustomStyles {
+    @Styles.Render("~/Content/PatternQuerySupport/css")
+}
+
+<div class="page-header">
+    <h1>PatternQuery <small>Support - @ViewBag.SupportTitle</small></h1>
+</div>
+
+@if (ViewBag.IsSupport)
+{
+    <div class="alert alert-danger" style="text-align: center; font-weight: bold">Support Mode = You provide the answer ;)</div>
+}
+
+<div style="margin-bottom: 20px">
+    <small style="color: #aaa">You can come back to this support request later using this URL. If you provided your email, a notification will be sent when a reply has been posted.</small>
+    <input class="result-input"
+           type="text" value="@Url.Action("Support", "PatternQuery", new { id = ViewBag.Id }, Request.Url.Scheme)" id="resultUrl" />
+</div>
+
+<div id="mq-support">
+    <ul data-bind="foreach: messages" class="unstyled mq-support-thread">
+        <li data-bind="css: fromSupport ? 'mq-support-from-support alert-info' : 'mq-support-from-user alert-success'">
+            <div class="mq-support-timestamp" data-bind="text: timestamp"></div>
+            <div class="mq-support-message" data-bind="html: body"></div>
+        </li>
+    </ul>
+
+    <!-- ko if: errorText().length > 0 -->
+    <div class="alert alert-info alert-block" data-bind="text: errorText"></div>
+    <!-- /ko -->
+
+    <button class="btn btn-block" data-bind="enable: canRefresh, click: refresh"><i class="icon-refresh"></i> Refresh</button>
+
+    <h4>
+        Message
+        @if (!ViewBag.IsSupport) { 
+        <small>You can send us additional info, for example in case you forgot to mention something in your original message.</small>
+        }
+    </h4>
+    <div class="mq-support-reply">
+        <textarea data-bind="value: message, valueUpdate: 'input'" rows="4"></textarea>
+    </div>
+    <div class="mq-support-reply-label">
+        Supports <a href="//en.wikipedia.org/wiki/Markdown#Example" target="_blank">Markdown</a>
+    </div>
+
+    <button class="btn btn-primary btn-block" data-bind="text: sendLabel, enable: canSend, click: send">Send</button>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        var PatternQuerySupportActions = {
+            sendAction: "@Url.Action(ViewBag.IsSupport ? "SupportSubmitSupport" : "SupportSubmitUser", new { id = ViewBag.Id })",
+            messagesAction: "@Url.Action("Support", new { id = ViewBag.Id, type = "messages" })"
+        };
+    </script>
+
+    @Scripts.Render("~/bundles/PatternQuerySupportThread")
+}

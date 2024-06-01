@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Data";
+}
+
+<div class="hero-unit">
+    <h1>Data</h1>
+    <hr>
+    <dl class="dl-horizontal">
+        @{ /* <dt><a href="@Url.Action("Operations")">Operations</a></dt> <dd>Browse data operations.</dd>
+        <dt>&nbsp;</dt><dd>&nbsp;</dd>
+        <dt><a href="@Url.Action("Database")">Databases</a></dt> <dd>Upload your structures or store computation resuts.</dd> */ }
+        <dt><a href="@Url.Action("DbView")">Database Views</a></dt> <dd> Access and filter data in databases.</dd>
+        @{ /* <dt><a href="@Url.Action("Propertie")">Properties</a></dt> <dd> Services such as Charges store their results as properties.</dd>
+        <dt><a href="@Url.Action("Repository")">Repositories</a></dt> <dd> Provide additional storage for individual services.</dd> */ }
+        <dt>&nbsp;</dt><dd>&nbsp;</dd>
+        <dt><a href="@Url.Action("Database", new { operation = "Public" })">Public Databases</a></dt> <dd>Public databases such as a mirror of PDBe.org.</dd>
+    </dl>
+</div>

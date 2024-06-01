@@ -1,0 +1,51 @@
+﻿.mq-auto-tooltip {
+    margin: 5px;
+    max-width: 700px;
+    -ms-word-wrap: normal;
+    word-wrap: normal;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    float: left;
+}
+
+.ace_rightAlignedText {
+    display: none !important;
+}
+
+.mq-auto-tooltip * {
+    white-space: normal;
+}
+
+.mq-auto-header {
+    font-family: Courier New, Courier, monospace;
+    display: block;
+    font-weight: bold;
+}
+
+.mq-auto-tooltip dd {
+    font-style: italic;
+}
+
+.mq-auto-tooltip dt:not(:first-child) {
+    margin-top: 5px;
+}
+
+.mq-auto-tooltip code {
+    display: block;
+}
+
+.mq-auto-tooltip b {
+    display: block;
+    margin-top: 10px;
+}
+
+.mq-auto-tooltip dl {
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.mq-auto-tooltip ul {
+    margin-left: 15px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}

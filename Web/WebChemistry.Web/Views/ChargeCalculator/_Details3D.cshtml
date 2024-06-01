@@ -1,0 +1,173 @@
+﻿<div id="details-3d-wrap">
+    <div class="details-controls">
+
+        <div id="details-3d-experimental" class="alert alert-success alert-block">
+            <b>Start by selecting your display criteria and clicking on <a href="#" data-bind="click: view3d.update" style="font-weight: bold">Update</a></b><br />
+            <i>Please note that this feature might require you to update to the latest browser and display driver version to work.</i>
+        </div>
+
+        <!-- ko if: atomCount > 20000 -->
+        <div id="details-3d-big-warning" class="alert alert-info alert-block" style="position: relative">
+            <button type="button" class="close" style="margin-right: 0; right: 5px; top: 5px; position: absolute;" title="Dismiss." data-dismiss="alert"><i class="icon-remove"></i></button>
+            <b>The structure you are about to visualize is quite large (<span data-bind="text: atomCount"></span> atoms)</b><br />
+            <i>Generating the 3D representation might take some time and consume a lot of memory. It is recommended to use lower display quality.</i><br />
+            Ye be warned.
+        </div>
+        <!-- /ko -->
+        
+        <div id="charges-3d-all-controls">
+            <div id="charges-3d-ag" class="input-entry input-append input-prepend">
+                <span class="add-on"><abbr title="Resolution for building the 3D model (atom or residue positions) and coloring it (atom or residue charges).">Atom Grouping</abbr></span>
+                <select data-bind="options: view3d.groupingNames, value: view3d.inputState.partitionName"></select>
+            </div>
+            <div id="charges-3d-display" class="input-entry input-append input-prepend">
+                <span class="add-on"><abbr title="The model will be colored using this set of charges.">Display Charges</abbr></span>
+                <select data-bind="options: computedChargeNames, value: view3d.inputState.chargesName"></select>
+            </div>
+            <div id="charges-3d-diff-wrap" class="input-entry input-append input-prepend" style="margin-bottom: 0px; height: 30px">
+                <label for="charges-3d-diff" class="add-on">
+                    <input type="checkbox" name="charges-3d-diff" id="charges-3d-diff" data-bind="checked: view3d.inputState.showDifference" />
+                    <abbr style="cursor: pointer" title="Enable to color the model by the differences between Display Charges and a secondary set of charges.">Show Differences</abbr>
+                </label>
+                <select data-bind="options: computedChargeNames, value: view3d.inputState.chargesDiffName, enable: view3d.inputState.showDifference"></select>
+            </div>
+
+            <hr />
+
+            <div id="charges-3d-mode">
+                <div class="input-entry input-append input-prepend" style="margin-bottom: 0px;">
+                    <span class="add-on" style="border-bottom-left-radius: 0">Display Mode</span>
+                    <select data-bind="options: view3d.displayModes, optionsText: 'name', value: view3d.inputState.displayMode"></select>
+                </div>
+
+                <div id="details-3d-mode-description" class="alert alert-block" style="position: relative; text-align: left">
+                    <span data-bind="html: view3d.inputState.displayMode().description"></span>
+                </div>
+
+                <!-- ko if: view3d.inputState.displayMode().type === 'BallsAndSticks' -->
+                <div class="input-entry input-append input-prepend">
+                    <span class="add-on"><abbr title="If enabled, scales the atom size using the absolute charge value.">Charge Scaling</abbr></span>
+                    <select data-bind="options: view3d.yesNo, value: view3d.inputState.ballScaling"></select>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: view3d.inputState.displayMode().type === 'Cartoons' -->
+                    <div class="input-entry input-append input-prepend">
+                        <span class="add-on">Show HET Atoms</span>
+                        <select data-bind="options: view3d.yesNo, value: view3d.inputState.cartoonsShowHet"></select>
+                    </div>
+                    <!-- ko if: view3d.inputState.cartoonsShowHet() === 'Yes' -->
+                    <div class="input-entry input-append input-prepend">
+                        <span class="add-on">Show Waters</span>
+                        <select data-bind="options: view3d.yesNo, value: view3d.inputState.cartoonsShowWaters"></select>
+                    </div>
+                    <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: view3d.inputState.displayMode().type === 'Surface' -->
+                <div class="input-entry input-append input-prepend">
+                    <span class="add-on"><abbr title="Determines the shape of the surface. Lower values correspond to more 'VDW-like' surface.">Probe Radius</abbr></span>
+                    <input class="charges-input-text-full" type="text" data-bind="value: view3d.inputState.probeRadius, valueUpdate: 'input'" />
+                </div>
+                <!-- /ko -->
+            </div>
+
+            <div id="charges-3d-detail" class="input-entry input-append input-prepend">
+                <span class="add-on">Display Quality</span>
+                <select data-bind="options: view3d.displayDetails, value: view3d.inputState.displayDetail"></select>
+            </div>
+
+            <div id="charges-3d-colors">
+                <div class="input-entry input-append input-prepend" style="height: 30px">
+                    <label for="charges-min-val" class="add-on">
+                        <input type="checkbox" name="charges-min-val" id="charges-min-val" data-bind="checked: view3d.inputState.customMinValue" />
+                        <abbr style="cursor: pointer" title="Allow to adjust lowest charge limit on color scale.">Min. Value</abbr>
+                    </label>
+                    <div class="charges-3d-range-element">
+                        <input type="text" data-bind="value: view3d.inputState.minValue, valueUpdate: 'input', enable: view3d.inputState.customMinValue" />
+                        @*<input type="text" data-bind="value: view3d.inputState.minColor, valueUpdate: 'input'" />*@
+                        @*<div class="charges-3d-color-box" data-bind="style: { backgroundColor: view3d.inputState.minColor }"></div>*@
+                        <div class="charges-3d-color-box" id="charges-3d-min-color"></div>
+                    </div>
+                </div>
+
+                <div class="input-entry input-append input-prepend" style="height: 30px">
+                    <span class="add-on">Mid. Value</span>
+                    <div class="charges-3d-range-element">
+                        <input type="text" data-bind="value: 0, enable: false" disabled />
+                        @*<input type="text" data-bind="value: view3d.inputState.midColor, valueUpdate: 'input'" />
+                        <div class="charges-3d-color-box" data-bind="style: { backgroundColor: view3d.inputState.midColor }"></div>*@
+                        <div class="charges-3d-color-box" id="charges-3d-mid-color"></div>
+                    </div>
+                </div>
+
+                <div class="input-entry input-append input-prepend" style="height: 30px">
+                    <label for="charges-max-val" class="add-on">
+                        <input type="checkbox" name="charges-max-val" id="charges-max-val" data-bind="checked: view3d.inputState.customMaxValue" />
+                        <abbr style="cursor: pointer" title="Allow to adjust highest charge limit on color scale.">Max. Value</abbr>
+                    </label>
+                    <div class="charges-3d-range-element">
+                        <input type="text" data-bind="value: view3d.inputState.maxValue, valueUpdate: 'input', enable: view3d.inputState.customMaxValue" />
+                        @*<input type="text" data-bind="value: view3d.inputState.maxColor, valueUpdate: 'input'" />
+                        <div class="charges-3d-color-box" data-bind="style: { backgroundColor: view3d.inputState.maxColor }"></div>*@
+                        <div class="charges-3d-color-box" id="charges-3d-max-color"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="charges-3d-gap" class="input-entry input-append input-prepend">
+                <label for="charges-3d-value-grouping" class="add-on">
+                    <input type="checkbox" name="charges-3d-value-grouping" id="charges-3d-value-grouping" data-bind="checked: view3d.inputState.valueGrouping" />
+                    <abbr style="cursor: pointer" title="If enabled, represent the charges using fewer discrete values (based on the parameter) to highlight relevant differences.">Value Gap</abbr>
+                </label>
+                <input class="charges-input-text-full" type="text" data-bind="value: view3d.inputState.valueGroupingRadius, valueUpdate: 'input', enable: view3d.inputState.valueGrouping" />
+            </div>
+
+            <div style="width: 475px; margin-bottom: 5px">
+                <button id="charges-3d-default" class="btn btn-block" data-bind="click: view3d.setDefaultParameters">Set Default Parameters</button>
+            </div>
+
+            <hr />
+
+            <!-- ko with: view3d.errors -->
+            <div id="details-3d-errors" class="alert alert-error alert-block">
+                <ul data-bind="foreach: $data">
+                    <li data-bind="text: $data"></li>
+                </ul>
+            </div>
+            <!-- /ko -->
+        </div>
+
+        <div style="width: 475px; margin-bottom: 10px" data-bind="visible: view3d.showUpdate">
+            <button class="btn btn-primary btn-block btn-large" data-bind="disable: view3d.isBusy, click: view3d.update" id="charges-3d-update">Update</button>
+        </div>
+    </div>
+
+    <div id="details-3d-model">
+        <div id="details-3d-model-host" />
+        <div id="charges-current-atom-info"></div>
+        @*<div id="charges-reset-camera">
+            <button class="btn btn-link btn-small" data-bind="click: view3d.resetCamera" title="Reset Camera"><i class="icon-white icon-refresh"></i></button>
+        </div>*@
+        <div id="charges-3d-controls">
+            <button class="btn btn-link btn-small" style="padding: 0; margin-right: -2px; opacity: 0.5;" data-bind="click: view3d.resetCamera" title="Reset Camera"><i class="icon-white icon-refresh"></i></button>
+            <div>Wheel: Clip</div>
+            <div>Left Button + Move: Rotate</div>
+            <div>Right Button + Move: Zoom</div>
+            <div>Middle Button + Move: Pan</div>
+        </div>
+        <!-- ko with: view3d.normalizedState -->
+        <div id="charges-current-state-info">
+            Grouping: <span data-bind="text: partitionName"></span> | Charges: <span data-bind="text: chargesName + (showDifference ? ' vs. ' + chargesDiffName : '')"></span><br />
+            <span data-bind="text: minValue.toFixed(2)"></span> <div class="charges-value-gradient" data-bind="style: { background: 'linear-gradient(to right,' + minColor + ',' + midColor + ' ' +  (100 * Math.abs(minValue) / Math.abs(maxValue - minValue)).toFixed(0) + '%,' + maxColor + ')' }"></div> <span data-bind="text: maxValue.toFixed(2)"></span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: view3d.is3NotAvailable -->
+        <div id="charges-3d-not-available">
+            WebGL is not available. It might be a temporary problem with your browser (restarting the browser or PC should work) or your browser/graphics card driver does not support it.<br />
+            Learn more at <a href='//get.webgl.org/' target='_blank'>//get.webgl.org/</a>.
+        </div>
+        <!-- /ko -->
+        <div id="charges-3d-bg-color-wrap" title="Change background">
+            <div id="charges-3d-bg-color"></div>
+        </div>
+    </div>
+</div>

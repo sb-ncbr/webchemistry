@@ -1,0 +1,725 @@
+﻿.charges-numeric-cell {
+    /*padding: 1px 5px 1px 2px;*/
+    text-align: right;
+    font-family: monospace
+}
+
+input.editor-text {
+    width: 100%;
+    height: 100%;
+    border: none !important;
+    margin: 0;
+    margin-top: -4px;
+    background: transparent;
+    border-radius: 0 !important;
+    padding: 0 4px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: 0 !important;
+}
+
+.charges-samples-preview {
+    text-align: center;
+    margin-top: 20px; 
+}
+
+.charges-samples-preview a div {
+    position: absolute;
+    bottom: 2px;
+    right: 6px;
+    color: black;
+    font-weight: bold;
+    display: none;
+}
+
+.charges-samples-preview a {
+    opacity: 0.5;
+    position: relative;
+    display: inline-block;
+}
+
+.charges-samples-preview a:hover {
+    opacity: 1.0;
+}
+
+.charges-samples-preview a:hover div {
+    display: block;
+}
+
+.charges-samples-preview a:not(:first-child) {
+    margin-left: 20px;
+}
+
+.charges-samples-preview img {
+    display: inline-block;
+    padding: 20px 25px 30px 25px;
+    height: 180px;
+    width: auto;
+}
+
+.charges-color-warning {
+    color: #DB890F
+}
+
+.charges-color-error {
+    color: red
+}
+
+.slick-cell-checkboxsel {
+      background: #f0f0f0;
+      border-right-color: silver;
+      border-right-style: solid;
+}
+
+.slick-cell-checkboxsel input[type=checkbox], .slick-column-name input[type=checkbox] {
+    margin-top:0px;
+    margin-left: 3px;
+}
+
+.total-charge-cell {
+    cursor: text
+}
+
+.data-grid-custom {
+    height: 120px;
+    max-height: 360px;
+    font-size: 10pt; 
+    outline: 0px;
+    background: #f5f5f5
+}
+
+.structure-valid {
+    color: blue
+}
+
+.structure-warning {
+    color: #DB890F
+}
+
+.structure-error {
+    color: red
+}
+
+.charges-config-section-header {
+    border-bottom: 1px solid #eee
+}
+
+dl.of-list dt {
+    margin-bottom: 3px;
+}
+
+dl.of-list dd {
+    margin-bottom: 5px;
+}
+
+dl.of-list ul {
+    margin-left: 10px;
+}
+
+/*.alert-config-can-compute {
+    position: fixed !important;
+    top: 60px;
+    right: 40px;
+}*/
+
+
+#results-view {
+    font-family: Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+    font-size: 9pt;
+}
+
+/* Details */
+#details-wrap {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0
+}
+
+#details-wrap .nav li:first-child {
+    margin-left: 150px;
+}
+
+#too-many-points-warning {
+    font-size: 10pt;
+    margin-right: 26px;
+    text-align: center;
+    margin-bottom: 0;
+    padding: 3px;
+    font-style: normal !important;
+}
+
+.chc-set-id-col {
+    font-size: 7pt !important; 
+    overflow: hidden; 
+    -ms-text-overflow: ellipsis; 
+    -o-text-overflow: ellipsis; 
+    text-overflow: ellipsis
+}
+
+#details-header {
+    font-size: 12pt; 
+    margin-top: 13px; 
+    margin-left: 14px;
+    font-weight: bold;
+}
+
+#details-orig-computation {
+    font-size: 12pt; 
+    margin-top: 9px; 
+    margin-right: 18px;
+    font-weight: bold;
+}
+
+#details-tabs {
+    height: 100%;
+}
+
+#details-wrap .error-list {
+    margin-left: 5px;
+    list-style: none;
+}
+
+#details-wrap .error-list li:before { 
+    content:"-"; 
+    position:relative; 
+    left:-5px;
+}
+#details-wrap .error-list ul li { text-indent:-5px; }
+
+#details-wrap dl {
+    margin-top: 4px;
+}
+
+#details-wrap dd {
+    margin-bottom: 10px
+}
+
+#details-wrap dt {
+    margin-bottom: 3px;
+}
+
+#details-wrap ul.nav {
+    margin-bottom: 1px;
+    padding-top: 5px;
+    background: #eee
+}
+
+#details-wrap .tab-content {
+    position: relative;
+    margin-left: 14px;
+    /*overflow-y: scroll;*/
+    margin-right: 0px;
+    padding-top: 15px;
+    padding-right: 15px;
+}
+
+#details-wrap span.add-on {
+    text-align: left;
+    font-weight: bold;
+    width: 150px;
+    padding-left: 8px;
+}
+
+#details-wrap label.add-on {
+    text-align: left;
+    font-weight: bold;
+    width: 150px;
+    padding-left: 8px;
+}
+
+#details-data-view {
+    font-family: Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+    font-size: 8pt;
+    position: absolute;
+    left: 0px;
+    top: 50px;
+    bottom: 15px;
+    right: 15px;    
+    background: #f0f0f0;
+}
+
+#details-aggregate-wrap, #details-correlation-wrap, #details-3d-wrap {
+    position: absolute;
+    left: 0px;
+    top: 15px;
+    bottom: 15px;
+    right: 15px;    
+}
+
+#details-3d-model {    
+    position: absolute;
+    display: block;
+    left: 500px;
+    top: 0;
+    bottom: 0;
+    right: 0;    
+}
+
+#details-3d-model-host {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;   
+    background: black;
+    overflow: hidden;
+}
+
+#charges-current-atom-info {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    line-height: 26px;
+    padding: 0 10px;
+    color: white;
+    font-size: 9pt;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+#charges-3d-controls {
+    position: absolute;
+    color: #424242;
+    right: 8px;
+    bottom: 5px;
+    text-align: right;
+    font-size: 8pt;
+    line-height: 12pt;
+}
+
+#charges-current-state-info {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 5px 10px;
+    color: white;
+    font-size: 9pt;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+#charges-current-state-info span {
+    font-weight: bold;
+}
+
+
+.charges-corr-range-element {
+    display: inline-block;
+    height: 30px !important;
+}
+
+
+.charges-corr-range-element input:first-child {
+    min-width: 0 !important;
+    width: 155px !important;
+    text-align: right;
+    margin: 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 30px;
+}
+
+.charges-corr-range-element input:nth-child(2) {
+    min-width: 0 !important;
+    width: 156px !important;
+    margin: 0;
+    margin-left: -1px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: right;
+    height: 30px;
+}
+
+.charges-value-gradient {
+    display: inline-block;
+    width: 150px;
+    height: 10px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    /*background: white;*/
+    background: linear-gradient(to right, #0000ff,white,#f00);
+}
+
+#charges-3d-not-available {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -o-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    width: 400px;
+    text-align: center;
+    color: white;
+}
+
+#details-3d-experimental, #details-3d-big-warning {
+    display: block;
+    text-align: center;
+    padding: 3px;
+    font-size: 12px;
+    width: 474px;
+    margin-bottom: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;    
+}
+
+#details-3d-mode-description {
+    display: block;
+    text-align: left;
+    padding: 3px 8px;
+    font-size: 12px;
+    width: 474px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    margin-top: 0px;
+    border-radius: 0 0 4px 4px;
+    border-top: none;
+    background: #F6F6F6;
+    border-color:  #ccc;
+    color: #777;
+    padding-bottom: 1px;
+}
+
+
+#details-3d-errors {
+    display: block;
+    padding: 3px;
+    font-size: 12px;
+    width: 475px;
+    margin-bottom: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.charges-input-text-full {
+    width: 310px;
+    height: 30px !important;
+    margin: 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#charges-reset-camera {
+    position: absolute;
+    top: 5px;
+    right: 0;    
+}
+
+.charges-3d-range-element {
+    display: inline-block;
+    height: 30px !important;
+}
+
+
+.charges-3d-range-element input:first-child {
+    min-width: 0 !important;
+    width: 155px !important;
+    text-align: right;
+    margin: 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 30px;
+}
+
+#charges-3d-bg-color-wrap {
+    position: absolute;    
+    width: 117px;
+    height: 15px;
+    right: 8px;
+    top: 8px;
+}
+
+#charges-3d-bg-color-wrap .colorPicker-picker {
+    width: 117px;
+    height: 15px;
+    border: 1px solid black;
+    box-shadow: white 0 0 6px inset;
+}
+
+.charges-3d-color-box {
+    display: inline-block;
+    height: 30px;
+    width: 155px;
+    border: 1px solid #ccc;
+    border-left: none;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.details-controls {
+    position: absolute;
+    height: 100%;
+    max-height: calc(100%);
+    overflow: auto;
+    width: 500px;
+    background: white
+}
+
+.details-controls .table {
+    width: 475px;
+}
+
+.details-controls .table td {
+    font-size: 9pt;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-right: 0px;
+}
+
+.details-controls hr {
+    margin: 10px 0 10px 0;
+    width: 475px
+}
+
+.details-controls .input-entry {
+    margin-left: 1px;
+    margin-bottom: 5px;
+}
+
+.details-controls .input-entry select {
+    width: 310px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 30px;
+}
+
+.details-controls .form-inline span:first-child {
+    width: 150px;
+    display: inline-block;
+}
+
+.details-controls .form-inline select {
+    width: 300px;
+}
+
+.details-plot-wrap {
+    position: absolute;
+    left: 510px;
+    right: 0;
+    height: 100%;
+    max-height: 100%;
+    text-align: center;
+}
+
+.details-plot {
+    /*position: absolute;
+    /*-moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);*/
+    /*background: red;
+    /*height: 100%;
+    left: 50%;*/
+    /*width: 900px;
+    max-height: calc(100%);*/
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+}
+
+/* --------------------  */
+
+/*
+IMPORTANT:
+In order to preserve the uniform grid appearance, all cell styles need to have padding, margin and border sizes.
+No built-in (selected, editable, highlight, flashing, invalid, loading, :focus) or user-specified CSS
+classes should alter those!
+*/
+
+.slick-header-column {
+    background: #eee !important;
+    color: black;
+    border-right: 1px solid silver;
+}
+
+.slick-header-columns {
+  background: #eee !important;
+  border-bottom: 1px solid silver;
+}
+
+
+.slick-headerrow {
+  background: #fafafa;
+}
+
+.slick-headerrow-column {
+  background: #fafafa;
+  border-bottom: 0;
+  height: 100%;
+}
+
+.slick-row.ui-state-active {
+  background: #F5F7D7;
+}
+
+.slick-row {
+  position: absolute;
+  background: white;
+  border: 0px;
+  line-height: 20px;
+}
+
+.slick-row.selected {
+  z-index: 10;
+  background: #DFE8F6;
+}
+
+.slick-cell {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.slick-group {
+  border-bottom: 2px solid silver;
+}
+
+.slick-cell > span.slick-group-toggle {
+    width: 10px;
+    height: 10px;
+}
+
+.slick-group-toggle {
+  background-color: transparent;
+}
+
+.slick-group-toggle.expanded {
+  background: url(../Images/collapse.gif) no-repeat center center;
+}
+
+.slick-group-toggle.collapsed {
+  background: url(../Images/expand.gif) no-repeat center center;
+}
+
+.slick-group-totals {
+  color: gray;
+  background: white;
+}
+
+.slick-cell.selected {
+  /*background-color: beige;*/
+}
+
+.slick-cell.active {
+  /*border-color: gray;
+  border-style: solid;*/
+}
+
+.slick-cell.editable {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.slick-sortable-placeholder {
+  background: silver !important;
+}
+
+.slick-row.odd {
+  background: #fafafa;
+}
+
+.slick-row.ui-state-active {
+  background: #F5F7D7;
+}
+
+.slick-row.loading {
+  opacity: 0.5;
+  filter: alpha(opacity = 50);
+}
+
+.slick-cell.invalid {
+  border-color: red;
+  -moz-animation-duration: 0.2s;
+  -webkit-animation-duration: 0.2s;
+  -moz-animation-name: slickgrid-invalid-hilite;
+  -webkit-animation-name: slickgrid-invalid-hilite;  
+}
+
+@-moz-keyframes slickgrid-invalid-hilite {
+  from { box-shadow: 0 0 6px red; }
+  to { box-shadow: none; }
+}
+
+@-webkit-keyframes slickgrid-invalid-hilite {
+  from { box-shadow: 0 0 6px red; }
+  to { box-shadow: none; }
+}
+
+.tab-guide-header button {
+    display: none;
+}
+
+.tab-guide-header {
+    position: relative;
+}
+
+.tab-guide-header.active a {
+    padding-right: 50px !important;
+}
+
+.tab-guide-header.active button {
+    display: block !important;
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    z-index: 9999;
+}
+
+/*********** COLOR PICKER ************/
+
+div.colorPicker-picker {
+    padding: 0 !important;
+    background: url(../Images/color-picker-arrow.gif) no-repeat bottom right;
+    cursor: pointer;
+  
+    display: inline-block;
+    height: 30px;
+    width: 155px;
+    border: 1px solid #ccc;
+    border-left: none;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+div.colorPicker-palette {
+  width: 110px;
+  position: absolute;
+  border: 1px solid #598FEF;
+  background-color: #EFEFEF;
+  padding: 2px;
+  z-index: 9999;
+}
+  div.colorPicker_hexWrap {width: 100%; float:left }
+  div.colorPicker_hexWrap label {font-size: 95%; color: #2F2F2F; margin: 5px 2px; width: 25%}
+  div.colorPicker_hexWrap input {margin: 5px 2px; padding: 0; font-size: 95%; border: 1px solid #000; width: 65%; }
+
+div.colorPicker-swatch {
+  height: 12px;
+  width: 12px;
+  border: 1px solid #000;
+  margin: 2px;
+  float: left;
+  cursor: pointer;
+  line-height: 12px;
+}
+
+
+/*************************************/

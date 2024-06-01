@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>@ViewBag.Title | WebChemistry</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="description" content="WebChemistry is a set of apps and services for chemical and biological computations, mostly focused on analysis of 3D structural patterns." />
+    <meta name="keywords" content="MOLE,SiteBinder,EEM Charges,ChargeCalculator,PatternQuery,PatternExplorer,MotiveValidator,MotiveAtlas,MotiveValidatorDB,ValidatorDB" />
+    <meta name="author" content="David Sehnal" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+    @RenderSection("CustomMeta", false)
+    @Styles.Render("~/Content/css")
+    @RenderSection("CustomStyles", false)
+    @RenderSection("CustomLinks", false)
+</head>
+<body>
+    <header>
+        <div class="navbar navbar-inverse navbar-static-top">
+            <div id="main-navbar" class="navbar-inner">
+                <a class="brand" style="float: right !important; padding-right: 15px" href="@(ViewBag.IsReviewMode == null || ViewBag.IsReviewMode == false ? Url.Action("Index", "Home") : "#")">WebChemistry</a>
+                <ul class="nav">
+                    @if (ViewEngines.Engines.FindPartialView(ViewContext.Controller.ControllerContext, "_Menu").View != null)
+                    {
+                        @Html.Partial("_Menu")
+                    }
+                </ul>
+                @*@if (ViewBag.IsReviewMode == null || ViewBag.IsReviewMode == false)
+                {
+                <div class="pull-right">
+                    @Html.Partial("_LoginPartial")
+                </div>
+                }*@
+                @*<div class="@(ViewBag.IsApp != null && ViewBag.IsApp ? "" : "container") topbar" style="padding-left: 0; padding-right: 0;">*@
+                <div class="container topbar" style="padding-left: 0; padding-right: 0;">
+                    <ul class="nav">
+                        @*@if (ViewEngines.Engines.FindPartialView(ViewContext.Controller.ControllerContext, "_Menu").View != null)
+        {
+            @Html.Partial("_Menu")
+            <li class="divider-vertical"></li>
+        }*@
+
+                        @if (ViewBag.IsReviewMode == null || ViewBag.IsReviewMode == false)
+                        {
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" id="dAppAndServices" role="button" data-toggle="dropdown" data-target="#" href="#"><i class="icon-th-large icon-white"></i> Apps and Services</a>
+                                <ul class="dropdown-menu dropdown-apps" role="menu" style="width: 320px">
+                                    @Html.Partial("_ServicesAndApps")
+                                </ul>
+                            </li>
+
+                            <li class="divider-vertical"></li>
+                            @*<li><a href="/Wiki/News" target="_blank">News</a></li>*@
+                            <li><a href="/Wiki" target="_blank">Wiki</a></li>
+                            <li class="divider-vertical"></li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li class="divider-vertical"></li>
+                            <li><a href="https://github.com/sb-ncbr/webchemistry" target="_blank"><i class="fa fa-github" style="font-size:24px"></i></a></li>
+
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        @RenderSection("SubMenu", required: false)
+    </header>
+
+    @if (ViewBag.UseContainer == null || ViewBag.UseContainer)
+    {
+        <div class="@(ViewBag.IsApp != null && ViewBag.IsApp ? "container-fluid" : "container")" style="margin-top: 20px">
+            @RenderBody()
+            @if ((ViewBag.IsApp == null || !ViewBag.IsApp) && ViewBag.HideFooter != true)
+            {
+                <hr style="margin-bottom: 4px">
+                <footer>
+                    <p style="text-align: right; color: gray"><small>&copy; @DateTime.Now.Year @(ViewBag.Copyright != null ? ViewBag.Copyright : "David Sehnal") | <a href="@Url.Action("TermsOfUse", "Home")">Terms of Use &amp; GDPR</a></small></p>
+                    <br />
+                </footer>
+            }
+        </div>
+    }
+    else
+    {
+        @RenderBody()
+        
+        if (ViewBag.HideFooter == true)
+        { 
+            <div class="container">
+                <hr style="margin-bottom: 4px">
+                <footer>
+                    <p style="text-align: right; color: gray"><small>&copy; @DateTime.Now.Year @(ViewBag.Copyright != null ? ViewBag.Copyright : "David Sehnal") | <a href="@Url.Action("TermsOfUse", "Home")">Terms of Use &amp; GDPR</a></small></p>
+                    <br />
+                </footer>
+            </div>
+        }
+    }
+
+
+    @Html.Partial("_AnalyticsAndDevWarning")
+    
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("jqueryui", required: false)
+    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+        var displayPoweredBy = false;
+        $(function () {
+            $('.nav').tooltip({ selector: "a[rel=tooltip]" }); $('.btn').tooltip(); $('.close').tooltip();
+            var helpActions = document.getElementById("help-actions-wrap");
+            if (helpActions) {
+                var $window = $(window);
+                $window.scroll(function () {
+                    var offset = Math.max(5, 60 - $window.scrollTop());
+                    helpActions.style.top = offset + "px";
+                });
+            }
+        });
+    </script>
+@if (ViewBag.CheckExit != null && ViewBag.CheckExit)
+{
+    <script type="text/javascript">
+        $(window).bind('beforeunload', function () {
+            var message = "By leaving this page you will lose your current work.";
+            if (/Firefox[\/\s](\d+)/.test(navigator.userAgent) && new Number(RegExp.$1) >= 4) {
+                if (confirm(message)) {
+                    history.go();
+                } else {
+                    window.setTimeout(function () {
+                        window.stop();
+                    }, 1);
+                }
+            } else {
+                return "Are you Sure do you want to leave?";
+            }
+        });
+    </script>
+}
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

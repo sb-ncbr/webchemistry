@@ -1,0 +1,135 @@
+﻿
+
+.mq-numeric-cell {
+    /*padding: 1px 5px 1px 2px;*/
+    text-align: right;
+}
+
+/* --------------- GRID ------------------------- */
+
+.slick-header-column {
+    background: #eee !important;
+    color: black;
+    border-right: 1px solid silver;
+}
+
+.slick-header-columns {
+  background: #eee !important;
+  border-bottom: 1px solid silver;
+  font-size: 8pt;
+}
+
+.slick-headerrow {
+  background: #fafafa;
+}
+
+.slick-headerrow-column {
+  background: #fafafa;
+  border-bottom: 0;
+  height: 100%;
+}
+
+.slick-row.ui-state-active {
+  background: #F5F7D7;
+}
+
+.slick-row {
+  position: absolute;
+  background: white;
+  border: 0px;
+  line-height: 20px;
+}
+
+.slick-row.selected {
+  z-index: 10;
+  background: #DFE8F6;
+}
+
+.slick-cell {
+  padding-left: 4px;
+  padding-right: 4px;
+  line-height: 22px;
+}
+
+.slick-group {
+  border-bottom: 2px solid silver;
+}
+
+.slick-group-toggle {
+  background-color: transparent
+}
+
+.slick-group-toggle.expanded {
+  background: url(../Images/collapse.gif) no-repeat center center;
+}
+
+.slick-group-toggle.collapsed {
+  background: url(../Images/expand.gif) no-repeat center center;
+}
+
+.slick-group-totals {
+  color: gray;
+  background: white;
+}
+
+.slick-cell.selected {
+  /*background-color: beige;*/
+}
+
+.slick-cell.active {
+  border-color: gray;
+  border-style: solid;
+}
+
+.slick-sortable-placeholder {
+  background: silver !important;
+}
+
+.slick-row.odd {
+  background: #fafafa;
+}
+
+.slick-row.loading {
+  opacity: 0.5;
+  filter: alpha(opacity = 50);
+}
+
+.slick-cell.invalid {
+  border-color: red;
+  -moz-animation-duration: 0.2s;
+  -webkit-animation-duration: 0.2s;
+  -moz-animation-name: slickgrid-invalid-hilite;
+  -webkit-animation-name: slickgrid-invalid-hilite;  
+}
+
+@-moz-keyframes slickgrid-invalid-hilite {
+  from { box-shadow: 0 0 6px red; }
+  to { box-shadow: none; }
+}
+
+@-webkit-keyframes slickgrid-invalid-hilite {
+  from { box-shadow: 0 0 6px red; }
+  to { box-shadow: none; }
+}
+
+.tab-guide-header button {
+    display: none;
+}
+
+.tab-guide-header {
+    position: relative;
+}
+
+.tab-guide-header.active a {
+    padding-right: 50px !important;
+}
+
+.tab-guide-header.active button {
+    display: block !important;
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    z-index: 9999;
+}
+
+/* ---------------------------------------------- */

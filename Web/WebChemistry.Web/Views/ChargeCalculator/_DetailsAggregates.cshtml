@@ -1,0 +1,61 @@
+﻿<div id="details-aggregate-wrap">
+    <div class="details-controls">
+        <div id="charges-aggregate-content">
+            <div id="charges-aggregate-ag" class="input-entry input-append input-prepend">
+                <span class="add-on"><abbr title="Atomic or residue level resolution.">Atom Grouping</abbr></span>
+                <select data-bind="options: dataModel.partitionNames, value: aggregates.currentPartitionName"></select>
+            </div>
+            <div id="charges-aggregate-group" class="input-entry input-append input-prepend">
+                <span class="add-on"><abbr title="Statistics computed based on this property.">Group Property</abbr></span>
+                <select data-bind="options: aggregates.clusterList, value: aggregates.currentCluster"></select>
+            </div>
+            <div id="charges-aggregate-pv" class="input-entry input-append input-prepend">
+                <span class="add-on"><abbr title="Bars in graph refer to this descriptor.">Plot Value</abbr></span>
+                <select data-bind="options: aggregates.propertyList, optionsText: 'name', value: aggregates.currentProperty"></select>
+            </div>
+        </div>
+
+        <hr />
+
+        <div id="charges-aggregate-raw">
+            <div class="input-entry input-append input-prepend">
+                <span class="add-on"><abbr title="Statistics for this set of charges.">Raw Data</abbr></span>
+                <select data-bind="options: computedChargeNames, value: aggregates.currentDetailsName"></select>
+            </div>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width: 60px">Key</th>
+                        <th><abbr title="Number of elements.">#</abbr></th>
+                        <th><abbr title="Minimum Charge">Min</abbr></th>
+                        <th><abbr title="Maximum Charge">Max</abbr></th>
+                        <th><abbr title="Average Charge">Avg</abbr></th>
+                        <th><abbr title="Average Absolute Charge">|Avg|</abbr></th>
+                        <th><abbr title="Standard Charge Deviation">&sigma;</abbr></th>
+                        <th><abbr title="Standard Abs. Charge Deviation">|&sigma;|</abbr></th>
+                    </tr>
+                </thead>
+                <!-- ko with: aggregates.currentDetails -->
+                <tbody data-bind="foreach: Stats">
+                    <tr>
+                        <td data-bind="attr: { title: Key }">
+                            <div style="-ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; text-overflow: ellipsis; width: 60px; max-width: 60px; overflow: hidden; white-space: nowrap">
+                                <span data-bind="text: Key"></span>
+                            </div>
+                        </td>
+                        <td data-bind="text: $data['Count'] !== null ? $data['Count'] : ''"></td>
+                        <td data-bind="text: $data['MinCharge'] !== null ? $data['MinCharge'].toFixed(3) : ''"></td>
+                        <td data-bind="text: $data['MaxCharge'] !== null ? $data['MaxCharge'].toFixed(3) : ''"></td>
+                        <td data-bind="text: $data['Average'] !== null ? $data['Average'].toFixed(3) : ''"></td>
+                        <td data-bind="text: $data['AbsAverage'] !== null ? $data['AbsAverage'].toFixed(3) : ''"></td>
+                        <td data-bind="text: $data['Sigma'] !== null ? $data['Sigma'].toFixed(3) : ''"></td>
+                        <td data-bind="text: $data['AbsSigma'] !== null ? $data['AbsSigma'].toFixed(3) : ''"></td>
+                    </tr>
+                </tbody>
+                <!-- /ko -->
+            </table>
+        </div>
+    </div>
+    <div id="details-aggregate-plot" class="details-plot-wrap"></div>
+</div>

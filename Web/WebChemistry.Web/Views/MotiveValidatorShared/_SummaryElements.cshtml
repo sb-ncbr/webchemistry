@@ -1,0 +1,435 @@
+﻿<script type="text/html" id="empty-template">
+    <div></div>
+</script>
+
+
+<script type="text/html" id="busy-template">
+    <div id="busySpinner" style="height: 150px"></div>
+    <div style="margin-top: 5px; padding-bottom: 20px; text-align:center"><span style="font-weight: bold; font-size: 20px" data-bind="text: message"></span></div>
+</script>
+
+<script type="text/html" id="fail-template">
+    <div style="margin-top: 5px; padding-bottom: 20px; text-align:center"><span style="font-weight: bold; font-size: 20px; color:red" data-bind="text: message"></span></div>
+</script>
+
+
+<script type="text/html" id="summary-cell-template">
+    <td class="summary-cell" data-bind="style: { background: !Count ? '#888' : MotiveValidatorGlobals[Name].color }, attr: { colspan: $data['Span'] ? $data['Span'] : 1 }">
+        <!-- ko if: $data['Prefix'] !== undefined -->
+        <span data-bind="text: Prefix" style="color: white; font-weight: bold"></span>
+        <!-- /ko -->
+        <!-- ko if: !isNaN(Count)  -->
+        <!-- ko if: Count > 0  -->
+        <!-- ko if: (100 * (Count >= 0 ? Count : 0) / Total).toFixed(1) == '0.0'  -->
+        <a href="#" data-show-details="true" data-bind="attr: { 'data-model-name' : ModelName, 'data-details-name': Name }"><span style="color: white; font-weight: bold; border-bottom: 1px dotted white">&lt;0.1%</span>&nbsp;<small style="color: #eee;"><span data-bind="text: Count"></span></small></a>
+        <!-- /ko -->
+        <!-- ko if: (100 * (Count >= 0 ? Count : 0) / Total).toFixed(1) != '0.0'  -->
+        <a href="#" data-show-details="true" data-bind="attr: { 'data-model-name' : ModelName, 'data-details-name': Name }"><span style="color: white; font-weight: bold; border-bottom: 1px dotted white"><span data-bind="text: (100 * (Count >= 0 ? Count : 0) / Total).toFixed(1)"></span>%</span>&nbsp;<small style="color: #eee;"><span data-bind="text: Count"></span></small></a>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: !Count  -->
+        <span style="color: white; font-weight: bold;">-</span>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: isNaN(Count)  -->
+        <span style="color: #ddd; font-weight: normal;">n/a</span>
+        <!-- /ko -->
+    </td>
+</script>
+
+<script type="text/html" id="summary-cell-header-template">
+    <td class="mv-summary-cell" data-bind="style: { background: !Summary[Name] ? '#ddd' : '#ddd' }, attr: { colspan: $data['Span'] ? $data['Span'] : 1 }">
+        <a href="#" data-show-details="true" data-bind="attr: { 'data-model-name' : ModelName, 'data-details-name': Name, title: MotiveValidatorGlobals[Name].tooltip }, text: MotiveValidatorGlobals[Name].name, style: { fontWeight: $data['Warn'] ? '' : 'bold', fontStyle: $data['Warn'] ? 'italic' : '' }"
+           data-placement="top"></a>
+    </td>
+</script>
+
+<script type="text/html" id="result-template">
+    @if (ViewBag.IsNotValidatorDb == true)
+    {
+        <div id="result-link">
+            <small style="color: #aaa">You can come back to the result later using this URL. The result will not be deleted before @(ViewBag.OnlineUntil).</small>
+            <input class="result-input"
+                   type="text" value="@Url.Action("Result", "MotiveValidator", new { id = ViewBag.Id }, Request.Url.Scheme)" id="resultUrl" />
+        </div>
+        <div class="row-fluid" id="result-download">
+            <div class="btn-group span4">
+                <a class="btn btn-info btn-large dropdown-toggle btn-block" data-toggle="dropdown" href="#">
+                    <i class="icon-download-alt icon-white"></i> <strong>Download Input</strong>
+                </a>
+                <ul class="dropdown-menu">
+                    <li data-bind="if: ValidationType != 'Sugars'"><a href="@Url.Action("Download", new { id = ViewBag.Id, type = "InputModels" })">Model</a></li>
+                    <li><a href="@Url.Action("Download", new { id = ViewBag.Id, type = "InputStructures" })">Structures</a></li>
+                </ul>
+            </div>
+            <a class="btn btn-large btn-info span8"
+               href="@Url.Action("Download", new { id = ViewBag.Id, type = "Result" })"><i class="icon-download-alt icon-white"></i><strong>Download Result</strong></a>
+        </div>
+    }
+
+    <div class="tabbable" style="margin-top: 20px">
+        <ul class="nav nav-tabs" id="result-tab-headers">
+            <li id="result-overview-header" class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
+            <li id="result-summary-header" class=""><a href="#summary" data-toggle="tab" id="summaryTabLink">Summary</a></li>
+            <li id="result-details-header"><a href="#details" data-toggle="tab" id="detailsTabLink">Details</a></li>
+            <!-- ko if: errors.count > 0 -->
+            <li id="result-warnings-header">
+                <a href="#errors" data-toggle="tab" id="errorsTabLink">
+                    <span data-bind="if: errors.warningCount > 0 && errors.errorCount > 0">
+                        Processing Errors (<span data-bind="text: errors.errorCount"></span>) / Warnings (<span data-bind="text: errors.warningCount"></span>)
+                    </span>
+                    <span data-bind="if: errors.warningCount > 0 && errors.errorCount === 0">
+                        Processing Warnings (<span data-bind="text: errors.warningCount"></span>)
+                    </span>
+                    <span data-bind="if: errors.warningCount === 0 && errors.errorCount > 0">
+                        Processing Errors (<span data-bind="text: errors.errorCount"></span>)
+                    </span>
+                </a>
+            </li>
+            <!-- /ko -->
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane" id="summary" style="position: relative">
+
+                <button class="btn btn-success pull-right" style="position: absolute; right: 0;" onclick="startResultSummaryIntro();"><i class="icon icon-white icon-question-sign"></i></button>
+
+                <!-- ko if: Models.length > 1 -->
+                <ul class="nav nav-pills" data-bind="foreach: Models" style="margin-bottom: 5px" id="result-residue-list">
+                    <li data-bind="css: (ModelName === $parent.Models[0].ModelName ? 'active' : '')">
+                        <a href="#" data-bind="click: setCurrent, attr: { title: headerTooltip }, style: { color: headerColor }" data-toggle="tab" data-placement="top" data-do-tooltip="true">
+                            <span data-bind="text: ModelName.toUpperCase()" style="font-weight: bold"></span>
+                            <small data-bind="text: '(' + Entries.length + ')'"></small>
+                        </a>
+                    </li>
+                </ul>
+                <hr style="padding:0; margin: 0 0 5px 0" />
+                <!-- /ko -->
+                <div data-bind="with: currentModel">
+                    <!-- ko if: Entries.length === 0 -->
+                    <div data-bind="template: { name: 'empty-model-template', data: $data }" />
+                    <!-- /ko -->
+                    <!-- ko if: Entries.length > 0 -->
+                    <div data-bind="template: { name: 'good-model-template', data: $data }" />
+                    <!-- /ko -->
+                </div>
+            </div>
+            <div class="tab-pane active" id="overview">
+                <div class="alert alert-block alert-success">
+                    Validated <span style="font-weight: bold" data-bind="text: overview.motifCountText"></span>,
+                    using <span style="font-weight: bold" data-bind="text: overview.modelCountText"></span>,
+                    in <span style="font-weight: bold" data-bind="text: overview.structureCountText"></span>.
+                </div>
+                <div id="overview-plot" style="height: 400px"></div>
+                <div class="overview-categories-warning">Only categories with at least 0.5% representation are shown. Use the CSV link to view all data.</div>
+                <!-- ko if: ValidationType !== 'Database' -->
+                <div class="alert alert-block alert-info">
+                    <!-- ko template: { name: 'validation-type-template', data: $data } --><!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </div>
+            <div class="tab-pane" id="details">
+                <div class="form-inline" style="margin-bottom: 5px">
+                    <select data-bind="options: Models, optionsText: 'CountedName', value: DataViews.currentModel" style="width: 130px" id="result-details-residue"></select>
+                    <select data-bind="options: DataViews.views, optionsText: 'title', value: DataViews.currentView, optionsAfterRender: setOptionDisable" style="width: 340px" id="result-details-group"></select>
+
+                    <div class="btn-group" id="result-details-list">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" title="Export lists">
+                            <i class="icon-list"></i>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="exportParentListLink" data-bind="click: showParentList" target="_blank">Parent Structure List</a></li>
+                            <li><a href="#" id="exportMotifsListLink" data-bind="click: showMotifList" target="_blank">Motif List</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="pull-right">
+                        <div class="input-append" id="result-details-filter">
+                            <input type="text" style="width: 100px; border-radius: inherit 0 0 inherit" title="Filter the identifer using a regular expression." placeholder="Filter Id (1tqn)" data-bind="value: detailsFilterParentString, valueUpdate: 'keyup'">
+                            <input type="text" style="width: 145px; border-radius: 0; margin-left: -1px" title="Filter the validated molecule using a regular expression." placeholder="Molecule (123 A or A)" data-bind="value: detailsFilterResidueString, valueUpdate: 'keyup'">
+                            <button class="btn" data-bind="click: function() { detailsFilterParentString(''); detailsFilterResidueString(''); }"><i class="icon-remove"></i></button>
+                        </div>
+
+                        <button class="btn btn-success" onclick="startResultDetailsIntro();"><i class="icon icon-white icon-question-sign"></i></button>
+                    </div>
+                </div>
+                <div id="detailsGrid" style="width:100%; height: 400px; font-family: Arial; font-size: 8pt;"></div>
+            </div>
+            <div class="tab-pane" id="errors" data-bind="if: errors.count > 0">
+                <div data-bind="template: { name: 'errors-template', data: errors }"></div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="big-result-template">
+    <div>
+        @*<i>You can come back to the result later using this URL:</i><br/>*@
+        <small style="color: #aaa">You can come back to the result later using this URL. The result will not be deleted before @(ViewBag.OnlineUntil).</small>
+        <input class="result-input"
+               type="text" value="@Url.Action("Result", "MotiveValidator", new { id = ViewBag.Id }, Request.Url.Scheme)" id="resultUrl" />
+    </div>
+    <div class="row-fluid">
+        <div class="btn-group span4">
+            <a class="btn btn-info btn-large dropdown-toggle btn-block" data-toggle="dropdown" href="#">
+                <i class="icon-download-alt icon-white"></i> <strong>Download Input</strong>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="@Url.Action("Download", new { id = ViewBag.Id, type = "InputModels" })">Model</a></li>
+                <li><a href="@Url.Action("Download", new { id = ViewBag.Id, type = "InputStructures" })">Structures</a></li>
+            </ul>
+        </div>
+        <a class="btn btn-large btn-info span8"
+           href="@Url.Action("Download", new { id = ViewBag.Id, type = "Result" })"><i class="icon-download-alt icon-white"></i><strong>Download Result</strong></a>
+    </div>
+    <h2>
+        The result contains too much data to be displayed in the browser (<span data-bind="text: size"></span>MB, max. is <span data-bind="text: maxSize"></span>MB).
+        It can still be downloaded and viewed in the CSV/JSON format.
+    </h2>
+</script>
+
+<script type="text/html" id="validation-type-template">
+    <div data-bind="if: ValidationType === 'Model'">
+        <div>Validation Method: <b>Motif/Fragment Validation</b>, computed using version <b data-bind="text: Version"></b> on @ViewBag.Date</div>
+        <div>
+            <ul style="margin: 5px 10px 0px 18px">
+                <li>Reads the structure of an input structural motif (residue or fragments of residues) or a set of motifs, and an input <i>model residue</i> to serve as reference for validation.</li>
+                <li>Validates each structural motif by comparison to the model residue, regardless of the annotations (i.e., the entire structure of each motif as a whole will be validated against the model residue).</li>
+            </ul>
+        </div>
+    </div>
+    <div data-bind="if: ValidationType === 'Sugars'">
+        <div>Validation Method: <b>Sugar Validation</b>, computed using version <b data-bind="text: Version"></b> on @ViewBag.Date</div>
+        <div>
+            <ul style="margin: 5px 10px 0px 18px">
+                <li>
+                    Reads the <b>entire structure</b> of an input biomolecule or biomolecular complex, automatically detects all sugar (carbohydrate) residues present, and subsequently validates them with respect
+                    to model residues obtained from the wwPDB Chemical Component Dictionary.
+                </li>
+                <li>The structure of each sugar residue in the input structure is compared with the wwPDB Chemical Component Dictionary model that has the same annotation, i.e., the same 3-letter residue name according to PDB standards.</li>
+            </ul>
+        </div>
+    </div>
+    <div data-bind="if: ValidationType === 'CustomModels'">
+        <div>Validation Method: <b>Residue Validation</b>, computed using version <b data-bind="text: Version"></b> on @ViewBag.Date</div>
+        <div>
+            <ul style="margin: 5px 10px 0px 18px">
+                <li>Reads the structure of an input biomolecule or biomolecular complex, and an input model residue to serve as reference template for validation.</li>
+                <li>Scans the <b>entire biomolecule(s)</b>, automatically detects all residues in the input biomolecule(s) with the same annotation (i.e., the same 3-letter code) as the template model residue, and subsequently validates them by comparison to the model.</li>
+            </ul>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="model-header-template">
+    <h4 data-bind="attr: { id: ModelName }">
+        <span data-bind="text: ModelName.toUpperCase()"></span>
+        <small>
+            @*[ <a data-bind="attr: { href: '//ligand-expo.rcsb.org/reports/' + ModelName.charAt(0).toUpperCase() + '/' + ModelName.toUpperCase() + '/index.html' }" target="_blank">LigandExpo</a> |*@
+            [ <a data-bind="attr: { href: 'https://www.ebi.ac.uk/pdbe-srv/pdbechem/chemicalCompound/show/' + ModelName.toUpperCase() }" target="_blank">PDBeChem</a> |
+            <a data-bind="attr: { href: getModelUrl(ModelName, 'modelpdb', true) }">PDB</a> <a data-bind="attr: { href: getModelUrl(ModelName, 'modelpdb', false) }" target="_blank"><i class="icon-eye-open" /></a> @* |
+            <a data-bind="attr: { href: getModelUrl(ModelName, 'modelmol', true) }">MOL</a> <a data-bind="attr: { href: getModelUrl(ModelName, 'modelmol', false) }" target="_blank"><i class="icon-eye-open" /></a> *@ ]
+        </small>
+
+        <small>
+            [ <span data-bind="text: Entries.length"></span> <span data-bind="text: Entries.length > 1 ? 'molecules' : 'molecule'"></span> in
+            <abbr data-bind="attr: { title: StructureNames.join(', ') }">
+                <span data-bind="text: StructureNames.length"></span>
+                <span data-bind="text: StructureNames.length > 1 ? 'PDB entries' : 'PDB entry'"></span>
+            </abbr><span data-bind="if: errorCount > 0"> | <a href="#" class="validator-summary-error-link" data-show-errors="true" data-bind="    attr: { 'data-model-name' : ModelName }, text: errorCount.toString() + ' (' + errorPerc + '%) ' + 'not processed' "></a></span><span data-bind="if: warningCount > 0"> | <a href="#" class="validator-summary-error-link" data-show-warnings="true" data-bind="    attr: { 'data-model-name' : ModelName }, text: warningCount.toString() + ' ' + (warningCount == 1 ? 'warning' : 'warnings') "></a></span> ]
+        </small>
+
+        <br />
+        <small>[&nbsp;</small><small data-bind="html: $data['htmlFormula']"></small><small data-bind="if: $data['htmlFormula']['length'] > 0 && $data['LongName']['length'] > 0">&nbsp;|&nbsp;</small><small data-bind="text: $data['LongName']"></small><small>&nbsp;]</small>
+        <!-- ko if: $data['ChiralAtoms'] -->
+        <small>
+            <!-- ko if: $data['ChiralAtoms'].length > 0 -->
+            [ Chiral Atoms (<span data-bind="text: ChiralAtoms.length"></span>): <span data-bind="text: ChiralAtoms.map(function (a) { return ModelNames[a]; }).join(', ') "></span> ]
+            <!-- /ko -->
+            <!-- ko if: $data['ChiralAtoms'].length === 0 -->
+            [ Chiral Atoms: none ]
+            <!-- /ko -->
+        </small>
+        <!-- /ko -->
+        <!-- ko if: $data['CoordinateSource'] -->
+        <!-- ko if: CoordinateSource === 'CifModel' -->
+        <small>[ Experimental Coordinates ]</small>
+        <!-- /ko -->
+        <!-- ko if: CoordinateSource === 'CifIdeal' -->
+        <small>[ Ideal Coordinates ]</small>
+        <!-- /ko -->
+        <!-- /ko -->
+    </h4>
+</script>
+
+<script type="text/html" id="empty-model-template">
+    <div data-bind="template: { name: 'model-header-template', data: $data }"></div>
+    <h5>No data to display.</h5>
+</script>
+
+<script type="text/html" id="good-model-template">
+    <div data-bind="template: { name: 'model-header-template', data: $data }" id="result-residue-info" style="margin-right: 50px"></div>
+
+    <div class="row">
+        <div class="span8" id="result-summary-plot">
+            <div data-bind="attr: { id: 'summaryChart-' + ModelName }" style="height: 350px; width: 576px"></div>
+        </div>
+        <div class="span4" style="text-align:center; height: 350px;">
+            <a target="_blank" data-bind="attr: { title: ModelName, href: '//www.ebi.ac.uk/pdbe/static/files/pdbechem_v2/' + ModelName.toUpperCase() + '_500.svg'  }" style="display: inline-block; vertical-align: middle">
+                <img style="max-width: 288px; max-height: 340px;" data-bind="attr: { title: ModelName, src: '//www.ebi.ac.uk/pdbe/static/files/pdbechem_v2/' + ModelName.toUpperCase() + '_500.svg'  }" />
+            </a>
+        </div>
+    </div>
+
+    <div id="result-summary-tables">
+        <table class="table table-bordered table-striped" style="margin-bottom: 0px;">
+            <tbody class="table-atoms-details">
+                <tr>
+                    <!-- ko template: { data: { Span: 3, Name: 'Missing', ModelName: ModelName, Summary: Summary }, name: 'summary-cell-header-template' } --><!-- /ko -->
+                    <!-- ko template: { data: { Span: 5, Name: 'HasAll', ModelName: ModelName, Summary: Summary }, name: 'summary-cell-header-template' } --><!-- /ko -->
+                </tr>
+                <tr>
+                    <!-- ko template: { name: 'summary-cell-template', data: { Span: 3, Name: 'Missing', Count: Summary.Missing, Total: Summary.Analyzed, ModelName: ModelName } } --><!-- /ko -->
+                    <!-- ko template: { name: 'summary-cell-template', data: { Span: 5, Name: 'HasAll', Count: Summary.HasAll, Total: Summary.Analyzed, ModelName: ModelName } } --><!-- /ko -->
+                </tr>
+                <tr>
+                    <!-- ko template: { data: { Name: 'Missing_Atoms', ModelName: ModelName, Summary: Summary }, name: 'summary-cell-header-template' } --><!-- /ko -->
+                    <!-- ko template: { data: { Name: 'Missing_Rings', ModelName: ModelName, Summary: Summary }, name: 'summary-cell-header-template' } --><!-- /ko -->
+                    @*<!-- ko template: { data: { Name: 'Missing_Disconnected', ModelName: ModelName, Summary: Summary }, name: 'summary-cell-header-template' } --><!-- /ko -->*@
+                    <!-- ko template: { data: { Name: 'Missing_Degenerate', ModelName: ModelName, Summary: Summary }, name: 'summary-cell-header-template' } --><!-- /ko -->
+                    <!-- ko template: { data: { Name: 'HasAll_GoodChirality_IgnorePlanarAndNonSingleBondErrors', ModelName: ModelName, Summary: Summary }, name: 'summary-cell-header-template' } --><!-- /ko -->
+                    <!-- ko template: { data: { Name: 'HasAll_BadChirality', ModelName: ModelName, Summary: Summary }, name: 'summary-cell-header-template' } --><!-- /ko -->
+                    @*<!-- ko template: { data: { Name: 'HasAll_WrongBonds', ModelName: ModelName, Summary: Summary }, name: 'summary-cell-header-template' } --><!-- /ko -->*@
+                    <!-- ko template: { data: { Warn: true, Name: 'HasAll_Substitutions', ModelName: ModelName, Summary: Summary }, name: 'summary-cell-header-template' } --><!-- /ko -->
+                    <!-- ko template: { data: { Warn: true, Name: 'HasAll_Foreign', ModelName: ModelName, Summary: Summary }, name: 'summary-cell-header-template' } --><!-- /ko -->
+                    <!-- ko template: { data: { Warn: true, Name: 'HasAll_NameMismatch', ModelName: ModelName, Summary: Summary }, name: 'summary-cell-header-template' } --><!-- /ko -->
+                </tr>
+                <tr>
+                    <!-- ko template: { name: 'summary-cell-template', data: { Name: 'Missing_Atoms', Count: Summary.Missing_Atoms, Total: Summary.Analyzed, ModelName: ModelName } } --><!-- /ko -->
+                    <!-- ko template: { name: 'summary-cell-template', data: { Name: 'Missing_Rings', Count: Summary.Missing_Rings, Total: Summary.Analyzed, ModelName: ModelName } } --><!-- /ko -->
+                    @*<!-- ko template: { name: 'summary-cell-template', data: { Name: 'Missing_Disconnected', Count: Summary.Missing_Disconnected, Total: Summary.Analyzed, ModelName: ModelName } } --><!-- /ko -->*@
+                    <!-- ko template: { name: 'summary-cell-template', data: { Name: 'Missing_Degenerate', Count: Summary.Missing_Degenerate, Total: Summary.Analyzed, ModelName: ModelName } } --><!-- /ko -->
+                    <!-- ko template: { name: 'summary-cell-template', data: { Name: 'HasAll_GoodChirality_IgnorePlanarAndNonSingleBondErrors', Count: Summary.HasAll_GoodChirality_IgnorePlanarAndNonSingleBondErrors, Total: Summary.Analyzed, ModelName: ModelName } } --><!-- /ko -->
+                    <!-- ko template: { name: 'summary-cell-template', data: { Name: 'HasAll_BadChirality', Count: Summary.HasAll_BadChirality, Total: Summary.Analyzed, ModelName: ModelName } } --><!-- /ko -->
+                    @*<!-- ko template: { name: 'summary-cell-template', data: { Name: 'HasAll_BadChiralityPlanarWarning', Count: Summary.HasAll_BadChiralityPlanarWarning, Total: Summary.Analyzed, ModelName: ModelName } } --><!-- /ko -->*@
+                    @*<!-- ko template: { name: 'summary-cell-template', data: { Name: 'HasAll_WrongBonds', Count: Summary.HasAll_WrongBonds, Total: Summary.Analyzed, ModelName: ModelName } } --><!-- /ko -->*@
+                    <!-- ko template: { name: 'summary-cell-template', data: { Name: 'HasAll_Substitutions', Count: Summary.HasAll_Substitutions, Total: Summary.Analyzed, ModelName: ModelName } } --><!-- /ko -->
+                    <!-- ko template: { name: 'summary-cell-template', data: { Name: 'HasAll_Foreign', Count: Summary.HasAll_Foreign, Total: Summary.Analyzed, ModelName: ModelName } } --><!-- /ko -->
+                    <!-- ko template: { name: 'summary-cell-template', data: { Name: 'HasAll_NameMismatch', Count: Summary.HasAll_NameMismatch, Total: Summary.Analyzed, ModelName: ModelName} } --><!-- /ko -->
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- ko if: summaryAnalyses.length > 0 -->
+        <hr style="padding:0; margin: 5px 0" />
+        <!-- ko foreach: summaryAnalyses -->
+        <!-- ko template: { name: 'summary-analysis-template', data: $data } --><!-- /ko -->
+        <!-- /ko -->
+        <!-- /ko -->
+    </div>
+</script>
+
+<script type="text/html" id="summary-analysis-template">
+    <div>
+        <table class="table table-bordered" style="margin-bottom: 2px" data-bind="style: { background: MotiveValidatorGlobals[summaryElement].color }">
+            <tbody class="table-atoms-details">
+                <tr>
+                    <th data-bind="attr: { colspan: dataWidth }, style: { background: '#ddd' }" class="mv-summary-cell">
+                        <span style="" data-show-details-toggle="true" data-bind="text: title"></span>
+                        <small>in <span data-bind="text: total"></span> molecule(s)</small>
+                    </th>
+                </tr>
+                <!-- ko foreach: dataRows -->
+                <tr data-bind="foreach: $data">
+                    <td class="mv-summary-cell" data-bind="style: { background: MotiveValidatorGlobals[summaryElement].color }">
+                        <a style="text-shadow: none; color: white !important" href="#" data-show-details="true" data-bind="attr: { 'data-details-name' : link, 'data-model-name' : modelName, title: prefix + name + ' in ' + count + ' molecule(s).' }"
+                           data-placement="top">
+                            <span data-bind="text: name" style="font-weight: bold"></span>
+                            <!-- ko if: (100 * (count >= 0 ? count : 0) / total).toFixed(1) == '0.0'  -->
+                            <span style="color: white; font-weight: bold; border-bottom: 1px dotted white">&lt;0.1%</span>&nbsp;<small style="color: #eee;"><span data-bind="text: count"></span></small>
+                            <!-- /ko -->
+                            <!-- ko if: (100 * (count >= 0 ? count : 0) / total).toFixed(1) != '0.0'  -->
+                            <span style="color: white; font-weight: bold; border-bottom: 1px dotted white"><span data-bind="text: (100 * (count >= 0 ? count : 0) / total).toFixed(1)"></span>%</span>&nbsp;<small style="color: #eee;"><span data-bind="text: count"></span></small>
+                            <!-- /ko -->
+                        </a>
+                    </td>
+                </tr>
+                <!-- /ko -->
+                @*<tr data-bind="foreach: $data">
+                        <!-- ko template: { name: 'summary-cell-template', data: { Prefix: name + " - ",  Name: summaryElement, Count: count, Total: total } } --><!-- /ko -->
+                    </tr>*@
+            </tbody>
+        </table>
+    </div>
+</script>
+
+<script type="text/html" id="empty-result-template">
+    <h2>The input does not contain any molecules relevant for validation.</h2>
+    <div data-bind="if: errors.length > 0">
+        <hr />
+        <h3>Errors</h3>
+        <dl data-bind="foreach: errors">
+            <dt data-bind="text: $data[0]"></dt>
+            <dd data-bind="text: $data[1]"></dd>
+        </dl>
+    </div>
+</script>
+
+<script type="text/html" id="old-version-template">
+    @if (ViewBag.IsNotValidatorDb == true)
+    {
+        <div id="result-link">
+            <small style="color: #aaa">You can come back to the result later using this URL. The result will not be deleted before @(ViewBag.OnlineUntil).</small>
+            <input class="result-input"
+                   type="text" value="@Url.Action("Result", "MotiveValidator", new { id = ViewBag.Id }, Request.Url.Scheme)" id="resultUrl" />
+        </div>
+        <div class="row-fluid">
+            <div class="btn-group span4">
+                <a class="btn btn-info btn-large dropdown-toggle btn-block" data-toggle="dropdown" href="#">
+                    <i class="icon-download-alt icon-white"></i> <strong>Download Input</strong>
+                </a>
+                <ul class="dropdown-menu">
+                    <li data-bind="if: ValidationType != 'Sugars'"><a href="@Url.Action("Download", new { id = ViewBag.Id, type = "InputModels" })">Model</a></li>
+                    <li><a href="@Url.Action("Download", new { id = ViewBag.Id, type = "InputStructures" })">Structures</a></li>
+                </ul>
+            </div>
+            <a class="btn btn-large btn-info span8"
+               href="@Url.Action("Download", new { id = ViewBag.Id, type = "Result" })"><i class="icon-download-alt icon-white"></i><strong>Download Result</strong></a>
+        </div>
+
+        <h2>Old result</h2>
+        <p>
+            This validation was computed using an outdated version of the service (<span data-bind="text: version"></span>, req. <span data-bind="text: minVersion"></span>). The result
+            is still available in the raw format using the Download button. To view the result in the UI, please submit the computation again.
+        </p>
+        <p>
+            <i>This change was required to support new features.</i>
+        </p>
+    }
+    else
+    {
+        <h2>Old result</h2>
+        <p>
+            This validation was computed using an outdated version of the MotiveValidator. The updated validation will be online soon.
+        </p>
+    }
+</script>
+
+<script type="text/html" id="errors-template">
+    <div class="form-inline" style="margin-bottom: 5px">
+        <select data-bind="options: entries, optionsText: 'title', value: currentEntry" style="width: 400px"></select>
+    </div>
+    <div data-bind="if: currentEntry().title.indexOf('rror') >= 0">
+        <div style="margin-top: 18px">
+            The molecules listed here were not included in the analysis.
+        </div>
+    </div>
+    <div data-bind="if: currentEntry().count > 0">
+        <dl data-bind="foreach: currentEntry().data">
+            <dt data-bind="html: $data[0].html"></dt>
+            <dd data-bind="foreach: $data[1]">
+                <div data-bind="text: $data"></div>
+            </dd>
+        </dl>
+    </div>
+</script>

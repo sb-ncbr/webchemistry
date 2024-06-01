@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="WebChemistry.Charges.Silverlight.App" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:vm="clr-namespace:WebChemistry.Charges.Silverlight.ViewModel" mc:Ignorable="d">
+  <Application.Resources>
+    <ResourceDictionary>
+            <DataTemplate x:Key="VisualTooltipTemplate">
+                <Border Background="#FF119EDA" Padding="6 2" CornerRadius="0">
+                    <StackPanel>
+                        <TextBlock Foreground="White"><Run FontWeight="Bold" Text="{Binding Label, FallbackValue=Unknown}" /></TextBlock>
+                        <TextBlock Foreground="White"><Run Text="Charge  " FontWeight="Bold" FontSize="10" /><Run Text="{Binding Charge, FallbackValue=Unknown}" /></TextBlock>
+                        <TextBlock Foreground="White"><Run Text="Set  " FontWeight="Bold" FontSize="10" /><Run Text="{Binding Set, FallbackValue=Unknown}" /></TextBlock>
+                    </StackPanel>
+                </Border>
+            </DataTemplate>
+
+            <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+        
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/WebChemistry.Silverlight.Common;component/Common.xaml"/>
+                <ResourceDictionary Source="/WebChemistry.Silverlight.Common;component/Theme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+  </Application.Resources>
+</Application>

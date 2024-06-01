@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3AFEDC7F-F1E5-4D94-884F-AE92CF1AF001}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebChemistry.Framework.Visualization</RootNamespace>
+    <AssemblyName>WebChemistry.Framework.Visualization</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <Utf8Output>true</Utf8Output>
+    <ExpressionBlendVersion>4.0.20525.0</ExpressionBlendVersion>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\WebChemistry.Framework.Visualization.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Silverlight\</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\bin\Silverlight\WebChemistry.Framework.Visualization.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Toolkit, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Libs\Silverlight5\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\ChangeOpacityBehavior.cs" />
+    <Compile Include="Controls\Viewport3D\RotationSliderValueConverter.cs" />
+    <Compile Include="Controls\Viewport3D\Viewport3D.xaml.cs">
+      <DependentUpon>Viewport3D.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Visualization\DisplayMode.cs" />
+    <Compile Include="Visualization\Interfaces\ICamera.cs" />
+    <Compile Include="Visualization\Interfaces\IViewport3DBase.cs" />
+    <Compile Include="Visualization\Interfaces\IVisualElement.cs" />
+    <Compile Include="Visualization\Materials\AtomMaterial.cs" />
+    <Compile Include="Visualization\Materials\AtomMaterials.cs" />
+    <Compile Include="Visualization\Materials\StructureMaterial.cs" />
+    <Compile Include="Visualization\Materials\Pallete.cs" />
+    <Compile Include="Visualization\Structures\Models\AtomModel3D.cs" />
+    <Compile Include="Visualization\Structures\Models\BondModel3D.cs" />
+    <Compile Include="Visualization\Structures\Visuals\BondPath3D.cs" />
+    <Compile Include="Visualization\Internal\HighlightManager.cs" />
+    <Compile Include="Visualization\Internal\PerspectiveCamera.cs" />
+    <Compile Include="Visualization\Internal\RenderContext.cs" />
+    <Compile Include="Visualization\Internal\UpdateAsyncArgs.cs" />
+    <Compile Include="Visualization\Internal\UpdateContext.cs" />
+    <Compile Include="Visualization\Model3D.cs" />
+    <Compile Include="Visualization\OrthogonalCamera.cs" />
+    <Compile Include="Visualization\RenderingExtensions.cs" />
+    <Compile Include="Visualization\Structures\Visuals\StructureColoringMode.cs" />
+    <Compile Include="Visualization\Structures\Visuals\StructureRenderMode.cs" />
+    <Compile Include="Visualization\RenderParameters.cs" />
+    <Compile Include="Visualization\Structures\Visuals\AtomVisual3D.cs" />
+    <Compile Include="Visualization\Structures\TODO\BallsAndSticksStructureVisual3D.cs" />
+    <Compile Include="Visualization\Structures\Visuals\BondVisual3D.cs" />
+    <Compile Include="Visualization\Structures\Visuals\StructureVisual3D.cs" />
+    <Compile Include="Visualization\Structures\Models\StructureModel3D.cs" />
+    <Compile Include="Visualization\Viewport3DBase.cs" />
+    <Compile Include="Visualization\Visual3D.cs" />
+    <Compile Include="Visualization\Visual3DCollection.cs" />
+    <Compile Include="Visualization\VisualElement3D.cs" />
+    <Compile Include="Visualization\VisualsManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\Viewport3D\Viewport3D.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Viewport3D\ZoomIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Framework\Silverlight\WebChemistry.Framework.Core\WebChemistry.Framework.Core.csproj">
+      <Project>{220441C8-7056-4EFE-8689-4E038E1B1D04}</Project>
+      <Name>WebChemistry.Framework.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

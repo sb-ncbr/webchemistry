@@ -1,0 +1,265 @@
+﻿@{
+    ViewBag.Title = "PatternQuery Explorer";
+}
+
+@section CustomStyles {
+    @Styles.Render("~/Content/slickgrid/css")
+    @Styles.Render("~/Content/PatternQueryExplorer/css")
+}
+
+<div id="mq-explorer-app">
+
+
+    <div class="btn-group pull-right">
+        <button class="btn btn-success" onclick="startExplorerIntro();" title="Interactive Guide" data-placement="bottom"><i class="icon icon-white icon-question-sign"></i> Guide</button>
+        <a class="btn btn-success" href="//webchem.ncbr.muni.cz/Wiki/PatternQuery:Explorer" target="_blank" title="Wiki page with detailed information" data-placement="bottom">Wiki</a>
+
+        @*<div class="btn-group" style="">*@
+            <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#" id="mq-explorer-examples-button">
+                Examples
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <!-- ko foreach: examples.exampleList -->
+                <li><a href="#" data-bind="click: $parent.examples.apply, text: title"></a></li>
+                <!-- /ko -->
+                <li class="divider"></li>
+                <li><a href="#" data-bind="click: examples.clear">None</a></li>
+            </ul>
+        @*</div>*@
+    </div>
+
+    <div id="mq-explorer-session-info" class="pull-right">
+        <input type="text" id="instance-id" value="@Url.Action("Explorer", "PatternQuery", new { id = ViewBag.Id }, Request.Url.Scheme)" />
+        <div>You can come back here later using this URL. The session will expire on @(ViewBag.OnlineUntil).</div>
+    </div>
+
+    <div id="mq-explorer-header">
+        <h2>
+            PatternQuery Explorer
+            <small>@ViewBag.Name</small>
+        </h2>
+    </div>
+
+    <div id="mq-exlorer-content">
+        <div id="mq-explorer-input">
+            <!-- ko with: query -->
+            <div id="mq-explorer-query-wrap">
+                <div id="mq-explorer-query-editor"></div>                
+            </div>
+            <div class="mq-query-examples-list" data-bind="visible: showExamples">
+                <!-- ko if: examples().length === 0 -->
+                Start typing or press <span style="font-family: Courier New, Courier, monospace">Ctrl-Space</span> to bring up query completion menu. Selecting a function will show examples in this box.<br/>
+                Use <span style="font-family: Courier New, Courier, monospace">Ctrl-Enter</span> or the Query button to submit the query.
+                <!-- /ko -->
+                <!-- ko if: examples().length > 0 -->
+                <dl data-bind="foreach: examples">
+                    <dt>
+                        <a href="#" title="Click to enter the example." data-bind="click: function (ex) { $parent.setExample(ex); }"><code data-bind="text: Query"></code></a>
+                        <span class="pull-right">
+                            <a href="#" data-bind="click: function (ex) { $parent.insertExample(ex); }" title="Inserts this example at the current position in the input. Further editing might be required.">Insert</a>
+                            | <a href="#" data-bind="click: function (ex) { $parent.setExample(ex); }" title="Sets the input to this example.">Set</a>
+                        </span>
+                    </dt>
+                    <dd data-bind="text: Description"></dd>
+                </dl>
+                <!-- /ko -->
+            </div>
+            <button class="btn btn-large btn-primary" data-bind="enable: canQuery() && !$parent.status.isBusy(), click: query"><i class="icon-search icon-white"></i> Query</button>
+            <!-- /ko -->
+        </div>
+
+        <div id="mq-explorer-list">
+            <div id="mq-explorer-add-data" class="btn-group">
+                <button class="btn btn-primary" data-bind="click: upload.uploadFiles" title="Add your files. Supported formats are PDB, PDBx/mmCIF, MOL, MOL2, ZIP, and gzipped files. Multiple files can be selected at the same time."><i class="icon-hdd icon-white"></i> Add File(s)</button>
+                <button class="btn btn-primary" data-bind="click: fromPdb.toggle"><i class="icon-list icon-white"></i> Add from PDBe.org</button>
+                <button class="btn" title="Remove All" data-bind="click: structures.removeAll"><i class="icon-trash"></i></button>
+                @*<button class="btn"><i class="icon-minus"></i></button>*@
+            </div>
+            <div id="mq-explorer-structure-grid"></div>
+            <div id="mq-explorer-structure-grid-count" data-bind="text: structures.countString">Showing 0 entries</div>
+
+            <!-- ko with: motifs -->
+            <div id="mq-explorer-motif-controls" class="btn-group">
+                <input placeholder="Filter id using regexp..." type="text" id="mq-explorer-motifs-filter" data-bind="value: filterText, valueUpdate: 'input'" />
+                <button id="mq-explorer-clear-filter-btn" class="btn btn-link btn-small" data-bind="visible: filterText().length > 0, click: function() { filterText(''); }"><i class="icon-remove"></i></button>
+                <button id="mq-explorer-download-btn" class="btn" data-bind="enable: isDownloadAvailable, click: downloadResult"><i class="icon-download-alt"></i> Download <small data-bind="text: downloadSize"></small></button>
+                <button id="mq-explorer-clear-motifs-btn" class="btn" data-bind="click: clear" title="Clear the patterns." style="padding: 0" data-placement="left"><i class="icon-trash"></i></button>
+            </div>
+            <!-- /ko -->
+            <div id="mq-explorer-motif-grid" data-bind="click: motifs.setCurrentMotifFromGrid"></div>
+            <div id="mq-explorer-motif-grid-count" data-bind="text: motifs.countString"></div>
+        </div>
+
+        <div id="mq-explorer-view">
+            <div id="mq-explorer-3d-view">
+                <!-- ko with: view3d -->
+                <canvas id="mq-explorer-3d-host"></canvas>
+                <div id="mq-explorer-3d-controls">
+                    <button class="btn btn-small btn-link" title="Toggle Labels" data-bind="click: toggleLabels"><i class="icon-font"></i></button><button class="btn btn-small btn-link" title="Toggle Display Mode" data-bind="click: toggleMode"><i class="icon-random"></i></button>
+                </div>
+                <div id="mq-explorer-3d-message" data-bind="html: message"></div>
+                <div id="mq-explorer-3d-atom-info-wrap">
+                    <div id="mq-explorer-3d-atom-info"></div>
+                </div>
+                <!-- /ko -->
+
+                <div id="mq-explorer-from-pdb" class="hide">
+                    <!-- ko with: fromPdb -->
+                    @Html.Partial("_ExplorerFromPdb")
+                    <!-- /ko -->
+                </div>
+            </div>
+
+            <!-- ko with: motifs.currentMotif -->
+            <div id="mq-explorer-current-info">
+                <h4>
+                    <span data-bind="text: Id"></span><br />
+                    <small>
+                        <span data-bind="html:mqResultUtils.formatSignature(Atoms)"></span> (<span data-bind="text: AtomCount"></span>);
+                        <span data-bind="html:mqResultUtils.formatSignature(Signature)"></span> (<span data-bind="text: ResidueCount"></span>)
+                    </small><br />
+                    <small data-bind="text: Residues, attr: { title: Residues }" id="mq-explorer-current-info-residues"></small>
+                </h4>
+            </div>
+            <!-- /ko -->
+            <!-- ko with: log -->
+            <div id="mq-explorer-log-wrap">
+                <div id="mq-explorer-log">
+                    <ul class="unstyled" data-bind="foreach: messages" style="margin: 0">
+                        <li class="mq-log-item">
+                            <!-- ko template: { name: 'log-item-template', data: $data } --><!-- /ko -->
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="mq-explorer-log-controls">
+                    <button title="Expand the log." data-placement="left" class="mq-explorer-log-expand btn btn-link btn-small" 
+                            data-bind="click: function() { $('#mq-explorer-view').addClass('mq-explorer-view-expand-log'); mqExplorerModel.view3d.updateSize(); }"><i class="icon-chevron-up"></i></button>
+                    <button title="Collapse the log." data-placement="left" class="mq-explorer-log-collapse btn btn-link btn-small"
+                            data-bind="click: function() { $('#mq-explorer-view').removeClass('mq-explorer-view-expand-log'); mqExplorerModel.view3d.updateSize(); }"><i class="icon-chevron-down"></i></button>
+                    <button title="Clear the log." data-placement="left" class="btn btn-link btn-small" data-bind="click: clear"><i class="icon-trash"></i></button>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+
+    <input id="fileUploadInput" type="file" hidden="hidden" multiple style="display: none" accept="@(string.Join(",", WebChemistry.Framework.Core.StructureReader.SupportedExtensions) + ",.zip")" />
+
+    <div id="mq-explorer-overlay">
+        <div id="mq-explorer-overlay-bg"></div>
+        <div id="mq-explorer-overlay-wrap">
+            <!-- ko with: status -->
+            <div id="mq-explorer-overlay-spinner"></div>
+            <div id="mq-explorer-overlay-message" data-bind="html: message"></div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="log-item-template">
+    <div class="mq-log-item-remove"><button title="Remove entry" class="btn btn-link btn small" data-bind="click: mqExplorerModel.log.removeItem"><i class="icon-remove"></i></button></div>
+    <div class="mq-log-item-timestamp"><span data-bind="text: timestamp"></span></div>
+    <div class="mq-log-item-content">
+        <!-- ko if: type === 'message' -->
+        <span class="mq-log-item-message" data-bind="text: text"></span>
+        <!-- /ko -->
+        <!-- ko if: type === 'error' -->
+        <span class="mq-log-item-error" data-bind="text: text"></span>
+        <!-- /ko -->
+        <!-- ko if: type === 'errorSet' -->
+        <span class="mq-log-item-error" data-bind="text: text"></span> 
+        <a href="#" title="Click to show/hide errors." class="mq-log-item-error-label"
+           data-bind="text: mqResultUtils.pluralize(errors.length, 'error', 'errors'), click: function(data, event) { data.log.toggleScroll(event.target, 'errors'); }"></a>
+        <ul data-bind="foreach: errors" class="mq-log-item-errors hide">
+            <li data-bind="text: $data"></li>
+        </ul>
+        <!-- /ko -->
+        <!-- ko if: type === 'structures' -->
+        Added <abbr class="mq-log-item-id-label" data-bind="text: mqResultUtils.pluralize(structures.length, 'structure', 'structures'), attr: {title: structures.join(', ') }"></abbr> with
+        <a href="#" title="Click to show/hide warnings." class="mq-log-item-warning-label"
+           data-bind="text: mqResultUtils.pluralize(warnings.length, 'warning', 'warnings'), click: function(data, event) { data.log.toggleScroll(event.target, 'warnings'); }"></a>
+        and
+        <a href="#" title="Click to show/hide errors." class="mq-log-item-error-label"
+           data-bind="text: mqResultUtils.pluralize(errors.length, 'error', 'errors'), click: function(data, event) { data.log.toggleScroll(event.target, 'errors'); }"></a>
+        <ul data-bind="foreach: warnings" class="mq-log-item-warnings hide">
+            <li data-bind="text: $data"></li>
+        </ul>
+        <ul data-bind="foreach: errors" class="mq-log-item-errors hide">
+            <li data-bind="text: $data"></li>
+        </ul>
+        <!-- /ko -->
+        <!-- ko if: type === 'motifs' -->
+        Found <span class="mq-log-item-id-label" data-bind="text: mqResultUtils.pluralize(count, 'pattern', 'patterns')"></span>
+        in <span class="mq-log-item-id-label" data-bind="text: mqResultUtils.pluralize(structureCount, 'structure', 'structures')"></span>
+        with
+        <a href="#" title="Click to show/hide warnings." class="mq-log-item-warning-label"
+           data-bind="text: mqResultUtils.pluralize(warnings.length, 'warning', 'warnings'), click: function(data, event) { data.log.toggleScroll(event.target, 'warnings'); }"></a>
+        and
+        <a href="#" title="Click to show/hide errors." class="mq-log-item-error-label"
+           data-bind="text: mqResultUtils.pluralize(errors.length, 'error', 'errors'), click: function(data, event) { data.log.toggleScroll(event.target, 'errors'); }"></a>
+        in <span class="mq-log-item-id-label" data-bind="text: timing"></span>
+        <ul data-bind="foreach: warnings" class="mq-log-item-warnings hide">
+            <li data-bind="text: $data"></li>
+        </ul>
+        <ul data-bind="foreach: errors" class="mq-log-item-errors hide">
+            <li data-bind="text: $data"></li>
+        </ul>
+        <!-- /ko -->
+        <!-- ko if: type === 'structure-warnings' -->
+        <span class="mq-log-item-id-label" data-bind="text: id"></span> with
+        <a href="#" title="Click to show/hide warnings." class="mq-log-item-warning-label"
+           data-bind="text: mqResultUtils.pluralize(warnings.length, 'warning', 'warnings'), click: function(data, event) { data.log.toggleScroll(event.target, 'warnings'); }"></a>
+        <ul data-bind="foreach: warnings" class="mq-log-item-warnings hide">
+            <li data-bind="text: $data"></li>
+        </ul>
+        <!-- /ko -->
+    </div>
+</script>
+
+@section scripts {
+    <script type="text/javascript">
+        var PatternQueryMetadataPreview = {
+            includePreviewSelection: true
+        };
+        var PatternQueryActions = {
+            databaseAction: "@Url.Action("Database", new { id = "-type-" })",
+        };
+        var PatternQueryExplorerActions = {
+            supportedFilenames: [ @Html.Raw("'" + string.Join("','", WebChemistry.Framework.Core.StructureReader.SupportedExtensions) + "','.zip'")],
+            uploadFilesAction: "@Url.Action("ExplorerUpload", new { id = ViewBag.Id })",
+            stateAction: "@Url.Action("ExplorerState", new { id = ViewBag.Id })",
+            downloadResultAction: "@Url.Action("ExplorerDownloadResult", new { id = ViewBag.Id })",
+            queryActionProvider: function (query) {
+                var uri = "@Url.Action("ExplorerQuery", new { id = ViewBag.Id, queryString = "-query-" })";                
+                return uri.replace('-query-', encodeURIComponent(query.trim())); //btoa(query.trim())
+            },
+            removeStructuresActionProvider: function (xs) {
+                var uri = "@Url.Action("ExplorerRemoveStructures", new { id = ViewBag.Id, structures = "-xs-" })";                
+                return uri.replace("-xs-", encodeURIComponent(JSON.stringify(xs)));
+            },
+            addFromPdbActionProvider: function (xs) {
+                var uri = "@Url.Action("ExplorerAddFromPdb", new { id = ViewBag.Id, structures = "-xs-" })";
+                return uri.replace("-xs-", encodeURIComponent(JSON.stringify(xs)));
+            },
+            setStructuresProvider: function (xs) {
+                var uri = "@Url.Action("ExplorerSetStructures", new { id = ViewBag.Id, structures = "-xs-" })";
+                return uri.replace("-xs-", encodeURIComponent(JSON.stringify(xs)));
+            },
+            databaseActionProvider: function (type) {
+                var uri = "@Url.Action("Database", new { id = "-type-" })";
+                return uri.replace("-type-", encodeURIComponent(type));
+            },
+            ligandValidationAction: "@Url.Action("ByStructure", "ValidatorDb", new { id = "-id-" })",
+            version: "@WebChemistry.Queries.Core.Query.Version.ToString()"
+        };
+
+        var AceEditorConfig = {
+            path: "@Url.Content("~/Scripts/ace/")"
+        };
+</script>
+    @Scripts.Render(@Url.Action("AutoCompletionInfo", new { v = Url.Encode(WebChemistry.Queries.Core.Query.Version.ToString()) }))
+    @Scripts.Render("~/bundles/PatternQueryExplorer")
+    @Scripts.Render("~/bundles/aceTools")
+}

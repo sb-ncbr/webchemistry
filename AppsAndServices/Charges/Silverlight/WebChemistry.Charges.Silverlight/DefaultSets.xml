@@ -1,0 +1,914 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Sets>
+  <ParameterSet Name="Svob2007_cmet2">
+    <!-- Name will be displayed in the set list -->
+    <Properties>
+      <Property Name="Author">Svobodová Vařeková R., Vaněk J., Suchomel Š., Jiroušková Z., Koča J.</Property>
+      <Property Name="Publication">Electronegativity equalization method: Parametrization and validation for large sets of organic, organohalogen and organometal molecules</Property>
+      <Property Name="Journal">Int. J. Mol. Sci., 8, 572-582</Property>
+      <Property Name="Year">2007</Property>
+      <Property Name="Target">Small Organic Molecules (Drugs)</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Basis Set">STO-3G</Property>
+      <Property Name="Population Analysis">Mulliken (MPA)</Property>
+      <Property Name="Training Set Size">1154</Property>
+      <Property Name="Data Source">NCI DIS and CSD</Property>
+      <!-- Additional parameters can be added here -->
+      <!-- <Property Name="XYZ">value</Property> -->
+    </Properties>
+    <Parameters Kappa="0.42">
+      <Element Name="H">
+        <Bond Type="1" A="2.386" B="0.937" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.452" B="0.593" />
+        <Bond Type="2" A="2.462" B="0.527" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.550" B="0.663" />
+        <Bond Type="2" A="2.547" B="0.639" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.624" B="0.847" />
+        <Bond Type="2" A="2.567" B="0.622" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.424" B="0.400" />
+      </Element>
+      <Element Name="Zn">
+	<Bond Type="0" A="2.378" B="0.259" />
+        <Bond Type="1" A="2.378" B="0.259" />
+      </Element>
+      <Element Name="Fe">
+        <Bond Type="0" A="2.557" B="0.061" />
+        <Bond Type="1" A="2.557" B="0.061" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Svob2007_cbeg2">
+    <Properties>
+      <Property Name="Author">Svobodová Vařeková R., Vaněk J., Suchomel Š., Jiroušková Z., Koča J.</Property>
+      <Property Name="Publication">Electronegativity equalization method: Parametrization and validation for large sets of organic, organohalogen and organometal molecules</Property>
+      <Property Name="Journal">Int. J. Mol. Sci., 8, 572-582</Property>
+      <Property Name="Year">2007</Property>
+      <Property Name="Target">Small Organic Molecules (Drugs)</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Basis Set">STO-3G</Property>
+      <Property Name="Population Analysis">Mulliken (MPA)</Property>
+      <Property Name="Training Set Size">544</Property>
+      <Property Name="Data Source">NCI DIS and CSD</Property>
+    </Properties>
+    <Parameters Kappa="0.44">
+      <Element Name="H">
+        <Bond Type="1" A="2.396" B="0.959" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.459" B="0.611" />
+        <Bond Type="2" A="2.464" B="0.565" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.597" B="0.790" />
+        <Bond Type="2" A="2.554" B="0.611" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.625" B="0.858" />
+        <Bond Type="2" A="2.580" B="0.691" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.407" B="0.491" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Svob2007_chal2">
+    <Properties>
+      <Property Name="Author">Svobodová Vařeková R., Vaněk J., Suchomel Š., Jiroušková Z., Koča J.</Property>
+      <Property Name="Publication">Electronegativity equalization method: Parametrization and validation for large sets of organic, organohalogen and organometal molecules</Property>
+      <Property Name="Journal">Int. J. Mol. Sci., 8, 572-582</Property>
+      <Property Name="Year">2007</Property>
+      <Property Name="Target">Small Organic Molecules (Drugs)</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Basis Set">STO-3G</Property>
+      <Property Name="Population Analysis">Mulliken (MPA)</Property>
+      <Property Name="Training Set Size">870</Property>
+      <Property Name="Data Source">NCI DIS and CSD</Property>
+    </Properties>
+    <Parameters Kappa="0.66">
+      <Element Name="H">
+        <Bond Type="1" A="2.404" B="1.461" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.503" B="0.899" />
+        <Bond Type="2" A="2.516" B="0.850" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.653" B="1.017" />
+        <Bond Type="2" A="2.633" B="0.869" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.713" B="1.211" />
+        <Bond Type="2" A="2.757" B="1.348" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.465" B="0.705" />
+      </Element>
+      <Element Name="Cl">
+        <Bond Type="1" A="2.791" B="2.365" />
+      </Element>
+      <Element Name="Br">
+        <Bond Type="1" A="2.496" B="1.345" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="2.789" B="1.494" />
+      </Element>
+      <Element Name="I">
+        <Bond Type="1" A="2.421" B="2.309" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Svob2007_hm2">
+    <Properties>
+      <Property Name="Author">Svobodová Vařeková R., Vaněk J., Suchomel Š., Jiroušková Z., Koča J.</Property>
+      <Property Name="Publication">Electronegativity equalization method: Parametrization and validation for large sets of organic, organohalogen and organometal molecules</Property>
+      <Property Name="Journal">Int. J. Mol. Sci., 8, 572-582</Property>
+      <Property Name="Year">2007</Property>
+      <Property Name="Target">Small Organic Molecules (Drugs)</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Basis Set">STO-3G</Property>
+      <Property Name="Population Analysis">Mulliken (MPA)</Property>
+      <Property Name="Training Set Size">3258</Property>
+      <Property Name="Data Source">NCI DIS and CSD</Property>
+    </Properties>
+    <Parameters Kappa="0.55">
+      <Element Name="H">
+        <Bond Type="1" A="2.394" B="1.212" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.476" B="0.772" />
+        <Bond Type="2" A="2.495" B="0.704" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.597" B="0.835" />
+        <Bond Type="2" A="2.600" B="0.790" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.676" B="1.077" />
+        <Bond Type="2" A="2.622" B="0.850" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.440" B="0.665" />
+      </Element>
+      <Element Name="Cl">
+        <Bond Type="1" A="2.759" B="2.092" />
+      </Element>
+      <Element Name="Br">
+        <Bond Type="1" A="2.494" B="1.315" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="2.032" B="2.985" />
+      </Element>
+      <Element Name="I">
+        <Bond Type="1" A="2.454" B="1.387" />
+      </Element>
+      <Element Name="Zn">
+        <Bond Type="0" A="2.422" B="0.301" />
+	<Bond Type="1" A="2.422" B="0.301" />
+      </Element>
+      <Element Name="Fe">
+        <Bond Type="0" A="2.575" B="0.087" />
+	<Bond Type="1" A="2.575" B="0.087" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Jir2008_hf">
+    <!-- Name will be displayed in the set list -->
+    <Properties>
+      <Property Name="Author">Jiroušková Z., Svobodová Vařeková R., Vaněk J., Koča J.</Property>
+      <Property Name="Publication">Electronegativity Equalization Method: Parametrization and Validation for Organic Molecules using the Merz-Kollman-Singh Charge Distribution Scheme</Property>
+      <Property Name="Journal">J. Comput. Chem., 30, 1174-1178</Property>
+      <Property Name="Year">2008</Property>
+      <Property Name="Target">Small Organic Molecules (Drugs)</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">Merz-Kollman-Singh (MK)</Property>
+      <Property Name="Training Set Size">380</Property>
+      <Property Name="Data Source">CSD</Property>
+      <!-- Additional parameters can be added here -->
+      <!-- <Property Name="XYZ">value</Property> -->
+    </Properties>
+    <Parameters Kappa="0.227">
+      <Element Name="H">
+        <Bond Type="1" A="2.357" B="0.688" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.481" B="0.373" />
+        <Bond Type="2" A="2.475" B="0.292" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.585" B="0.392" />
+        <Bond Type="2" A="2.556" B="0.288" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.870" B="0.717" />
+        <Bond Type="2" A="2.757" B="0.621" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.450" B="0.269" />
+      </Element>
+      <Element Name="Zn">
+        <Bond Type="0" A="2.185" B="0.375" />
+        <Bond Type="1" A="2.185" B="0.375" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="3.991" B="3.594" />
+      </Element>
+      <Element Name="Cl">
+        <Bond Type="1" A="2.517" B="1.043" />
+      </Element>
+      <Element Name="Br">
+        <Bond Type="1" A="2.615" B="1.436" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Jir2008_dft">
+    <!-- Name will be displayed in the set list -->
+    <Properties>
+      <Property Name="Author">Jiroušková Z., Svobodová Vařeková R., Vaněk J., Koča J.</Property>
+      <Property Name="Publication">Electronegativity Equalization Method: Parametrization and Validation for Organic Molecules using the Merz-Kollman-Singh Charge Distribution Scheme</Property>
+      <Property Name="Journal">J. Comput. Chem., 30, 1174-1178</Property>
+      <Property Name="Year">2008</Property>
+      <Property Name="Target">Small Organic Molecules (Drugs)</Property>
+      <Property Name="QM Method">B3LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">Merz-Kollman-singh (MK)</Property>
+      <Property Name="Training Set Size">380</Property>
+      <Property Name="Data Source">CSD</Property>
+      <!-- Additional parameters can be added here -->
+      <!-- <Property Name="XYZ">value</Property> -->
+    </Properties>
+    <Parameters Kappa="0.302">
+      <Element Name="H">
+        <Bond Type="1" A="2.385" B="0.737" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.482" B="0.464" />
+        <Bond Type="2" A="2.464" B="0.392" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.595" B="0.468" />
+        <Bond Type="2" A="2.556" B="0.377" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.825" B="0.844" />
+        <Bond Type="2" A="2.789" B="0.834" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.452" B="0.362" />
+      </Element>
+      <Element Name="Zn">
+        <Bond Type="0" A="2.298" B="0.420" />
+        <Bond Type="1" A="2.298" B="0.420" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="3.577" B="3.419" />
+      </Element>
+      <Element Name="Cl">
+        <Bond Type="1" A="2.519" B="1.450" />
+      </Element>
+      <Element Name="Br">
+        <Bond Type="1" A="2.659" B="1.802" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Bult2002_mul">
+    <Properties>
+      <Property Name="Author">Bultinck, P., Langenaeker, W., Lahorte, P., De Proft, F., Geerlings, P., Waroquier, M., Tollenaere, J. P.</Property>
+      <Property Name="Publication">The Electronegativity Equalization Method II: Applicability of Different Atomic Charge schemes</Property>
+      <Property Name="Journal">J. Phys. Chem. A, 106, 7895-7901</Property>
+      <Property Name="Year">2002</Property>
+      <Property Name="Target">Medicinal Chemistry Compounds</Property>
+      <Property Name="QM Method">B3-LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">Mulliken (MPA)</Property>
+      <Property Name="Training Set Size">138</Property>
+      <Property Name="Data Source">Not Specified</Property>
+    </Properties>
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="1.000" B="35.900" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="5.260" B="18.000" />
+        <Bond Type="2" A="5.260" B="18.000" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="8.800" B="18.780" />
+        <Bond Type="2" A="8.800" B="18.780" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="14.720" B="28.680" />
+        <Bond Type="2" A="14.720" B="28.680" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="15.000" B="39.540" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Bult2002_che">
+    <Properties>
+      <Property Name="Author">Bultinck, P., Langenaeker, W., Lahorte, P., De Proft, F., Geerlings, P., Waroquier, M., Tollenaere, J. P.</Property>
+      <Property Name="Publication">The Electronegativity Equalization Method II: Applicability of Different Atomic Charge schemes</Property>
+      <Property Name="Journal">J. Phys. Chem. A, 106, 7895-7901</Property>
+      <Property Name="Year">2002</Property>
+      <Property Name="Target">Medicinal Chemistry Compounds</Property>
+      <Property Name="QM Method">B3-LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">CHELPG</Property>
+      <Property Name="Training Set Size">138</Property>
+      <Property Name="Data Source">Not Specified</Property>
+    </Properties>
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="1.000" B="30.580" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.770" B="17.640" />
+        <Bond Type="2" A="2.770" B="17.640" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="6.310" B="18.060" />
+        <Bond Type="2" A="6.310" B="18.060" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="33.940" B="71.140" />
+        <Bond Type="2" A="33.940" B="71.140" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="9.880" B="39.060" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Bult2002_mk">
+    <Properties>
+      <Property Name="Author">Bultinck, P., Langenaeker, W., Lahorte, P., De Proft, F., Geerlings, P., Waroquier, M., Tollenaere, J. P.</Property>
+      <Property Name="Publication">The Electronegativity Equalization Method II: Applicability of Different Atomic Charge schemes</Property>
+      <Property Name="Journal">J. Phys. Chem. A, 106, 7895-7901</Property>
+      <Property Name="Year">2002</Property>
+      <Property Name="Target">Medicinal Chemistry Compounds</Property>
+      <Property Name="QM Method">B3-LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">Merz-Sing-Kollman (MK)</Property>
+      <Property Name="Training Set Size">138</Property>
+      <Property Name="Data Source">Not Specified</Property>
+    </Properties>
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="1.000" B="28.600" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="3.150" B="16.720" />
+        <Bond Type="2" A="3.150" B="16.720" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="5.480" B="17.500" />
+        <Bond Type="2" A="5.480" B="17.500" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="26.350" B="58.120" />
+        <Bond Type="2" A="26.350" B="58.120" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="8.460" B="34.260" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Bult2002_npa">
+    <Properties>
+      <Property Name="Author">Bultinck, P., Langenaeker, W., Lahorte, P., De Proft, F., Geerlings, P., Waroquier, M., Tollenaere, J. P.</Property>
+      <Property Name="Publication">The Electronegativity Equalization Method II: Applicability of Different Atomic Charge schemes</Property>
+      <Property Name="Journal">J. Phys. Chem. A, 106, 7895-7901</Property>
+      <Property Name="Year">2002</Property>
+      <Property Name="Target">Medicinal Chemistry Compounds</Property>
+      <Property Name="QM Method">B3-LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">Natural (NPA)</Property>
+      <Property Name="Training Set Size">138</Property>
+      <Property Name="Data Source">Not Specified</Property>
+    </Properties>
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="1.000" B="19.440" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="8.490" B="18.300" />
+        <Bond Type="2" A="8.490" B="18.300" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="13.450" B="21.280" />
+        <Bond Type="2" A="13.450" B="21.280" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="27.060" B="39.260" />
+        <Bond Type="2" A="27.060" B="39.260" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="39.180" B="88.200" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Bult2002_hir">
+    <Properties>
+      <Property Name="Author">Bultinck, P., Langenaeker, W., Lahorte, P., De Proft, F., Geerlings, P., Waroquier, M., Tollenaere, J. P.</Property>
+      <Property Name="Publication">The Electronegativity Equalization Method II: Applicability of Different Atomic Charge schemes</Property>
+      <Property Name="Journal">J. Phys. Chem. A, 106, 7895-7901</Property>
+      <Property Name="Year">2002</Property>
+      <Property Name="Target">Medicinal Chemistry Compounds</Property>
+      <Property Name="QM Method">B3-LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">Hirshfeld</Property>
+      <Property Name="Training Set Size">138</Property>
+      <Property Name="Data Source">Not Specified</Property>
+    </Properties>
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="1.000" B="38.620" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.220" B="19.960" />
+        <Bond Type="2" A="2.220" B="19.960" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="3.510" B="21.980" />
+        <Bond Type="2" A="3.510" B="21.980" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="71.760" B="313.58" />
+        <Bond Type="2" A="71.760" B="313.58" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="11.780" B="86.060" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Bult2004_aim">
+    <Properties>
+      <Property Name="Author">Bultinck, P., Vanholme, R., Popelier, P. L. A., De Proft, F., Geerlings, P.</Property>
+      <Property Name="Publication">High-speed Calculation of AIM Charges through the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Phys. Chem. A, 108, 10359-10366</Property>
+      <Property Name="Year">2004</Property>
+      <Property Name="Target">Medicinal Chemistry Compounds</Property>
+      <Property Name="QM Method">B3-LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">Bader (AIM)</Property>
+      <Property Name="Training Set Size">138</Property>
+      <Property Name="Data Source">Not Specified</Property>
+    </Properties>
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="1.000" B="41.140" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="1.770" B="18.480" />
+        <Bond Type="2" A="1.770" B="18.480" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="14.800" B="21.480" />
+        <Bond Type="2" A="14.800" B="21.480" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="29.460" B="31.700" />
+        <Bond Type="2" A="29.460" B="31.700" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="62.840" B="92.100" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Chavez2006">
+    <Properties>
+      <Property Name="Author">Chavez, J., Barroso, J. M., Bultinck, P., Carbo-Dorca, R.</Property>
+      <Property Name="Publication">Towards an Alternative Hardness Kernel Matrix Structure in the Electronegativity Equalization Method (EEM)</Property>
+      <Property Name="Journal">J. Chem. Inf. Model., 46, 1657-1665</Property>
+      <Property Name="Year">2006</Property>
+      <Property Name="Target">Medicinal Chemistry Compounds</Property>
+      <Property Name="QM Method">B3-LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">Mulliken (MPA)</Property>
+      <Property Name="Training Set Size">138</Property>
+      <Property Name="Data Source">Not Specified</Property>
+    </Properties>
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="1.000" B="35.900" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="4.920" B="12.500" />
+        <Bond Type="2" A="4.920" B="12.500" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="9.100" B="17.380" />
+        <Bond Type="2" A="9.100" B="17.380" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="14.370" B="30.080" />
+        <Bond Type="2" A="14.370" B="30.080" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="15.250" B="42.720" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Mort1986">
+    <Properties>
+      <Property Name="Author">Mortier, W. J., Ghosh, S. K., Shankar, S.</Property>
+      <Property Name="Publication">Electronegativity Equalization Method for the Calculation of Atomic Charges in Molecules</Property>
+      <Property Name="Journal">J. Am. Chem. soc., 108, 4315-4320</Property>
+      <Property Name="Year">1986</Property>
+      <Property Name="Target">Not Specified</Property>
+      <Property Name="QM Method">Not Specified</Property>
+      <Property Name="Basis Set">STO-3G</Property>
+      <Property Name="Population Analysis">Mulliken (MPA)</Property>
+      <Property Name="Training Set Size">11</Property>
+      <Property Name="Data Source">C2 and C3 derivatives, water</Property>
+    </Properties>
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="2.846" B="13.8274" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="3.076" B="11.193" />
+        <Bond Type="2" A="3.076" B="11.193" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="3.668" B="16.0086" />
+        <Bond Type="2" A="3.668" B="16.0086" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="4.162" B="14.162" />
+        <Bond Type="2" A="4.162" B="14.162" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Ouy2009">
+    <Properties>
+      <Property Name="Author">Ouyang, Y., Ye, F., Liang, Y.</Property>
+      <Property Name="Publication">A modified electronegativity equalization method for fast and accurate calculation of atomic charges in large biological molecules</Property>
+      <Property Name="Journal">Phys. Chem. Chem. Phys, 11</Property>
+      <Property Name="Year">2009</Property>
+      <Property Name="Target">Biomolecules</Property>
+      <Property Name="QM Method">B3LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">Natural (NPA)</Property>
+      <Property Name="Training Set Size">124</Property>
+      <Property Name="Data Source">Not Specified</Property>
+    </Properties>
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="7.5196" B="2.5372" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="8.1092" B="1.4066" />
+        <Bond Type="2" A="7.9852" B="1.2708" />
+        <Bond Type="3" A="7.8746" B="1.2486" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="8.6563" B="1.7886" />
+        <Bond Type="2" A="8.3901" B="1.6174" />
+        <Bond Type="3" A="8.1462" B="1.6332" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="9.8540" B="3.4962" />
+        <Bond Type="2" A="9.2413" B="2.7994" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Ouy2009_elem">
+    <Properties>
+      <Property Name="Author">Ouyang, Y., Ye, F., Liang, Y.</Property>
+      <Property Name="Publication">A modified electronegativity equalization method for fast and accurate calculation of atomic charges in large biological molecules</Property>
+      <Property Name="Journal">Phys. Chem. Chem. Phys, 11</Property>
+      <Property Name="Year">2009</Property>
+      <Property Name="Target">Biomolecules</Property>
+      <Property Name="QM Method">B3LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">Natural (NPA)</Property>
+      <Property Name="Training Set Size">124</Property>
+      <Property Name="Data Source">Not Specified</Property>
+    </Properties>
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="8.0784" B="2.2952" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="8.5332" B="1.3042" />
+	<Bond Type="2" A="8.5332" B="1.3042" />
+	<Bond Type="3" A="8.5332" B="1.3042" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="8.7931" B="1.4164" />
+        <Bond Type="2" A="8.7931" B="1.4164" />
+        <Bond Type="3" A="8.7931" B="1.4164" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="9.6179" B="2.4846" />
+        <Bond Type="2" A="9.6179" B="2.4846" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Ouy2009_elemF">
+    <Properties>
+      <Property Name="Author">Ouyang, Y., Ye, F., Liang, Y.</Property>
+      <Property Name="Publication">A modified electronegativity equalization method for fast and accurate calculation of atomic charges in large biological molecules</Property>
+      <Property Name="Journal">Phys. Chem. Chem. Phys, 11</Property>
+      <Property Name="Year">2009</Property>
+      <Property Name="Target">Biomolecules</Property>
+      <Property Name="QM Method">B3LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">Natural (NPA)</Property>
+      <Property Name="Training Set Size">141</Property>
+      <Property Name="Data Source">Not Specified</Property>
+    </Properties>
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="17.1039" B="1.2996" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="17.5373" B="2.2393" />
+	<Bond Type="2" A="17.5373" B="2.2393" />
+	<Bond Type="3" A="17.5373" B="2.2393" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="17.8048" B="1.4128" />
+        <Bond Type="2" A="17.8048" B="1.4128" />
+
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="18.6226" B="2.4894" />
+        <Bond Type="2" A="18.6226" B="2.4894" />
+      </Element>
+	<Element Name="F">
+        <Bond Type="1" A="19.4129" B="5.5822" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Baek1991">
+    <Properties>
+      <Property Name="Author">Baekelandt, B. G., Mortier, W. J., Lievens, J. L., Schoonheydt, R. A.</Property>
+      <Property Name="Publication">Probing the Reactivity of Different Sites within a Molecule or Solid by Direct Computation of Molecular Sensitivities via an Extension of the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Am. Chem. Soc., 113</Property>
+      <Property Name="Year">1991</Property>
+      <Property Name="Target">Small Organometals and Salts</Property>
+      <Property Name="QM Method">Not Specified</Property>
+      <Property Name="Basis Set">STO-3G</Property>
+      <Property Name="Population Analysis">Mulliken (MPA)</Property>
+      <Property Name="Training Set Size">25</Property>
+      <Property Name="Data Source">Not Specified</Property>
+    </Properties>
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="3.791345" B="23.69072" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="5.68045" B="18.10116" />
+	<Bond Type="2" A="5.68045" B="18.10116" />
+	<Bond Type="3" A="5.68045" B="18.10116" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="10.59916" B="26.37246" />
+        <Bond Type="2" A="10.59916" B="26.37246" />
+        <Bond Type="3" A="10.59916" B="26.37246" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="8.50000" B="22.16574" />
+        <Bond Type="2" A="8.50000" B="22.16574" />
+      </Element>
+	<Element Name="Al">
+        <Bond Type="0" A="-2.23952" B="15.3449" />
+	<Bond Type="1" A="-2.23952" B="15.3449" />
+      </Element>
+	<Element Name="Si">
+        <Bond Type="0" A="1.33182" B="12.98518" />
+	<Bond Type="1" A="1.33182" B="12.98518" />
+	<Bond Type="2" A="1.33182" B="12.98518" />
+	<Bond Type="3" A="1.33182" B="12.98518" />
+      </Element>
+	<Element Name="P">
+        <Bond Type="0" A="2.90541" B="12.5883" />
+	<Bond Type="1" A="2.90541" B="12.5883" />
+	<Bond Type="2" A="2.90541" B="12.5883" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Yang1994">
+    <Properties>
+      <Property Name="Author">Yang, Z., Shen, E., Wang, L.</Property>
+      <Property Name="Publication">A scheme for calculating charge distribution in large molecules based on density functional theory and electronegativity equalization</Property>
+      <Property Name="Journal">J. Mol. Str. (Theochem), 312</Property>
+      <Property Name="Year">1994</Property>
+      <Property Name="Target">Small Saturated Organic</Property>
+      <Property Name="QM Method">Not Specified</Property>
+      <Property Name="Basis Set">STO-3G</Property>
+      <Property Name="Population Analysis">Mulliken (MPA)</Property>
+      <Property Name="Training Set Size">12</Property>
+      <Property Name="Data Source">Not Specified</Property>
+    </Properties>
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="2.29723" B="5.00384" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.50549" B="3.3859" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="3.42935" B="4.98152" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="3.02171" B="4.23088" />
+      </Element>
+      <Element Name="Si">
+        <Bond Type="0" A="1.70087" B="2.5336" />
+        <Bond Type="1" A="1.70087" B="2.5336" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Smirn1999">
+    <Properties>
+      <Property Name="Author">Smirnov, K. S., Thibault-Starzyk, F.</Property>
+      <Property Name="Publication">Confinement of Acetonitrile Molecules in Mordenite. A Computer Modeling Study</Property>
+      <Property Name="Journal">J. Phys. Chem. B, 103</Property>
+      <Property Name="Year">1999</Property>
+      <Property Name="Target">Organometallic</Property>
+      <Property Name="QM Method">Not Specified</Property>
+      <Property Name="Basis Set">STO-3G</Property>
+      <Property Name="Population Analysis">Merz-Kollman-Singh (MK)</Property>
+      <Property Name="Training Set Size">72</Property>
+      <Property Name="Data Source">Not Specified</Property>
+    </Properties>
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="4.1775" B="17.4452" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="4.9783" B="12.619" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="8.1458" B="16.6048" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="8.5000" B="19.741" />
+      </Element>
+      <Element Name="Si">
+        <Bond Type="0" A="2.0413" B="10.4426" />
+        <Bond Type="1" A="2.0413" B="10.4426" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+
+  <!--ParameterSet Name="MultiTest">
+    <Properties>
+      <Property Name="Target">Multiset Template</Property>
+      <Property Name="Basis Set">Who cares</Property>
+    </Properties>
+    <Parameters Target="AmbientAtoms[Atoms[Fe,Zn], 6]" Kappa="0.42" Priority="1">
+      <Element Name="H">
+        <Bond Type="1" A="2.386" B="0.937" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.452" B="0.593" />
+        <Bond Type="2" A="2.462" B="0.527" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.550" B="0.663" />
+        <Bond Type="2" A="2.547" B="0.639" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.624" B="0.847" />
+        <Bond Type="2" A="2.567" B="0.622" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.424" B="0.400" />
+      </Element>
+      <Element Name="Zn">
+        <Bond Type="0" A="2.378" B="0.259" />
+        <Bond Type="1" A="2.378" B="0.259" />
+      </Element>
+      <Element Name="Fe">
+        <Bond Type="0" A="2.557" B="0.061" />
+        <Bond Type="1" A="2.557" B="0.061" />
+      </Element>
+    </Parameters>
+    
+    <Parameters Target="Atoms" Kappa="0.44" Priority="2">
+      <Element Name="H">
+        <Bond Type="1" A="2.396" B="0.959" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.459" B="0.611" />
+        <Bond Type="2" A="2.464" B="0.565" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.597" B="0.790" />
+        <Bond Type="2" A="2.554" B="0.611" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.625" B="0.858" />
+        <Bond Type="2" A="2.580" B="0.691" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.407" B="0.491" />
+      </Element>
+    </Parameters>
+  </ParameterSet-->
+  
+  <ParameterSet Name="RS2-E">
+    <Properties>
+      <Property Name="Author">Crina</Property>
+      <Property Name="Target">Proteins</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">Mulliken</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">43</Property>
+      <Property Name="Data Source">PDB fragments</Property>
+    </Properties>
+    <Parameters Kappa="0.00600000">
+      <Element Name="Ca">
+        <Bond Type="1" A="2.44700900" B="0.01590200" />
+        <Bond Type="2" A="2.44700900" B="0.01590200" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.461924" B="0.014183" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.464400" B="0.007686" />
+        <Bond Type="2" A="2.464400" B="0.007686" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.478456" B="0.023513" />
+        <Bond Type="2" A="2.478456" B="0.023513" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.470527" B="0.012582" />
+        <Bond Type="2" A="2.470527" B="0.012582" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.475012" B="-0.050493" />
+        <Bond Type="2" A="2.475012" B="-0.050493" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+  <ParameterSet Name="RS2-EX">
+    <Properties>
+      <Property Name="Author">Crina</Property>      
+      <Property Name="Target">Proteins</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">Mulliken</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">43</Property>
+      <Property Name="Data Source">PDB fragments</Property>
+    </Properties>
+    <Parameters Kappa="0.00600000">
+      <Element Name="Ca">
+        <Bond Type="1" A="2.443085" B="0.017100" />
+        <Bond Type="2" A="2.443085" B="0.017100" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.458569" B="0.014775" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.461123" B="0.008147" />
+        <Bond Type="2" A="2.461067" B="0.007616" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.469984" B="0.017176" />
+        <Bond Type="2" A="2.473471" B="0.020849" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.473635" B="0.019073" />
+        <Bond Type="2" A="2.466074" B="0.011147" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.471719" B="-0.028756" />
+        <Bond Type="2" A="2.471719" B="-0.028756" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+</Sets>

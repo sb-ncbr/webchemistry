@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "MotiveQuery Help";
+}
+
+<div class="page-header">
+  <h1>Help <small>Basic language reference</small></h1>
+</div>
+
+<div class="row">
+    
+    <div class="span11">
+        
+        <dl class="dl-horizontal">
+          <dt>Atoms</dt> 
+          <dd>
+             <code>[C, N, O]</code> - Match any atom in the set.<br/>
+             <code>OnRing([N])</code> - All nitrogen atoms that are on ring.<br/>
+             <code>OnRing([C],4-C,N)</code> - All C atoms that are on ring with 4 carbons and 1 nitrogen.
+          </dd>
+            
+          <dt>&nbsp;</dt><dd>&nbsp;</dd>
+          <dt>Residues</dt> 
+          <dd>
+            <code>{ASP, ASN}</code> - Match any residue in the set.
+            </dd>
+            <dt>&nbsp;</dt><dd>&nbsp;</dd>
+          <dt>Rings</dt> <dd>
+            <code>Ring()</code> or <code>@@()</code> - Match any ring.<br/>
+                <code>Ring(5-C, O)</code> or <code>@@(5-C, O)</code> - Match a ring containing 5 C and O.
+          </dd>
+          <dt>&nbsp;</dt><dd>&nbsp;</dd>
+          <dt>Topology</dt>
+          <dd>
+            <code>$(Near(4.0,[Ca], [Ca]))</code> - Ambient residues that are around the inner motive.<br/>
+            <code>$($([Ca]))</code> - Two "levels" of ambient residues.<br/>
+            <code>Amb(n, {Zn})</code> - n "levels" of ambient residues. If <i>n = 0</i>, the motive is expanded to the "current" residue.<br/>
+            <code>AmbientAtoms(n, OnRing([N]))</code> - Find all nitrogens on a ring and add <i>n</i> layers of atoms around them.<br/>
+            <code>SurroundedBy([Zn], 2-HIS, 2-CYS)</code> - Match a zinc atom that is surrounded by given residues. All surrounding residues are included.<br/>
+          </dd>
+
+            
+          <dt>&nbsp;</dt><dd>&nbsp;</dd>
+          <dt>Geometry</dt>
+          <dd>
+            <code>Near(4.0, [Ca], Ring(), {ASP})</code> - Match any combination of patterns as long as they are close (4 ang in this case).<br/>
+            <code>CloseResidues(3.5, Ring(4-C, N))</code> - Residues that are closer (in this case closer than 3.5 ang) than the given distance to any atom of the inner motive.
+          </dd>
+                        
+          <dt>&nbsp;</dt><dd>&nbsp;</dd>
+          <dt>Misc</dt>
+          <dd>
+            <code>Regex("RGD")</code> - Match a linear motive (ELMs..). Regex must be in quotes.<br/>
+            <code>Or(Ring(5-C, O), Ring(4-C, O), Ring(4-C, N))</code> - Match any of the patterns.
+          </dd>
+        </dl>
+    </div>
+</div>

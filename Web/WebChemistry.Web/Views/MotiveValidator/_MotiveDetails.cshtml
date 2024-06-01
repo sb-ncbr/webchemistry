@@ -1,0 +1,180 @@
+﻿
+<script type="text/html" id="details-map-template">
+    <div data-bind="if: count === 0">None</div>
+    <div data-bind="if: count > 0">
+        <table class="table table-striped table-bordered" style="margin: 5px 0 5px 0; padding: 0">
+            <thead>
+                <tr>
+                    <th class="cell-small-padding" style="width: 100px">Model</th>
+                    <th class="cell-small-padding">Motif</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: Object.keys(theMap)">
+                <tr>
+                    <td data-bind="text: $parent.modelNames[$data]" style="width: 100px" class="cell-small-padding"></td>
+                    <td data-bind="text: $parent.theMap[$data]" class="cell-small-padding"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</script>
+
+<style>
+    .details-small-visualizer {
+        margin-top: 15px;
+        width: 340px;
+        height: 210px;
+        position: relative;
+    }
+
+    .details-small-visualizer canvas {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    .details-big-visualizer {
+        background: white;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 10000;
+    }
+
+    .details-big-visualizer canvas {
+        position: absolute;
+        text-align: center;
+        left: 50%;
+        margin-left: -445px;
+        width: 890px;
+        max-width: 890px;
+        top: 0;
+        bottom: 0;
+    }
+</style>
+
+<script type="text/html" id="details-template">
+    <div style="width: 1050px">
+        <table style="width: 1050px" cellpadding="0" cellspacing="0">
+            <tr>
+                <td style="width: 350px" valign="top">
+                    <div>
+                        <select data-bind="disable:modelVisualizationA.isBusy, options: modelVisualizationOptions, optionsText: 'caption', value: modelVisualizationA.current" style="width: 250px"></select>
+                        <span data-bind="text: modelVisualizationA.status"></span>
+                    </div>
+                    <div style="text-align: left;" class="details-small-visualizer" id="model3d-A-wrap">
+                        <canvas id="model3d-A" data-bind="if: isWebGLavailable"></canvas>
+                        <div style="position: absolute; right: 5px; top: 5px">
+                            <button class="btn btn-small btn-link" title="Toggle Size" data-bind="click: function() { toggleVisualizerSize('A'); }"><i class="icon-resize-full"></i></button><br />
+                            <button class="btn btn-small btn-link" title="Toggle Labels" data-bind="disable:modelVisualizationA.isBusy, click: modelVisualizationAType.toggleLabels"><i class="icon-font"></i></button><br />
+                            <button class="btn btn-small btn-link" title="Toggle Display Mode" data-bind="disable:modelVisualizationA.isBusy, click: modelVisualizationAType.toggleDisplayType"><i class="icon-random"></i></button><br />
+                        </div>
+                    </div>
+                </td>
+                <td style="width: 350px" valign="top">
+                    <div>
+                        <select data-bind="disable:modelVisualizationB.isBusy, options: modelVisualizationOptions, optionsText: 'caption', value:modelVisualizationB.current" style="width: 250px"></select>
+                        <span data-bind="text: modelVisualizationB.status"></span>
+                    </div>
+                    <div style="text-align: left;" class="details-small-visualizer" id="model3d-B-wrap">
+                        <canvas id="model3d-B" data-bind="if: isWebGLavailable"></canvas>
+                        <div style="position: absolute; right: 5px; top: 5px">
+                            <button class="btn btn-small btn-link" title="Toggle Size" data-bind="click: function() { toggleVisualizerSize('B'); }"><i class="icon-resize-full"></i></button><br />
+                            <button class="btn btn-small btn-link" title="Toggle Labels" data-bind="disable:modelVisualizationB.isBusy, click: modelVisualizationBType.toggleLabels"><i class="icon-font"></i></button><br />
+                            <button class="btn btn-small btn-link" title="Toggle Display Mode" data-bind="disable:modelVisualizationB.isBusy, click: modelVisualizationBType.toggleDisplayType"><i class="icon-random"></i></button><br />
+                        </div>
+                    </div>
+                </td>
+                <td style="width: 350px" align="center">
+                    <img style="max-width:350px; max-height: 250px" data-bind="attr: { title: ModelName.toUpperCase(), src: '//www.ebi.ac.uk/pdbe-srv/pdbechem/image/showNew?code=' + ModelName.toUpperCase() + '&size=500'   }" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3"><hr style="margin: 5px 0px" /></td>
+            </tr>
+            <tr>
+                <td valign="top" style="padding-right: 10px; width: 350px; max-width: 350px; overflow: hidden">
+                    <dl style="margin-top: 5px">
+                        <dt>Model Info</dt>
+                        <dd>
+                            <span data-bind="text: model.ModelName.toUpperCase()"></span> [ <span data-bind="html: model['htmlFormula']"></span> ]<br />
+                            <span style="font-style: italic" data-bind="text: model['LongName']"></span><br />
+                            <a data-bind="attr: { href: '//ligand-expo.rcsb.org/reports/' + ModelName.charAt(0).toUpperCase() + '/' + ModelName.toUpperCase() + '/index.html' }" target="_blank">LigandExpo</a> |
+                            <a data-bind="attr: { href: getModelUrl(ModelName, 'modelpdb', true) }">PDB</a> <a data-bind="    attr: { href: getModelUrl(ModelName, 'modelpdb', false) }" target="_blank"><i class="icon-eye-open" /></a> |
+                            <a data-bind="attr: { href: getModelUrl(ModelName, 'modelmol', true) }">MOL</a> <a data-bind="    attr: { href: getModelUrl(ModelName, 'modelmol', false) }" target="_blank"><i class="icon-eye-open" /></a>
+                        </dd>
+                        <dt style="margin-top: 10px">Motif Info</dt>
+                        <dd>
+                            <abbr title="The structure the motif was extracted from. The links work only for structures that can be found in the PDB.org database.">Input structure</abbr> - <a data-bind="attr: { href: '//www.pdb.org/pdb/download/downloadFile.do?fileFormat=pdb&compression=NO&structureId=' + parentId }">PDB</a> <a data-bind="    attr: { href: '//www.rcsb.org/pdb/files/' + parentId + '.pdb' }" target="_blank"><i class="icon-eye-open" /></a> | <a data-bind="    attr: { href: '//www.pdb.org/pdb/explore/explore.do?structureId=' + parentId }" target="_blank">Info</a> <br>
+                            <abbr title="Motif that was used as the input to the validation algorithm. Contains all atoms of the validated residue, together with atoms within one or two bonds from any atom of the validated residue in the input structure.">Input motif</abbr> - <a data-bind="attr: { href: getStructureUrl(id, 'motif', true) }">PDB</a> <a data-bind="    attr: { href: getStructureUrl(id, 'motif', false) }" target="_blank"><i class="icon-eye-open" /></a><br>
+                            <abbr title="A subset of atoms from the input motif which were sucessfully mapped to atoms from the model residue.">Validated motif</abbr> - <a data-bind="attr: { href: getStructureUrl(id, 'matched', true) }">PDB</a> <a data-bind="    attr: { href: getStructureUrl(id, 'matched', false) }" target="_blank"><i class="icon-eye-open" /></a>
+                            | <a data-bind="attr: { href: getStructureUrl(id, 'mol', true) }">MOL</a> <a data-bind="    attr: { href: getStructureUrl(id, 'mol', false) }" target="_blank"><i class="icon-eye-open" /></a>
+                            <br>
+                        </dd>
+                        <dt style="margin-top: 10px" data-bind="if: warning">
+                            <abbr title="A warning indicates that the shown results may not be correct and a manual validation is recommended.">Processing Warnings</abbr>
+                        </dt>
+                        <dd>
+                            <ul data-bind="foreach: warnings" style="margin-left: 4px; margin-top: 2px; color: #DB890F">
+                                <li><small data-bind="text: $data"></small></li>
+                            </ul>
+                        </dd> @*<small><span data-bind="text: warning" style="color: #DB890F"></span></small></dd>*@
+                    </dl>
+                </td>
+                <td valign="top" style="padding-right: 10px">
+                    <dl style="margin-top: 5px">
+                        <dt>Validated Residue</dt>
+                        <dd data-bind="text: MainResidue"></dd>
+                        <dt>Residues in Input Motif</dt>
+                        <dd data-bind="text: Residues"></dd>
+                        <dt><abbr title="Atoms from the validated motif with different PDB name than the corresponding atom from the model residue (e.g., the C1 atom mapped to the C7 atom).">Different Atom Names</abbr> <span style="font-weight: normal" data-bind="text: NameMismatchCount"></span></dt>
+                        <dd data-bind="template: { name: 'details-map-template', data: { count: NameMismatchCount, theMap: NameMismatches, modelNames: modelsMap[ModelName].ModelNames } }">
+                        </dd>
+                        <dt><abbr title="Atoms from the model residue mapped to atom from outside the validated residue (i.e., from its surroundings).">Foreign Atoms</abbr> <span style="font-weight: normal" data-bind="text: ForeignAtomCount"></span></dt>
+                        <dd data-bind="template: { name: 'details-map-template', data: { count: ForeignAtomCount, theMap: ForeignAtoms, modelNames: modelsMap[ModelName].ModelNames } }">
+                        </dd>
+                        <dt><abbr title="Atoms from the validated motif with different chemical symbol than the corresponding atom in the model residue (e.g., O mapped to N).">Substitutions</abbr> <span style="font-weight: normal" data-bind="text: SubstitutionCount"></span></dt>
+                        <dd data-bind="template: { name: 'details-map-template', data: { count: SubstitutionCount, theMap: Substitutions, modelNames: modelsMap[ModelName].ModelNames } }">
+                        </dd>
+                    </dl>
+                </td>
+                <td valign="top">
+                    <dl style="margin-top: 5px">
+                        <dt><abbr title="Atoms from the model residue which could not be mapped to any atom in the input motif.">Missing Atoms</abbr> <span style="font-weight: normal" data-bind="text: MissingAtomCount"></span></dt>
+                        <dd data-bind="text: MissingAtomCount > 0 ? atomListToString(id, MissingAtoms) : 'None'"></dd>
+                        <dt><abbr title="Rings that are present in the model but not in the validated motif.">Missing Rings</abbr> <span style="font-weight: normal" data-bind="text: MissingRingCount"></span></dt>
+                        <dd data-bind="text: MissingRingCount > 0 ? MissingRings : 'None'"></dd>
+                        <dt><abbr title="Atoms from the validated motif with different chirality than the corresponding atom from the model residue.">Chirality Errors</abbr> <span style="font-weight: normal" data-bind="text: ChiralityMismatchCount"></span></dt>
+                        <dd>
+                            <div data-bind="if: ChiralityMismatchCount === 0">None</div>
+                            <div data-bind="if: ChiralityMismatchCount > 0">
+                                <table class="table table-striped table-bordered" style="margin: 5px 0 5px 0; padding: 0">
+                                    <thead>
+                                        <tr>
+                                            <th class="cell-small-padding">Model</th>
+                                            <th class="cell-small-padding">Motif</th>
+                                            <th class="cell-small-padding">Expected</th>
+                                            <th class="cell-small-padding">Got</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: wrongChirality">
+                                        <tr>
+                                            <td data-bind="text: modelAtom" class="cell-small-padding"></td>
+                                            <td data-bind="text: atom" class="cell-small-padding"></td>
+                                            <td data-bind="text: modelChirality" class="cell-small-padding"></td>
+                                            <td data-bind="text: atomChirality" class="cell-small-padding"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </dd>
+                    </dl>
+                </td>
+            </tr>
+        </table>
+    </div>
+</script>

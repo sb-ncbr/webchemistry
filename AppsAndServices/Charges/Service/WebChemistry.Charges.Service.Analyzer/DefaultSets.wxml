@@ -1,0 +1,1867 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Sets>
+  <ParameterSet Name="Cheminf_hf_npa">
+    <Properties>
+      <Property Name="Author">Geidl S., Bouchal T., Raček T., Svobodová Vařeková R., Hejret V., Křenek A., Abagyan R., and Koča J.</Property>
+      <Property Name="Publication">High-quality and universal empirical atomic charges for chemoinformatics applications</Property>
+      <Property Name="Journal">Journal of Cheminformatics, 7:59</Property>
+      <Property Name="Year">2015</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Basis Set">6-311G</Property>
+      <Property Name="Population Analysis">NPA</Property>
+      <Property Name="Training Set Size">4475</Property>
+      <Property Name="Data Source">Not Specified</Property>
+      <Property Name="Priority">2</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.23990000">
+      <Element Name="Br">
+        <Bond Type="1" A="2.44000000" B="0.65270000" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.48870000" B="0.30540000" />
+        <Bond Type="2" A="2.49750000" B="0.29610000" />
+        <Bond Type="3" A="2.46130000" B="0.31760000" />
+      </Element>
+      <Element Name="Cl">
+        <Bond Type="1" A="2.52250000" B="0.79330000" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="3.02110000" B="1.19770000" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.39150000" B="0.62770000" />
+      </Element>
+      <Element Name="I">
+        <Bond Type="1" A="2.32740000" B="0.92110000" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.59430000" B="0.39200000" />
+        <Bond Type="2" A="2.55000000" B="0.27810000" />
+        <Bond Type="3" A="2.53340000" B="0.37180000" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.63990000" B="0.39450000" />
+        <Bond Type="2" A="2.65050000" B="0.38190000" />
+      </Element>
+      <Element Name="P">
+        <Bond Type="1" A="2.39290000" B="0.17320000" />
+        <Bond Type="2" A="2.17410000" B="0.31920000" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.44710000" B="0.23960000" />
+        <Bond Type="2" A="2.49060000" B="0.19500000" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+  <ParameterSet Name="Cheminf_hf_mpa">
+    <Properties>
+      <Property Name="Author">Geidl S., Bouchal T., Raček T., Svobodová Vařeková R., Hejret V., Křenek A., Abagyan R., and Koča J.</Property>
+      <Property Name="Publication">High-quality and universal empirical atomic charges for chemoinformatics applications</Property>
+      <Property Name="Journal">Journal of Cheminformatics, 7:59</Property>
+      <Property Name="Year">2015</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Basis Set">6-311G</Property>
+      <Property Name="Population Analysis">MPA</Property>
+      <Property Name="Training Set Size">4475</Property>
+      <Property Name="Data Source">Not Specified</Property>
+      <Property Name="Priority">5</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.20020000">
+      <Element Name="Br">
+        <Bond Type="1" A="2.34280000" B="0.78160000" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.50140000" B="0.27230000" />
+        <Bond Type="2" A="2.48850000" B="0.24660000" />
+        <Bond Type="3" A="2.51540000" B="0.23820000" />
+      </Element>
+      <Element Name="Cl">
+        <Bond Type="1" A="2.52590000" B="0.87310000" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="3.01860000" B="1.11320000" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.37510000" B="0.66210000" />
+      </Element>
+      <Element Name="I">
+        <Bond Type="1" A="2.28840000" B="0.64130000" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.61000000" B="0.30600000" />
+        <Bond Type="2" A="2.56570000" B="0.29110000" />
+        <Bond Type="3" A="2.60770000" B="0.75790000" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.63700000" B="0.34440000" />
+        <Bond Type="2" A="2.64810000" B="0.39920000" />
+      </Element>
+      <Element Name="P">
+        <Bond Type="1" A="2.40710000" B="0.15080000" />
+        <Bond Type="2" A="2.16540000" B="0.32590000" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.42020000" B="0.25020000" />
+        <Bond Type="2" A="2.46420000" B="0.18340000" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+  <ParameterSet Name="Cheminf_hf_aim">
+    <Properties>
+      <Property Name="Author">Geidl S., Bouchal T., Raček T., Svobodová Vařeková R., Hejret V., Křenek A., Abagyan R., and Koča J.</Property>
+      <Property Name="Publication">High-quality and universal empirical atomic charges for chemoinformatics applications</Property>
+      <Property Name="Journal">Journal of Cheminformatics, 7:59</Property>
+      <Property Name="Year">2015</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Basis Set">6-311G</Property>
+      <Property Name="Population Analysis">AIM</Property>
+      <Property Name="Training Set Size">4475</Property>
+      <Property Name="Data Source">Not Specified</Property>
+      <Property Name="Priority">4</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.19760000">
+      <Element Name="Br">
+        <Bond Type="1" A="2.47030000" B="0.53870000" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.42460000" B="0.27570000" />
+        <Bond Type="2" A="2.44350000" B="0.25400000" />
+        <Bond Type="3" A="2.31210000" B="0.42930000" />
+      </Element>
+      <Element Name="Cl">
+        <Bond Type="1" A="2.60370000" B="0.68220000" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="3.54390000" B="1.71380000" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.42640000" B="0.50540000" />
+      </Element>
+      <Element Name="I">
+        <Bond Type="1" A="2.35920000" B="0.74760000" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.59980000" B="0.29790000" />
+        <Bond Type="2" A="2.56820000" B="0.24540000" />
+        <Bond Type="3" A="3.16550000" B="0.81880000" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.65750000" B="0.32740000" />
+        <Bond Type="2" A="2.66330000" B="0.31630000" />
+      </Element>
+      <Element Name="P">
+        <Bond Type="1" A="1.92710000" B="0.37950000" />
+        <Bond Type="2" A="1.84280000" B="0.34420000" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.39530000" B="0.27310000" />
+        <Bond Type="2" A="2.43130000" B="0.17920000" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+  <ParameterSet Name="Cheminf_b3lyp_mpa">
+    <Properties>
+      <Property Name="Author">Geidl S., Bouchal T., Raček T., Svobodová Vařeková R., Hejret V., Křenek A., Abagyan R., and Koča J.</Property>
+      <Property Name="Publication">High-quality and universal empirical atomic charges for chemoinformatics applications</Property>
+      <Property Name="Journal">Journal of Cheminformatics, 7:59</Property>
+      <Property Name="Year">2015</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">B3LYP</Property>
+      <Property Name="Basis Set">6-311G</Property>
+      <Property Name="Population Analysis">MPA</Property>
+      <Property Name="Training Set Size">4475</Property>
+      <Property Name="Data Source">Not Specified</Property>
+      <Property Name="Priority">6</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.22120000">
+      <Element Name="Br">
+        <Bond Type="1" A="2.34390000" B="0.76870000" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.52040000" B="0.31150000" />
+        <Bond Type="2" A="2.49600000" B="0.28200000" />
+        <Bond Type="3" A="2.50810000" B="0.21010000" />
+      </Element>
+      <Element Name="Cl">
+        <Bond Type="1" A="2.49910000" B="1.00910000" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="3.11060000" B="1.67910000" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.37700000" B="0.71380000" />
+      </Element>
+      <Element Name="I">
+        <Bond Type="1" A="2.27430000" B="0.74980000" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.61080000" B="0.34590000" />
+        <Bond Type="2" A="2.58320000" B="0.38360000" />
+        <Bond Type="3" A="2.55440000" B="0.93730000" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.63710000" B="0.40760000" />
+        <Bond Type="2" A="2.63610000" B="0.46120000" />
+      </Element>
+      <Element Name="P">
+        <Bond Type="1" A="2.42480000" B="0.16460000" />
+        <Bond Type="2" A="2.14460000" B="0.40450000" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.41210000" B="0.31250000" />
+        <Bond Type="2" A="2.46260000" B="0.20700000" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+  <ParameterSet Name="Cheminf_b3lyp_aim">
+    <Properties>
+      <Property Name="Author">Geidl S., Bouchal T., Raček T., Svobodová Vařeková R., Hejret V., Křenek A., Abagyan R., and Koča J.</Property>
+      <Property Name="Publication">High-quality and universal empirical atomic charges for chemoinformatics applications</Property>
+      <Property Name="Journal">Journal of Cheminformatics, 7:59</Property>
+      <Property Name="Year">2015</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">B3LYP</Property>
+      <Property Name="Basis Set">6-311G</Property>
+      <Property Name="Population Analysis">AIM</Property>
+      <Property Name="Training Set Size">4475</Property>
+      <Property Name="Data Source">Not Specified</Property>
+      <Property Name="Priority">3</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.23470000">
+      <Element Name="Br">
+        <Bond Type="1" A="2.46770000" B="0.64790000" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.43240000" B="0.31920000" />
+        <Bond Type="2" A="2.44660000" B="0.30330000" />
+        <Bond Type="3" A="2.29030000" B="0.53320000" />
+      </Element>
+      <Element Name="Cl">
+        <Bond Type="1" A="2.60260000" B="0.82900000" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="3.51580000" B="1.93870000" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.42380000" B="0.55860000" />
+      </Element>
+      <Element Name="I">
+        <Bond Type="1" A="2.36140000" B="0.85450000" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.59970000" B="0.36080000" />
+        <Bond Type="2" A="2.56910000" B="0.28930000" />
+        <Bond Type="3" A="2.82230000" B="0.57040000" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.66330000" B="0.38900000" />
+        <Bond Type="2" A="2.67290000" B="0.37700000" />
+      </Element>
+      <Element Name="P">
+        <Bond Type="1" A="1.89340000" B="0.43380000" />
+        <Bond Type="2" A="1.95100000" B="0.35970000" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.40470000" B="0.29550000" />
+        <Bond Type="2" A="2.43540000" B="0.20830000" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+  <ParameterSet Name="Cheminf_b3lyp_npa">
+    <Properties>
+      <Property Name="Author">Geidl S., Bouchal T., Raček T., Svobodová Vařeková R., Hejret V., Křenek A., Abagyan R., and Koča J.</Property>
+      <Property Name="Publication">High-quality and universal empirical atomic charges for chemoinformatics applications</Property>
+      <Property Name="Journal">Journal of Cheminformatics, 7:59</Property>
+      <Property Name="Year"></Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">B3LYP</Property>
+      <Property Name="Basis Set">6-311G</Property>
+      <Property Name="Population Analysis">NPA</Property>
+      <Property Name="Training Set Size">4475</Property>
+      <Property Name="Data Source">Not Specified</Property>
+      <Property Name="Priority">1</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.25090000">
+      <Element Name="Br">
+        <Bond Type="1" A="2.42440000" B="0.75110000" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.49920000" B="0.32200000" />
+        <Bond Type="2" A="2.50650000" B="0.31730000" />
+        <Bond Type="3" A="2.46170000" B="0.34890000" />
+      </Element>
+      <Element Name="Cl">
+        <Bond Type="1" A="2.51040000" B="0.83640000" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="3.00280000" B="1.24330000" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.38640000" B="0.65810000" />
+      </Element>
+      <Element Name="I">
+        <Bond Type="1" A="2.32720000" B="0.93030000" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.58910000" B="0.40720000" />
+        <Bond Type="2" A="2.55680000" B="0.29490000" />
+        <Bond Type="3" A="2.53480000" B="0.40250000" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.63420000" B="0.40410000" />
+        <Bond Type="2" A="2.65880000" B="0.42320000" />
+      </Element>
+      <Element Name="P">
+        <Bond Type="1" A="2.38980000" B="0.19020000" />
+        <Bond Type="2" A="2.20980000" B="0.32810000" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.45060000" B="0.24040000" />
+        <Bond Type="2" A="2.48840000" B="0.20430000" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Svob2007_cmet2">
+    <!-- Name will be displayed in the set list -->
+    <Properties>
+      <Property Name="Author">Svobodová Vareková R., Vanek J., Suchomel Š., Jiroušková Z., Koca J.</Property>
+      <Property Name="Publication">Electronegativity equalization method: Parametrization and validation for large sets of organic, organohalogen and organometal molecules</Property>
+      <Property Name="Journal">Int. J. Mol. Sci., 8, 572-582</Property>
+      <Property Name="Year">2007</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Basis Set">STO-3G</Property>
+      <Property Name="Population Analysis">MPA</Property>
+      <Property Name="Training Set Size">1154</Property>
+      <Property Name="Data Source">NCI DIS and CSD</Property>
+      <Property Name="Priority">7</Property>
+      <!-- Additional parameters can be added here -->
+      <!-- <Property Name="XYZ">value</Property> -->
+    </Properties>
+    <Parameters Kappa="0.42">
+      <Element Name="H">
+        <Bond Type="1" A="2.386" B="0.937" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.452" B="0.593" />
+        <Bond Type="2" A="2.462" B="0.527" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.550" B="0.663" />
+        <Bond Type="2" A="2.547" B="0.639" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.624" B="0.847" />
+        <Bond Type="2" A="2.567" B="0.622" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.424" B="0.400" />
+      </Element>
+      <Element Name="Zn">
+        <Bond Type="0" A="2.378" B="0.259" />
+        <Bond Type="1" A="2.378" B="0.259" />
+      </Element>
+      <Element Name="Fe">
+        <Bond Type="0" A="2.557" B="0.061" />
+        <Bond Type="1" A="2.557" B="0.061" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Svob2007_cbeg2">
+    <Properties>
+      <Property Name="Author">Svobodová Vareková R., Vanek J., Suchomel Š., Jiroušková Z., Koca J.</Property>
+      <Property Name="Publication">Electronegativity equalization method: Parametrization and validation for large sets of organic, organohalogen and organometal molecules</Property>
+      <Property Name="Journal">Int. J. Mol. Sci., 8, 572-582</Property>
+      <Property Name="Year">2007</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Basis Set">STO-3G</Property>
+      <Property Name="Population Analysis">MPA</Property>
+      <Property Name="Training Set Size">544</Property>
+      <Property Name="Data Source">NCI DIS and CSD</Property>
+      <Property Name="Priority">3</Property>
+    </Properties>
+    <Parameters Kappa="0.44">
+      <Element Name="H">
+        <Bond Type="1" A="2.396" B="0.959" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.459" B="0.611" />
+        <Bond Type="2" A="2.464" B="0.565" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.597" B="0.790" />
+        <Bond Type="2" A="2.554" B="0.611" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.625" B="0.858" />
+        <Bond Type="2" A="2.580" B="0.691" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.407" B="0.491" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Svob2007_chal2">
+    <Properties>
+      <Property Name="Author">Svobodová Vareková R., Vanek J., Suchomel Š., Jiroušková Z., Koca J.</Property>
+      <Property Name="Publication">Electronegativity equalization method: Parametrization and validation for large sets of organic, organohalogen and organometal molecules</Property>
+      <Property Name="Journal">Int. J. Mol. Sci., 8, 572-582</Property>
+      <Property Name="Year">2007</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Basis Set">STO-3G</Property>
+      <Property Name="Population Analysis">MPA</Property>
+      <Property Name="Training Set Size">870</Property>
+      <Property Name="Data Source">NCI DIS and CSD</Property>
+      <Property Name="Priority">3</Property>
+    </Properties>
+    <Parameters Kappa="0.66">
+      <Element Name="H">
+        <Bond Type="1" A="2.404" B="1.461" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.503" B="0.899" />
+        <Bond Type="2" A="2.516" B="0.850" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.653" B="1.017" />
+        <Bond Type="2" A="2.633" B="0.869" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.713" B="1.211" />
+        <Bond Type="2" A="2.757" B="1.348" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.465" B="0.705" />
+      </Element>
+      <Element Name="Cl">
+        <Bond Type="1" A="2.791" B="2.365" />
+      </Element>
+      <Element Name="Br">
+        <Bond Type="1" A="2.496" B="1.345" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="2.789" B="1.494" />
+      </Element>
+      <Element Name="I">
+        <Bond Type="1" A="2.421" B="2.309" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Svob2007_hm2">
+    <Properties>
+      <Property Name="Author">Svobodová Vareková R., Vanek J., Suchomel Š., Jiroušková Z., Koca J.</Property>
+      <Property Name="Publication">Electronegativity equalization method: Parametrization and validation for large sets of organic, organohalogen and organometal molecules</Property>
+      <Property Name="Journal">Int. J. Mol. Sci., 8, 572-582</Property>
+      <Property Name="Year">2007</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Basis Set">STO-3G</Property>
+      <Property Name="Population Analysis">MPA</Property>
+      <Property Name="Training Set Size">3258</Property>
+      <Property Name="Data Source">NCI DIS and CSD</Property>
+      <Property Name="Priority">3</Property>
+    </Properties>
+    <Parameters Kappa="0.55">
+      <Element Name="H">
+        <Bond Type="1" A="2.394" B="1.212" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.476" B="0.772" />
+        <Bond Type="2" A="2.495" B="0.704" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.597" B="0.835" />
+        <Bond Type="2" A="2.600" B="0.790" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.676" B="1.077" />
+        <Bond Type="2" A="2.622" B="0.850" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.440" B="0.665" />
+      </Element>
+      <Element Name="Cl">
+        <Bond Type="1" A="2.759" B="2.092" />
+      </Element>
+      <Element Name="Br">
+        <Bond Type="1" A="2.494" B="1.315" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="2.032" B="2.985" />
+      </Element>
+      <Element Name="I">
+        <Bond Type="1" A="2.454" B="1.387" />
+      </Element>
+      <Element Name="Zn">
+        <Bond Type="0" A="2.422" B="0.301" />
+        <Bond Type="1" A="2.422" B="0.301" />
+      </Element>
+      <Element Name="Fe">
+        <Bond Type="0" A="2.575" B="0.087" />
+        <Bond Type="1" A="2.575" B="0.087" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Bult2002_mul">
+    <Properties>
+      <Property Name="Author">Bultinck, P., Langenaeker, W., Lahorte, P., De Proft, F., Geerlings, P., Waroquier, M., Tollenaere, J. P.</Property>
+      <Property Name="Publication">The Electronegativity Equalization Method II: Applicability of Different Atomic Charge schemes</Property>
+      <Property Name="Journal">J. Phys. Chem. A, 106, 7895-7901</Property>
+      <Property Name="Year">2002</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">B3LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">MPA</Property>
+      <Property Name="Training Set Size">138</Property>
+      <Property Name="Data Source">Not Specified</Property>
+      <Property Name="Priority">4</Property>
+    </Properties>
+    <UnitConversion KappaFactor="0.529177249" ABFactor="0.036749309" />
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="1.000" B="35.900" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="5.260" B="18.000" />
+        <Bond Type="2" A="5.260" B="18.000" />
+        <Bond Type="3" A="5.260" B="18.000" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="8.800" B="18.780" />
+        <Bond Type="2" A="8.800" B="18.780" />
+        <Bond Type="3" A="8.800" B="18.780" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="14.720" B="28.680" />
+        <Bond Type="2" A="14.720" B="28.680" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="15.000" B="39.540" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Bult2002_che">
+    <Properties>
+      <Property Name="Author">Bultinck, P., Langenaeker, W., Lahorte, P., De Proft, F., Geerlings, P., Waroquier, M., Tollenaere, J. P.</Property>
+      <Property Name="Publication">The Electronegativity Equalization Method II: Applicability of Different Atomic Charge schemes</Property>
+      <Property Name="Journal">J. Phys. Chem. A, 106, 7895-7901</Property>
+      <Property Name="Year">2002</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">B3LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">CHELPG</Property>
+      <Property Name="Training Set Size">138</Property>
+      <Property Name="Data Source">Not Specified</Property>
+      <Property Name="Priority">4</Property>
+    </Properties>
+    <UnitConversion KappaFactor="0.529177249" ABFactor="0.036749309" />
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="1.000" B="30.580" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.770" B="17.640" />
+        <Bond Type="2" A="2.770" B="17.640" />
+        <Bond Type="3" A="2.770" B="17.640" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="6.310" B="18.060" />
+        <Bond Type="2" A="6.310" B="18.060" />
+        <Bond Type="3" A="6.310" B="18.060" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="33.940" B="71.140" />
+        <Bond Type="2" A="33.940" B="71.140" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="9.880" B="39.060" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Bult2002_mk">
+    <Properties>
+      <Property Name="Author">Bultinck, P., Langenaeker, W., Lahorte, P., De Proft, F., Geerlings, P., Waroquier, M., Tollenaere, J. P.</Property>
+      <Property Name="Publication">The Electronegativity Equalization Method II: Applicability of Different Atomic Charge schemes</Property>
+      <Property Name="Journal">J. Phys. Chem. A, 106, 7895-7901</Property>
+      <Property Name="Year">2002</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">B3LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">MK</Property>
+      <Property Name="Training Set Size">138</Property>
+      <Property Name="Data Source">Not Specified</Property>
+      <Property Name="Priority">4</Property>
+    </Properties>
+    <UnitConversion KappaFactor="0.529177249" ABFactor="0.036749309" />
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="1.000" B="28.600" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="3.150" B="16.720" />
+        <Bond Type="2" A="3.150" B="16.720" />
+        <Bond Type="3" A="3.150" B="16.720" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="5.480" B="17.500" />
+        <Bond Type="2" A="5.480" B="17.500" />
+        <Bond Type="3" A="5.480" B="17.500" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="26.350" B="58.120" />
+        <Bond Type="2" A="26.350" B="58.120" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="8.460" B="34.260" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Bult2002_npa">
+    <Properties>
+      <Property Name="Author">Bultinck, P., Langenaeker, W., Lahorte, P., De Proft, F., Geerlings, P., Waroquier, M., Tollenaere, J. P.</Property>
+      <Property Name="Publication">The Electronegativity Equalization Method II: Applicability of Different Atomic Charge schemes</Property>
+      <Property Name="Journal">J. Phys. Chem. A, 106, 7895-7901</Property>
+      <Property Name="Year">2002</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">B3LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">NPA</Property>
+      <Property Name="Training Set Size">138</Property>
+      <Property Name="Data Source">Not Specified</Property>
+      <Property Name="Priority">4</Property>
+    </Properties>
+    <UnitConversion KappaFactor="0.529177249" ABFactor="0.036749309" />
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="1.000" B="19.440" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="8.490" B="18.300" />
+        <Bond Type="2" A="8.490" B="18.300" />
+        <Bond Type="3" A="8.490" B="18.300" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="13.450" B="21.280" />
+        <Bond Type="2" A="13.450" B="21.280" />
+        <Bond Type="3" A="13.450" B="21.280" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="27.060" B="39.260" />
+        <Bond Type="2" A="27.060" B="39.260" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="39.180" B="88.200" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Bult2002_hir">
+    <Properties>
+      <Property Name="Author">Bultinck, P., Langenaeker, W., Lahorte, P., De Proft, F., Geerlings, P., Waroquier, M., Tollenaere, J. P.</Property>
+      <Property Name="Publication">The Electronegativity Equalization Method II: Applicability of Different Atomic Charge schemes</Property>
+      <Property Name="Journal">J. Phys. Chem. A, 106, 7895-7901</Property>
+      <Property Name="Year">2002</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">B3LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">Hirshfeld</Property>
+      <Property Name="Training Set Size">138</Property>
+      <Property Name="Data Source">Not Specified</Property>
+      <Property Name="Priority">4</Property>
+    </Properties>
+    <UnitConversion KappaFactor="0.529177249" ABFactor="0.036749309" />
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="1.000" B="38.620" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="2.220" B="19.960" />
+        <Bond Type="2" A="2.220" B="19.960" />
+        <Bond Type="3" A="2.220" B="19.960" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="3.510" B="21.980" />
+        <Bond Type="2" A="3.510" B="21.980" />
+        <Bond Type="3" A="3.510" B="21.980" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="71.760" B="313.58" />
+        <Bond Type="2" A="71.760" B="313.58" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="11.780" B="86.060" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Bult2004_aim">
+    <Properties>
+      <Property Name="Author">Bultinck, P., Vanholme, R., Popelier, P. L. A., De Proft, F., Geerlings, P.</Property>
+      <Property Name="Publication">High-speed Calculation of AIM Charges through the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Phys. Chem. A, 108, 10359-10366</Property>
+      <Property Name="Year">2004</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">B3LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">AIM</Property>
+      <Property Name="Training Set Size">138</Property>
+      <Property Name="Data Source">Not Specified</Property>
+      <Property Name="Priority">4</Property>
+    </Properties>
+    <UnitConversion KappaFactor="0.529177249" ABFactor="0.036749309" />
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="1.000" B="41.140" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="1.770" B="18.480" />
+        <Bond Type="2" A="1.770" B="18.480" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="14.800" B="21.480" />
+        <Bond Type="2" A="14.800" B="21.480" />
+        <Bond Type="3" A="14.800" B="21.480" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="29.460" B="31.700" />
+        <Bond Type="2" A="29.460" B="31.700" />
+        <Bond Type="3" A="29.460" B="31.700" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="62.840" B="92.100" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Ouy2009">
+    <Properties>
+      <Property Name="Author">Ouyang, Y., Ye, F., Liang, Y.</Property>
+      <Property Name="Publication">A modified electronegativity equalization method for fast and accurate calculation of atomic charges in large biological molecules</Property>
+      <Property Name="Journal">Phys. Chem. Chem. Phys, 11</Property>
+      <Property Name="Year">2009</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">B3LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">NPA</Property>
+      <Property Name="Training Set Size">124</Property>
+      <Property Name="Data Source">Not Specified</Property>
+      <Property Name="Priority">100</Property>
+    </Properties>
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="7.5196" B="2.5372" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="8.1092" B="1.4066" />
+        <Bond Type="2" A="7.9852" B="1.2708" />
+        <Bond Type="3" A="7.8746" B="1.2486" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="8.6563" B="1.7886" />
+        <Bond Type="2" A="8.3901" B="1.6174" />
+        <Bond Type="3" A="8.1462" B="1.6332" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="9.8540" B="3.4962" />
+        <Bond Type="2" A="9.2413" B="2.7994" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Ouy2009_elem">
+    <Properties>
+      <Property Name="Author">Ouyang, Y., Ye, F., Liang, Y.</Property>
+      <Property Name="Publication">A modified electronegativity equalization method for fast and accurate calculation of atomic charges in large biological molecules</Property>
+      <Property Name="Journal">Phys. Chem. Chem. Phys, 11</Property>
+      <Property Name="Year">2009</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">B3LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">NPA</Property>
+      <Property Name="Training Set Size">124</Property>
+      <Property Name="Data Source">Not Specified</Property>
+      <Property Name="Priority">100</Property>
+    </Properties>
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="8.0784" B="2.2952" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="8.5332" B="1.3042" />
+        <Bond Type="2" A="8.5332" B="1.3042" />
+        <Bond Type="3" A="8.5332" B="1.3042" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="8.7931" B="1.4164" />
+        <Bond Type="2" A="8.7931" B="1.4164" />
+        <Bond Type="3" A="8.7931" B="1.4164" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="9.6179" B="2.4846" />
+        <Bond Type="2" A="9.6179" B="2.4846" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Ouy2009_elemF">
+    <Properties>
+      <Property Name="Author">Ouyang, Y., Ye, F., Liang, Y.</Property>
+      <Property Name="Publication">A modified electronegativity equalization method for fast and accurate calculation of atomic charges in large biological molecules</Property>
+      <Property Name="Journal">Phys. Chem. Chem. Phys, 11</Property>
+      <Property Name="Year">2009</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">B3LYP</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">NPA</Property>
+      <Property Name="Training Set Size">141</Property>
+      <Property Name="Data Source">Not Specified</Property>
+      <Property Name="Priority">4</Property>
+    </Properties>
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="17.1039" B="1.2996" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="17.5373" B="2.2393" />
+        <Bond Type="2" A="17.5373" B="2.2393" />
+        <Bond Type="3" A="17.5373" B="2.2393" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="17.8048" B="1.4128" />
+        <Bond Type="2" A="17.8048" B="1.4128" />
+        <Bond Type="2" A="17.8048" B="1.4128" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="18.6226" B="2.4894" />
+        <Bond Type="2" A="18.6226" B="2.4894" />
+      </Element>
+      <Element Name="F">
+        <Bond Type="1" A="19.4129" B="5.5822" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="Baek1991">
+    <Properties>
+      <Property Name="Author">Baekelandt, B. G., Mortier, W. J., Lievens, J. L., Schoonheydt, R. A.</Property>
+      <Property Name="Publication">Probing the Reactivity of Different Sites within a Molecule or Solid by Direct Computation of Molecular Sensitivities via an Extension of the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Am. Chem. Soc., 113</Property>
+      <Property Name="Year">1991</Property>
+      <Property Name="Target">Organic molecules</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Basis Set">STO-3G</Property>
+      <Property Name="Population Analysis">MPA</Property>
+      <Property Name="Training Set Size">25</Property>
+      <Property Name="Data Source">Not Specified</Property>
+      <Property Name="Priority">5</Property>
+    </Properties>
+    <UnitConversion KappaFactor="0.529177249" ABFactor="0.036749309" />
+    <Parameters Kappa="1.00">
+      <Element Name="H">
+        <Bond Type="1" A="3.791345" B="23.69072" />
+      </Element>
+      <Element Name="C">
+        <Bond Type="1" A="5.68045" B="18.10116" />
+        <Bond Type="2" A="5.68045" B="18.10116" />
+        <Bond Type="3" A="5.68045" B="18.10116" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="10.59916" B="26.37246" />
+        <Bond Type="2" A="10.59916" B="26.37246" />
+        <Bond Type="3" A="10.59916" B="26.37246" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="8.50000" B="22.16574" />
+        <Bond Type="2" A="8.50000" B="22.16574" />
+      </Element>
+      <Element Name="Al">
+        <Bond Type="0" A="-2.23952" B="15.3449" />
+        <Bond Type="1" A="-2.23952" B="15.3449" />
+      </Element>
+      <Element Name="Si">
+        <Bond Type="0" A="1.33182" B="12.98518" />
+        <Bond Type="1" A="1.33182" B="12.98518" />
+        <Bond Type="2" A="1.33182" B="12.98518" />
+        <Bond Type="3" A="1.33182" B="12.98518" />
+      </Element>
+      <Element Name="P">
+        <Bond Type="0" A="2.90541" B="12.5883" />
+        <Bond Type="1" A="2.90541" B="12.5883" />
+        <Bond Type="2" A="2.90541" B="12.5883" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="E-MPA_6-31Gd_gas">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">MPA</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">41</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">2</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00600000">
+      <Element Name="C">
+        <Bond Type="1" A="2.46293300" B="0.00775200" />
+        <Bond Type="2" A="2.46293300" B="0.00775200" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.45516100" B="0.00863600" />
+        <Bond Type="2" A="2.45516100" B="0.00863600" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.46054300" B="0.01402100" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.47305100" B="0.01864700" />
+        <Bond Type="2" A="2.47305100" B="0.01864700" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.47016300" B="0.01412300" />
+        <Bond Type="2" A="2.47016300" B="0.01412300" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47517000" B="-0.06685600" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="E-MPA_6-31Gd_PCM">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">MPA</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">41</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">2</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00900000">
+      <Element Name="C">
+        <Bond Type="1" A="2.46190000" B="0.01145000" />
+        <Bond Type="2" A="2.46190000" B="0.01145000" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.47990500" B="-0.00777400" />
+        <Bond Type="2" A="2.47990500" B="-0.00777400" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45812100" B="0.02166600" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.47142200" B="0.02145000" />
+        <Bond Type="2" A="2.47142200" B="0.02145000" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.47023200" B="0.01718900" />
+        <Bond Type="2" A="2.47023200" B="0.01718900" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47032400" B="0.05213900" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="E-MPA_6-31Gdd_gas">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G**</Property>
+      <Property Name="Population Analysis">MPA</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">41</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">2</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00800000">
+      <Element Name="C">
+        <Bond Type="1" A="2.46374500" B="0.00984800" />
+        <Bond Type="2" A="2.46374500" B="0.00984800" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.48971700" B="-0.01458900" />
+        <Bond Type="2" A="2.48971700" B="-0.01458900" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.46110800" B="0.02336900" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.49367900" B="0.05137500" />
+        <Bond Type="2" A="2.49367900" B="0.05137500" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.48125800" B="0.02907800" />
+        <Bond Type="2" A="2.48125800" B="0.02907800" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47230600" B="-0.05265600" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="E-MPA_6-31Gdd_PCM">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G**</Property>
+      <Property Name="Population Analysis">MPA</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">41</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">2</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00700000">
+      <Element Name="C">
+        <Bond Type="1" A="2.46618900" B="0.00873400" />
+        <Bond Type="2" A="2.46618900" B="0.00873400" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.47844900" B="-0.00512200" />
+        <Bond Type="2" A="2.47844900" B="-0.00512200" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.46286800" B="0.02457100" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.50216600" B="0.05930900" />
+        <Bond Type="2" A="2.50216600" B="0.05930900" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.48194300" B="0.02512500" />
+        <Bond Type="2" A="2.48194300" B="0.02512500" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47650400" B="-0.10641000" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="E-NPA_6-31Gd_gas">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">NPA</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">41</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">2</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00700000">
+      <Element Name="C">
+        <Bond Type="1" A="2.46311000" B="0.00876600" />
+        <Bond Type="2" A="2.46311000" B="0.00876600" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.44721000" B="0.01281100" />
+        <Bond Type="2" A="2.44721000" B="0.01281100" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45929400" B="0.01921200" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.47103400" B="0.01897300" />
+        <Bond Type="2" A="2.47103400" B="0.01897300" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.47079400" B="0.01406500" />
+        <Bond Type="2" A="2.47079400" B="0.01406500" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47815200" B="-0.04731500" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="E-NPA_6-31Gd_PCM">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">NPA</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">40</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">2</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00600000">
+      <Element Name="C">
+        <Bond Type="1" A="2.45892900" B="0.00731300" />
+        <Bond Type="2" A="2.45892900" B="0.00731300" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.42339000" B="0.01281100" />
+        <Bond Type="2" A="2.42339000" B="0.01281100" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45298900" B="0.02824800" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.48699400" B="0.04654000" />
+        <Bond Type="2" A="2.48699400" B="0.04654000" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.42226900" B="-0.04095400" />
+        <Bond Type="2" A="2.42226900" B="-0.04095400" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47389000" B="-0.05792800" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="E-NPA_6-31Gdd_gas">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G**</Property>
+      <Property Name="Population Analysis">NPA</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">41</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">2</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00700000">
+      <Element Name="C">
+        <Bond Type="1" A="2.46314200" B="0.00875900" />
+        <Bond Type="2" A="2.46314200" B="0.00875900" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.44701900" B="0.01293100" />
+        <Bond Type="2" A="2.44701900" B="0.01293100" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45928900" B="0.01910200" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.47110900" B="0.01889700" />
+        <Bond Type="2" A="2.47110900" B="0.01889700" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.47036600" B="0.01351800" />
+        <Bond Type="2" A="2.47036600" B="0.01351800" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47808800" B="-0.04680600" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="E-NPA_6-31Gdd_PCM">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G**</Property>
+      <Property Name="Population Analysis">NPA</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">40</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">2</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00600000">
+      <Element Name="C">
+        <Bond Type="1" A="2.45895600" B="0.00730800" />
+        <Bond Type="2" A="2.45895600" B="0.00730800" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.42386900" B="0.02502500" />
+        <Bond Type="2" A="2.42386900" B="0.02502500" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45297400" B="0.02801900" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.48544200" B="0.04384000" />
+        <Bond Type="2" A="2.48544200" B="0.04384000" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.42267500" B="-0.04033500" />
+        <Bond Type="2" A="2.42267500" B="-0.04033500" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47376900" B="-0.05696000" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="E-HiI_6-31Gd_gas">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">Hirshfeld I</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">41</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">3</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00800000">
+      <Element Name="C">
+        <Bond Type="1" A="2.46243700" B="0.00908600" />
+        <Bond Type="2" A="2.46243700" B="0.00908600" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.43860400" B="0.01786400" />
+        <Bond Type="2" A="2.43860400" B="0.01786400" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.46139100" B="0.01868300" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.46491700" B="0.01196800" />
+        <Bond Type="2" A="2.46491700" B="0.01196800" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.45320700" B="-0.00745100" />
+        <Bond Type="2" A="2.45320700" B="-0.00745100" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47304000" B="0.06751200" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="E-HiI_6-31Gd_PCM">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">Hirshfeld I</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">38</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">3</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00800000">
+      <Element Name="C">
+        <Bond Type="1" A="2.45855800" B="0.00930900" />
+        <Bond Type="2" A="2.45855800" B="0.00930900" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.41489800" B="0.02833700" />
+        <Bond Type="2" A="2.41489800" B="0.02833700" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45715800" B="0.02224700" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.44991500" B="-0.00241000" />
+        <Bond Type="2" A="2.44991500" B="-0.00241000" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.44545300" B="-0.01272800" />
+        <Bond Type="2" A="2.44545300" B="-0.01272800" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47171200" B="0.09333000" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="E-HiI_6-31Gdd_gas">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G**</Property>
+      <Property Name="Population Analysis">Hirshfeld I</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">41</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">3</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00700000">
+      <Element Name="C">
+        <Bond Type="1" A="2.45947700" B="0.00792100" />
+        <Bond Type="2" A="2.45947700" B="0.00792100" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.44670100" B="0.01186200" />
+        <Bond Type="2" A="2.44670100" B="0.01186200" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45870500" B="0.01532000" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.46180600" B="0.01069500" />
+        <Bond Type="2" A="2.46180600" B="0.01069500" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.45052600" B="-0.00758900" />
+        <Bond Type="2" A="2.45052600" B="-0.00758900" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.46993000" B="0.07328100" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="E-HiI_6-31Gdd_PCM">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G**</Property>
+      <Property Name="Population Analysis">Hirshfeld I</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">40</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">3</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00700000">
+      <Element Name="C">
+        <Bond Type="1" A="2.45910400" B="0.00798700" />
+        <Bond Type="2" A="2.45910400" B="0.00798700" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.45714200" B="0.00496400" />
+        <Bond Type="2" A="2.45714200" B="0.00496400" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45787500" B="0.01670700" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.46204700" B="0.01155000" />
+        <Bond Type="2" A="2.46204700" B="0.01155000" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.45106600" B="-0.00600300" />
+        <Bond Type="2" A="2.45106600" B="-0.00600300" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47235100" B="0.09514500" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="EX-MPA_6-31Gd_gas">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">MPA</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">41</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">2</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00700000">
+      <Element Name="C">
+        <Bond Type="1" A="2.46164600" B="0.00955200" />
+        <Bond Type="2" A="2.46187400" B="0.00832200" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.44823700" B="0.01381900" />
+        <Bond Type="2" A="2.44823700" B="0.01381900" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45902000" B="0.01568200" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.47513000" B="0.02406800" />
+        <Bond Type="2" A="2.47223300" B="0.01919400" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.47902500" B="0.02604700" />
+        <Bond Type="2" A="2.46821200" B="0.01435600" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47051500" B="-0.01752400" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="EX-MPA_6-31Gd_PCM">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">MPA</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">41</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">2</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.01000000">
+      <Element Name="C">
+        <Bond Type="1" A="2.46091100" B="0.01367300" />
+        <Bond Type="2" A="2.46152700" B="0.01153700" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.47794400" B="-0.00715000" />
+        <Bond Type="2" A="2.47794400" B="-0.00715000" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45686700" B="0.02328800" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.47535700" B="0.02880900" />
+        <Bond Type="2" A="2.48262900" B="0.03784400" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.48477200" B="0.03517000" />
+        <Bond Type="2" A="2.47268600" B="0.02325900" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.46975800" B="0.05958400" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="EX-MPA_6-31Gdd_gas">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G**</Property>
+      <Property Name="Population Analysis">MPA</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">41</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">2</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00700000">
+      <Element Name="C">
+        <Bond Type="1" A="2.45866700" B="0.01077500" />
+        <Bond Type="2" A="2.45843000" B="0.01060000" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.42417600" B="0.03015900" />
+        <Bond Type="2" A="2.42417600" B="0.03015900" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45601700" B="0.02174900" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.44157500" B="-0.01653900" />
+        <Bond Type="2" A="2.48480800" B="0.04233500" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.47757800" B="0.03213100" />
+        <Bond Type="2" A="2.46792600" B="0.01789400" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47477800" B="-0.04477200" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="EX-MPA_6-31Gdd_PCM">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G**</Property>
+      <Property Name="Population Analysis">MPA</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">41</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">2</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00700000">
+      <Element Name="C">
+        <Bond Type="1" A="2.46026700" B="0.00946500" />
+        <Bond Type="2" A="2.46141100" B="0.00812000" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.47036900" B="-0.00223900" />
+        <Bond Type="2" A="2.47036900" B="-0.00223900" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45679200" B="0.02618200" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.47585200" B="0.02906800" />
+        <Bond Type="2" A="2.48888200" B="0.04536500" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.43818100" B="-0.03317500" />
+        <Bond Type="2" A="2.46519900" B="0.01031100" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47159400" B="-0.04470200" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="EX-NPA_6-31Gd_gas">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">NPA</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">41</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">1</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00600000">
+      <Element Name="C">
+        <Bond Type="1" A="2.46147900" B="0.00798900" />
+        <Bond Type="2" A="2.46130600" B="0.00745800" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.47634700" B="-0.00569000" />
+        <Bond Type="2" A="2.47634700" B="-0.00569000" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45861000" B="0.01450700" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.46567400" B="0.01274100" />
+        <Bond Type="2" A="2.47120000" B="0.01887000" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.47416700" B="0.01911600" />
+        <Bond Type="2" A="2.46806600" B="0.01239800" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47462100" B="-0.03391500" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="EX-NPA_6-31Gd_PCM">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">NPA</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">40</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">2</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00700000">
+      <Element Name="C">
+        <Bond Type="1" A="2.46309800" B="0.00936100" />
+        <Bond Type="2" A="2.46309500" B="0.00859800" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.44073400" B="0.01698600" />
+        <Bond Type="2" A="2.44073400" B="0.01698600" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45914100" B="0.01909800" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.46752300" B="0.01428700" />
+        <Bond Type="2" A="2.47820600" B="0.02985400" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.47598300" B="0.01900500" />
+        <Bond Type="2" A="2.46828900" B="0.01098700" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47933500" B="-0.06193800" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="EX-NPA_6-31Gdd_gas">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G**</Property>
+      <Property Name="Population Analysis">NPA</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">41</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">2</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00700000">
+      <Element Name="C">
+        <Bond Type="1" A="2.46166200" B="0.00909700" />
+        <Bond Type="2" A="2.46154500" B="0.00856700" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.47653200" B="-0.00507400" />
+        <Bond Type="2" A="2.47653200" B="-0.00507400" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45846800" B="0.01644500" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.46668400" B="0.01497200" />
+        <Bond Type="2" A="2.47187800" B="0.02050200" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.47532100" B="0.02093300" />
+        <Bond Type="2" A="2.46877000" B="0.01380100" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47735300" B="-0.04446600" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="EX-NPA_6-31Gdd_PCM">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G**</Property>
+      <Property Name="Population Analysis">NPA</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">40</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">2</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00600000">
+      <Element Name="C">
+        <Bond Type="1" A="2.46088600" B="0.00837800" />
+        <Bond Type="2" A="2.46037100" B="0.00782800" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.44777700" B="0.01096300" />
+        <Bond Type="1" A="2.44777700" B="0.01096300" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45750000" B="0.01550800" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.46487700" B="0.01259100" />
+        <Bond Type="2" A="2.48067900" B="0.03407900" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.47763500" B="0.02273900" />
+        <Bond Type="2" A="2.46739200" B="0.01210900" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47850300" B="-0.07334200" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="EX-HiI_6-31Gd_gas">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">Hirshfeld I</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">41</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">3</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00500000">
+      <Element Name="C">
+        <Bond Type="1" A="2.46063000" B="0.00523300" />
+        <Bond Type="2" A="2.46086700" B="0.00612800" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.42490400" B="0.02256000" />
+        <Bond Type="2" A="2.42490400" B="0.02256000" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.46139100" B="0.01664600" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.45640700" B="-0.00069500" />
+        <Bond Type="2" A="2.46745000" B="0.01396800" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.45293500" B="-0.01164500" />
+        <Bond Type="2" A="2.46327200" B="0.00629900" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.46988400" B="0.05127600" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="EX-HiI_6-31Gd_PCM">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G*</Property>
+      <Property Name="Population Analysis">Hirshfeld I</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">38</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">3</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00700000">
+      <Element Name="C">
+        <Bond Type="1" A="2.46007300" B="0.00730300" />
+        <Bond Type="2" A="2.46026400" B="0.00892600" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.44049000" B="0.01536400" />
+        <Bond Type="2" A="2.44049000" B="0.01536400" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45863300" B="0.02262200" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.45261300" B="-0.00294000" />
+        <Bond Type="2" A="2.47586300" B="0.02701700" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.44873200" B="-0.01526600" />
+        <Bond Type="2" A="2.45609700" B="-0.00166400" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47404700" B="0.09123700" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="EX-HiI_6-31Gdd_gas">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G**</Property>
+      <Property Name="Population Analysis">Hirshfeld I</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">41</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">3</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00500000">
+      <Element Name="C">
+        <Bond Type="1" A="2.46089200" B="0.00560400" />
+        <Bond Type="2" A="2.46131000" B="0.00611200" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.43821200" B="0.01186200" />
+        <Bond Type="2" A="2.43821200" B="0.01186200" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45961900" B="0.01897000" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.45635900" B="-0.00116800" />
+        <Bond Type="2" A="2.46986700" B="0.01658400" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.45185300" B="-0.01448400" />
+        <Bond Type="2" A="2.46340600" B="0.00589000" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47201100" B="0.05830400" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+
+  <ParameterSet Name="EX-HiI_6-31Gdd_PCM">
+    <Properties>
+      <Property Name="Author">Ionescu, C. M., Geidl, S., Svobodova Varekova, R., Koca, J.</Property>
+      <Property Name="Publication">Rapid Calculation of Accurate Atomic Charges for Proteins via the Electronegativity Equalization Method</Property>
+      <Property Name="Journal">J. Chem Inf. Model., 53</Property>
+      <Property Name="Year">2013</Property>
+      <Property Name="Target">Biomacromolecules</Property>
+      <Property Name="Basis Set">6-31G**</Property>
+      <Property Name="Population Analysis">Hirshfeld I</Property>
+      <Property Name="QM Method">HF</Property>
+      <Property Name="Training Set Size">40</Property>
+      <Property Name="Data Source">protein fragments</Property>
+      <Property Name="Priority">3</Property>
+    </Properties>
+    <Parameters Target="Atoms" Priority="0" Kappa="0.00600000">
+      <Element Name="C">
+        <Bond Type="1" A="2.45797700" B="0.00615500" />
+        <Bond Type="2" A="2.45747100" B="0.00836500" />
+      </Element>
+      <Element Name="Ca">
+        <Bond Type="1" A="2.43724200" B="0.01578000" />
+        <Bond Type="2" A="2.43724200" B="0.01578000" />
+      </Element>
+      <Element Name="H">
+        <Bond Type="1" A="2.45663400" B="0.01990800" />
+      </Element>
+      <Element Name="N">
+        <Bond Type="1" A="2.45093100" B="-0.00318000" />
+        <Bond Type="2" A="2.47429800" B="0.02595300" />
+      </Element>
+      <Element Name="O">
+        <Bond Type="1" A="2.44243600" B="-0.02179000" />
+        <Bond Type="2" A="2.45343900" B="-0.00297300" />
+      </Element>
+      <Element Name="S">
+        <Bond Type="1" A="2.47246800" B="0.09362600" />
+      </Element>
+    </Parameters>
+  </ParameterSet>
+</Sets>

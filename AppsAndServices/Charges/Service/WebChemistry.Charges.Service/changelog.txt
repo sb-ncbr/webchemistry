@@ -1,0 +1,70 @@
+﻿== 1.1.23.12.27 ==
+* Fixed a bug in the mmCIF parser.
+
+== 1.1.21.12.14 ==
+* Fixed a bug in the mmCIF parser.
+
+== 1.1.15.1.26 ==
+* Fixed a bug in MOL2 exporter.
+
+== 1.1.15.2.2 ==
+* Added support for unit conversion.
+
+== 1.1.14.11.28 ==
+* Changes in PDB parser - atom names no longer need to be unique per each residue.
+
+== 1.1.14.11.27 ==
+* Fixed MOL2 reference charges naming bug.
+
+== 1.1.14.11.23 ==
+* CorrectCutoffTotalCharge is not True by default.
+
+== 1.1.14.11.17 ==
+* Changed result structure.
+
+== 1.1.14.11.15 ==
+* Updated Atom group labels.
+* Updated partition clustering.
+
+== 1.1.14.11.7 ==
+* Improved PQR export support.
+
+== 1.1.14.11.2 ==
+* Aligned with new version of Core that supports gzipped (.gz) input.
+
+== 1.1.14.10.16 ==
+* Improved MOL2 loading and export support.
+
+== 1.1.14.10.9 ==
+* Added a warning for parsing PDB/mmCIF files regarding different names on a single residue.
+
+== 1.0.14.10.6a ==
+* Updated how the group labels are determined.
+
+== 1.0.14.10.6 ==
+* Better error message for computations with degenerate structures/parameters.
+
+== 1.0.14.10.1 ==
+* Changed labels for AtomType groupings.
+
+== 1.0.14.8.8 ==
+* Updated PQR export.
+
+== 1.0.14.6.13 ==
+* Added atom types partitions.
+
+== 1.0.14.5.12 ==
+* Progress updates fix.
+
+== 1.0.14.5.11 ==
+* Residues clusters are no longer computed for non-biomolecule inputs.
+
+== 1.0.14.5.7 ==
+* Added export of clusters.
+
+== 1.0.14.4.17 ==
+* Better progress updates for CMD version.
+* Fixed an issue with max degree of parallelism.
+
+== 1.0.14.4.15 ==
+* Initial version.

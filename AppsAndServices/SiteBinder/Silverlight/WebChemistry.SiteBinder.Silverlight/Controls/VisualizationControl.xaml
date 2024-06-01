@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="WebChemistry.SiteBinder.Silverlight.Controls.VisualizationControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vis="clr-namespace:WebChemistry.Framework.Controls;assembly=WebChemistry.Framework.Visualization"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="400">
+    
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <vis:Viewport3D x:Name="viewport" Visual="{Binding Session.Visual}" CanSelectAtoms="True" />
+        <Border VerticalAlignment="Top" Margin="0" Background="{x:Null}">
+            <StackPanel Orientation="Horizontal">
+                <ComboBox x:Name="DisplayCountCombo" ToolTipService.ToolTip="Determines how many selected structures are displayed. This affects the application performance." />
+                <ComboBox Margin="2 0 0 0" x:Name="ModeCombo" />
+                <!--Rectangle Style="{StaticResource HorizontalSplitter}" /-->
+                <ComboBox Margin="2 0 0 0" x:Name="ColorsCombo" />
+                <ComboBox Margin="2 0 0 0" x:Name="DisplayCombo" />
+                <!--RadioButton Margin="4 0 0 0" GroupName="Display" VerticalAlignment="Center" x:Name="DisplayAll">All</RadioButton>
+                <RadioButton Margin="4 0 0 0" GroupName="Display" VerticalAlignment="Center">Selection</RadioButton-->
+                <!--Rectangle Style="{StaticResource HorizontalSplitter}" />
+                <TextBlock VerticalAlignment="Center" FontWeight="Bold">Background</TextBlock>
+                <ComboBox Margin="4 0 0 0" /-->
+                <!--Rectangle Style="{StaticResource HorizontalSplitter}" /-->
+                <Button VerticalAlignment="Center" Padding="12 4" Margin="2 0 0 0" Click="Save" ToolTipService.ToolTip="Save the current image to a PNG image in 1600x1200 resolution.">Save</Button>
+                <Button VerticalAlignment="Center" Padding="12 4" Margin="2 0 0 0" Click="Render" ToolTipService.ToolTip="Render all selected structures to a PNG image in 1600x1200 resolution.">Render</Button>
+            </StackPanel>
+        </Border>
+        <TextBlock Visibility="Collapsed" Margin="0 28 0 0" IsHitTestVisible="False" VerticalAlignment="Top" FontSize="9" HorizontalAlignment="Left" Foreground="#FFAAAAAA">For performance reasons, only the first 50 selected structures are displayed.</TextBlock>
+    </Grid>
+</UserControl>

@@ -1,0 +1,48 @@
+﻿.mq-support-thread li {
+    padding: 4px 8px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 4px;
+}
+
+.mq-support-thread p {
+    margin-bottom: 0;
+}
+
+/*.mq-support-from-support {
+    color: #3a87ad;
+    background: #d9edf7;
+    border: 1px solid #bce8f1;
+}*/
+
+/*.mq-support-from-user {
+    color: #3a87ad;
+    background: #d9edf7;
+    border: 1px solid #bce8f1;
+}*/
+
+.mq-support-timestamp {
+    font-weight: bold;
+}
+
+.mq-support-reply {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.mq-support-reply textarea {
+    min-width: 926px;
+    max-width: 926px;
+    width: 926px;
+    max-height: 150px;
+    margin: 0;
+}
+
+.mq-support-reply-label {
+    font-size: 9pt;
+    text-align: right;
+    color: #777;
+    margin-bottom: 5px;
+}

@@ -1,0 +1,133 @@
+﻿<div class="mq-left-pane-wrap" data-bind="attr: { id:  id + '-motif-entries-wrap' }">
+    <div class="mq-details-section-header">
+        <div class="input-append pull-right" data-bind="attr: { id:  id + '-motif-filters-wrap' }">
+            <select data-bind="options: motifsDisplayFilters, optionsText: 'label', value: motifsFilterType" style="width: 200px; margin-right: 10px"></select>
+            <div style="display: inline-block">
+                <input type="text" title="Matches a regular expression." placeholder="Pattern id filter..." data-bind="value: motifsFilterText, valueUpdate: 'input'" style="width: 160px">
+                <button class="btn" data-bind="click: function() { motifsFilterText(''); }"><i class="icon-remove"></i></button>
+            </div>
+        </div>
+
+        <h3>
+            Patterns
+            <small>
+                <!-- ko with: motifsViewCount -->
+                <span data-bind="text: 'Showing ' + mqResultUtils.pluralize(motifs, 'pattern', 'patterns') + ' in ' + mqResultUtils.pluralize(structures, 'PDB entry', 'PDB entries')"></span>
+                <!-- ko if: motifs > 0 -->
+                <a href="#" title="View in CSV format." data-bind="click: $parent.showMotifList"><i class="icon-list"></i></a>
+                <!-- /ko -->
+                <!-- /ko -->
+            </small>
+        </h3>
+    </div>
+
+    <!-- ko template: { name: 'active-filter-info-template', data: metadata.activeFilterInfo() } --><!-- /ko -->
+
+    <div class="mq-view-wrap" data-bind="attr: { id: id + '-motifs-grid' }, click: setCurrentFromGrid"></div>
+
+    <div class="mq-color-legend">
+        <ul class="unstyled" style="float: left">
+            <li style="font-weight: bold"><abbr title="Color coding of the Id column.">Pattern Validation</abbr></li>
+            <li><div class="mq-motif-ok-bg">&nbsp;</div> No Issue/Not Validated</li>
+            <li><div class="mq-motif-minor-issue-bg">&nbsp;</div> Minor Issue</li>
+            <li><div class="mq-motif-chirality-issue-bg">&nbsp;</div> Chirality Issue</li>
+            <li><div class="mq-motif-incomplete-bg">&nbsp;</div> Structural Issue</li>
+        </ul>
+        <ul class="unstyled">
+            <li style="font-weight: bold;"><abbr title="Color coding of the Parent column.">Parent PDB Entry</abbr></li>
+            <li><div class="mq-structure-valid-bg">&nbsp;</div> No Issue</li>
+            <li><div class="mq-reader-warning-bg">&nbsp;</div> Input Warning</li>
+            <li><div class="mq-computation-warning-bg">&nbsp;</div> Query Warning</li>
+            <li><div class="mq-structure-error-bg">&nbsp;</div> Error</li>
+        </ul>
+    </div>
+    <div style="clear: both"></div>
+
+    <a href="#meta-filters" class="alert alert-info" style="display: block; margin: 0 0 10px 0; font-size: 9pt; padding-left: 6px; padding-top: 4px; padding-bottom: 4px; border-radius: 0">
+        @*<a class="close" data-dismiss="alert" href="#" style="top: 0">&times;</a>*@
+        <b>TIP:</b> Applying a filter in the Metadata Filter section below will keep only the rows of interest and add the corresponding metadata columns to this table.
+    </a>
+
+</div>
+
+<div data-bind="attr: { id: id + '-motif-details-wrap'}" style="margin-top: 20px">
+    <div class="mq-details-section-header" style="margin-top: 0">
+        <h3>
+            Pattern
+            <!-- ko with: currentMotif -->
+            <small>
+                <span data-bind="text: Id"></span>
+                in
+                <a href="#" data-bind="text: ParentId, attr: { onclick: 'javascript:showCurrentStructure(event, \'' + $parent.id + '\', \'' + ParentId + '\')' }"></a>
+                <span style="font-size: 8pt">
+                    [ <a href="#" target="_blank" data-bind="attr: { href: '//www.ebi.ac.uk/pdbe/entry/pdb/' + ParentId }">PDBe.org</a>
+                    | <a href="#" target="_blank" data-bind="attr: { href: PatternQueryActions.ligandValidationAction.replace('-id-', ParentId) }" title="Ligand and non-standard residues validation.">Validator<sup>DB</sup></a> ]
+                </span>
+            </small>
+            <!-- /ko -->
+        </h3>
+    </div>
+
+    <div class="row mq-right-pane-wrap">
+        <div class="span4 mq-motif-3d" data-bind="attr: { id: id + '-3d-view' }">
+            <div class="mq-motif-3d-wrap mq-motif-3d-wrap-small">
+                <!-- ko with: view3d -->
+                <div class="mq-motif-3d-host">
+                </div>
+                <div class="pull-right">
+                    <button class="btn btn-small btn-link" title="Toggle Labels" data-bind="click: toggleLabels"><i class="icon-font"></i></button><button class="btn btn-small btn-link" title="Toggle Display Mode" data-bind="click: toggleMode"><i class="icon-random"></i></button><button class="btn btn-small btn-link" title="Toggle Size" data-bind="click: toggleSize"><i class="icon-resize-full"></i></button>
+                </div>
+                <div class="mq-motif-3d-message" data-bind="html: message"></div>
+                <div class="mq-motif-3d-desc"></div>
+                <!-- /ko -->
+            </div>
+        </div>
+
+        <div class="span4 mq-motif-details-text mq-motif-details-info">
+            <!-- ko with: currentMotif -->
+            <dl>
+                @*<dt>Parent</dt>
+    <dd>
+        <a href="#" data-bind="text: ParentId, attr: { onclick: 'javascript:showCurrentStructure(event, \'' + $parent.id + '\', \'' + ParentId + '\')' }"></a>
+        <small>
+            | <a href="#" target="_blank" data-bind="attr: { href: '//www.ebi.ac.uk/pdbe/entry/pdb/' + ParentId }">PDBe.org </a>
+            | <a href="#" target="_blank" data-bind="attr: { href: PatternQueryActions.ligandValidationAction.replace('-id-', ParentId) }" title="Ligand and non-standard residues validation.">Validator<sup>DB</sup></a>
+        </small>
+    </dd>*@
+
+                <dt>Ligand Validation Info</dt>
+                <!-- ko if: ValidationFlagsId >= 0 -->
+                <dd data-bind="css: $parent.validations[ValidationFlagsId].css, text: $parent.validations[ValidationFlagsId].text"></dd>
+                <!-- /ko -->
+                <!-- ko if: ValidationFlagsId < 0 -->
+                <dd style="color: #777">Not available or applicable</dd>
+                <!-- /ko -->
+
+                <dt><abbr title="A residue is listed if at least one of its atoms is present in the motif.">Residues</abbr> <small data-bind="text: ResidueCount"></small></dt>
+                <dd>
+                    <span data-bind="html: mqResultUtils.formatSignature(Signature)"></span><br />
+                    <small data-bind="html: mqResultUtils.formatResidueValidations($data, $parent)"></small>
+                </dd>
+
+                <dt>Atoms <small data-bind="text: AtomCount"></small></dt>
+                <dd data-bind="html: mqResultUtils.formatSignature(Atoms)"></dd>
+
+                <dt>Download</dt>
+                <dd>
+                    <a href="#" title="Download pattern in PDB format" data-bind="attr: { href: PatternQueryActions.motifSourceProvider($parent.fullId, Id, 'pdb', 'download'), download: Id + '.pdb' }">PDB</a>
+                    <a href="#" target="_blank" title="View pattern in PDB format" data-bind="attr: { href: PatternQueryActions.motifSourceProvider($parent.fullId, Id, 'pdb', 'view') }"><i class="icon-eye-open"></i></a>
+                    |
+                    <a href="#" title="Download pattern in MOL format" data-bind="attr: { href: PatternQueryActions.motifSourceProvider($parent.fullId, Id, 'mol', 'download'), download: Id + '.mol' }">MOL</a>
+                    <a href="#" target="_blank" title="View pattern in MOL format" data-bind="attr: { href: PatternQueryActions.motifSourceProvider($parent.fullId, Id, 'mol', 'view') }"><i class="icon-eye-open"></i></a>
+                </dd>
+            </dl>
+            <!-- /ko -->
+        </div>
+
+        <div class="span4 mq-motif-details-text mq-motif-details-metadata-info">
+            <!-- ko if: currentMotif -->
+            <!-- ko template: { name: 'metadata-details-template', data: structureMap[currentMotif().ParentId].Metadata } --><!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </div>
+</div>

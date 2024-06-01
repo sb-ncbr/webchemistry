@@ -1,0 +1,30 @@
+﻿@model WebChemistry.Web.Models.CreateOrUpdateDatabaseModel
+
+@{
+    ViewBag.Title = "Create Database";
+}
+
+<h2>Create Database</h2>
+
+@using (Html.BeginForm("Database", "Data", new { operation = "Create" }, FormMethod.Post)) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div>
+        @Html.LabelFor(m => m.Name)
+    </div>
+    <div>
+        @Html.EditorFor(m => m.Name)
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    
+    <div>
+        @Html.LabelFor(m => m.Description)
+    </div>
+    <div>
+        @Html.EditorFor(m => m.Description)
+        @Html.ValidationMessageFor(m => m.Description)
+    </div>
+    <br />
+    <button class="btn btn-primary" type="submit">Create</button>
+}

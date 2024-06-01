@@ -1,0 +1,214 @@
+﻿<style>
+    table.bonds-table td, table.bonds-table th {
+        padding: 2px;
+    }
+
+    .audit-details-atom-list {
+        font-size: 9pt;
+    }
+</style>
+
+<script type="text/html" id="bond-table-template">
+    <table style="margin-top: 3px" class="table table-striped table-hover bonds-tablet">
+        <thead>
+            <tr>
+                <th>Bond</th>
+                <th>Length (&Aring;)</th>
+                <th>Expected (&Aring;)</th>
+                <th>Error (&Aring;)</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: $data" class="audit-details-atom-list">
+            <tr>
+                <td data-bind="text: $data['key']"></td>
+                <td data-bind="text: $data['length']"></td>
+                <td><span data-bind="text: $data['range']['min']"></span> - <span data-bind="text: $data['range']['max']"></span></td>
+                <td data-bind="text: $data['error']"></td>
+                <td data-bind="text: $data['type']"></td>
+            </tr>
+        </tbody>
+    </table>
+</script>
+
+<script type="text/html" id="atom-list-template">
+    <span class="audit-details-atom-list" data-bind="text: $data.map(function (a) { return a.match(/(\S+) .*/)[1]; }).join(', ')"></span>
+</script>
+
+<div id="auditDetailsModal" class="modal hide" tabindex="-1" role="dialog" style="overflow:hidden; width: 640px; height: 350px; margin-left: -320px; margin-top: -175px">
+    <!-- ko with: current -->
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>
+            Details for
+            <a data-bind="attr: { href: href }" target="_blank"><span data-bind="text: audit.Id, style: { color: color }"></span></a>
+            <span data-bind="if: audit.ProblemCount > 0">- <span data-bind="text: audit.ProblemCount"></span> <span data-bind="text: audit.ProblemCount === 1 ? 'problem' : 'problems'"></span></span>
+        </h3>
+    </div>
+    <div class="modal-body" style="margin-top: 0; padding: 0; max-height: 285px; height: 285px; position: relative">
+        <div class="tabbable" style="position: absolute; left: 14px; right: 14px; bottom: 0; top: 7px; max-height: calc(100% - 7px);">
+            <ul class="nav nav-tabs" style="font-size: 9pt">
+                <li class="active"><a href="#audit-details-general" data-toggle="tab">General Info</a></li>
+                <li><a href="#audit-details-bonds-model" data-toggle="tab">Bonds (Model) [<span data-bind="text: unusualModelBonds.length + unusualModelBondsMinor.length"></span>]</a></li>
+                <li><a href="#audit-details-bonds-ideal" data-toggle="tab">Bonds (Ideal) [<span data-bind="text: unusualIdealBonds.length + unusualIdealBondsMinor.length"></span>]</a></li>
+                <li><a href="#audit-details-chirality" data-toggle="tab">Chirality [<span data-bind="text: audit.extraChiralAtomCount + audit.missingChiralAtomCount"></span>]</a></li>
+                <li><a href="#audit-details-coordinates" data-toggle="tab">Coordinates [<span data-bind="text: audit.missingCoordinateModelAtomCount + audit.missingCoordinateIdealAtomCount"></span>]</a></li>
+            </ul>
+            <div class="tab-content" style="overflow-y:auto; position: absolute; top: 45px; right: 0; left: 0; bottom: 0">
+                <div class="tab-pane active" id="audit-details-general" style="margin-top: 0">
+                    <ul class="unstyled">
+                        <li><i data-bind="text: audit.LongName"></i></li>
+                        <li data-bind="html: htmlFormula"></li>
+                        <li><a data-bind="attr: { href: href }" target="_blank">LigandExpo link</a></li>
+                    </ul>
+                    <!-- ko if: !audit.hasProblem -->
+                    <i>No problems detected.</i>
+                    <!-- /ko -->
+                </div>
+
+                <div class="tab-pane" id="audit-details-bonds-model">
+                    <!-- ko if: unusualModelBonds.length > 0 -->
+                    <h4>Major (<span data-bind="text: unusualModelBonds.length"></span>)</h4>
+                    <div data-bind="template: { name: 'bond-table-template', data: unusualModelBonds }"></div>
+                    <!-- /ko -->
+                    <!-- ko if: unusualModelBondsMinor.length > 0 -->
+                    <h4>Minor (<span data-bind="text: unusualModelBondsMinor.length"></span>)</h4>
+                    <div data-bind="template: { name: 'bond-table-template', data: unusualModelBondsMinor }"></div>
+                    <!-- /ko -->
+                    <!-- ko if: unusualModelBonds.length +  unusualModelBondsMinor.length === 0  -->
+                    No problem detected.
+                    <!-- /ko -->
+                </div>
+                <div class="tab-pane" id="audit-details-bonds-ideal">
+                    <!-- ko if: unusualIdealBonds.length > 0 -->
+                    <h4>Major (<span data-bind="text: unusualIdealBonds.length"></span>)</h4>
+                    <div data-bind="template: { name: 'bond-table-template', data: unusualIdealBonds }"></div>
+                    <!-- /ko -->
+                    <!-- ko if: unusualIdealBondsMinor.length > 0 -->
+                    <h4>Minor (<span data-bind="text: unusualIdealBondsMinor.length"></span>)</h4>
+                    <div data-bind="template: { name: 'bond-table-template', data: unusualIdealBondsMinor }"></div>
+                    <!-- /ko -->
+                    <!-- ko if: unusualIdealBonds.length + unusualIdealBondsMinor.length === 0  -->
+                    No problem detected.
+                    <!-- /ko -->
+                </div>
+
+                <div class="tab-pane" id="audit-details-chirality">
+                    <h4>Chiral Atoms (<span data-bind="text: audit.ChiralAtoms.length"></span>)</h4>
+                    <!-- ko if: audit.ChiralAtoms.length === 0 -->
+                    No chiral atoms
+                    <!-- /ko -->
+                    <!-- ko if: audit.ChiralAtoms.length > 0 -->
+                    <div data-bind="template: { name: 'atom-list-template', data: audit.ChiralAtoms }"></div>
+                    <!-- /ko -->
+
+                    <!-- ko if: audit.ExtraChiralAtoms.length > 0 -->
+                    <h4>Extra Chiral Atoms (<span data-bind="text: audit.ExtraChiralAtoms.length"></span>)</h4>
+                    <div data-bind="template: { name: 'atom-list-template', data: audit.ExtraChiralAtoms }"></div>
+                    <!-- /ko -->
+                    <!-- ko if: audit.MissingChiralAtoms.length > 0 -->
+                    <h4>Missing Chiral Atoms (<span data-bind="text: audit.MissingChiralAtoms.length"></span>)</h4>
+                    <div data-bind="template: { name: 'atom-list-template', data: audit.MissingChiralAtoms }"></div>
+                    <!-- /ko -->
+                </div>
+
+                <div class="tab-pane" id="audit-details-coordinates">
+                    <!-- ko if: audit.MissingCoordinateModelAtoms.length > 0 -->
+                    <h4>Missing Model Coordinates (<span data-bind="text: audit.MissingCoordinateModelAtoms.length"></span>)</h4>
+                    <div data-bind="template: { name: 'atom-list-template', data: audit.MissingCoordinateModelAtoms }"></div>
+                    <!-- /ko -->
+
+                    <!-- ko if: audit.MissingCoordinateIdealAtoms.length > 0 -->
+                    <h4>Missing Ideal Coordinates (<span data-bind="text: audit.MissingCoordinateIdealAtoms.length"></span>)</h4>
+                    <div data-bind="template: { name: 'atom-list-template', data: audit.MissingCoordinateIdealAtoms }"></div>
+                    <!-- /ko -->
+
+                    <!-- ko if: audit.MissingCoordinateIdealAtoms.length + audit.MissingCoordinateModelAtoms.length === 0  -->
+                    No problem detected.
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+
+
+        @*<div>
+            <dl>
+                <dt>General Info</dt>
+                <dd>
+                    <ul class="unstyled">
+                        <li><i data-bind="text: audit.LongName"></i></li>
+                        <li data-bind="html: htmlFormula"></li>
+                        <li><a data-bind="attr: { href: href }" target="_blank">LigandExpo link</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <!-- ko if: !audit.hasProblem -->
+            <i>No problems detected.</i>
+            <!-- /ko -->
+            <!-- ko if: audit.hasProblem -->
+            <dl>
+                <dt data-bind="if: !audit.IsConnected">Not Connected</dt>
+                <dd data-bind="if: !audit.IsConnected">True</dd>
+
+                <dt style="margin-top: 10px" data-bind="if: unusualBonds.length > 0">Unusual Bonds (<span data-bind="text:  unusualBonds.length"></span>)</dt>
+                <dd data-bind="if: unusualBonds.length > 0">
+                    <table style="margin-top: 3px" class="table table-striped table-hover bonds-table">
+                        <thead>
+                            <tr>
+                                <th>Bond</th>
+                                <th>Length (&Aring;)</th>
+                                <th>Expected (&Aring;)</th>
+                                <th>Error (&Aring;)</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: unusualBonds">
+                            <tr>
+                                <td data-bind="text: $data['key']"></td>
+                                <td data-bind="text: $data['length']"></td>
+                                <td><span data-bind="text: $data['range']['min']"></span> - <span data-bind="text: $data['range']['max']"></span></td>
+                                <td data-bind="text: $data['error']"></td>
+                                <td data-bind="text: $data['type']"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </dd>
+
+                <dt style="margin-top: 10px" data-bind="if: unusualBondsMinor.length > 0">Unusual Bonds - Minor (<span data-bind="text:  unusualBondsMinor.length"></span>)</dt>
+                <dd data-bind="if: unusualBondsMinor.length > 0">
+                    <table style="margin-top: 3px" class="table table-striped table-hover bonds-table">
+                        <thead>
+                            <tr>
+                                <th>Bond</th>
+                                <th>Length (&Aring;)</th>
+                                <th>Type</th>
+                                <th>Expected (&Aring;)</th>
+                                <th>Error (&Aring;)</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: unusualBondsMinor">
+                            <tr>
+                                <td data-bind="text: $data['key']"></td>
+                                <td data-bind="text: $data['length']"></td>
+                                <td data-bind="text: $data['type']"></td>
+                                <td><span data-bind="text: $data['range']['min']"></span> - <span data-bind="text: $data['range']['max']"></span></td>
+                                <td data-bind="text: $data['error']"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </dd>
+                
+                <dt style="margin-top: 10px" data-bind="if: audit.hasMissingFile">Missing File</dt>
+                <dd data-bind="if: audit.hasMissingFile"><span data-bind="text: audit.NonExistingFile"></span></dd>
+
+                <dt style="margin-top: 10px" data-bind="if: audit.hasDifferentNumberOfAtomsPdbSdf">Different Atom Count</dt>
+                <dd data-bind="if: audit.hasDifferentNumberOfAtomsPdbSdf">SDF: <span data-bind="text: audit.SdfAtomCount"></span>, PDB: <span data-bind="text: audit.PdbAtomCount"></span></dd>
+
+                <dt style="margin-top: 10px" data-bind="if: audit.zeroCoordinateCount > 0">Zero Coordinate Atoms (<span data-bind="text: audit.zeroCoordinateCount"></span>)</dt>
+                <dd data-bind="if: audit.zeroCoordinateCount > 0"><span data-bind="text: audit.ZeroCoordinateAtoms.join(', ')"></span></dd>
+            </dl>
+            <!-- /ko -->
+        </div>*@
+    </div>
+    <!-- /ko -->
+</div>

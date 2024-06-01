@@ -1,0 +1,29 @@
+﻿
+.modal-backdrop {
+    display: none !important;
+}
+
+#detailsModal, #notValidatedDetailsModal {
+    position: absolute !important;
+    height: auto !important;
+    left: 0;
+    top: 170px;
+    right: 0;
+    border-radius: 0 !important;
+    border: 0;
+    overflow: scroll;
+    box-shadow: none;
+    margin: 0 auto 40px auto !important;
+    outline: none !important;
+}
+
+#detailsModal .close, #notValidatedDetailsModal .close {
+    display: none;
+}
+
+#detailsModal .modal-body, #notValidatedDetailsModal .modal-body {
+    height: auto !important;
+    max-height: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}

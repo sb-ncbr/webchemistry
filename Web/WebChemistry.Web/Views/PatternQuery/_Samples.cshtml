@@ -1,0 +1,154 @@
+﻿<div class="tabbable" id="charges-samples">
+    <div style="background: #F5F5F5; padding: 6px 19px; border-radius: 6px">
+        <ul class="nav nav-pills" style="margin: 0">
+            <li class="disabled" style="width: 90px"><a href="#" style="font-weight: bold; color: black !important; padding-left: 0 !important">Sample</a></li>
+            <li class="active"><a href="#sample-tes-tab" style="font-weight: bold" data-toggle="tab" id="sample-tesBtn">Testosterone</a></li>
+            <li><a href="#sample-zinc-tab" style="font-weight: bold" data-toggle="tab" id="sampleZincBtn">Zinc Fingers</a></li>
+            <li><a href="#sample-lec-tab" style="font-weight: bold" data-toggle="tab" id="sample-lecBtn">LecB</a></li>
+        </ul>
+    </div>
+    <div class="tab-content">
+
+        <div class="tab-pane active" id="sample-tes-tab" style="text-align: justify">
+            <a href="~/Content/PatternQuery/images/mq-sample_tes-big.png" target="_blank" class="mq-hover-highlight" style="float: right; margin: 0 0 0 15px;" title="Show bigger image."><img src="~/Content/PatternQuery/images/mq-sample_tes.png" /></a>
+
+            <h3>
+                Testosterone
+                <small>Binding Site</small>
+                <span class="btn-group">
+                    <a class="btn btn-primary btn-small" title="Inspect precomputed results." target="_blank" href="/Platform/PatternQuery/Result/Testosterone"><i class="icon-search icon-white"></i> Browse Data</a>
+                    <button class="btn btn-success btn-small" title="Fill in the query as input for a new computation." data-bind="click: examplesModel.doSampleTes"><i class="icon-play icon-white"></i> Try It Yourself</button>
+                </span>
+            </h3>
+
+
+            <p>
+                Testosterone is a steroid sex hormone found in a variety of vertebrates. It activates an androgen receptor (NR3C4) upon binding in either its pure form or its derivative
+                dihydrotestosterone and is primarily responsible for the development of male primary sexual characteristics [1].
+            </p>
+
+            <code style="display: block; margin: 20px 0">
+                Residues("TES") <span style="color: #888">Residues annotated as TES ...</span><br />
+                &nbsp;&nbsp;.AmbientResidues(4) <span style="color: #888">... and all residues within 4&Aring; of the particular TES occurrence.</span>
+            </code>
+
+
+            <div>
+                <p>
+                    The Protein Data Bank contains 26 instances of residues annotated as testosterone (TES) originating from 26 PDB entries (as of Dec 23 2014). The testosterone derivatives with different annotation
+                    (BDT, DHT, FFA, TH2) were not queried here. All the structures are complete and correct. The immediate surrounding of TES residues is rich in positively charged (Arg, His) and polar residues (Thr, Gln, Tyr).
+                </p>
+
+                <b style="font-size: 9pt">
+                    References:
+                </b>
+                <ol style="font-size: 8pt; margin-left: 20px">
+                    <li>
+                        Voet, D. and Voet, JG. Biochemistry. 4th ed. Hoboken, NJ: John Wiley, 2011, xxv, 142853.
+                        ISBN 04-709-1745-8.
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="sample-zinc-tab" style="text-align: justify">
+            <h3>
+                Zinc Fingers
+                <small>Cys<sub>2</sub>His<sub>2</sub> Zinc Finger Transcription Factor</small>
+                <span class="btn-group">
+                    <a class="btn btn-primary btn-small" title="Inspect precomputed results." target="_blank" href="/Platform/PatternQuery/Result/ZincFingers"><i class="icon-search icon-white"></i> Browse Data</a>
+                    <button class="btn btn-success btn-small" title="Fill in the query as input for a new computation." data-bind="click: examplesModel.doSampleZn"><i class="icon-play icon-white"></i> Try It Yourself</button>
+                </span>
+            </h3>
+
+
+            <p>
+                Cys<sub>2</sub>His<sub>2</sub> zinc fingers (C<sub>2</sub>H<sub>2</sub>-ZFs) are the largest family of DNA-binding proteins in metazoans. They provide a stable, versatile and conserved framework for double-stranded DNA recognition [1].
+                @*<a href="#sample-zinc-more" onclick="var $t = $(this); $t.text($t.text() === '[show more]' ? '[show less]' : '[show more]'); $('#sample-zinc-more').toggle();">[show more]</a>*@
+            </p>
+
+            <code style="display: block; margin: 20px 0">
+                RegularMotifs(".{2}C.{2,4}C.{3}[F|Y].{5}[AILFPGV].{2}H.{3,5}H") <span style="color: #888">Detect specified primary sequence motif ...</span><br />
+                &nbsp;&nbsp;.ConnectedAtoms(1) <span style="color: #888">... and atoms connected to it.</span>
+            </code>
+
+            <a href="~/Content/PatternQuery/images/mq-sample_zn-big.png" target="_blank" class="mq-hover-highlight" style="float: right; margin: 0 0 0 15px;" title="Show bigger image."><img src="~/Content/PatternQuery/images/mq-sample_zn.png" /></a>
+
+            <div id="sample-zinc-more">
+                <p>
+                    Each zinc finger spans ~30 amino acid residues and folds into a simple &#946;&#946;&#945;-motif around a tetrahedrally coordinated zinc ion. The motif can be identified by a
+                    regular expression X<sub>2</sub>-C-X<sub>2,4</sub>-C-X<sub>12</sub>-H-X<sub>3,5</sub>-H<sub>1,2</sub>, where X represents any amino acid.
+                    The X<sub>12</sub> region usually has the form: X<sub>3</sub>-[F|Y]-X<sub>5</sub>-&#936;-X<sub>1,2</sub>, where &#936; denotes a hydrophobic residue [2]. The zinc ion is coordinated by two cysteine residues and two histidines.
+                </p>
+
+                <p>
+                    PQ was employed in the discovery and extraction of all structural patterns which satisfy the sequence condition. In total, 354 patterns representing zinc fingers
+                    were successfully identified in 233 distinct PDB entries. The majority of patterns come from <i>Homo sapiens</i> and other mammals.
+                </p>
+
+                <b style="font-size: 9pt">
+                    References:
+                </b>
+                <ol style="font-size: 8pt; margin-left: 20px">
+                    <li>Gupta, A., Christensen, R.G., Bell, H.A., Goodwin, M., Patel, R.Y., Pandey, M., Enuameh, M.S., Rayla, A.L., Zhu, C., Thibodeau-Beganny, S., et al. (2014) An improved predictive recognition model for Cys(2)-His(2) zinc finger proteins. Nucleic Acids Res., 42, 4800&ndash;12.</li>
+                    <li>Pabo, C.O., Peisach, E. and Grant, R.A. (2001) Design and selection of novel Cys2His2 zinc finger proteins. Annu. Rev. Biochem., 70, 313&ndash;40.</li>
+                </ol>
+                <a name="sample-zinc-more"></a>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="sample-lec-tab" style="text-align: justify">
+            <h3>
+                LecB
+                <small>Sugar Binding Sites</small>
+                <span class="btn-group">
+                    <a class="btn btn-primary btn-small" title="Inspect precomputed results." target="_blank" href="@Url.Action("Result", new { id = "Lectins" })"><i class="icon-search icon-white"></i> Browse Data</a>
+                    <button class="btn btn-success btn-small" title="Fill in the query as input for a new computation." data-bind="click: examplesModel.doSampleLec"><i class="icon-play icon-white"></i> Try It Yourself</button>
+                </span>
+            </h3>
+
+            <p>
+                <i>Pseudomonas aeruginosa</i> is an opportunistic pathogen associated with a number of chronic infections. This pathogen forms a biofilm shield enabling it to survive both the response
+                of the host immune system and antibiotic treatment. One of the cornerstones of biofilm formation is the presence of carbohydrate-binding proteins (lectins) on the outer cell membrane:
+                LecA (PA-IL) and LecB (PA-IIL). Their inhibition is considered to be a promising approach for anti-pseudomonadal treatment [1].
+                @*<a href="#sample-lec-more" onclick="var $t = $(this); $t.text($t.text() === '[show more]' ? '[show less]' : '[show more]'); $('#sample-lec-more').toggle();">[show more]</a>*@
+            </p>
+
+            <code style="display: block; margin: 20px 0">
+                Near(4, Atoms("Ca"), Atoms("Ca")) <span style="color: #888">Pairs of Ca atoms closer than 4Å ...</span><br />
+                &nbsp;&nbsp;.ConnectedResidues(1) <span style="color: #888">... with residues connected to any one of them ...</span><br />
+                &nbsp;&nbsp;.Filter(lambda l: <span style="color: #888">... the residues must contains a sugar ring (pyran, furan) ...</span><br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;l.Count(Or(Rings(5 * ["C"] + ["O"]), Rings(4 * ["C"] + ["O"]))) > 0) <br />
+                &nbsp;&nbsp;.Filter(lambda l: l.Count(Atoms("P")) == 0)  <span style="color: #888">... and no P atoms (to exclude nucleotides).</span>
+            </code>
+
+            <a href="~/Content/PatternQuery/images/mq-sample_lec-big.png" target="_blank" class="mq-hover-highlight" style="float: right; margin: 0 0 0 15px; height: 150px" title="Show bigger image."><img src="~/Content/PatternQuery/images/mq-sample_lec.png" /></a>
+
+            <div id="sample-lec-more">
+                <p>
+                    We employed MQ in the discovery of sugar binding sites with similar geometry as the tetrameric PA-IIL protein in the Protein Data Bank.
+                    The carbohydrate-binding domain is calcium dependent, with two calcium ions stabilizing the binding site and contributing to sugar binding [2].
+                    Therefore, just the structures containing calcium ions were queried. The query was searching for 2 calcium ions at most 4&Aring; far from each other,
+                    and all the residues with direct interaction with either of the ions. Furthermore, just the molecular patterns containing a furan or pyran ring were kept.
+                    Additionally, in case the phosphorus atom was present, the pattern was filtered out in order to avoid nucleotides.
+                </p>
+
+                <p>
+                    The outcome of this query is made up of 87 distinct patterns originating from 36 PDB entries of 7 different organisms.
+                    The majority of them originated from <i>P.aeruginosa</i>, however, binding sites from other pathogens such as <i>R. solanacearum</i>,
+                    <i>B. cenocepacia</i> or <i>C. violaceum</i> were identified. In 83 patterns, the sugar-binding site is composed of 3x Asp, 2x Asn,
+                    1x Glu and 1x Gly residues, in agreement with literature reports of the binding site for 24 PDB entries belonging to 3 pathogens.
+                </p>
+
+                <b style="font-size: 9pt">
+                    References:
+                </b>
+                <ol style="font-size: 8pt; margin-left: 20px">
+                    <li>Hauck, D., Joachim, I., Frommeyer, B., Varrot, A., Philipp, B., Möller, H.M., Imberty, A., Exner, T.E. and Titz, A: Discovery of two classes of potent glycomimetic inhibitors of Pseudomonas aeruginosa LecB with distinct binding modes. 2012, <i>ACS Chem. Biol.</i>, 8, 1775&ndash;84.</li>
+                    <li>Mitchell, E., Houles, C., Sudakevitz, D., Wimmerova, M., Gautier, C., Pérez, S., Wu, A.M., Gilboa-Garber, N. and Imberty, A: Structural basis for oligosaccharide-mediated adhesion of Pseudomonas aeruginosa in the lungs of cystic fibrosis patients. 2012, <i>Nat. Struct. Biol.</i>, 9, 918&ndash;21.</li>
+                </ol>
+                <a name="sample-lec-more"></a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+﻿<div id="modal-confirm" class="modal hide fade">
+    <div class="modal-header">
+      <a href="#" class="close">&times;</a>
+      <h3><span id="modalHeader"></span></h3>
+    </div>
+    <div class="modal-body">
+      <div id="#modalBody"></div>
+    </div>
+    <div class="modal-footer">      
+      <a href="#" class="btn btn-danger" id="confirmYesBtn">Yes</a>
+      <a href="#" class="btn" id="confirmNoBtn">No</a>
+    </div>
+</div>
+
+<script>
+    (function (WebChem) {
+        var onConfirmYes = function () { };
+        var onConfirmNo = function () { };
+
+        $(function () {
+            var modalConfirm = $("#modal-confirm");
+
+            $("#confirmYesBtn").click(function (e) {
+                e.preventDefault = true;
+                modalConfirm.modal('hide');
+                if (onConfirmYes) onConfirmYes();
+            });
+
+            $("#confirmYesNo").click(function (e) {
+                e.preventDefault = true;
+                modalConfirm.modal('hide');
+                if (onConfirmNo) onConfirmNo();
+            });
+        });
+
+        WebChem.confirm = function (options) {
+            $("#modalHeader").html(options.header);
+            $("#modalBody").html(options.body);
+            onConfirmYes = options.onYes;
+            onConfirmNo = options.onNo;
+            $("#modal-confirm").modal('show');
+        };
+    })(WebChem || (WebChem = {}));    
+</script>

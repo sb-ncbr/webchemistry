@@ -1,0 +1,352 @@
+﻿@{
+    ViewBag.Title = "MotiveValidator";
+}
+
+@section CustomMeta {
+    <meta name="robots" content="nofollow" />
+}
+
+<div class="page-header">
+    <h1>MotiveValidator<br /><small>Validate ligand and residue structure in biomolecular complexes.</small></h1>
+</div>
+
+@{ /*<div style="padding-bottom:15px">
+    <p>Some clever description goes here. is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+</div> */}
+
+<div style="margin-bottom: 35px">
+    <p>
+        <strong>MotiveValidator</strong> is a platform for a set of applications designed to help you determine whether a residue or a ligand in a biomolecule or biomolecular complex is structurally complete
+        and correctly annotated according to its models stored in the <strong>wwPDB Chemical Component Dictionary</strong> (wwPDB CCD).
+    </p>
+    <p>
+        The applications provided within the <strong>MotiveValidator</strong> platform cover all residues and ligands defined in the <strong>wwPDB CCD</strong>, and available via <strong>PDBeChem</strong>.
+        In addition, you may specify your own model residue if it is not available in <strong>wwPDB CCD</strong>.
+    </p>
+</div>
+
+<div class="alert alert-info alert-block" style="margin-bottom: 35px;">
+    <a class="close" data-dismiss="alert" href="#">&times;</a>
+    Are you interested in validating ligands and non-standard residues in existing PDBe.org entries? Check out <a style="font-weight: bold" target="_blank" href="@Url.Action("Index", "ValidatorDb")">Validator<sup>DB</sup></a>.
+</div>
+
+<div class="tabbable">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#intro" data-toggle="tab">Quick Help</a></li>
+        <li style="margin-left: 30px"><a href="#customMode" data-toggle="tab"><b>Residue Validation</b></a> </li>
+        <li><a href="#sugarMode" data-toggle="tab"><b>Sugar Validation</b></a></li>
+        <li style="margin-left: 30px"><a href="#modelMode" data-toggle="tab"><b>Motif/Fragment Validation</b></a></li>
+        <li class="pull-right"><a href="#cmdVersion" data-toggle="tab" id="cmdTabLink">Command Line Version</a></li>
+        @*<li><a href="#residueMode" data-toggle="tab">Automatic Residue Analysis <sup>beta</sup></a></li>*@
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="intro">
+            <ul>
+                <li>
+                    Click on each of the application tabs to read about the functionality of a specific <b>MotiveValidator</b> application, and upload the structures you wish to study.
+                    If you do not have any input PDB or PDBx/mmCIF files ready or are unsure regarding what the input files can look like, just view the results to one of our sample calculations.
+                    You will be able to download sample input files from there.
+                </li>
+                <li>Note that some of the applications work with the structure of entire biomolecules, whereas other applications work with fragments of these structures.</li>
+                <li>Once your calculation is complete, you will be redirected to a results page, where you will be able to analyze your results in detail, both statistically and visually.</li>
+                <li>You will be provided with a link to your results page, so that you can return, analyze or download your results later. The results page address is not publicly visible.</li>
+                <li>
+                    For a step-by-step guide about how to work with MotiveValidator and how to analyze your results, see the
+                    <a class="btn btn-small btn-primary" target="_blank" href="@Url.Content("~/Content/MotiveValidator/MotiveValidator_manual.pdf")">Manual</a>.
+                    Should you have any further questions or comments, feel free to contact us at david.sehnal<img src="~/Images/at.png">mail.muni.cz.
+                </li>
+                <li>
+                    For a quick demo, view the
+                    @*<a class="btn btn-small btn-primary" href="//webchem.ncbr.muni.cz/Wiki/MotiveValidator_Tutorial" title="The tutorial offers a brief, graphical walk through of job submission and result analysis, and is meant for a quick start for first time users, who would like to try out MotiveValidator without going through all the explanations in the manual.">Tutorial</a>*@
+                    <a class="btn btn-small btn-primary" target="_blank" href="@Url.Content("~/Content/MotiveValidator/MotiveValidator_tutorial.pdf")" title="The tutorial offers a brief, graphical walk through of job submission and result analysis, and is meant for a quick start for first time users, who would like to try out MotiveValidator without going through all the explanations in the manual.">Tutorial</a>
+                    and examine the results of our <button class="btn btn-success btn-small" id="samplesBtn">Sample</button> calculations.
+
+                    <dl style="margin-top: 15px" class="hide" id="samplesTable">
+                        @Html.Partial("_Samples")
+                    </dl>
+                </li>
+                <li style="margin-top:20px">
+                    If you found MotiveValidator helpful, please cite:<br />
+                    <small>
+                        Svobodová Vařeková, R., Jaiswal, D., Sehnal, D., Ionescu, C.-M., Geidl, S., Pravda, L., Horský, V., Wimmerová, M. and Koča, J.:
+                        <a href="//dx.doi.org/10.1093/nar/gku426" target="_blank">MotiveValidator: interactive web-based validation of ligand and residue structure in biomolecular complexes</a>. Nucleic Acids Res., 42, W227–33 (2014).
+                    </small>
+                </li>
+            </ul>
+
+            <hr />
+
+            <p style="text-align: center">
+                <img src="~/Images/elixirlogo.png" alt="ELIXIR logo" style="height: 70px" /><br />
+                <small>
+                    MotiveValidator is a part of services provided by <a href="https://www.elixir-czech.cz/" target="_blank">ELIXIR</a> &ndash;
+                    European research infrastructure for biological information.
+                    For other services provided by ELIXIR's Czech Republic Node visit <a href="https://www.elixir-czech.cz/services" target="_blank">www.elixir-czech.cz/services</a>.
+                </small>
+            </p>
+            <br />
+        </div>
+        <div class="tab-pane" id="sugarMode">
+            <h4>Automatic sugar validation in one or more biomolecules</h4>
+            <ul>
+                <li>
+                    Reads the <b>entire structure</b> of an input biomolecule or biomolecular complex, automatically detects all sugar (carbohydrate) residues present,
+                    and subsequently validates them with respect to model residues obtained from the wwPDB Chemical Component Dictionary.
+                </li>
+                <li>
+                    The structure of each sugar residue in the input structure is compared with the wwPDB Chemical Component Dictionary model residue that has the same annotation,
+                    i.e., the same 3-letter residue name according to PDB standards.
+                </li>
+            </ul>
+            <br />
+            <div id="upload-sugars-form" class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label"><b>Biomolecule(s)</b>: </label>
+                    <div class="controls">
+                        <div class="fileupload fileupload-new" data-provides="fileupload" style="margin-bottom: 0px">
+                            <div class="input-append input-prepend">
+                                <span class="add-on">From File </span>
+                                <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file">
+                                    <span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span>
+                                    <input type="file" name="structures" data-disable="fromPdbSugars" />
+                                </span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                @*<span class="btn" title="If you are unsure regarding what the input files can look like, just go to our Quick Help page and view the results to one of our sample calculations. You will be able to download sample input files from there."><i class="icon-question-sign"></i></span>*@
+                                @*<a href="@Url.Content("~/Content/MotiveValidatorInputExamples/ExampleProteins.zip")" class="btn" title="Download Input Example"><i class="icon-download"></i> Input Example</a>*@
+                            </div>
+                        </div>
+
+                        <div style="color: #808080"><small>Select a single file or a <strong>ZIP</strong> file containing <strong>entire biomolecule(s)</strong> in <strong>PDB</strong> or <strong>PDBx/mmCIF</strong> format (300MB limit).</small></div>
+
+                        <div class="input-prepend input-append" id="fromPdbSugars" style="margin-top: 4px">
+                            <span class="add-on">From PDBe.org</span>
+                            <input type="text" name="structureNames" id="sugarValidationPdbNames" placeholder="PDB 4-letter identifiers…">
+                            <a href="#" class="btn" id="sugarValidationPdbListExampleBtn" title="Click me for a sample."><i class="icon-question-sign"></i></a>
+                        </div>
+                        <div style="color: #808080"><small>PDB identifiers are used only if no file is selected. Loaded from <b>PDBx/mmCIF</b> format.</small></div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-large btn-primary btn-block" data-do-upload="true" data-upload-form="upload-sugars-form" data-upload-action="@Url.Action("UploadSugars", "MotiveValidator")" data-method-name="Sugar Validation">
+                    <i class="icon-upload icon-white"></i> Upload and Compute
+                </button>
+            </div>
+        </div>
+        <div class="tab-pane" id="customMode">
+            <h4>Automatic custom residue validation in one or more biomolecules</h4>
+            <ul>
+                <li>Reads the structure of an input biomolecule or biomolecular complex, and an input model residue to serve as reference template for validation.</li>
+                <li>
+                    Scans the <b>entire biomolecule(s)</b>, automatically detects all residues in the input biomolecule(s) with the same annotation (i.e., the same 3-letter code)
+                    as the model residue, and subsequently validates them by comparison to the model.
+                </li>
+            </ul>
+            <br />
+
+            <div id="upload-custom-models-form" class="form-horizontal">
+                @*<p>Select a single <strong>PDB</strong> file or a <strong>ZIP</strong> file containing <strong>one or more PDB files with template models</strong> (a model must contain exactly one residue):</p>*@
+                @*<p>Select a single file or a <strong>ZIP</strong> file containing <strong>template model(s)</strong> (a model must contain exactly one residue) in <strong>PDB</strong> or <strong>PDBx/mmCIF</strong> format:</p>*@
+
+                <div class="control-group">
+                    <label class="control-label"><b>Model Residue(s)</b>: </label>
+                    <div class="controls">
+                        <div class="input-prepend input-append" id="fromLigandExpoCustomModels">
+                            <span class="add-on">From wwPDB CCD</span>
+                            <input type="text" name="modelNames" id="customModelNames" placeholder="Residue 3-letter codes…">
+                            <a href="#" class="btn" id="residueListExampleBtn" title="Click me for a sample."><i class="icon-question-sign"></i></a>
+                        </div>
+                        <div id="notifyMultipleLigands" class="alert alert-info hide" style="margin: 6px 0 0 0; padding: 4px 6px 4px 6px">
+                            To validate more residues or ligands in one run, enter a comma separated list of 3-letter codes.
+                        </div>
+                        @*<div style="color: #808080"><small>LigandExpo names are used only if no model file is selected.</small></div>*@
+                        <div class="fileupload fileupload-new" data-provides="fileupload" style="margin-top: 6px">
+                            <div class="input-prepend input-append">
+                                <span class="add-on">From File </span>
+                                <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file">
+                                    <span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span>
+                                    <input type="file" name="models" data-disable="fromLigandExpoCustomModels" data-warning="notifyModelSelect-CustomModels" />
+                                </span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                @*<span class="btn" title="If you are unsure regarding what the input files can look like, just go to our Quick Help page and view the results to one of our sample calculations. You will be able to download sample input files from there."><i class="icon-question-sign"></i></span>*@
+                                @*<a href="@Url.Content("~/Content/MotiveValidatorInputExamples/ExampleModels.zip")" class="btn" title="Download Input Example"><i class="icon-download"></i> Input Example</a>*@
+                            </div>
+                            <div id="notifyModelSelect-CustomModels" class="alert alert-info hide" style="margin: 6px 0 0 0; padding: 4px 6px 4px 6px"></div>
+                            <div style="color: #808080">
+                                <small>
+                                    Select a single file or a <strong>ZIP</strong> file containing <strong>model residues(s)</strong> (a model must contain exactly one residue) in
+                                    <strong>PDB</strong> or <strong>PDBx/mmCIF</strong> format.<br />
+                                    When using the PDB format, it is recommended that the input is a ZIP archive with both PDB and SD/SDF/MOL (for bonds) versions present.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @*<p>Select a single file or a <strong>ZIP</strong> file containing <strong>entire biomolecule(s)</strong> in <strong>PDB</strong> or <strong>PDBx/mmCIF</strong> format (300MB limit):</p>*@
+
+                <div class="control-group">
+                    <label class="control-label"><b>Biomolecule(s)</b>: </label>
+                    <div class="controls">
+                        <div class="fileupload fileupload-new" data-provides="fileupload" style="margin-bottom: 0px">
+                            <div class="input-append input-prepend">
+                                <span class="add-on">From File </span>
+                                <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file">
+                                    <span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span>
+                                    <input type="file" name="structures" data-disable="fromPdbCustomModels" />
+                                </span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                @*<span class="btn" title="If you are unsure regarding what the input files can look like, just go to our Quick Help page and view the results to one of our sample calculations. You will be able to download sample input files from there."><i class="icon-question-sign"></i></span>*@
+                                @*<a href="@Url.Content("~/Content/MotiveValidatorInputExamples/ExampleProteins.zip")" class="btn" title="Download Input Example"><i class="icon-download"></i> Input Example</a>*@
+                            </div>
+                        </div>
+
+                        <div style="color: #808080"><small>Select a single file or a <strong>ZIP</strong> file containing <strong>entire biomolecule(s)</strong> in <strong>PDB</strong> or <strong>PDBx/mmCIF</strong> format (300MB limit).</small></div>
+
+                        <div class="input-prepend input-append" id="fromPdbCustomModels" style="margin-top: 4px">
+                            <span class="add-on">From PDBe.org</span>
+                            <input type="text" name="structureNames" id="residueValidationPdbNames" placeholder="PDB 4-letter identifiers…">
+                            <a href="#" class="btn" id="residueValidationPdbListExampleBtn" title="Click me for a sample."><i class="icon-question-sign"></i></a>
+                        </div>
+                        <div style="color: #808080"><small>PDB identifiers are used only if no file is selected. Loaded from <b>PDBx/mmCIF</b> format.</small></div>
+                    </div>
+                </div>
+                <button class="btn btn-large btn-primary btn-block" data-do-upload="true" data-upload-form="upload-custom-models-form" data-upload-action="@Url.Action("UploadCustomModels", "MotiveValidator")" data-method-name="Residue Validation">
+                    <i class="icon-upload icon-white"></i> Upload and Compute
+                </button>
+            </div>
+        </div>
+        <div class="tab-pane" id="modelMode">
+            <h4>Validation of precomputed structural motifs against a model residue</h4>
+            <ul>
+                <li>Reads the structure of an input structural motif (residue or fragments of residues) or a set of motifs, and an input <i>model residue</i> to serve as reference for validation.</li>
+                <li>Validates each structural motif by comparison to the model residue, regardless of the annotations (i.e., the entire structure of each motif as a whole will be validated against the model residue).</li>
+                <li>
+                    To extract your own fragments/motifs, you can download the MotifExtractor utility from the <a href="#" id="cmdVersionLink" style="font-style: italic">Command Line Version</a> tab.
+                </li>
+            </ul>
+            <br />
+            <div id="upload-model-form" class="form-horizontal">
+                @*<p>Select a <strong>PDB</strong> file containing your <strong>model</strong> (a model must contain exactly one residue):</p>*@
+                <div class="control-group">
+                    <label class="control-label"><b>Model Residue</b>: </label>
+                    <div class="controls">
+                        <div class="input-prepend input-append" id="fromLigandExpoModel">
+                            <span class="add-on">From wwPDB CCD</span>
+                            <input type="text" name="modelName" id="customModelName" placeholder="Residue 3-letter code…">
+                            <a href="#" class="btn" id="residueExampleBtn" title="Click me for a sample."><i class="icon-question-sign"></i></a>
+                        </div>
+                        @*<div style="color: #808080"><small>LigandExpo name is used only if no model file is selected.</small></div>*@
+                        <div class="fileupload fileupload-new" data-provides="fileupload" style="margin-top: 6px">
+                            <div class="input-append input-prepend">
+                                <span class="add-on">From File </span>
+                                <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file">
+                                    <span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span>
+                                    <input type="file" name="model" data-disable="fromLigandExpoModel" data-warning="notifyModelSelect-Model" />
+                                </span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                @*<span class="btn" title="If you are unsure regarding what the input files can look like, just go to our Quick Help page and view the results to one of our sample calculations. You will be able to download sample input files from there."><i class="icon-question-sign"></i></span>*@
+                                @*<a href="@Url.Content("~/Content/MotiveValidatorInputExamples/ExampleModel.zip")" class="btn" title="Download Input Example"><i class="icon-download"></i> Input Example</a>*@
+                            </div>
+                            <div id="notifyModelSelect-Model" class="alert alert-info hide" style="margin: 6px 0 0 0; padding: 4px 6px 4px 6px"></div>
+                            <div style="color: #808080">
+                                <small>
+                                    Select a <strong>PDB</strong> or <strong>PDBx/mmCIF</strong> file containing your <strong>model residue</strong> (a model must contain exactly one residue).<br />
+                                    When using the PDB format, it is recommended that the input is a ZIP archive with both PDB and SD/SDF/MOL (for bonds) versions present.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<p>Select a single <strong>PDB</strong> file or a <strong>ZIP</strong> file containing <strong>one or more PDB files with motifs</strong> (300MB limit):</p>*@
+                <div class="control-group">
+                    <label class="control-label"><b>Motif(s)</b>: </label>
+                    <div class="controls">
+                        <div class="fileupload fileupload-new" data-provides="fileupload" style="margin-bottom: 0px">
+                            <div class="input-append input-prepend">
+                                <span class="add-on">From File </span>
+                                <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file">
+                                    <span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span>
+                                    <input type="file" name="motifs" />
+                                </span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                @*<span class="btn" title="If you are unsure regarding what the input files can look like, just go to our Quick Help page and view the results to one of our sample calculations. You will be able to download sample input files from there."><i class="icon-question-sign"></i></span>*@
+                                @*<a href="@Url.Content("~/Content/MotiveValidatorInputExamples/ExampleProteins.zip")" class="btn" title="Download Input Example"><i class="icon-download"></i> Input Example</a>*@
+                            </div>
+                        </div>
+                        <div style="color: #808080">
+                            <small>
+                                Select a single file or a <strong>ZIP</strong> file containing <strong>motif(s)</strong> in <strong>PDB</strong> or <strong>PDBx/mmCIF</strong> format (300MB limit).
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-large btn-primary btn-block" data-do-upload="true" data-upload-form="upload-model-form" data-upload-action="@Url.Action("UploadModel", "MotiveValidator")" data-method-name="Motif/Fragment Validation">
+                    <i class="icon-upload icon-white"></i> Upload and Compute
+                </button>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="cmdVersion">
+            <h4>Command line version of the MotiveValidator service</h4>
+            <div style="margin-bottom: 10px">
+                The command line version provides access to the underlying service. For usage instructions, please consult the
+                <a href="//webchem.ncbr.muni.cz/Wiki/MotiveValidator" target="_blank">Wiki page</a>.
+            </div>
+            <a href="@Url.Action("DownloadService")" class="btn btn-primary"><i class="icon-download icon-white"></i> Current Version (@ViewBag.ServiceVersion)</a>
+            <br />
+
+            <div class="form-inline" id="versionsDownload" style="margin-top: 10px">
+                <span>All Versions (<a href="@Url.Action("ChangeLog")" target="_blank">change log</a>): </span>
+                <select data-bind="options: versionList, optionsText: 'caption', value: currentVersion" style="width: 130px"></select>
+                <a data-bind="attr: { href: currentVersion().link  }" class="btn" style="margin-right: 6px"><i class="icon-download"></i> Download</a>
+            </div>
+            <br />
+
+            <h5>MotifExtrator</h5>
+            <div>
+                To extract your own fragments/motifs, you can use <a class="btn btn-small btn-primary" href="@Url.Content("~/Content/MotiveValidator/MotifExtractor.zip")">MotifExtractor</a>,
+                a simple automated script for extracting the motifs of interest from biomolecule structure files. For usage instructions, please consult the <a href="//webchem.ncbr.muni.cz/Wiki/MotiveValidator" target="_blank">Wiki page</a>.
+            </div>
+            <br />
+        </div>
+        @*<div class="tab-pane" id="residueMode">
+                <h4>Automatically analyze all residues in one or more proteins.</h4>
+                <p>Select a single <strong>PDB</strong> file or a <strong>ZIP</strong> file containing <strong>one or more PDB files</strong> (30MB limit):</p>
+                @using (Html.BeginForm("UploadResidues", "MotiveValidator", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data" }))
+                {
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                        <div class="input-append">
+                            <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file">
+                                <span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span>
+                                <input type="file" name="motifs" />
+                            </span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-large btn-primary"><i class="icon-upload icon-white"></i> Upload and Compute</button>
+                }
+            </div>*@
+    </div>
+
+    @Helpers.RecenlySubmittedComputations("MotiveValidator", "MotiveValidatorActions.resultAction")
+        
+    <div style="text-align:right">
+        <small style="color: #909090">
+            Database mirrors last updated @(ViewBag.DbLastUpdated). wwPDB CCD with @ViewBag.DbStructureCount.ToString() ligands (view <a href="@Url.Action("ListModels", new { id = "All" })" target="_blank">all</a>,
+            <a href="@Url.Action("ListModels", new { id = "Sugars" })" target="_blank">sugars</a>), PDB with @ViewBag.PdbStructureCount structures.<br />Service version @ViewBag.ServiceVersion (<a href="@Url.Action("ChangeLog")" target="_blank">change log</a>).
+        </small>
+    </div>
+</div>
+
+@section scripts {
+<script type="text/javascript">
+        var MotiveValidatorActions = { resultAction: "@Url.Action("Result", "MotiveValidator", new { id = "-id-" }, Request.Url.Scheme)" };
+</script>
+
+    @Scripts.Render("~/bundles/validatorindex")
+
+    <script type="text/javascript">
+        @{ var versions = string.Join(",", System.Linq.Enumerable.Select(ViewBag.AllVersions, new Func<WebChemistry.Framework.Core.AppVersion, string>(v => string.Format("{{ link : '{0}', caption: '{1}' }}", Url.Action("DownloadService", new { id = v }), v)))); }
+        var versionsModel = {
+            versionList: [ @Html.Raw(versions) ],
+            currentVersion: ko.observable()
+        };
+        $(function () {
+            versionsModel.currentVersion(versionsModel.versionList[0]);
+            ko.applyBindings(versionsModel, document.getElementById('versionsDownload'));
+        })
+    </script>
+}

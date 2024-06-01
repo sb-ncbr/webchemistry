@@ -1,0 +1,997 @@
+﻿#mq-explorer-app {
+    position: fixed;
+    top: 60px;
+    left: 30px;
+    bottom: 20px;
+    right: 30px;
+}
+
+#mq-explorer-app > div {
+    /*background: #ececec*/
+}
+
+#mq-explorer-session-info {    
+    z-index: 10000;
+    font-size: 7pt;
+    text-align: right;
+    color: #999;
+    margin-right: 10px;
+}
+
+#mq-explorer-session-info div {
+    margin-top: -6px;
+    margin-right: -3px;
+}
+
+#mq-explorer-session-info input {
+    border: 0;
+    padding: 0;
+    font-size: 8pt;
+    outline: none;
+    width: 500px;
+    color: #999;
+    text-align: right;
+    margin: -3px 0 0 0;
+    box-shadow: none;
+}
+
+#mq-explorer-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 600px;
+    height: 32px;
+    text-wrap: none;
+    -ms-text-overflow: clip;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    overflow: hidden;
+}
+
+#mq-explorer-header h2 {
+    margin: 0;
+    line-height: 30px;
+    float: left;
+    text-wrap: none;
+}
+
+#mq-exlorer-content {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+#mq-explorer-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 440px;
+    height: 40px;
+}
+
+#mq-explorer-query {
+    position: absolute;
+    left: 440px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+#mq-explorer-query-wrap {
+    position: absolute;
+    left: 0;
+    right: 100px;
+    top: 0;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+    border-radius: 0;
+    overflow: hidden;
+    z-index: 25000;
+    height: 26px;
+    background: white;
+}
+
+#mq-explorer-query-editor {
+    width: 100%;
+    z-index: 25000;
+}
+
+.ace-mq-editor {
+    height: 135px !important;
+}
+
+#mq-explorer-add-data {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;    
+}
+
+#mq-explorer-add-data button {
+    height: 30px;
+    width: 201px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-radius: 0 !important;
+}
+
+#mq-explorer-add-data button:last-child {
+    padding: 0;
+    width: 30px;
+}
+
+/*#mq-explorer-add-data button:last-child {
+    height: 30px;
+    width: 32px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}*/
+
+#mq-explorer-input button {
+    display: block;
+    width: 100px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 0 !important;
+}
+
+#mq-explorer-list {
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    right: 0;
+    width: 430px;
+}
+
+#mq-explorer-structure-grid {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    left: 0;
+    height: 160px;
+    background: #f7f7f7;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-bottom: none;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 9pt;
+}
+
+#mq-explorer-structure-grid-count {
+    top: 190px;    
+}
+
+.mq-explorer-structure-id {
+    font-family: monospace;
+}
+
+.mq-explorer-remove-structure-button {
+    margin-top: -2px;
+    margin-left: 2px;
+    padding: 0 !important;
+    opacity: 0.5;
+}
+
+.mq-explorer-structure-pdborg-link {
+    display: inline-block;
+    padding: 0;
+    position: absolute;
+    right: 4px;
+    top: 0;
+    opacity: 0.5;
+}
+
+.mq-explorer-structure-valdb-link {
+    display: inline-block;
+    padding: 0;
+    position: absolute;
+    right: 18px;
+    top: 0;
+    opacity: 0.5;
+}
+
+
+.mq-explorer-remove-structure-button:hover, .mq-explorer-structure-pdborg-link:hover, .mq-explorer-structure-valdb-link:hover {
+    opacity: 1;
+}
+
+#mq-explorer-motif-controls {
+    position: absolute;
+    top: 220px;
+    height: 30px;
+    width: 100%;
+}
+
+#mq-explorer-motifs-filter {
+    display: inline-block;    
+    height: 30px;
+    width: 241px;
+    margin: 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 0;
+}
+
+#mq-explorer-download-btn {
+    display: inline-block;
+    margin-left: -1px;
+    height: 30px;
+    width: 161px;
+    border-radius: 0;
+}
+
+#mq-explorer-download-btn small {
+    color: #777;
+    font-size: 8pt;
+}
+
+#mq-explorer-clear-motifs-btn {
+    display: inline-block;
+    margin-left: -1px;
+    height: 30px;
+    width: 30px;
+    border-radius: 0;
+}
+
+#mq-explorer-clear-filter-btn {
+    position: absolute;
+    right: 159px;
+    top: 3px;
+}
+
+#mq-explorer-motif-grid {
+    position: absolute;
+    top: 250px;
+    right: 0;
+    left: 0;
+    bottom: 20px;
+    background: #f7f7f7;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-bottom: none;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 9pt;
+}
+
+#mq-explorer-motif-grid-count {
+    bottom: 0;
+}
+
+#mq-explorer-structure-grid-count, #mq-explorer-motif-grid-count {
+    padding-right: 8px;
+    padding-left: 8px;
+    text-align: left;
+    height: 20px;
+    background: #E8E8E8;
+    position: absolute;    
+    right: 0;
+    left: 0;
+    font-size: 8pt;
+    line-height: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+    color: #222;
+}
+
+#mq-explorer-view {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    bottom: 0;
+    right: 440px;
+}
+
+#mq-explorer-3d-view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 90px;
+    right: 0;    
+}
+
+#mq-explorer-3d-controls {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#mq-explorer-3d-controls button {
+    padding: 4px;
+}
+
+#mq-explorer-3d-message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 400px;
+}
+
+#mq-explorer-3d-atom-info-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+}
+
+#mq-explorer-3d-atom-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-weight: bold;
+    font-size: 9pt;
+    color: #424242
+}
+
+#mq-explorer-3d-host {
+    width: 100%;
+    height: 100%;
+}
+
+#mq-explorer-current-info {
+    position: absolute;
+    bottom: 90px;
+    left: 0;
+    right: 10px;
+    text-align: right;
+}
+
+#mq-explorer-current-info h4 {
+    margin: 0;
+    padding: 0;
+}
+
+#mq-explorer-current-info  small {
+    font-size: 9pt;
+}
+
+#mq-explorer-current-info-residues {
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    max-width: 800px;
+    white-space: nowrap;
+    display: inline-block;
+    overflow: hidden;
+}
+
+#mq-explorer-log-wrap {
+    padding: 5px 0 0 0;
+    font-size: 10pt;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 80px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #CCC;    
+    background: #F7F7F7;
+}
+
+#mq-explorer-log {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    padding: 3px 5px 3px 5px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+
+#mq-explorer-log-controls {
+    position: absolute;
+    right: 20px;
+    width: 25px;
+    top: 5px;
+}
+
+#mq-explorer-log-controls button {    
+    float: left;
+    text-align: center !important;
+    width: 25px !important;
+    padding: 0 !important;
+    margin-bottom: 3px;
+}
+
+#mq-explorer-log-controls button:not(:last-child) {
+    margin-left: 1px;
+}
+
+#mq-explorer-log-controls button:last-child {
+    opacity: 0.5;
+}
+
+#mq-explorer-log-controls button:last-child:hover {
+    opacity: 1.0;
+}
+
+.mq-explorer-log-collapse {
+    display: none;
+}
+
+.mq-explorer-view-expand-log .mq-explorer-log-collapse {
+    display: inline-block;
+}
+
+.mq-explorer-view-expand-log .mq-explorer-log-expand {
+    display: none;
+}
+
+.mq-explorer-view-expand-log #mq-explorer-log-wrap {
+    height: 300px;
+}
+
+.mq-explorer-view-expand-log #mq-explorer-current-info {
+    bottom: 310px;
+}
+
+.mq-explorer-view-expand-log #mq-explorer-3d-view {
+    bottom: 310px;
+}
+
+#mq-explorer-overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 27000;
+    width: 100%;
+    height: 100%;
+}
+
+#mq-explorer-overlay-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    opacity: 0.5;
+}
+
+#mq-explorer-overlay-wrap {
+    position: absolute;
+    height: 400px;
+    width: 640px;
+    left: 50%;
+    top: 50%;
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#mq-explorer-overlay-spinner {
+    height: 280px;
+}
+
+#mq-explorer-overlay-message {
+    text-align: center;
+    padding: 0 25px;
+    font-size: 20pt;
+    font-weight: bold;
+    color: #ececec;
+}
+
+/* -- Examples -- */
+.mq-query-examples-list {
+    position: absolute;
+    background: #d9edf7;
+    border: 1px solid #bce8f1;
+    border-top-width: 0px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 700px;
+    left: 0;
+    top: 147px;
+    padding: 8px;
+    font-size: 9pt;
+    color: #3a87ad;
+    z-index: 25000;
+}
+
+.mq-query-examples-list dl {
+    margin: 0;
+}
+.mq-query-examples-list dd {
+    font-style: italic;
+}
+
+.mq-query-examples-list dt:not(:first-child) {
+    margin-top: 5px;
+}
+/* -------------- */
+
+/* ------ log items ---------- */
+
+.mq-log-item {
+}
+
+.mq-log-item:not(:last-child) {
+    margin-bottom: 0px;
+}
+
+.mq-log-item-remove {
+    float: left;
+    width: 22px;
+}
+
+.mq-log-item-remove button {
+    
+    opacity: 0.5;
+    padding: 0px;
+}
+
+.mq-log-item-remove button:hover {
+    opacity: 1;
+}
+
+
+.mq-log-item-timestamp {
+    float: left;
+    padding: 2px 0 0 0;
+    width: 90px;
+    font-weight: bold;
+}
+
+.mq-log-item-content {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-top: 2px;
+    margin: 0 8px 2px 112px;
+    position: relative;
+}
+
+.mq-log-item-content abbr {
+    font-style: normal !important;
+}
+
+.mq-log-item-id-label {
+    font-weight: bold;
+}
+
+.mq-log-item-warning-label {
+    font-weight: bold;
+    color: #DB890F;
+    border-bottom: 1px dotted #DB890F;
+}
+
+.mq-log-item-warning-label:hover {
+    color: #DB890F;
+    text-decoration: none;
+    border-bottom-style: solid;
+}
+
+.mq-log-item-error-label {
+    font-weight: bold;
+    color: #B94A48;
+    border-bottom: 1px dotted #B94A48;
+}
+
+.mq-log-item-error-label:hover {
+    color: #B94A48;
+    text-decoration: none;
+    border-bottom-style: solid;
+}
+
+.mq-log-item-warnings, .mq-log-item-errors {   
+    margin-top: 3px;
+    margin-left: 20px;
+    font-size: 9pt;
+    list-style: disc
+}
+
+.mq-log-item-warnings {
+    color: #DB890F;
+}
+
+.mq-log-item-errors {
+    color: #B94A48;
+}
+
+.mq-log-item-error {
+    color: #B94A48;
+}
+
+
+
+/* --------------------------- */
+
+/* -------- from pdb --------- */
+#mq-explorer-from-pdb {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 15px;
+    z-index: 21000;
+    border: 1px solid #ccc;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#mq-explorer-from-pdb-close {
+    position: absolute;
+    right: 5px;
+    top: 2px;
+    z-index: 100;
+    padding: 0;
+}
+
+#mq-explorer-from-pdb-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #f7f7f7;
+}
+
+#mq-explorer-from-pdb-content {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 40px;
+    left: 0px;
+}
+
+
+#mq-explorer-from-pdb-actions {
+    position: absolute;
+    height: 40px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+#mq-explorer-from-pdb-count {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    line-height: 40px;
+    color: #424242;
+    font-weight: bold;
+}
+
+#mq-explorer-from-pdb-actions button {
+    border-radius: 0 !important;
+    height: 40px !important;
+}
+
+#mq-explorer-from-pdb-actions-bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: #E8E8E8;
+}
+
+#mq-explorer-from-pdb-actions .control-group {   
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#mq-explorer-from-pdb-actions button:last-child {
+    width: 150px;
+}
+
+.mq-action-col {
+    width: 10%;
+    max-width: 10%;
+}
+
+.mq-section-header-wrap {
+    margin: 7px 0 0 10px;
+}
+
+.mq-filter-col {
+    width: 20%;
+    max-width: 20%;
+}
+
+.mq-filter-col-added {
+    width: 20%;
+    max-width: 20%;
+    padding-right: 0px !important;
+    text-align: center !important;
+    font-weight: bold;
+}
+
+.mq-filter-col-added span {
+    margin-right: 6px !important;
+}
+
+.mq-filter-comparison-col {
+    width: 13%;
+    min-width: 13%;
+    max-width: 13%;
+    font-style: italic;
+    text-align:  center !important;
+}
+
+.mq-filter-text-col {
+    width: 57%;
+    max-width: 57%;
+    padding-right: 13px !important;
+}
+
+.mq-added {
+    vertical-align: middle !important;
+    padding-left: 7px !important;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+    position: relative;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.mq-added code {
+    display: block;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.mq-filter-help {
+    background: #EAEAEA;
+    color: #424242;
+    padding: 5px 10px;
+    font-size: 9pt;
+}
+
+.mq-filter-help button {
+    padding: 2px
+}
+
+.mq-filter-help ul {
+    margin-top: 2px !important;
+    margin-left: 20px;
+    margin-bottom: 2px !important
+}
+
+/*#mq-explorer-filter-table-wrap {
+    overflow: auto;
+    max-height: 170px;   
+}*/
+
+.mq-text-align-right {
+    text-align: right !important;
+}
+
+.mq-query-table {
+    table-layout: fixed;
+    margin-bottom: 0;
+    background: #eee;
+}
+
+.mq-query-table th {
+    text-align: left !important;
+    font-style: normal !important;
+    font-size: 8pt;
+    height: 15px;
+    padding: 4px 0px 0px 8px;
+    background: #DDD;
+    color: #424242
+}
+
+.mq-query-table .control-group {
+    margin: 0;
+}
+
+.mq-query-table td {
+    border: 0 !important;
+    padding: 0;    
+}
+
+.mq-query-table input, .mq-query-table textarea, .mq-query-table select {
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+    border-radius: 0 !important;
+    margin: 0;
+}
+
+.mq-query-table button {
+    border-radius: 0 !important;
+    text-align: right;
+    padding-right: 10px;
+}
+
+#filter-tab {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 50px;
+    overflow: auto;
+}
+
+#filters-preview .btn {
+    border-radius: 0 !important;
+}
+
+#mq-explorer-filters-preview {
+    background: #ddd
+}
+
+#filter-preview-data {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    background: #eee;
+}
+
+#filter-preview-data table {
+    margin: 0;
+    font-size: 9pt;
+}
+
+#filter-match-count {    
+    font-size: 9pt;
+    margin-left: 6px;
+}
+
+#filter-errors-wrap {
+    background: #EEE;
+    padding: 6px 10px;
+}
+
+#filter-errors-wrap ul {
+    margin-bottom: 0;
+}
+
+#filter-preview-data table td, #filter-preview-data table th {
+    min-width: 50px;
+    max-width: 150px;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 2px 6px;
+}
+
+#filter-preview-data input {
+    margin-top: -2px;
+    padding: 0;
+}
+
+#filter-preview-data table td:first-child, #filter-preview-data table th:first-child {
+    width: 18px;
+    min-width: 18px;
+    padding-left: 6px;
+    position: absolute;
+    left: 0;
+    margin-top: 0px;
+    background: #e8e8e8;
+    padding: 2px 2px 2px 4px;
+    border: none;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+/*#filter-preview-data table th:first-child {
+    border-top: 1px solid #B7B7B7;
+}*/
+
+#filter-preview-data table td:not(:first-child) {
+    border-right: 1px dotted #ddd;
+}
+
+#filter-preview-data table th:not(:first-child) a {
+    color: black;
+    border-bottom: 1px dotted black;
+}
+
+#filter-preview-data table th:not(:first-child) a:hover {
+    text-decoration: none;
+    border-bottom: 1px solid black;
+}
+
+/*#filter-preview-data table td:not(:first-child), #filter-preview-data table th:not(:first-child) {
+    margin-left: 20px;
+}*/
+
+#filter-preview-data table td:nth-child(2), #filter-preview-data table th:nth-child(2) {
+    padding-left: 30px;
+}
+
+#filter-preview-data table td:last-child, #filter-preview-data table th:last-child {
+    padding-right: 4px;
+}
+
+
+#list-tab {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 50px;
+    background: #FCFCFC;
+    overflow-y: auto;
+}
+
+.tooltip {
+    z-index: 30000 !important;
+}
+
+#list-tab .control-group {
+    margin: 0 !important;
+}
+
+#list-tab textarea {
+    resize: none;
+    /*width: 100%;
+    max-width: 100%;
+    min-width: 100%;*/
+    margin: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    margin-right: -20px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    /*height: 100px;*/
+    
+    width: 100%;
+    height: 100%;    
+}
+
+#mq-explorer-pdblist {
+    background: red;
+}
+
+#pdbListHelp {
+    padding: 6px 8px;
+}
+
+#pdbListMissingEntries {
+    margin: 0;
+    border-radius: 0 !important;
+    font-style: italic;
+    text-align: center;
+}
+
+#pdbListMissingEntries button {
+    margin-top: 10px;
+    padding: 6px 30px;
+}
+
+#pdbListMissingEntries span {
+    font-style: italic;
+}
+
+#pdbListMissingEntries a {
+    font-weight: bold;
+}
+
+
+/*-----------------------------*/

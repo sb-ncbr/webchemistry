@@ -1,0 +1,110 @@
+﻿<!-- ko if: summary.PatternLimitReached -->
+<div class="alert alert-danger alert-block">
+    <b>The pattern count limit (<span data-bind="text: summary.PatternLimit"></span>) was reached. Please try using a less general query, review if this is indeed the query you have intended, or request a higher limit.</b>
+    <br />
+    <i>Because of the large amount data, the Details tab might not work correctly (you can still inspect the result in detail after downloading it).</i>
+</div>
+<!-- /ko -->
+<!-- ko if: summary.AtomLimitReached -->
+<div class="alert alert-danger alert-block">
+    <b>The atom count limit (<span data-bind="text: summary.AtomLimit"></span>) was reached. Try using a less general query or request a higher limit.</b>
+    <br />
+    <i>Because of the large amount data, the Details tab might not work correctly (you can still inspect the result in detail after downloading it).</i>
+</div>
+<!-- /ko -->
+
+<div class="mq-details-section-header" style="margin-bottom: 10px">
+    <h3>Queries</h3>
+</div>
+
+<div class="alert alert-success alert-block" style="margin-bottom: 0">
+    Found <span data-bind="text: mqResultUtils.pluralize(totalMotifs, 'pattern', 'patterns')" style="font-weight: bold"></span>
+    in <span data-bind="text: totalTime" style="font-weight: bold"></span>
+    on <abbr title="Date and time the computation was created. In universal time." style="font-weight: bold">@ViewBag.DateCreated</abbr>
+    using PatternQuery version <span data-bind="text: summary.ServiceVersion"></span>.
+</div>
+
+<!-- ko if: summary.PatternLimitReached -->
+<div class="alert alert-danger alert-block" style="margin-top: 10px;margin-bottom: 0">
+    <b>The result contains only the first <span data-bind="text: summary.PatternLimit"></span> patterns.</b><br />
+    <small>
+        The limit of <span data-bind="text: summary.PatternLimit"></span> patterns was reached. Try a less general query or execute your query on a smaller input set.<br />
+        The command line version of the service that can be <a href="@Url.Action("Index")" target="_blank">downloaded from the main page</a> does not have these limitations.
+    </small>
+</div>
+<!-- /ko -->
+<!-- ko if: summary.AtomLimitReached -->
+<div class="alert alert-danger alert-block" style="margin-top: 10px;margin-bottom: 0">
+    <b>The result contains only the first <span data-bind="text: totalMotifs"></span> patterns.</b><br />
+    <small>
+        The limit of <span data-bind="text: summary.AtomLimit"></span> atoms was reached. Try a less general query or execute your query on a smaller input set. 
+        The command line version of the service that can be <a href="@Url.Action("Index")" target="_blank">downloaded from the main page</a> does not have these limitations.
+    </small>
+</div>
+<!-- /ko -->
+
+<table class="table mq-summary-table" style="margin-top: 30px">
+    <thead>
+        <tr>
+            <th><abbr title="Query id">Id</abbr></th>
+            <th><abbr title="Number of patterns">Patterns</abbr></th>
+            <th><abbr title="Number of structures with at least one pattern">PDB Entries</abbr></th>
+            <th><abbr title="Query / Input Warning Count">Warnings</abbr></th>
+            <th><abbr title="Number of structures with errors">Errors</abbr></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: summary.Queries">
+        <tr>
+            <td><a href="#" data-bind="text: Id, click: showFromSummary"></a></td>
+            <td data-bind="text: PatternCount"></td>
+            <td data-bind="text: StructureCount"></td>
+            <td><abbr title="Number of query warnings."><span data-bind="text: StructureWithComputationWarningCount"></span></abbr> / <abbr title="Number of input warnings (skipped alternate locations, etc.)."><span data-bind="text: StructureWithReaderWarningCount"></span></abbr></td>
+            <td data-bind="text: StructureWithErrorCount"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td colspan="5"><code data-bind="text: mqResultUtils.prettifyQuery(QueryString)" style="white-space: pre-wrap"></code></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="mq-details-section-header" style="margin-bottom: 10px">
+    <h3>Input</h3>
+</div>
+
+<!-- ko with: inputModel  -->
+<div class="alert alert-info alert-block">
+    Queried <span data-bind="text: mqResultUtils.pluralize($parent.summary.TotalStructureCount || 'n/a', 'PDB entry', 'PDB entries')" style="font-weight: bold"></span>
+    from
+    <span style="font-weight: bold" data-bind="html: sourceType"></span>
+    <!-- ko if: isSpecific -->
+    (<a href="#" data-bind="click: showEntryList">show list</a>)
+    <!-- /ko -->
+    with <a target="_blank" href="@Url.Action("Index", "ValidatorDb")">Validator<sup>DB</sup></a> validation <span style="font-weight: bold" data-bind="text: input.DoValidation ? 'enabled' : 'disabled'"></span>.<br />
+    @*<span style="font-size: 9pt">
+            Detailed info about each queried PDB Entry can be found in the
+            <a href="#" data-bind="click: function() { $('a[href=#input-tab]').click(); }">Queried PDB Entry Details</a> tab.
+        </span>*@
+</div>
+
+<!-- ko if: isFiltered -->
+<h5 style="margin-bottom: 5px">Filters Applied to PDB Entries</h5>
+<table class="table mq-used-filters-table">
+    <tbody data-bind="foreach: filters">
+        <tr>
+            <td class="mq-filter-col-added mq-added">
+                <abbr data-bind="text: name, attr: { title: desc }"></abbr>
+            </td>
+            <td class="mq-filter-comparison-col mq-added" style="font-size: 8pt">
+                <span data-bind="text: comparison"></span>
+            </td>
+            <td class="mq-filter-text-col mq-added">
+                <code data-bind="text: filter"></code>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<!-- /ko -->
+<!-- /ko -->

@@ -1,0 +1,46 @@
+﻿@{
+    var downloadLink = ViewBag.IsCustomSearch == true
+        ? Url.Action("CustomDownload", new { id = ViewBag.Id, what = "-what-" })
+        : Url.Action("Download", new { id = "-what-" });
+}
+
+<div class="tab-pane" id="model-details">
+    <div class="form-inline">
+        <button class="btn btn-success pull-right" onclick="startDbByModelIntro();"><i class="icon icon-white icon-question-sign"></i></button>
+        <div class="input-append pull-right" id="model-details-view-filter" style="margin-right: 10px">
+            <div style="display: inline-block" id="model-display-type">
+                <label class="radio" style="margin-right: 10px; font-weight: bold" title="Display absolute values"><input disabled type="radio" name="detailsByResidueDisplay" value="Value" data-bind="disable: false, checked: DetailsValueFormatValue">Value</label>&nbsp;&nbsp;
+                <label class="radio" style="margin-right: 10px; font-weight: bold" title="Display percentages"><input disabled type="radio" name="detailsByResidueDisplay" value="Percent" data-bind="disable: false, checked: DetailsValueFormatValue">%</label>
+            </div>
+            <div style="display: inline-block" id="model-filter">
+                <input type="text" title="Matches a regular expression." placeholder="Molecule Filter..." data-bind="disable: false, value: filterString, valueUpdate: 'input'" disabled>
+                <button class="btn" data-bind="disable: false, click: function() { filterString(''); }" disabled><i class="icon-remove"></i></button>
+            </div>
+        </div>
+        <a class="btn" href="@downloadLink.Replace("-what-", "CsvModelSummary")" id="model-download-btn"><i class="icon-download-alt"></i> <b>Download CSV Data</b></a>
+    </div>
+    <div id="model-details-view"></div>
+    <div id="model-details-view-columns" style="margin-top: 5px;">
+        <!-- ko template: { data: $data, name: 'column-labels-template' } --><!-- /ko -->
+    </div>
+</div>
+<div class="tab-pane" id="structure-details">
+    <div class="form-inline">
+        <button class="btn btn-success pull-right" onclick="startDbByStructureIntro();"><i class="icon icon-white icon-question-sign"></i></button>
+        <div class="input-append pull-right" id="structure-details-view-filter" style="margin-right: 10px">
+            <div style="display: inline-block" id="structure-display-type">
+                <label class="radio" style="margin-right: 10px; font-weight: bold" title="Display absolute values"><input disabled type="radio" name="detailsByStructureDisplay" value="Value" data-bind="disable: false, checked: DetailsValueFormatValue">Value</label>&nbsp;&nbsp;
+                <label class="radio" style="margin-right: 10px; font-weight: bold" title="Display percentages"><input disabled type="radio" name="detailsByStructureDisplay" value="Percent" data-bind="disable: false, checked: DetailsValueFormatValue">%</label>
+            </div>
+            <div style="display: inline-block" id="structure-filter">
+                <input type="text" title="Matches a regular expression." placeholder="PDB ID or Molecule Filter..." data-bind="disable: false, value: filterString, valueUpdate: 'input'" disabled>
+                <button class="btn" data-bind="disable: false, click: function() { filterString(''); }" disabled><i class="icon-remove"></i></button>
+            </div>
+        </div>
+        <a class="btn" href="@downloadLink.Replace("-what-", "CsvStructureSummary")" id="structure-download-btn"><i class="icon-download-alt"></i> <b>Download CSV Data</b></a>
+    </div>
+    <div id="structure-details-view"></div>
+    <div id="structure-details-view-columns" style="margin-top: 5px;">
+        <!-- ko template: { data: $data, name: 'column-labels-template' } --><!-- /ko -->
+    </div>
+</div>
