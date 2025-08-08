@@ -616,7 +616,7 @@
                 {
                     var nears = trees.Select(t => t.GetCloseMotives(maxDistance, m)).ToArray();
                     var x = m;
-                    isEmpty = true;
+                    isEmpty = false;
                     for (int i = 0; i < nears.Length; i++)
                     {
                         bool empty = true;
