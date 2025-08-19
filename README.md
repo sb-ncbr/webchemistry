@@ -13,6 +13,11 @@ To compile all projects:
 * [Visual Studio Silverlight plugin](https://marketplace.visualstudio.com/items?itemName=RamiAbughazaleh.SilverlightProjectSystem)
 * [Silverlight 5 SDK](https://www.microsoft.com/en-us/download/details.aspx?id=39597) (install Silverlight_x64.exe and Silverlight_Developer_x86.exe)
 * IIS Express to debug the web.
+* (Optional) [7-zip](https://www.7-zip.org/) for helper service deployment scripts.
+
+To deploy the web, use Publish option for the Webchemistry.Web project in Visual Studio. Use `Default Web Site\Platform` as AppPath.
+
+To update services, use the commands in `DeployHelper` directory. After copying the new binaries to the WebChemUtils directory at E:\, run the Bootstrapper to update the versions of the services.
 
 ## Web services
 
