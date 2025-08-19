@@ -14,3 +14,4 @@ packages/
 
 # We want to store additional libs
 !Libs/**/*.dll
+!Web/WebChemistry.Web/Content/MotiveValidator/MotifExtractor.zip
