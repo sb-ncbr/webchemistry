@@ -65,7 +65,7 @@
 
         addStep("mq-input-query-section",
             "<p>In a single database run you may include up to 10 different queries.</p>" +
-            "<p>Start by specifying a unique query name, and then the query itself using the <a target='_blank' href='//webchem.ncbr.muni.cz/Wiki/PatternQuery:Language_Reference'>PQ chemical language</a>. Then press <b>Add</b> for including the query.</p>");
+            "<p>Start by specifying a unique query name, and then the query itself using the <a target='_blank' href='//webchemwiki.biodata.ceitec.cz/PatternQuery:Language_Reference'>PQ chemical language</a>. Then press <b>Add</b> for including the query.</p>");
 
         addStep("mq-data-source",
             "<p>Decide where you would like to run the PQ queries defined above:</p>" +
@@ -92,7 +92,7 @@
 
         addStep("mq-examples-button",
             "<p>If you don't know how to start, load one of the ready-to-use examples.</p>" +
-            "<p>Don't forget to check out more <a target='_blank' href='//webchem.ncbr.muni.cz/Wiki/PatternQuery:Use_Cases'>use cases</a> and consult the <a target='_blank' href='//webchem.ncbr.muni.cz/Wiki/PatternQuery:Language_Reference'>language reference</a>.</p>" +
+            "<p>Don't forget to check out more <a target='_blank' href='//webchemwiki.biodata.ceitec.cz/PatternQuery:Use_Cases'>use cases</a> and consult the <a target='_blank' href='//webchemwiki.biodata.ceitec.cz/PatternQuery:Language_Reference'>language reference</a>.</p>" +
             "<p>If all else fails, feel free to ask us directly for help via the <a href='#' onclick='javascript: event.preventDefault(); $(\"#supportTabLink\").click()'>Support tab</a>.<p>", //please make it link to the Support tab if possible, and if not just remove the link completely and make Support tab bold.
             "left");
     }

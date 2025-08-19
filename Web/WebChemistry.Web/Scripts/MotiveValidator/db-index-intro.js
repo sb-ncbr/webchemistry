@@ -19,7 +19,7 @@
             },
             {
                 element: "#overview-tab-header",
-                intro: "<p>PDB-wide validation statistics. Includes reports about incomplete structures, incorrect chirality and chemical modifications (see the <a href='//webchem.ncbr.muni.cz/Wiki/ValidatorDB:Database_contents' target='_blank'>wiki</a> for details).</p>",
+                intro: "<p>PDB-wide validation statistics. Includes reports about incomplete structures, incorrect chirality and chemical modifications (see the <a href='//webchemwiki.biodata.ceitec.cz/ValidatorDB:Database_contents' target='_blank'>wiki</a> for details).</p>",
                 position: "bottom-middle-aligned"
             },
             {

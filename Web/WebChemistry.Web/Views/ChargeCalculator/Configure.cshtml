@@ -14,8 +14,8 @@
 
 <div class="btn-group" id="help-actions-wrap">
     <button class="btn btn-large btn-success" onclick="startConfigIntro();" title="Interactive guide that will walk you through the steps of the calculation" data-placement="bottom"><i class="icon icon-white icon-question-sign"></i> Guide</button>
-    <a class="btn btn-large btn-success" href="//webchem.ncbr.muni.cz/Wiki/ChargeCalculator:FAQ" target="_blank" title="Frequently asked questions" data-placement="bottom">FAQ</a>
-    <a class="btn btn-large btn-success" href="//webchem.ncbr.muni.cz/Wiki/ChargeCalculator:UserManual" target="_blank" title="Wiki user manual" data-placement="bottom">Wiki</a>
+    <a class="btn btn-large btn-success" href="//webchemwiki.biodata.ceitec.cz/ChargeCalculator:FAQ" target="_blank" title="Frequently asked questions" data-placement="bottom">FAQ</a>
+    <a class="btn btn-large btn-success" href="//webchemwiki.biodata.ceitec.cz/ChargeCalculator:UserManual" target="_blank" title="Wiki user manual" data-placement="bottom">Wiki</a>
 </div>
 
 <div id="mainView" data-bind="template: { name: template().name, data: template().data }">
@@ -214,7 +214,7 @@
     <div class="modal-body">
         <div class="form">
             <select data-bind="options: availableMethods, value: selectMethod, optionsText: 'name'" name="method"></select>
-            <div><span style="font-style: italic" data-bind="text: selectMethod().description"></span> [<a data-bind="attr: { href: '//webchem.ncbr.muni.cz/Wiki/' + selectMethod().wikiLink }" target="_blank">more</a>]</div>
+            <div><span style="font-style: italic" data-bind="text: selectMethod().description"></span> [<a data-bind="attr: { href: '//webchemwiki.biodata.ceitec.cz/' + selectMethod().wikiLink }" target="_blank">more</a>]</div>
             <h4>Options</h4>
             <div data-bind="if: selectMethod().value !== 'Eem'">
                 <label for="radius">Cutoff Radius:</label>

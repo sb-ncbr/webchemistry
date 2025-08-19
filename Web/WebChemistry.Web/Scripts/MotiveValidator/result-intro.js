@@ -25,7 +25,7 @@
           "The <i>specifics</i> or <i>results</i> page is organized in several functional tabs, allowing to view and interpret the validation results at various levels of detail.");
 
     addIf("result-overview-header",
-          "Overall statistics of the validation results (see the <a href='//webchem.ncbr.muni.cz/Wiki/ValidatorDB:Database_contents' target='_blank'>wiki</a> for details.");
+          "Overall statistics of the validation results (see the <a href='//webchemwiki.biodata.ceitec.cz/ValidatorDB:Database_contents' target='_blank'>wiki</a> for details.");
 
     addIf("result-summary-header",
           "Validation report listing all issues encountered for each validated molecule.");
@@ -74,7 +74,7 @@ function startResultSummaryIntro() {
            "right");
 
     addIf("result-summary-tables",
-          "<p>Issues found during validation. Statistics relevant when multiple molecules were available for validation (see the <a href='//webchem.ncbr.muni.cz/Wiki/ValidatorDB:Database_contents' target='_blank'>wiki</a> for details).</p>" +
+          "<p>Issues found during validation. Statistics relevant when multiple molecules were available for validation (see the <a href='//webchemwiki.biodata.ceitec.cz/ValidatorDB:Database_contents' target='_blank'>wiki</a> for details).</p>" +
           "<p>Color coding convention: <span class='mvcolor-Missing'>incomplete structures</span>, <span class='mvcolor-HasAll_BadChirality'>incorrect chirality</span>, <span class='mvcolor-HasAll_GoodChirality'>correct structures</span> and <span class='mvcolor-HasAll_Substitutions'>warnings</span>.</p>",
           "top");
 
@@ -153,7 +153,7 @@ function startResultResidueDetailIntro() {
           "Choose which structure to visualize and how.");
 
     addIf("result-residue-detail-errors",
-          "Errors found in the validated molecule: <span class='mvcolor-Missing'>incomplete structures</span>, <span class='mvcolor-HasAll_BadChirality'>incorrect chirality</span> (see the <a href='//webchem.ncbr.muni.cz/Wiki/ValidatorDB:Database_contents' target='_blank'>wiki</a> for details).",
+          "Errors found in the validated molecule: <span class='mvcolor-Missing'>incomplete structures</span>, <span class='mvcolor-HasAll_BadChirality'>incorrect chirality</span> (see the <a href='//webchemwiki.biodata.ceitec.cz/ValidatorDB:Database_contents' target='_blank'>wiki</a> for details).",
            "top");
 
     addIf("result-residue-detail-warnings",
