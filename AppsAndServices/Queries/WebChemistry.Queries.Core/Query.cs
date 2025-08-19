@@ -45,7 +45,7 @@
     /// </summary>
     public abstract class Query
     {
-        public static readonly AppVersion Version = new AppVersion(1, 0, 21, 12, 14, 'a');
+        public static readonly AppVersion Version = new AppVersion(1, 0, 25, 8, 19);
         
         /// <summary>
         /// Parse a query filter from a string.

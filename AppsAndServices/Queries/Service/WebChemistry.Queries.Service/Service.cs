@@ -21,7 +21,7 @@
     {
         public override AppVersion GetVersion()
         {
-            return new AppVersion(1, 1, 23, 12, 27, 'b');
+            return new AppVersion(1, 1, 25, 8, 19);
         }
                 
         public override string GetName()

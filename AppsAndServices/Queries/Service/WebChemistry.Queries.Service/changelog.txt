@@ -1,4 +1,7 @@
-﻿== 1.1.23.12.27 ==
+﻿== 1.1.25.8.19 ==
+* Fixed a bug in the Near query.
+
+== 1.1.23.12.27 ==
 * Fixed a bug in the mmCIF parser.
 
 == 1.1.21.12.14 ==
