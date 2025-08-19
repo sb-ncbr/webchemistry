@@ -1,7 +1,7 @@
 option batch abort
 option confirm off
-open dave@webchem.ncbr.muni.cz
-cd D
+open krab1k@webchem.ncbr.muni.cz
+cd /E:
 cd WebChemUtils
 cd Temp
 put bin\Platform.7z
