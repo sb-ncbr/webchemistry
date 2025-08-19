@@ -10,12 +10,13 @@ Run install-packages.bat or .ps1 in powershell (its enough to copy/paste it ther
 
 To compile all projects:
 * Visual Studio 2017 recommended.
-* Silverlight 5 SDK (might be required to install the toolkit from silverlight.codeplex.com)
+* [Visual Studio Silverlight plugin](https://marketplace.visualstudio.com/items?itemName=RamiAbughazaleh.SilverlightProjectSystem)
+* [Silverlight 5 SDK](https://www.microsoft.com/en-us/download/details.aspx?id=39597) (install Silverlight_x64.exe and Silverlight_Developer_x86.exe)
 * IIS Express to debug the web.
 
 ## Web services
 
-Majority of these tools are available as webservices either in [WebChemistry](https://webchem.ncbr.muni.cz/) or [MOLE Online](https://mole.upol.cz/).
+Majority of these tools are available as webservices either in [WebChemistry](https://webchem.ncbr.muni.cz/) or [MOLEonline](https://moleonline.cz/).
 
 ## How to cite
 Should you find this toolkit useful please cite one of the publications based on what you used:
