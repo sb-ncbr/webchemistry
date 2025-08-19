@@ -5,6 +5,7 @@
 *.pubxml*
 *.htm
 *.vs
+*.csproj.user
 obj/
 bin/
 AppsBin/
