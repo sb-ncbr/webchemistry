@@ -1,4 +1,3 @@
-###################
 *.zip
 *.suo
 *.xap
@@ -11,3 +10,6 @@ bin/
 AppsBin/
 ClientBin/
 packages/
+
+# We want to store additional libs
+!Libs/**/*.dll
