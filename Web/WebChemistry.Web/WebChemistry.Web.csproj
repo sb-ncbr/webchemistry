@@ -187,7 +187,7 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
@@ -197,30 +197,30 @@
     </Reference>
     <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <HintPath>..\..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
     </Reference>
     <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.20710.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.20710.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
     </Reference>
     <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.2.0.20710.0\lib\net40\WebMatrix.WebData.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.WebData.2.0.20710.0\lib\net40\WebMatrix.WebData.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -365,6 +365,26 @@
     <Content Include="Content\PatternQuery\PQ_pymol_plugin.py" />
     <Content Include="Content\ChargeCalculator\protegrin.smpl" />
     <Content Include="Content\CrocoBLAST\CrocoBLAST_manual.pdf" />
+    <Content Include="AppsBin\WebChemistry.SiteBinder.Silverlight.xap" />
+    <Content Include="AppsBin\Microsoft.CSharp.zip" />
+    <Content Include="AppsBin\System.Windows.Controls.Data.DataForm.Toolkit.zip" />
+    <Content Include="AppsBin\System.Windows.Controls.Data.zip" />
+    <Content Include="AppsBin\System.Windows.Controls.Data.Input.zip" />
+    <Content Include="AppsBin\System.Windows.Controls.Data.Toolkit.zip" />
+    <Content Include="AppsBin\System.Windows.Controls.DataVisualization.Toolkit.zip" />
+    <Content Include="AppsBin\System.Windows.Controls.zip" />
+    <Content Include="AppsBin\System.Windows.Controls.Input.zip" />
+    <Content Include="AppsBin\System.Windows.Controls.Input.Toolkit.zip" />
+    <Content Include="AppsBin\System.Windows.Controls.Layout.Toolkit.zip" />
+    <Content Include="AppsBin\System.Windows.Controls.Navigation.zip" />
+    <Content Include="AppsBin\System.Windows.Controls.Toolkit.zip" />
+    <Content Include="AppsBin\System.Windows.Data.zip" />
+    <Content Include="AppsBin\System.Xml.Linq.zip" />
+    <Content Include="AppsBin\System.Numerics.zip" />
+    <Content Include="AppsBin\WebChemistry.Queries.Silverlight.xap" />
+    <Content Include="AppsBin\WebChemistry.Charges.Silverlight.xap" />
+    <Content Include="AppsBin\System.ComponentModel.DataAnnotations.zip" />
+    <None Include="Properties\PublishProfiles\WebChem - staging.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -681,7 +701,6 @@
     <Content Include="Views\Data\Repositorie.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AppsBin\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
