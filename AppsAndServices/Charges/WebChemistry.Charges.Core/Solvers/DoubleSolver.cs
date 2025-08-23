@@ -85,13 +85,8 @@
             var provider = MathNet.Numerics.Control.LinearAlgebraProvider;
             var ipvt = new int[count + 1];
 
-#if SILVERLIGHT
-            provider.LUFactor(eemMatrix.Data, count + 1, ipvt);
-            provider.LUSolveFactored(1, eemMatrix.Data, count + 1, ipvt, b);
-#else
             provider.LUFactor(eemMatrix.Values, count + 1, ipvt);
             provider.LUSolveFactored(1, eemMatrix.Values, count + 1, ipvt, b);
-#endif
 
             return pivots.Zip(b, (a, c) => new { A = a, C = c }).ToDictionary(a => a.A, a => a.C);
         }  

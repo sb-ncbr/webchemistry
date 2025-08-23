@@ -23,11 +23,7 @@
         static Regex GetRegex(string input)
         {
             var options = /*RegexOptions.CultureInvariant  | RegexOptions.Singleline -- not compatible with ecmascript | */ RegexOptions.IgnoreCase | RegexOptions.ECMAScript;
-#if SILVERLIGHT
-            return new Regex(input, options);
-#else
             return new Regex(input, RegexOptions.Compiled | options);
-#endif
         }
 
         Query input;

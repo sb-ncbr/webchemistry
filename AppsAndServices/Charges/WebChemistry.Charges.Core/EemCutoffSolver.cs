@@ -8,11 +8,7 @@
     using WebChemistry.Framework.Math;
     using MathNet.Numerics.LinearAlgebra.Double;
     using WebChemistry.Framework.Core.Pdb;
-#if SILVERLIGHT
-    using PortableTPL;
-#else
     using System.Threading.Tasks;
-#endif
 
     public static partial class EemSolver
     {
@@ -37,11 +33,8 @@
             int visited = 0;
 
             var pivots = partitions.SelectMany(p => p.Atoms.Select(a => Tuple.Create(p, a))).ToList();
-#if SILVERLIGHT
-            ParallelOptions parOptions = new ParallelOptions();
-#else
+
             ParallelOptions parOptions = new ParallelOptions { MaxDegreeOfParallelism = MaxDegreeOfParallelism };
-#endif
             Parallel.ForEach(pivots, parOptions, pivot =>
             {
                 progress.ThrowIfCancellationRequested();
@@ -131,11 +124,7 @@
                 ? (MatrixSolver)new WebChemistry.Charges.Core.Solvers.SingleSolver()
                 : (MatrixSolver)new WebChemistry.Charges.Core.Solvers.DoubleSolver();
 
-#if SILVERLIGHT
-            ParallelOptions parOptions = new ParallelOptions();
-#else
             ParallelOptions parOptions = new ParallelOptions { MaxDegreeOfParallelism = MaxDegreeOfParallelism };
-#endif
             Parallel.ForEach(pivots, parOptions, pivot =>
             {
                 progress.ThrowIfCancellationRequested();

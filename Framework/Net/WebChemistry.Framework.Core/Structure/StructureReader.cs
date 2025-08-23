@@ -8,10 +8,8 @@
     using WebChemistry.Framework.Core.MdlMol;
     using WebChemistry.Framework.Core.Pdb;
     using WebChemistry.Framework.Math;
-
-#if !SILVERLIGHT
     using System.IO.Compression;
-#endif
+
 
     /// <summary>
     /// Determines the type of the structure that needs to be parsed.
@@ -122,10 +120,8 @@
             ".pdb0", ".pdb1",".pdb2",".pdb3",".pdb4",".pdb5",".pdb6",".pdb7",".pdb8",".pdb9", // PDB Assembly
             ".pqr", // PQR
             ".mol", ".mdl", ".sdf", ".sd", ".ml2", ".mol2", // MDL
-            ".cif", ".mmcif" // PDBx/mmCIF
-            #if !SILVERLIGHT
-            , ".gz" // GZip compressed stuff
-            #endif
+            ".cif", ".mmcif", // PDBx/mmCIF
+            ".gz" // GZip compressed stuff
         };
         
         /// <summary>
@@ -135,9 +131,7 @@
         /// <returns></returns>
         public static bool IsStructureFilename(string filename)
         {
-            #if !SILVERLIGHT
             if (filename.EndsWith(".gz", StringComparison.OrdinalIgnoreCase)) filename = filename.Substring(0, filename.Length - 3);
-            #endif
 
             var index = filename.LastIndexOf('.');
             if (index < 0) return false;
@@ -174,9 +168,7 @@
         /// <returns></returns>
         public static StructureType GetStructureType(string filename)
         {
-            #if !SILVERLIGHT
             if (filename.EndsWith(".gz", StringComparison.OrdinalIgnoreCase)) filename = filename.Substring(0, filename.Length - 3);
-            #endif
 
             string ext = filename.Substring(filename.LastIndexOf('.')).ToLowerInvariant();
             if (!ext.EqualOrdinalIgnoreCase(".pdbqt") && ext.StartsWith(".pdb", StringComparison.OrdinalIgnoreCase))
@@ -214,9 +206,7 @@
         /// <returns></returns>
         public static string GetStructureIdFromFilename(string filename)
         {
-            #if !SILVERLIGHT
             if (filename.EndsWith(".gz", StringComparison.OrdinalIgnoreCase)) filename = filename.Substring(0, filename.Length - 3);
-            #endif
 
             var slashIndex = filename.LastIndexOfAny(@"/\".ToCharArray()) + 1;
             var dotIndex = filename.LastIndexOf('.');
@@ -225,8 +215,6 @@
             return filename.Substring(slashIndex);
         }
 
-
-#if !SILVERLIGHT
         /// <summary>
         /// The file name without extension.
         /// </summary>
@@ -259,7 +247,6 @@
         {
             return TryRead(filename, () => File.OpenRead(filename), customId, customType);
         }
-#endif
 
         static Func<TextReader> WrapReader(Func<TextReader> readerProvider)
         {
@@ -294,12 +281,10 @@
                 try
                 {
                     var stream = streamProvider();
-                    #if !SILVERLIGHT
                     if (filename.EndsWith(".gz", StringComparison.OrdinalIgnoreCase))
                     {
                         return new StreamReader(new GZipStream(stream, CompressionMode.Decompress));
                     }
-                    #endif
                     return new StreamReader(stream);                    
                 }
                 catch (Exception e)
@@ -346,9 +331,7 @@
         static StructureReaderResult ReadInternal(string filename, Func<TextReader> readerProvider, string customId = null, StructureReaderType customType = StructureReaderType.Auto)
         {
             StructureReaderResult s = null;
-            #if !SILVERLIGHT
             if (filename.EndsWith(".gz", StringComparison.OrdinalIgnoreCase)) filename = filename.Substring(0, filename.Length - 3);
-            #endif
             string ext = filename.Substring(filename.LastIndexOf('.')).ToLowerInvariant();
 
             readerProvider = WrapReader(readerProvider);

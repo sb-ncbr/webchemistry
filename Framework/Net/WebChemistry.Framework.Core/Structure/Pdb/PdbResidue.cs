@@ -47,11 +47,7 @@ namespace WebChemistry.Framework.Core.Pdb
     static class PdbResidueIdentifierHelper
     {
         const string regex = @"^\s*(?<n>[0-9]+)((\s+(?!(i[:]))(?<c>[_,.;:""&<>()/\{}'`~!@#$%A-Za-z0-9*|+-]*)){0,1})((\s+i[:](?<ic>[a-zA-Z0-9])){0,1})\s*$";
-#if SILVERLIGHT
-        public static Regex Parser = new Regex(regex, RegexOptions.Singleline | RegexOptions.CultureInvariant);
-#else
         public static Regex Parser = new Regex(regex, RegexOptions.Compiled | RegexOptions.Singleline | RegexOptions.CultureInvariant);
-#endif
 
         static StringComparer OrdinalComparer = StringComparer.Ordinal;
         public static int CompareOrdinal(string a, string b)

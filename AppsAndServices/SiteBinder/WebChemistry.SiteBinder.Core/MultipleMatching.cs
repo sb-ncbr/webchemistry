@@ -6,13 +6,8 @@
     using System.Text;
     using WebChemistry.Framework.Core;
     using WebChemistry.Framework.Math;
-#if SILVERLIGHT
-    using PortableTPL;
-    using Microsoft.Scripting.Utils;
-#else
     using System.Threading.Tasks;
     using System.Threading;
-#endif
     
     public static class MultipleMatching
     {
@@ -294,17 +289,6 @@
             var pivot = graphs[pivotIndex];
             var template = pivot.Clone();
 
-#if SILVERLIGHT
-            ParallelOptions parOptions = new ParallelOptions();
-            ThreadLocal<MatchGraph<T>> threadLocalPivot = new ThreadLocal<MatchGraph<T>>(true);
-            Func<MatchGraph<T>> threadPivot = () => threadLocalPivot.GetOrCreate(() =>
-            {
-                var p = pivot.Clone();
-                var _ls = allLabels;
-                p.Vertices.ForEach(v => v.MakeThreeConstituentMap(_ls));
-                return p;
-            });
-#else
             ParallelOptions parOptions = new ParallelOptions { MaxDegreeOfParallelism = maxParallelism };
             ThreadLocal<MatchGraph<T>> threadLocalPivot = new ThreadLocal<MatchGraph<T>>(() =>
             {
@@ -314,8 +298,6 @@
                 return p;
             });
             Func<MatchGraph<T>> threadPivot = () => threadLocalPivot.Value;
-#endif
-
 
             var pivotMatchings = new PairwiseMatching<T>[graphs.Count];
 
@@ -345,25 +327,15 @@
                     }
                 });
             }
-#if SILVERLIGHT
-            catch (PortableTPL.AggregateException e)
-            {
-                if (e.InnerExceptions.Count > 0) throw e.InnerExceptions[0];
-                throw;
-            }
-#else
             catch (System.AggregateException e)
             {
                 if (e.InnerExceptions.Count > 0) throw e.InnerExceptions[0];
                 throw;
             }
-#endif
-#if !SILVERLIGHT
             finally
             {
                 threadLocalPivot.Dispose();
             }
-#endif
 
             var matchings = new List<PairwiseMatching<T>> { PairwiseMatching<T>.Identity(pivot) };
             matchings.AddRange(pivotMatchings.Where(m => m != null));

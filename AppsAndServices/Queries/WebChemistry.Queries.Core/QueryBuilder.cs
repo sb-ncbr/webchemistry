@@ -217,25 +217,6 @@ namespace WebChemistry.Queries.Core
         public QueryBuilderElement Filled(double RadiusFactor = 0.75, bool NoWaters = true) { return QueryBuilderHelper.Apply("Filled", QueryBuilderHelper.Args(this), new [] { QueryBuilderHelper.Option("RadiusFactor", RadiusFactor), QueryBuilderHelper.NoWatersOption(NoWaters) }); }
         public QueryBuilderElement NearestDistanceTo(QueryBuilderElement to) { return QueryBuilderHelper.Apply("NearestDistanceTo", this, to); }
         public QueryBuilderElement Find(QueryBuilderElement what) { return QueryBuilderHelper.Apply("Find", this, what); }
-        ////public QueryBuilderElement Tunnels(QueryBuilderElement start, double ProbeRadius = 3.0, double InteriorThreshold = 1.25, double BottleneckRadius = 1.25)
-        ////{
-        ////    return QueryBuilderHelper.Apply("Tunnels", QueryBuilderHelper.Args(this, start),
-        ////        new[] 
-        ////        { 
-        ////            QueryBuilderHelper.Option(SymbolTable.ProbeRadiusOption.Name, ProbeRadius), 
-        ////            QueryBuilderHelper.Option(SymbolTable.InteriorThresholdOption.Name, InteriorThreshold), 
-        ////            QueryBuilderHelper.Option(SymbolTable.BottleneckRadiusOption.Name, BottleneckRadius) 
-        ////        });
-        ////}
-        public QueryBuilderElement EmptySpace(double ProbeRadius = 3.0, double InteriorThreshold = 1.25)
-        {
-            return QueryBuilderHelper.Apply("EmptySpace", QueryBuilderHelper.Args(this),
-                new[] 
-                { 
-                    QueryBuilderHelper.Option(SymbolTable.ProbeRadiusOption.Name, ProbeRadius), 
-                    QueryBuilderHelper.Option(SymbolTable.InteriorThresholdOption.Name, InteriorThreshold)
-                });
-        }
 
         //public QueryBuilderElement Metadata(string name) { return QueryBuilderHelper.Apply("Metadata", this, QueryBuilderHelper.Value(name)); }
         public QueryBuilderElement AtomProperty(string name) { return QueryBuilderHelper.Apply("AtomProperty", this, QueryBuilderHelper.Value(name)); }
@@ -573,28 +554,7 @@ namespace WebChemistry.Queries.Core
         public static QueryBuilderElement NearestDistanceTo(QueryBuilderElement what, QueryBuilderElement to) { return QueryBuilderHelper.Apply("NearestDistanceTo", what, to); }
         public static QueryBuilderElement DistanceCluster(IEnumerable<QueryBuilderElement> patterns, object DistanceMin, object DistanceMax) { return QueryBuilderHelper.Apply("DistanceCluster", patterns.ToArray(), new[] { QueryBuilderHelper.Option(SymbolTable.DistanceMatrixMinOption.Name, QueryBuilderHelper.Matrix(DistanceMin)), QueryBuilderHelper.Option(SymbolTable.DistanceMatrixMaxOption.Name, QueryBuilderHelper.Matrix(DistanceMax)) }); }
         public static QueryBuilderElement Stack2(double minDist, double maxDist, double minProjDist, double maxProjDist, double minAngleDeg, double maxAngleDeg, QueryBuilderElement pattern1, QueryBuilderElement pattern2) { return QueryBuilderHelper.Apply("Stack2", QueryBuilderHelper.Args(Value(minDist), Value(maxDist), Value(minProjDist), Value(maxProjDist), Value(minAngleDeg), Value(maxAngleDeg), pattern1, pattern2)); }
-        ////public static QueryBuilderElement Tunnels(QueryBuilderElement inner, QueryBuilderElement start, double ProbeRadius = 3.0, double InteriorThreshold = 1.25, double BottleneckRadius = 1.25) 
-        ////{ 
-        ////    return QueryBuilderHelper.Apply("Tunnels", QueryBuilderHelper.Args(inner, start), 
-        ////        new[] 
-        ////        { 
-        ////            QueryBuilderHelper.Option(SymbolTable.ProbeRadiusOption.Name, ProbeRadius), 
-        ////            QueryBuilderHelper.Option(SymbolTable.InteriorThresholdOption.Name, InteriorThreshold), 
-        ////            QueryBuilderHelper.Option(SymbolTable.BottleneckRadiusOption.Name, BottleneckRadius) 
-        ////        });
-        ////}
-        public static QueryBuilderElement EmptySpace(QueryBuilderElement inner, double ProbeRadius = 3.0, double InteriorThreshold = 1.25)
-        {
-            return QueryBuilderHelper.Apply("EmptySpace", QueryBuilderHelper.Args(inner),
-                new[] 
-                { 
-                    QueryBuilderHelper.Option(SymbolTable.ProbeRadiusOption.Name, ProbeRadius), 
-                    QueryBuilderHelper.Option(SymbolTable.InteriorThresholdOption.Name, InteriorThreshold)
-                });
-        }
-
         public static QueryBuilderElement CSA() { return QueryBuilderHelper.Apply("CSA"); }
-
         public static QueryBuilderElement AtomSimilarity(QueryBuilderElement a, QueryBuilderElement b) { return QueryBuilderHelper.Apply("AtomSimilarity", a, b); }
         public static QueryBuilderElement AtomSimilarity(string a, string b) { return QueryBuilderHelper.Apply("AtomSimilarity", QueryBuilderHelper.Apply("Pattern", QueryBuilderHelper.Value(a)), QueryBuilderHelper.Apply("Pattern", QueryBuilderHelper.Value(b))); }
         public static QueryBuilderElement AtomSimilarity(QueryBuilderElement a, string b) { return QueryBuilderHelper.Apply("AtomSimilarity", a, QueryBuilderHelper.Apply("Pattern", QueryBuilderHelper.Value(b))); }

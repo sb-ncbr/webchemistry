@@ -365,25 +365,6 @@
     <Content Include="Content\PatternQuery\PQ_pymol_plugin.py" />
     <Content Include="Content\ChargeCalculator\protegrin.smpl" />
     <Content Include="Content\CrocoBLAST\CrocoBLAST_manual.pdf" />
-    <Content Include="AppsBin\WebChemistry.SiteBinder.Silverlight.xap" />
-    <Content Include="AppsBin\Microsoft.CSharp.zip" />
-    <Content Include="AppsBin\System.Windows.Controls.Data.DataForm.Toolkit.zip" />
-    <Content Include="AppsBin\System.Windows.Controls.Data.zip" />
-    <Content Include="AppsBin\System.Windows.Controls.Data.Input.zip" />
-    <Content Include="AppsBin\System.Windows.Controls.Data.Toolkit.zip" />
-    <Content Include="AppsBin\System.Windows.Controls.DataVisualization.Toolkit.zip" />
-    <Content Include="AppsBin\System.Windows.Controls.zip" />
-    <Content Include="AppsBin\System.Windows.Controls.Input.zip" />
-    <Content Include="AppsBin\System.Windows.Controls.Input.Toolkit.zip" />
-    <Content Include="AppsBin\System.Windows.Controls.Layout.Toolkit.zip" />
-    <Content Include="AppsBin\System.Windows.Controls.Navigation.zip" />
-    <Content Include="AppsBin\System.Windows.Controls.Toolkit.zip" />
-    <Content Include="AppsBin\System.Windows.Data.zip" />
-    <Content Include="AppsBin\System.Xml.Linq.zip" />
-    <Content Include="AppsBin\System.Numerics.zip" />
-    <Content Include="AppsBin\WebChemistry.Queries.Silverlight.xap" />
-    <Content Include="AppsBin\WebChemistry.Charges.Silverlight.xap" />
-    <Content Include="AppsBin\System.ComponentModel.DataAnnotations.zip" />
     <None Include="Properties\PublishProfiles\WebChem - staging.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -496,7 +477,6 @@
     <Content Include="Scripts\MotiveValidator\index.js" />
     <Content Include="Scripts\MotiveValidator\overview-plot.js" />
     <Content Include="Scripts\MotiveValidator\result-overview.js" />
-    <Content Include="Scripts\silverlight.js" />
     <Content Include="Scripts\SlickGrid\Controls\slick.columnpicker.js" />
     <Content Include="Scripts\SlickGrid\Controls\slick.pager.js" />
     <Content Include="Scripts\SlickGrid\Plugins\slick.autotooltips.js" />
@@ -517,9 +497,7 @@
     <Content Include="Scripts\SlickGrid\slick.groupitemmetadataprovider.js" />
     <Content Include="Scripts\SlickGrid\slick.remotemodel.js" />
     <Content Include="Scripts\spin.js" />
-    <Content Include="Silverlight.js" />
     <Content Include="Views\App\_Menu.cshtml" />
-    <Content Include="Views\App\SilverlightAppHost.cshtml" />
     <None Include="Properties\PublishProfiles\Master.pubxml" />
     <None Include="Properties\PublishProfiles\WebChem.pubxml" />
     <Content Include="Views\App\Mole.cshtml" />
@@ -535,7 +513,6 @@
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="Views\ChargeCalculator\_Samples.cshtml" />
     <Content Include="Views\App\CrocoBLAST.cshtml" />
-    <Content Include="Views\App\SiteBinder.cshtml" />
     <None Include="Views\Data\CreateDatabase.cshtml" />
     <Content Include="Views\Data\CreateView.cshtml" />
     <Content Include="Views\Data\ViewDetails.cshtml" />
@@ -742,10 +719,6 @@
     <ProjectReference Include="..\..\AppsAndServices\MotiveValidator\WebChemistry.MotiveValidator.DataModel\WebChemistry.MotiveValidator.DataModel.csproj">
       <Project>{a74bdee2-fc1e-4abe-8703-738117a62f53}</Project>
       <Name>WebChemistry.MotiveValidator.DataModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\AppsAndServices\Tunnels\WebChemistry.Tunnels.Core\WebChemistry.Tunnels.Core.csproj">
-      <Project>{e6e2bf63-7b87-4c44-96c3-aad4460149fe}</Project>
-      <Name>WebChemistry.Tunnels.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Framework\Net\WebChemistry.Framework.Core\WebChemistry.Framework.Core.csproj">
       <Project>{2a6559f9-cd2b-496c-b774-935fec3ed0e4}</Project>

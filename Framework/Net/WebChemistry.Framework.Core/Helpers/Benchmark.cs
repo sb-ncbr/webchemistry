@@ -20,18 +20,10 @@ namespace WebChemistry.Framework.Core
             GC.WaitForPendingFinalizers();
             GC.GetTotalMemory(true);
 
-#if SILVERLIGHT
-            var start = DateTime.Now;
-#else
             var sw = System.Diagnostics.Stopwatch.StartNew();
-#endif
             a();
-#if SILVERLIGHT
-            return DateTime.Now - start;
-#else
             sw.Stop();
             return sw.Elapsed;
-#endif
         }
 
         /// <summary>

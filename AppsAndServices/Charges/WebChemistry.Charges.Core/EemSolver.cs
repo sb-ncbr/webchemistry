@@ -8,11 +8,7 @@
     using WebChemistry.Framework.Math;
     using MathNet.Numerics.LinearAlgebra.Double;
     using WebChemistry.Framework.Core.Pdb;
-#if SILVERLIGHT
-    using PortableTPL;
-#else
     using System.Threading.Tasks;
-#endif
     
     /// <summary>
     /// Eem charge solver.
@@ -203,11 +199,7 @@
             {
                 throw;
             }
-#if SILVERLIGHT
-            catch (PortableTPL.AggregateException e)
-#else 
             catch (AggregateException e)
-#endif
             {
                 var msg = "";
                 if (e.InnerExceptions != null && e.InnerExceptions.Count > 0) msg = e.InnerExceptions.JoinBy(x => x.Message, "; ");

@@ -32,11 +32,7 @@
     {
         public override bool CanConvert(Type objectType)
         {
-#if SILVERLIGHT
-            return objectType.GetInterfaces().Any(i => i.Name.EqualOrdinalIgnoreCase("IStructure"));
-#else
             return objectType.GetInterface("IStructure") != null;
-#endif
         }
 
         public override bool CanRead

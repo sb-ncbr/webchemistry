@@ -5,14 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.Web", "WebChem
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{FFD9DC81-FE80-4606-B9C3-A7BABFC57DAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.Silverlight.Common", "..\AppsAndServices\Common\Silverlight\WebChemistry.Silverlight.Common\WebChemistry.Silverlight.Common.csproj", "{A4E66246-2177-4658-B883-42F5A2611499}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.Charges.Silverlight", "..\AppsAndServices\Charges\Silverlight\WebChemistry.Charges.Silverlight\WebChemistry.Charges.Silverlight.csproj", "{6CE4C915-52B9-4071-B604-30D0A8515217}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.Queries.Silverlight", "..\AppsAndServices\Queries\Silverlight\WebChemistry.Queries.Silverlight\WebChemistry.Queries.Silverlight.csproj", "{E16182FD-4AD7-4053-B58B-F7B2F791B5A7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.SiteBinder.Silverlight", "..\AppsAndServices\SiteBinder\Silverlight\WebChemistry.SiteBinder.Silverlight\WebChemistry.SiteBinder.Silverlight.csproj", "{5DBD452E-D9B9-4856-819C-D17FAD0DCDB8}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,30 +15,8 @@ Global
 		{18E52990-BF27-4BA4-8F7B-A25D3E1BCCCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18E52990-BF27-4BA4-8F7B-A25D3E1BCCCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18E52990-BF27-4BA4-8F7B-A25D3E1BCCCD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4E66246-2177-4658-B883-42F5A2611499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4E66246-2177-4658-B883-42F5A2611499}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4E66246-2177-4658-B883-42F5A2611499}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4E66246-2177-4658-B883-42F5A2611499}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6CE4C915-52B9-4071-B604-30D0A8515217}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6CE4C915-52B9-4071-B604-30D0A8515217}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6CE4C915-52B9-4071-B604-30D0A8515217}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6CE4C915-52B9-4071-B604-30D0A8515217}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E16182FD-4AD7-4053-B58B-F7B2F791B5A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E16182FD-4AD7-4053-B58B-F7B2F791B5A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E16182FD-4AD7-4053-B58B-F7B2F791B5A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E16182FD-4AD7-4053-B58B-F7B2F791B5A7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5DBD452E-D9B9-4856-819C-D17FAD0DCDB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5DBD452E-D9B9-4856-819C-D17FAD0DCDB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5DBD452E-D9B9-4856-819C-D17FAD0DCDB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5DBD452E-D9B9-4856-819C-D17FAD0DCDB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A4E66246-2177-4658-B883-42F5A2611499} = {FFD9DC81-FE80-4606-B9C3-A7BABFC57DAE}
-		{6CE4C915-52B9-4071-B604-30D0A8515217} = {FFD9DC81-FE80-4606-B9C3-A7BABFC57DAE}
-		{E16182FD-4AD7-4053-B58B-F7B2F791B5A7} = {FFD9DC81-FE80-4606-B9C3-A7BABFC57DAE}
-		{5DBD452E-D9B9-4856-819C-D17FAD0DCDB8} = {FFD9DC81-FE80-4606-B9C3-A7BABFC57DAE}
 	EndGlobalSection
 EndGlobal

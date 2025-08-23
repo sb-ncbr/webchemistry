@@ -8,11 +8,7 @@
     using WebChemistry.Framework.Math;
     using MathNet.Numerics.LinearAlgebra.Double;
     using WebChemistry.Framework.Core.Pdb;
-#if SILVERLIGHT
-    using PortableTPL;
-#else
     using System.Threading.Tasks;
-#endif
 
     class Vector3DComparer : IComparer<Vector3D>
     {
@@ -105,12 +101,7 @@
 
             var cells = affectedAtoms.ToDictionary(a => a, _ => new CoverCell());
             
-
-#if SILVERLIGHT
-            ParallelOptions parOptions = new ParallelOptions();
-#else
             ParallelOptions parOptions = new ParallelOptions { MaxDegreeOfParallelism = MaxDegreeOfParallelism };
-#endif
             Parallel.ForEach(pivots, parOptions, pivot =>
             {
                 progress.ThrowIfCancellationRequested();
