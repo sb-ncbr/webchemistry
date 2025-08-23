@@ -63,477 +63,294 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Attributes\AuthorAttribute.cs">
-      <Link>Attributes\AuthorAttribute.cs</Link>
+    <Compile Include="Attributes\AuthorAttribute.cs" />
+    <Compile Include="Collections\FibonacciHeap.cs" />
+    <Compile Include="Collections\FunctionalList.cs" />
+    <Compile Include="Collections\PrefixTree.cs" />
+    <Compile Include="Computation\AsyncEx.cs" />
+    <Compile Include="Computation\Computation.cs" />
+    <Compile Include="Computation\ComputationAwaiter.cs" />
+    <Compile Include="Computation\ComputationCancelledException.cs" />
+    <Compile Include="Computation\ComputationEx.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Collections\FibonacciHeap.cs">
-      <Link>Collections\FibonacciHeap.cs</Link>
+    <Compile Include="Computation\ComputationProgress.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Collections\FunctionalList.cs">
-      <Link>Collections\FunctionalList.cs</Link>
+    <Compile Include="Computation\ExecuteOn.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Collections\PrefixTree.cs">
-      <Link>Collections\PrefixTree.cs</Link>
+    <Compile Include="Computation\IComputation.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Computation\AsyncEx.cs">
-      <Link>Computation\AsyncEx.cs</Link>
+    <Compile Include="Computation\ProgressTick.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Computation\Computation.cs">
-      <Link>Computation\Computation.cs</Link>
+    <Compile Include="Computation\RelayComputation.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Computation\ComputationAwaiter.cs">
-      <Link>Computation\ComputationAwaiter.cs</Link>
+    <Compile Include="Core\CoreEx.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Computation\ComputationCancelledException.cs">
-      <Link>Computation\ComputationCancelledException.cs</Link>
+    <Compile Include="Core\HelperTypes.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Computation\ComputationEx.cs">
-      <Link>Computation\ComputationEx.cs</Link>
+    <Compile Include="Core\ICloneable.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Computation\ComputationProgress.cs">
-      <Link>Computation\ComputationProgress.cs</Link>
+    <Compile Include="Core\IInteractive.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Computation\ExecuteOn.cs">
-      <Link>Computation\ExecuteOn.cs</Link>
+    <Compile Include="Core\InteractiveObject.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Computation\IComputation.cs">
-      <Link>Computation\IComputation.cs</Link>
+    <Compile Include="Core\InteractivePropertyObject.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Computation\ProgressTick.cs">
-      <Link>Computation\ProgressTick.cs</Link>
+    <Compile Include="Core\IPropertyObject.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Computation\RelayComputation.cs">
-      <Link>Computation\RelayComputation.cs</Link>
+    <Compile Include="Core\ObservableObject.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Core\CoreEx.cs">
-      <Link>Core\CoreEx.cs</Link>
+    <Compile Include="Core\Property.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Core\HelperTypes.cs">
-      <Link>Core\HelperTypes.cs</Link>
+    <Compile Include="Core\PropertyCollection.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Core\ICloneable.cs">
-      <Link>Core\ICloneable.cs</Link>
+    <Compile Include="Core\PropertyDescriptor.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Core\IInteractive.cs">
-      <Link>Core\IInteractive.cs</Link>
+    <Compile Include="Core\PropertyHelper.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Core\InteractiveObject.cs">
-      <Link>Core\InteractiveObject.cs</Link>
+    <Compile Include="Core\PropertyObject.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Core\InteractivePropertyObject.cs">
-      <Link>Core\InteractivePropertyObject.cs</Link>
+    <Compile Include="Core\Version.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Core\IPropertyObject.cs">
-      <Link>Core\IPropertyObject.cs</Link>
+    <Compile Include="Exceptions\CannotWriteImmutablePropertyException.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Core\ObservableObject.cs">
-      <Link>Core\ObservableObject.cs</Link>
+    <Compile Include="Exceptions\NonUniqueAtomIdExcetion.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Core\Property.cs">
-      <Link>Core\Property.cs</Link>
+    <Compile Include="Geometry\Collections\Helpers.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Core\PropertyCollection.cs">
-      <Link>Core\PropertyCollection.cs</Link>
+    <Compile Include="Geometry\Collections\K3DNodes.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Core\PropertyDescriptor.cs">
-      <Link>Core\PropertyDescriptor.cs</Link>
+    <Compile Include="Geometry\Collections\K3DRect.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Core\PropertyHelper.cs">
-      <Link>Core\PropertyHelper.cs</Link>
+    <Compile Include="Geometry\Collections\K3DTree.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Core\PropertyObject.cs">
-      <Link>Core\PropertyObject.cs</Link>
+    <Compile Include="Geometry\Collections\PriorityArray.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Core\Version.cs">
-      <Link>Core\Version.cs</Link>
+    <Compile Include="Geometry\Collections\PriorityArrayView.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Exceptions\CannotWriteImmutablePropertyException.cs">
-      <Link>Exceptions\CannotWriteImmutablePropertyException.cs</Link>
+    <Compile Include="Geometry\Collections\PriorityBinaryHeap.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Exceptions\NonUniqueAtomIdExcetion.cs">
-      <Link>Exceptions\NonUniqueAtomIdExcetion.cs</Link>
+    <Compile Include="Geometry\Collections\PriorityCollection.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Collections\Helpers.cs">
-      <Link>Geometry\Collections\Helpers.cs</Link>
+    <Compile Include="Geometry\Collections\PriorityValuePair.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Collections\K3DNodes.cs">
-      <Link>Geometry\Collections\K3DNodes.cs</Link>
+    <Compile Include="Geometry\GeometricalCenterInfo.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Collections\K3DRect.cs">
-      <Link>Geometry\Collections\K3DRect.cs</Link>
+    <Compile Include="Geometry\IVertex.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Collections\K3DTree.cs">
-      <Link>Geometry\Collections\K3DTree.cs</Link>
+    <Compile Include="Geometry\K3DTree.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Collections\PriorityArray.cs">
-      <Link>Geometry\Collections\PriorityArray.cs</Link>
+    <Compile Include="Geometry\KDAtomTree.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Collections\PriorityArrayView.cs">
-      <Link>Geometry\Collections\PriorityArrayView.cs</Link>
+    <Compile Include="Geometry\Triangulation\DelaunayTriangulation.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Collections\PriorityBinaryHeap.cs">
-      <Link>Geometry\Collections\PriorityBinaryHeap.cs</Link>
+    <Compile Include="Geometry\Triangulation\DH\DHTriangulation.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Collections\PriorityCollection.cs">
-      <Link>Geometry\Collections\PriorityCollection.cs</Link>
+    <Compile Include="Geometry\Triangulation\DH\DisconnectedFace.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Collections\PriorityValuePair.cs">
-      <Link>Geometry\Collections\PriorityValuePair.cs</Link>
+    <Compile Include="Geometry\Triangulation\DH\DisconnectedFaceFactory.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\GeometricalCenterInfo.cs">
-      <Link>Geometry\GeometricalCenterInfo.cs</Link>
+    <Compile Include="Geometry\Triangulation\DH\HilbertOrdering.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\IVertex.cs">
-      <Link>Geometry\IVertex.cs</Link>
+    <Compile Include="Geometry\Triangulation\DH\HilbertOrderingLUT.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\K3DTree.cs">
-      <Link>Geometry\K3DTree.cs</Link>
+    <Compile Include="Geometry\Triangulation\DH\Tetrahedron.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\KDAtomTree.cs">
-      <Link>Geometry\KDAtomTree.cs</Link>
+    <Compile Include="Geometry\Triangulation\DH\TetrahedronFactory.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Triangulation\DelaunayTriangulation.cs">
-      <Link>Geometry\Triangulation\DelaunayTriangulation.cs</Link>
+    <Compile Include="Geometry\Triangulation\DH\TriangulationVertex.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Triangulation\DH\DHTriangulation.cs">
-      <Link>Geometry\Triangulation\DH\DHTriangulation.cs</Link>
+    <Compile Include="Geometry\Triangulation\Triangulation.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Triangulation\DH\DisconnectedFace.cs">
-      <Link>Geometry\Triangulation\DH\DisconnectedFace.cs</Link>
+    <Compile Include="Geometry\Triangulation\TriangulationCell.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Triangulation\DH\DisconnectedFaceFactory.cs">
-      <Link>Geometry\Triangulation\DH\DisconnectedFaceFactory.cs</Link>
+    <Compile Include="Geometry\Triangulation\VoronoiEdge.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Triangulation\DH\HilbertOrdering.cs">
-      <Link>Geometry\Triangulation\DH\HilbertOrdering.cs</Link>
+    <Compile Include="Geometry\Triangulation\VoronoiMesh.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Triangulation\DH\HilbertOrderingLUT.cs">
-      <Link>Geometry\Triangulation\DH\HilbertOrderingLUT.cs</Link>
+    <Compile Include="Helpers\Benchmark.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Triangulation\DH\Tetrahedron.cs">
-      <Link>Geometry\Triangulation\DH\Tetrahedron.cs</Link>
+    <Compile Include="Helpers\ComparerHelper.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Triangulation\DH\TetrahedronFactory.cs">
-      <Link>Geometry\Triangulation\DH\TetrahedronFactory.cs</Link>
+    <Compile Include="Helpers\EnumHelper.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Triangulation\DH\TriangulationVertex.cs">
-      <Link>Geometry\Triangulation\DH\TriangulationVertex.cs</Link>
+    <Compile Include="Helpers\Lazy.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Triangulation\Triangulation.cs">
-      <Link>Geometry\Triangulation\Triangulation.cs</Link>
+    <Compile Include="Helpers\ListExporter.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Triangulation\TriangulationCell.cs">
-      <Link>Geometry\Triangulation\TriangulationCell.cs</Link>
+    <Compile Include="Helpers\LogService.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Triangulation\VoronoiEdge.cs">
-      <Link>Geometry\Triangulation\VoronoiEdge.cs</Link>
+    <Compile Include="Helpers\Maybe.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Geometry\Triangulation\VoronoiMesh.cs">
-      <Link>Geometry\Triangulation\VoronoiMesh.cs</Link>
+    <Compile Include="Helpers\ThrowHelper.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Helpers\Benchmark.cs">
-      <Link>Helpers\Benchmark.cs</Link>
+    <Compile Include="Json\MathJsonConverters.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Helpers\ComparerHelper.cs">
-      <Link>Helpers\ComparerHelper.cs</Link>
+    <Compile Include="Json\StructureJsonConverter.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Helpers\EnumHelper.cs">
-      <Link>Helpers\EnumHelper.cs</Link>
+    <Compile Include="Math\IMatrix.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Helpers\Lazy.cs">
-      <Link>Helpers\Lazy.cs</Link>
+    <Compile Include="Math\IVector.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Helpers\ListExporter.cs">
-      <Link>Helpers\ListExporter.cs</Link>
+    <Compile Include="Math\Line3D.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Helpers\LogService.cs">
-      <Link>Helpers\LogService.cs</Link>
+    <Compile Include="Math\MathEx.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Helpers\Maybe.cs">
-      <Link>Helpers\Maybe.cs</Link>
+    <Compile Include="Math\MathHelper.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Helpers\ThrowHelper.cs">
-      <Link>Helpers\ThrowHelper.cs</Link>
+    <Compile Include="Math\Matrix.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Json\MathJsonConverters.cs">
-      <Link>Json\MathJsonConverters.cs</Link>
+    <Compile Include="Math\Matrix3D.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Json\StructureJsonConverter.cs">
-      <Link>Json\StructureJsonConverter.cs</Link>
+    <Compile Include="Math\Plane.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Math\IMatrix.cs">
-      <Link>Math\IMatrix.cs</Link>
+    <Compile Include="Math\Quaternion.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Math\IVector.cs">
-      <Link>Math\IVector.cs</Link>
+    <Compile Include="Math\Rotation3D.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Math\Line3D.cs">
-      <Link>Math\Line3D.cs</Link>
+    <Compile Include="Math\Vector.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Math\MathEx.cs">
-      <Link>Math\MathEx.cs</Link>
+    <Compile Include="Math\Vector2D.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Math\MathHelper.cs">
-      <Link>Math\MathHelper.cs</Link>
+    <Compile Include="Math\Vector3D.cs" />
+    <Compile Include="Primitives\Cavity.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Math\Matrix.cs">
-      <Link>Math\Matrix.cs</Link>
+    <Compile Include="Primitives\Facet.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Math\Matrix3D.cs">
-      <Link>Math\Matrix3D.cs</Link>
+    <Compile Include="Primitives\Tetrahedron.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Math\Plane.cs">
-      <Link>Math\Plane.cs</Link>
+    <Compile Include="Primitives\Tunnel.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Math\Quaternion.cs">
-      <Link>Math\Quaternion.cs</Link>
+    <Compile Include="Structure\Atom.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Math\Rotation3D.cs">
-      <Link>Math\Rotation3D.cs</Link>
+    <Compile Include="Structure\AtomCollection.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Math\Vector.cs">
-      <Link>Math\Vector.cs</Link>
+    <Compile Include="Structure\AtomEx.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Math\Vector2D.cs">
-      <Link>Math\Vector2D.cs</Link>
+    <Compile Include="Structure\AtomProperties.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Math\Vector3D.cs">
-      <Link>Math\Vector3D.cs</Link>
+    <Compile Include="Structure\Bond.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Primitives\Cavity.cs">
-      <Link>Primitives\Cavity.cs</Link>
+    <Compile Include="Structure\BondCollection.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Primitives\Facet.cs">
-      <Link>Primitives\Facet.cs</Link>
+    <Compile Include="Structure\BondIdentifier.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Primitives\Tetrahedron.cs">
-      <Link>Primitives\Tetrahedron.cs</Link>
+    <Compile Include="Structure\BondInfo.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Primitives\Tunnel.cs">
-      <Link>Primitives\Tunnel.cs</Link>
+    <Compile Include="Structure\BondType.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Atom.cs">
-      <Link>Structure\Atom.cs</Link>
+    <Compile Include="Structure\Chirality\ChiralityAnalyzer.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\AtomCollection.cs">
-      <Link>Structure\AtomCollection.cs</Link>
+    <Compile Include="Structure\ElementAndBondInfo.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\AtomEx.cs">
-      <Link>Structure\AtomEx.cs</Link>
+    <Compile Include="Structure\ElementColor.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\AtomProperties.cs">
-      <Link>Structure\AtomProperties.cs</Link>
+    <Compile Include="Structure\ElementSymbol.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Bond.cs">
-      <Link>Structure\Bond.cs</Link>
+    <Compile Include="Structure\ElementSymbols.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\BondCollection.cs">
-      <Link>Structure\BondCollection.cs</Link>
+    <Compile Include="Structure\ElementSymbolsInternal.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\BondIdentifier.cs">
-      <Link>Structure\BondIdentifier.cs</Link>
+    <Compile Include="Structure\ElementTable.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\BondInfo.cs">
-      <Link>Structure\BondInfo.cs</Link>
+    <Compile Include="Structure\ElementType.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\BondType.cs">
-      <Link>Structure\BondType.cs</Link>
+    <Compile Include="Structure\IAtom.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Chirality\ChiralityAnalyzer.cs">
-      <Link>Structure\Chirality\ChiralityAnalyzer.cs</Link>
+    <Compile Include="Structure\IAtomCollection.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\ElementAndBondInfo.cs">
-      <Link>Structure\ElementAndBondInfo.cs</Link>
+    <Compile Include="Structure\IBond.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\ElementColor.cs">
-      <Link>Structure\ElementColor.cs</Link>
+    <Compile Include="Structure\IBondCollection.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\ElementSymbol.cs">
-      <Link>Structure\ElementSymbol.cs</Link>
+    <Compile Include="Structure\IStructure.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\ElementSymbols.cs">
-      <Link>Structure\ElementSymbols.cs</Link>
+    <Compile Include="Structure\MdlMol\MdlMolAtom.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\ElementSymbolsInternal.cs">
-      <Link>Structure\ElementSymbolsInternal.cs</Link>
+    <Compile Include="Structure\MdlMol\MdlMolEx.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\ElementTable.cs">
-      <Link>Structure\ElementTable.cs</Link>
+    <Compile Include="Structure\Mol2\Mol2Atom.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\ElementType.cs">
-      <Link>Structure\ElementType.cs</Link>
+    <Compile Include="Structure\Mol2\Mol2Ex.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\IAtom.cs">
-      <Link>Structure\IAtom.cs</Link>
+    <Compile Include="Structure\PdbQt\PdbQtAtom.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\IAtomCollection.cs">
-      <Link>Structure\IAtomCollection.cs</Link>
+    <Compile Include="Structure\PdbQt\PdbQtEx.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\IBond.cs">
-      <Link>Structure\IBond.cs</Link>
+    <Compile Include="Structure\PdbQt\PdbQtReader.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\IBondCollection.cs">
-      <Link>Structure\IBondCollection.cs</Link>
+    <Compile Include="Structure\Pdb\PdbAtom.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\IStructure.cs">
-      <Link>Structure\IStructure.cs</Link>
+    <Compile Include="Structure\Pdb\PdbBackbone.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\MdlMol\MdlMolAtom.cs">
-      <Link>Structure\MdlMol\MdlMolAtom.cs</Link>
+    <Compile Include="Structure\Pdb\PdbCompAtom.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\MdlMol\MdlMolEx.cs">
-      <Link>Structure\MdlMol\MdlMolEx.cs</Link>
+    <Compile Include="Structure\Pdb\PdbEx.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Mol2\Mol2Atom.cs">
-      <Link>Structure\Mol2\Mol2Atom.cs</Link>
+    <Compile Include="Structure\Pdb\PdbMetadata.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Mol2\Mol2Ex.cs">
-      <Link>Structure\Mol2\Mol2Ex.cs</Link>
+    <Compile Include="Structure\Pdb\PdbReader.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\PdbQt\PdbQtAtom.cs">
-      <Link>Structure\PdbQt\PdbQtAtom.cs</Link>
+    <Compile Include="Structure\Pdb\PdbResidue.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\PdbQt\PdbQtEx.cs">
-      <Link>Structure\PdbQt\PdbQtEx.cs</Link>
+    <Compile Include="Structure\Pdb\PdbResidueCollection.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\PdbQt\PdbQtReader.cs">
-      <Link>Structure\PdbQt\PdbQtReader.cs</Link>
+    <Compile Include="Structure\Pdb\PdbStructure.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Pdb\PdbAtom.cs">
-      <Link>Structure\Pdb\PdbAtom.cs</Link>
+    <Compile Include="Structure\Pdb\PdbXFields.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Pdb\PdbBackbone.cs">
-      <Link>Structure\Pdb\PdbBackbone.cs</Link>
+    <Compile Include="Structure\Pdb\PdbXReader.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Pdb\PdbCompAtom.cs">
-      <Link>Structure\Pdb\PdbCompAtom.cs</Link>
+    <Compile Include="Structure\Pdb\PdbXRecords.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Pdb\PdbEx.cs">
-      <Link>Structure\Pdb\PdbEx.cs</Link>
+    <Compile Include="Structure\Rings\Ring.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Pdb\PdbMetadata.cs">
-      <Link>Structure\Pdb\PdbMetadata.cs</Link>
+    <Compile Include="Structure\Rings\RingCollection.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Pdb\PdbReader.cs">
-      <Link>Structure\Pdb\PdbReader.cs</Link>
+    <Compile Include="Structure\Structure.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Pdb\PdbResidue.cs">
-      <Link>Structure\Pdb\PdbResidue.cs</Link>
+    <Compile Include="Structure\StructureDescriptors.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Pdb\PdbResidueCollection.cs">
-      <Link>Structure\Pdb\PdbResidueCollection.cs</Link>
+    <Compile Include="Structure\StructureExtensions.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Pdb\PdbStructure.cs">
-      <Link>Structure\Pdb\PdbStructure.cs</Link>
+    <Compile Include="Structure\StructureReader.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Pdb\PdbXFields.cs">
-      <Link>Structure\Pdb\PdbXFields.cs</Link>
+    <Compile Include="Structure\StructureReaderWarnings.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Pdb\PdbXReader.cs">
-      <Link>Structure\Pdb\PdbXReader.cs</Link>
+    <Compile Include="Structure\StructureType.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Pdb\PdbXRecords.cs">
-      <Link>Structure\Pdb\PdbXRecords.cs</Link>
+    <Compile Include="Structure\StructureWriter.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Rings\Ring.cs">
-      <Link>Structure\Rings\Ring.cs</Link>
+    <Compile Include="Utils\AppVersion.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Rings\RingCollection.cs">
-      <Link>Structure\Rings\RingCollection.cs</Link>
+    <Compile Include="Utils\CollectionChangedObserver.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\Structure.cs">
-      <Link>Structure\Structure.cs</Link>
+    <Compile Include="Utils\CsvReader\CsvReader.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\StructureDescriptors.cs">
-      <Link>Structure\StructureDescriptors.cs</Link>
+    <Compile Include="Utils\CsvReader\CsvTable.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\StructureExtensions.cs">
-      <Link>Structure\StructureExtensions.cs</Link>
+    <Compile Include="Utils\CsvReader\DataRecord.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\StructureReader.cs">
-      <Link>Structure\StructureReader.cs</Link>
+    <Compile Include="Utils\CsvReader\HeaderRecord.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\StructureReaderWarnings.cs">
-      <Link>Structure\StructureReaderWarnings.cs</Link>
+    <Compile Include="Utils\CsvReader\Internal\Constants.cs">
     </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\StructureType.cs">
-      <Link>Structure\StructureType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Structure\StructureWriter.cs">
-      <Link>Structure\StructureWriter.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\AppVersion.cs">
-      <Link>Utils\AppVersion.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\CollectionChangedObserver.cs">
-      <Link>Utils\CollectionChangedObserver.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\CsvReader\CsvReader.cs">
-      <Link>Utils\CsvReader\CsvReader.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\CsvReader\CsvTable.cs">
-      <Link>Utils\CsvReader\CsvTable.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\CsvReader\DataRecord.cs">
-      <Link>Utils\CsvReader\DataRecord.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\CsvReader\HeaderRecord.cs">
-      <Link>Utils\CsvReader\HeaderRecord.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\CsvReader\Internal\Constants.cs">
-      <Link>Utils\Csv\Internal\Constants.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\CsvReader\Internal\CsvParser.cs">
-      <Link>Utils\Csv\Internal\CsvParser.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\CsvReader\Internal\ReadOnlyDictionary.cs">
-      <Link>Utils\Csv\Internal\ReadOnlyDictionary.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\CsvReader\RecordBase.cs">
-      <Link>Utils\CsvReader\RecordBase.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\NumberParser.cs">
-      <Link>Utils\NumberParser.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\OrderedObservableCollection.cs">
-      <Link>Utils\OrderedObservableCollection.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\Parser\Grammar.cs">
-      <Link>Utils\Parser\Grammar.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\Parser\Parser.cs">
-      <Link>Utils\Parser\Parser.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\Parser\ParseState.cs">
-      <Link>Utils\Parser\ParseState.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\Parser\ParseTree.cs">
-      <Link>Utils\Parser\ParseTree.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\Parser\Rule.cs">
-      <Link>Utils\Parser\Rule.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\Parser\SharedGrammar.cs">
-      <Link>Utils\Parser\SharedGrammar.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\PropertyChangedObserver.cs">
-      <Link>Utils\PropertyChangedObserver.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\SchedulerPropertyChangedListener.cs">
-      <Link>Utils\SchedulerPropertyChangedListener.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\Timing.cs">
-      <Link>Utils\Timing.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\WeakEventListener.cs">
-      <Link>Utils\WeakEventListener.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\WeakInteractiveListener.cs">
-      <Link>Utils\WeakInteractiveListener.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Silverlight\WebChemistry.Framework.Core\Utils\WeakNotifyPropertyChangedListener.cs">
-      <Link>Utils\WeakNotifyPropertyChangedListener.cs</Link>
-    </Compile>
+    <Compile Include="Utils\CsvReader\Internal\CsvParser.cs" />
+    <Compile Include="Utils\CsvReader\Internal\ReadOnlyDictionary.cs" />
+    <Compile Include="Utils\CsvReader\RecordBase.cs" />
+    <Compile Include="Utils\NumberParser.cs" />
+    <Compile Include="Utils\OrderedObservableCollection.cs" />
+    <Compile Include="Utils\Parser\Grammar.cs" />
+    <Compile Include="Utils\Parser\Parser.cs" />
+    <Compile Include="Utils\Parser\ParseState.cs" />
+    <Compile Include="Utils\Parser\ParseTree.cs" />
+    <Compile Include="Utils\Parser\Rule.cs" />
+    <Compile Include="Utils\Parser\SharedGrammar.cs" />
+    <Compile Include="Utils\PropertyChangedObserver.cs" />
+    <Compile Include="Utils\SchedulerPropertyChangedListener.cs" />
+    <Compile Include="Utils\Timing.cs" />
+    <Compile Include="Utils\WeakEventListener.cs" />
+    <Compile Include="Utils\WeakInteractiveListener.cs" />
+    <Compile Include="Utils\WeakNotifyPropertyChangedListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
