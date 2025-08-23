@@ -21,7 +21,6 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <SilverlightApplicationList>{E16182FD-4AD7-4053-B58B-F7B2F791B5A7}|..\..\AppsAndServices\Queries\Silverlight\WebChemistry.Queries.Silverlight\WebChemistry.Queries.Silverlight.csproj|AppsBin|False,{5DBD452E-D9B9-4856-819C-D17FAD0DCDB8}|..\..\AppsAndServices\SiteBinder\Silverlight\WebChemistry.SiteBinder.Silverlight\WebChemistry.SiteBinder.Silverlight.csproj|AppsBin|False,{6CE4C915-52B9-4071-B604-30D0A8515217}|..\..\AppsAndServices\Charges\Silverlight\WebChemistry.Charges.Silverlight\WebChemistry.Charges.Silverlight.csproj|AppsBin|False</SilverlightApplicationList>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <TypeScriptToolsVersion>2.0</TypeScriptToolsVersion>
     <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
