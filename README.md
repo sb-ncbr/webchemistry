@@ -10,8 +10,6 @@ Run install-packages.bat or .ps1 in powershell (its enough to copy/paste it ther
 
 To compile all projects:
 * Visual Studio 2017 recommended.
-* [Visual Studio Silverlight plugin](https://marketplace.visualstudio.com/items?itemName=RamiAbughazaleh.SilverlightProjectSystem)
-* [Silverlight 5 SDK](https://www.microsoft.com/en-us/download/details.aspx?id=39597) (install Silverlight_x64.exe and Silverlight_Developer_x86.exe)
 * IIS Express to debug the web.
 * (Optional) [7-zip](https://www.7-zip.org/) for helper service deployment scripts.
 
