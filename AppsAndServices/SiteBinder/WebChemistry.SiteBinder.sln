@@ -1,12 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Silverlight", "Silverlight", "{832C36CF-77BB-4FA1-8E7C-6897B57F5DBD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.SiteBinder.Silverlight", "Silverlight\WebChemistry.SiteBinder.Silverlight\WebChemistry.SiteBinder.Silverlight.csproj", "{5DBD452E-D9B9-4856-819C-D17FAD0DCDB8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.SiteBinder.Silverlight.Web", "Silverlight\WebChemistry.SiteBinder.Silverlight.Web\WebChemistry.SiteBinder.Silverlight.Web.csproj", "{94123E58-0CC6-4786-AEEB-20ABE2C0EAA5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.SiteBinder.Core", "WebChemistry.SiteBinder.Core\WebChemistry.SiteBinder.Core.csproj", "{4AA13687-F819-442A-95D6-1C300F50E3E4}"
 EndProject
 Global
@@ -15,14 +9,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5DBD452E-D9B9-4856-819C-D17FAD0DCDB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5DBD452E-D9B9-4856-819C-D17FAD0DCDB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5DBD452E-D9B9-4856-819C-D17FAD0DCDB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5DBD452E-D9B9-4856-819C-D17FAD0DCDB8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{94123E58-0CC6-4786-AEEB-20ABE2C0EAA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{94123E58-0CC6-4786-AEEB-20ABE2C0EAA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{94123E58-0CC6-4786-AEEB-20ABE2C0EAA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{94123E58-0CC6-4786-AEEB-20ABE2C0EAA5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4AA13687-F819-442A-95D6-1C300F50E3E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4AA13687-F819-442A-95D6-1C300F50E3E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AA13687-F819-442A-95D6-1C300F50E3E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -30,9 +16,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{5DBD452E-D9B9-4856-819C-D17FAD0DCDB8} = {832C36CF-77BB-4FA1-8E7C-6897B57F5DBD}
-		{94123E58-0CC6-4786-AEEB-20ABE2C0EAA5} = {832C36CF-77BB-4FA1-8E7C-6897B57F5DBD}
 	EndGlobalSection
 EndGlobal
