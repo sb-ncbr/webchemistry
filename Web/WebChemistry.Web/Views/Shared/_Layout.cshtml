@@ -26,21 +26,8 @@
                         @Html.Partial("_Menu")
                     }
                 </ul>
-                @*@if (ViewBag.IsReviewMode == null || ViewBag.IsReviewMode == false)
-                {
-                <div class="pull-right">
-                    @Html.Partial("_LoginPartial")
-                </div>
-                }*@
-                @*<div class="@(ViewBag.IsApp != null && ViewBag.IsApp ? "" : "container") topbar" style="padding-left: 0; padding-right: 0;">*@
                 <div class="container topbar" style="padding-left: 0; padding-right: 0;">
                     <ul class="nav">
-                        @*@if (ViewEngines.Engines.FindPartialView(ViewContext.Controller.ControllerContext, "_Menu").View != null)
-        {
-            @Html.Partial("_Menu")
-            <li class="divider-vertical"></li>
-        }*@
-
                         @if (ViewBag.IsReviewMode == null || ViewBag.IsReviewMode == false)
                         {
                             <li class="dropdown">

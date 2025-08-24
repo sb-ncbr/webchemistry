@@ -210,16 +210,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\ChargeCalculatorController.cs" />
-    <Compile Include="Controllers\ComputationController.cs" />
-    <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HelpersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -231,7 +227,6 @@
     <Compile Include="Filters\ActionTimeOutFilter.cs" />
     <Compile Include="Filters\CompressFilter.cs" />
     <Compile Include="Filters\CORSFilter.cs" />
-    <Compile Include="Filters\MustBeAuthorizedAttribute.cs" />
     <Compile Include="Helpers\ActionHelper.cs" />
     <Compile Include="Helpers\AppControllerBase.cs" />
     <Compile Include="Helpers\ComputationHelper.cs" />
@@ -648,12 +643,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Data\_Menu.cshtml" />
     <Content Include="Views\Data\Index.cshtml" />
-    <Content Include="Views\Shared\Unauthorized.cshtml" />
     <Content Include="Views\Data\Database.cshtml" />
     <Content Include="Views\Data\DbView.cshtml" />
     <Content Include="Views\Data\Propertie.cshtml" />
