@@ -1,1 +1,0 @@
-$cfgs = dir -r  | ? {$_.name -eq "packages.config"}; $output = "packages/"; foreach ($cfg in $cfgs) { Start-Process NuGet\NuGet.exe -ArgumentList @("update",$cfg.FullName,"-repositoryPath",$output) -wait -NoNewWindow -PassThru; }
