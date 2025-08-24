@@ -523,7 +523,6 @@
             double hydropathy = 0.0;
             double hydrophobicity = 0.0;
             double polarity = 0.0;
-            double hydratation = 0.0;
             double mutability = 0.0;
             int positives = 0;
             int negatives = 0;
@@ -562,7 +561,6 @@
             layer.PhysicoChemicalProperties = new TunnelPhysicoChemicalProperties(
                 Charge: charge,
                 Polarity: polarity,
-                //Hydratation: hydratation,
                 Hydrophobicity: hydrophobicity,
                 Hydropathy: hydropathy,
                 Mutability: (int)mutability,
