@@ -236,7 +236,6 @@
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HelpersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MotiveAtlasController.cs" />
     <Compile Include="Controllers\PatternQueryController.cs" />
     <Compile Include="Controllers\PatternQueryExplorerController.cs" />
     <Compile Include="Controllers\PatternQuerySupportController.cs" />
@@ -519,8 +518,6 @@
     <Content Include="Views\PatternQuery\_Menu.cshtml" />
     <Content Include="Views\PatternQuery\Index.cshtml" />
     <Content Include="Views\Helpers\_Modals.cshtml" />
-    <Content Include="Views\MotiveAtlas\_Menu.cshtml" />
-    <Content Include="Views\MotiveAtlas\Index.cshtml" />
     <Content Include="Views\Shared\CommingSoon.cshtml" />
     <Content Include="Views\MotiveValidator\_Menu.cshtml" />
     <Content Include="Views\MotiveValidator\Index.cshtml" />
@@ -690,10 +687,6 @@
     <ProjectReference Include="..\..\AppsAndServices\Charges\WebChemistry.Charges.Core\WebChemistry.Charges.Core.csproj">
       <Project>{4c5bbe8c-b1b3-40b1-bef0-cbaaf04b9846}</Project>
       <Name>WebChemistry.Charges.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\AppsAndServices\MotiveAtlas\WebChemistry.MotiveAtlas.DataModel\WebChemistry.MotiveAtlas.DataModel.csproj">
-      <Project>{064835dd-07b5-46c1-9814-a5b0d8c51891}</Project>
-      <Name>WebChemistry.MotiveAtlas.DataModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\AppsAndServices\Queries\Service\WebChemistry.Queries.Service.App\WebChemistry.Queries.Service.App.csproj">
       <Project>{2f09e70a-ceec-4c4c-83cf-12f979896cef}</Project>

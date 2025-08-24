@@ -32,19 +32,6 @@ namespace WebChemistry.Web
             );
 
             routes.MapRoute(
-                name: "MotiveAtlas",
-                url: "MotiveAtlas/{action}/{categoryId}/{subcategoryId}/{motiveId}",
-                defaults: new 
-                {
-                    controller = "MotiveAtlas", 
-                    action = "Index",
-                    categoryId = UrlParameter.Optional,
-                    subcategoryId = UrlParameter.Optional,
-                    motiveId = UrlParameter.Optional
-                }
-            );
-
-            routes.MapRoute(
                 name: "MotiveValidator",
                 url: "MotiveValidator/{action}/{id}",
                 defaults: new
