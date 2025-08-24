@@ -641,7 +641,6 @@ classes should alter those!
 
 .slick-row.loading {
   opacity: 0.5;
-  filter: alpha(opacity = 50);
 }
 
 .slick-cell.invalid {
