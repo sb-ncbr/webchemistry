@@ -160,7 +160,7 @@ namespace WebChemistry.Framework.Core.Pdb
         /// Returns the counted residue string: DMU*2-ASP*3-ASN*1
         /// </summary>
         /// <param name="counts"></param>
-        /// <param name="separator"
+        /// <param name="separator"></param>
         /// <returns></returns>
         public static string GetExplicitlyCountedResidueString(IDictionary<string, int> counts, string separator = "-")
         {

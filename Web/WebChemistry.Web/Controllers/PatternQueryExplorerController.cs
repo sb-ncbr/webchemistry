@@ -153,7 +153,7 @@ namespace WebChemistry.Web.Controllers
                 var xs = entries.Entries.Select(e => new AddStructureEntry { Filename = e.FilenameId + e.Extension, Provider = () => e.GetSourceStream() }).ToArray();
                 return inst.AddStructures(xs).AsJsonResult();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new { error = true, errorType = "generic", message = "Failed. Please try again later." }.AsJsonResult();
             }
@@ -262,7 +262,7 @@ namespace WebChemistry.Web.Controllers
                 var xs = entries.Entries.Select(e => new AddStructureEntry { Filename = e.FilenameId + e.Extension, Provider = () => e.GetSourceStream() }).ToArray();
                 return inst.AddStructures(xs).AsJsonResult();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new { error = true, errorType = "generic", message = "Failed. Please try again later." }.AsJsonResult();
             }

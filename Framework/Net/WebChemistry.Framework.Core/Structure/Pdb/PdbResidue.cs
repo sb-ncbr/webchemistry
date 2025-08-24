@@ -470,7 +470,6 @@ namespace WebChemistry.Framework.Core.Pdb
             }
         }
         
-        bool? _isWater;
         public bool IsWater { 
             get 
             {

@@ -279,7 +279,7 @@ namespace WebChemistry.MotiveValidator.Converter
                 Init(args);
                 HandleCommand();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //Log("Error: " + e.Message);
             }
