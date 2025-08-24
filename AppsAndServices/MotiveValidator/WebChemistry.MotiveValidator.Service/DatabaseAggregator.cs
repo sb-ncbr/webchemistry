@@ -4,10 +4,8 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using WebChemistry.Framework.Core;
-    using WebChemistry.Framework.Core.MdlMol;
     using WebChemistry.MotiveValidator.DataModel;
 
     class DatabaseAggregator

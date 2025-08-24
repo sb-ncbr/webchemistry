@@ -1,8 +1,6 @@
 ﻿namespace WebChemistry.MotiveValidator.Database
 {
-    using ICSharpCode.SharpZipLib.Zip;
     using System;
-    using System.Linq;
     using System.Collections.Generic;
     using System.IO;
     using WebChemistry.Platform;

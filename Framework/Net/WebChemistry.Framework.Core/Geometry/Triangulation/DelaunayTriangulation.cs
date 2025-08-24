@@ -6,7 +6,7 @@
     using System.Linq;
     using WebChemistry.Framework.Geometry.Triangulation.DH;
     using WebChemistry.Framework.Math;
-    
+
     public class DelaunayTriangulation3D<TVertex, TCell> : ITriangulation3D<TVertex, TCell>
         where TCell : TriangulationCell3D<TVertex, TCell>, new()
     {

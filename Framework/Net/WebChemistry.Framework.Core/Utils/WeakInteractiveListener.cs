@@ -15,7 +15,7 @@ namespace WebChemistry.Framework.Utils
     using System;
     using WebChemistry.Framework.Core;
     using System.ComponentModel;
-    
+
     /// <summary>
     /// Implements a weak event listener that allows the owner to be garbage
     /// collected if its only remaining link is an event handler.

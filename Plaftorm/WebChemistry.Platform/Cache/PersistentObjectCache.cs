@@ -124,7 +124,7 @@
 ////                }
 ////            }
 ////        }
-        
+
 ////        static void OnChanged(object source, FileSystemEventArgs e)
 ////        {
 ////           // Log("{0}: {1}", e.ChangeType, e.FullPath);
@@ -210,7 +210,7 @@
 ////                }
 ////            }
 ////        }
-        
+
 ////        /// <summary>
 ////        /// Get file's content.
 ////        /// </summary>

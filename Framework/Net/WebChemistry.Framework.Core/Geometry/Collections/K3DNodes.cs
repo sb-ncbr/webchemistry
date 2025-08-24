@@ -6,9 +6,8 @@
 
 namespace WebChemistry.Framework.Geometry
 {
-    using System.Collections.Generic;
     using WebChemistry.Framework.Math;
-        
+
     abstract class K3DNode<TValue>
     {
         public abstract void Nearest(Vector3D pivot, double maxDistance, double maxDistanceSquared, IPriorityCollection<double, TValue> output);

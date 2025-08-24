@@ -4,11 +4,10 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Text;
     using System.Xml;
     using System.Xml.Linq;
     using WebChemistry.Platform.MoleculeDatabase.Filtering;
-    
+
     /// <summary>
     /// View statistics.
     /// </summary>

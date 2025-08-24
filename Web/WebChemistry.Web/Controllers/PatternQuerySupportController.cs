@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Web;
-using System.Web.Caching;
 using System.Web.Mvc;
-using WebChemistry.Queries.Core;
-using WebChemistry.Queries.Core.Queries;
-using WebChemistry.Queries.Service.App;
-using WebChemistry.Queries.Service.Explorer;
-using WebChemistry.Platform;
 using WebChemistry.Platform.Users;
 using WebChemistry.Framework.Core;
 using WebChemistry.Web.Helpers;

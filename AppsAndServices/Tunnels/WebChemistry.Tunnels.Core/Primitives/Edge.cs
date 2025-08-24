@@ -1,11 +1,9 @@
 ﻿namespace WebChemistry.Tunnels.Core
 {
-    using System.Linq;
-    using WebChemistry.Framework.Core;
     using WebChemistry.Framework.Geometry;
     using WebChemistry.Framework.Math;
     using QuickGraph;
-    
+
     /// <summary>
     /// Edge in a Voronoi graph.
     /// </summary>

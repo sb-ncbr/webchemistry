@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using WebChemistry.Tunnels.Core.Helpers;
 
 namespace WebChemistry.Tunnels.Core.Geometry

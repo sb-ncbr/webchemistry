@@ -1,15 +1,11 @@
 ﻿namespace WebChemistry.Charges.Service.DataModel
 {
     using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using WebChemistry.Platform;
-using WebChemistry.Platform.Computation;
-using WebChemistry.Platform.Server;
-using WebChemistry.Platform.Users;
+    using System.IO;
+    using WebChemistry.Platform;
+    using WebChemistry.Platform.Computation;
+    using WebChemistry.Platform.Server;
+    using WebChemistry.Platform.Users;
 
     [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     public enum ChangeComputationStates

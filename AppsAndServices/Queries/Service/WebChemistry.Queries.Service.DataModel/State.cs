@@ -1,9 +1,6 @@
 ﻿
 namespace WebChemistry.Queries.Service.DataModel
 {
-    using System.Collections.Generic;
-    using WebChemistry.Platform;
-
     /// <summary>
     /// Custom state.
     /// </summary>

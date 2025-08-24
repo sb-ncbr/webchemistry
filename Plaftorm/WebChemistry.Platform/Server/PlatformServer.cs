@@ -1,10 +1,5 @@
 ﻿namespace WebChemistry.Platform.Server
 {
-    using System;
-    using System.IO;
-    using WebChemistry.Platform.Computation;
-    using WebChemistry.Platform.MoleculeDatabase;
-    using WebChemistry.Platform.Services;
     using WebChemistry.Platform.Users;
 
     /// <summary>

@@ -4,8 +4,6 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using WebChemistry.Framework.Core;
     using WebChemistry.Framework.Core.Pdb;
     using WebChemistry.MotiveValidator.DataModel;
@@ -13,7 +11,7 @@
     using WebChemistry.Platform.Computation;
     using WebChemistry.Platform.Server;
     using WebChemistry.Platform.Users;
-    
+
     public class MotiveValidatorDatabaseApp : PersistentObjectBase<MotiveValidatorDatabaseApp>
     {
         public static readonly char SpecificResidueSeparator = ':';

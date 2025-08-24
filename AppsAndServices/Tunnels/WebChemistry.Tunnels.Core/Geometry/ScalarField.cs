@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Text.RegularExpressions;
     using WebChemistry.Framework.Math;
-    
+
     public class ScalarFieldGrid : FieldBase
     {
         public double[][][] Values { get; private set; }

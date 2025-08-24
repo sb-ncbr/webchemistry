@@ -6,7 +6,6 @@
 
 namespace WebChemistry.Platform.MoleculeDatabase
 {
-    using ICSharpCode.SharpZipLib.Zip;
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
@@ -14,8 +13,6 @@ namespace WebChemistry.Platform.MoleculeDatabase
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
-    using System.Xml;
-    using System.Xml.Linq;
     using WebChemistry.Framework.Core;
 
     /// <summary>

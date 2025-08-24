@@ -1,11 +1,7 @@
 ﻿namespace WebChemistry.Charges.Service.DataModel
 {
     using Newtonsoft.Json;
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
-    using System.Text;
     using WebChemistry.Charges.Core;
     using WebChemistry.Platform.Services;
 

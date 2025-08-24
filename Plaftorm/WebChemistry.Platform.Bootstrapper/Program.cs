@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -13,7 +11,7 @@ using WebChemistry.Platform.Server;
 using WebChemistry.Platform.Services;
 
 namespace WebChemistry.Platform.Bootstrapper
-{    
+{
     class Program
     {
         static StringBuilder LogText = new StringBuilder();

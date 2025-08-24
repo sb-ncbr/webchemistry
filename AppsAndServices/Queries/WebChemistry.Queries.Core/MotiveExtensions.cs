@@ -2,7 +2,6 @@
 namespace WebChemistry.Queries.Core
 {
     using WebChemistry.Framework.Core;
-    using System;
 
     /// <summary>
     /// IStructure extensions for motives.

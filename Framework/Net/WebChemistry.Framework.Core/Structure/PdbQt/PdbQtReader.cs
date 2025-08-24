@@ -1,12 +1,8 @@
 ﻿namespace WebChemistry.Framework.Core.PdbQt
 {
     using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.IO;
-    using System.Linq;
-    using WebChemistry.Framework.Math;
-    
+
     public class PdbQtReader
     {
         readonly string Filename;

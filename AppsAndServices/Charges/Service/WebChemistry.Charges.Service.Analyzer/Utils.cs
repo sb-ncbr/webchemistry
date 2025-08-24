@@ -1,10 +1,8 @@
 ﻿namespace WebChemistry.Charges.Service.Analyzer
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Text;
     using WebChemistry.Charges.Core;
     using WebChemistry.Charges.Service.DataModel;
     using WebChemistry.Framework.Core;

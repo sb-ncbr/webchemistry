@@ -3,17 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using WebChemistry.Platform.Services;
     using WebChemistry.Charges.Service.DataModel;
     using WebChemistry.Framework.Core;
-    using Newtonsoft.Json;
     using System.IO;
     using WebChemistry.Charges.Core;
     using System.Xml.Linq;
     using WebChemistry.Platform;
-    using WebChemistry.Framework.Core.Collections;
-    using ICSharpCode.SharpZipLib.Zip;
 
     class AnalyzerService : ServiceBase<AnalyzerService, ChargesAnalyzerConfig, ChargesAnalyzerStandaloneConfig, object>
     {

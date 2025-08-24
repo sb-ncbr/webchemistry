@@ -4,7 +4,7 @@ namespace WebChemistry.Framework.Core.Pdb
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    
+
     /// <summary>
     /// SEcondary structure element (sheet/helix)
     /// </summary>

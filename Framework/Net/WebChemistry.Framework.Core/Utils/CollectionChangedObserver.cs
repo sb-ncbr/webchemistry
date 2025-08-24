@@ -2,8 +2,6 @@
 {
     using System.Collections.Specialized;
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Reactive.Concurrency;
     using System.Runtime.CompilerServices;
 

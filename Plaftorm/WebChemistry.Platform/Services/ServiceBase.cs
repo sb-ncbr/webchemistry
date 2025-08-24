@@ -8,7 +8,7 @@
     using WebChemistry.Framework.Core;
     using WebChemistry.Platform.Computation;
     using WebChemistry.Platform.Server;
-    
+
     /// <summary>
     /// A base class for implementing services.
     /// 

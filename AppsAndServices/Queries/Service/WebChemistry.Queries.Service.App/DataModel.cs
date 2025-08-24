@@ -6,7 +6,7 @@
     using WebChemistry.Platform.Computation;
     using WebChemistry.Platform.MoleculeDatabase;
     using WebChemistry.Platform.MoleculeDatabase.Filtering;
-    
+
     public class QueriesDatabaseFilterResult
     {
         public string[] Errors { get; set; }

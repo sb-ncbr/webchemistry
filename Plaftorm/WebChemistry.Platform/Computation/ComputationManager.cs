@@ -6,15 +6,11 @@
 
 namespace WebChemistry.Platform.Computation
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
-    using System.Xml;
-    using System.Xml.Linq;
     using WebChemistry.Platform.Services;
     using WebChemistry.Platform.Users;
-    
+
     /// <summary>
     /// Simple computation manager that builds XML index of the processes.
     /// </summary>

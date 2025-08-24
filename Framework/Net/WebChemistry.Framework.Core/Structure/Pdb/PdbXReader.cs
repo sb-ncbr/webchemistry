@@ -6,8 +6,7 @@
     using System.IO;
     using System.Linq;
     using System.Text;
-    using WebChemistry.Framework.Math;
-    
+
     internal partial class PdbReader
     {
         #region Core

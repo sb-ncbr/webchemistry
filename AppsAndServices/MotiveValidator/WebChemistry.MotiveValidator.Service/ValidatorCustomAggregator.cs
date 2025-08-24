@@ -1,18 +1,11 @@
 namespace WebChemistry.MotiveValidator.Service
 {
     using System;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.IO;
     using System.Linq;
-    using System.Text;
-    using System.Threading;
-    using System.Threading.Tasks;
     using WebChemistry.Framework.Core;
     using WebChemistry.Framework.Core.Csv;
-    using WebChemistry.Queries.Core;
-    using WebChemistry.Queries.Core.Queries;
     using WebChemistry.MotiveValidator.Database;
     using WebChemistry.MotiveValidator.DataModel;
     using WebChemistry.Platform;

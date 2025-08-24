@@ -2,14 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;    
+    using System.Linq;
     using WebChemistry.Framework.Core;
-    using WebChemistry.Framework.Geometry;
-    using WebChemistry.Framework.Math;
-    using MathNet.Numerics.LinearAlgebra.Double;
-    using WebChemistry.Framework.Core.Pdb;
-    using System.Threading.Tasks;
-    
+
     /// <summary>
     /// Eem charge solver.
     /// </summary>

@@ -5,8 +5,7 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using WebChemistry.Framework.Math;
-    using System.IO;
-    
+
     /// <summary>
     /// Represents a collection of simple rings inside a structure.
     /// </summary>

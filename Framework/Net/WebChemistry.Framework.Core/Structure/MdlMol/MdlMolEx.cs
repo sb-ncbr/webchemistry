@@ -1,8 +1,6 @@
 ﻿
 namespace WebChemistry.Framework.Core
 {
-    using System.Linq;
-    using System.Collections.Generic;
     using WebChemistry.Framework.Core.MdlMol;
 
     /// <summary>

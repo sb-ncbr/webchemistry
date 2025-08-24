@@ -7,11 +7,10 @@
 namespace WebChemistry.Tunnels.Core
 {
     using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
-using WebChemistry.Framework.Core;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Xml.Linq;
+    using WebChemistry.Framework.Core;
     using WebChemistry.Framework.Core.Pdb;
 
     /// <summary>

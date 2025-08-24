@@ -1,6 +1,5 @@
 ﻿namespace WebChemistry.Queries.Service.DataModel
 {
-    using System;
     using System.ComponentModel;
     using WebChemistry.Platform;
     using WebChemistry.Platform.Services;

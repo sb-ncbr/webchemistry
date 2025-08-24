@@ -1,6 +1,5 @@
 ﻿namespace WebChemistry.Web.Filters
 {
-    using System.IO.Compression;
     using System.Web.Mvc;
 
     public class CORSAttribute : System.Web.Mvc.ActionFilterAttribute

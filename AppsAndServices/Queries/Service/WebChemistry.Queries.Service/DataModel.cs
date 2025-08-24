@@ -8,7 +8,6 @@
     using WebChemistry.Queries.Service.DataModel;
     using WebChemistry.MotiveValidator.Database;
     using WebChemistry.Platform;
-    using WebChemistry.Framework.Core.Pdb;
 
     class QueryWrap
     {

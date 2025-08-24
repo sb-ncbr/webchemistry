@@ -3,7 +3,7 @@
     using WebChemistry.Framework.Math;
     using System.Collections.Generic;
     using System.Linq;
-using WebChemistry.Framework.Core;
+    using WebChemistry.Framework.Core;
 
     /// <summary>
     /// A class that represents a tunnel profile.

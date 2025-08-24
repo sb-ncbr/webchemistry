@@ -7,7 +7,6 @@
     using System.Linq;
     using WebChemistry.Framework.Core.MdlMol;
     using WebChemistry.Framework.Core.Pdb;
-    using WebChemistry.Framework.Math;
     using System.IO.Compression;
 
 

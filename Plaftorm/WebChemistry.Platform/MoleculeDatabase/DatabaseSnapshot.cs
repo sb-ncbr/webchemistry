@@ -1,13 +1,11 @@
 ﻿namespace WebChemistry.Platform.MoleculeDatabase
 {
     using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using System.Xml.Linq;
-using WebChemistry.Framework.Core;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Xml;
+    using System.Xml.Linq;
+    using WebChemistry.Framework.Core;
 
     /// <summary>
     /// Snapshot of structures given by multiple views.

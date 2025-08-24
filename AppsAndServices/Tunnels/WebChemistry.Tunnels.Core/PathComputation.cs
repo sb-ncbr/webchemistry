@@ -5,7 +5,7 @@
     using QuickGraph.Algorithms;
     using WebChemistry.Framework.Core;
     using WebChemistry.Framework.Math;
-        
+
     public partial class Complex
     {
         IEnumerable<Tunnel> GetPaths(IEnumerable<Tuple<Vector3D, Vector3D>> startAndEndPoints)

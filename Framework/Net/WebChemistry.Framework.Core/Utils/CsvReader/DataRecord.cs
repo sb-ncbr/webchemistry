@@ -1,9 +1,8 @@
 namespace WebChemistry.Framework.Core.Csv
 {
     using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+    using System.Collections.Generic;
+    using System.Globalization;
 
     /// <summary>
     /// Represents a data record in a CSV file.

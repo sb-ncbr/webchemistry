@@ -1,12 +1,7 @@
 ﻿namespace WebChemistry.Platform.Users
 {
     using System;
-    using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
-    using System.Text;
-    using System.Xml;
-    using System.Xml.Linq;
 
     /// <summary>
     /// User manager.

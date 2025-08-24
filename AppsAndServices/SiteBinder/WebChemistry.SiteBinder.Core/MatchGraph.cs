@@ -9,7 +9,6 @@ namespace WebChemistry.SiteBinder.Core
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using WebChemistry.Framework.Core;
     using WebChemistry.Framework.Math;
 

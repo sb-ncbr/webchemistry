@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-using WebChemistry.Platform.MoleculeDatabase.Filtering;
+    using WebChemistry.Platform.MoleculeDatabase.Filtering;
 
     /// <summary>
     /// Database view manager.

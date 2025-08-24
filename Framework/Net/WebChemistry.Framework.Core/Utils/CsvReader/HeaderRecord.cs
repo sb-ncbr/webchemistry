@@ -3,7 +3,6 @@ namespace WebChemistry.Framework.Core.Csv
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq;
     using WebChemistry.Framework.Core.Csv.Internal;
 
     /// <summary>

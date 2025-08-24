@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebChemistry.Framework.Core;
-using WebChemistry.Framework.Math;
-using WebChemistry.Queries;
-using WebChemistry.Queries.Core;
-using WebChemistry.Queries.Core.Queries;
 
 namespace MiscTests
 {

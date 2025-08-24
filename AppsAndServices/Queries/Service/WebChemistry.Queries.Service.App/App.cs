@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Text;
     using WebChemistry.Framework.Core;
     using WebChemistry.Queries.Service.DataModel;
     using WebChemistry.Platform;

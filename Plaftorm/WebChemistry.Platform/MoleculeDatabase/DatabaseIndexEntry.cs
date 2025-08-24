@@ -7,7 +7,7 @@
     using System.Linq;
     using System.Xml.Linq;
     using WebChemistry.Framework.Core;
-    
+
     /// <summary>
     /// Intex entry.
     /// </summary>

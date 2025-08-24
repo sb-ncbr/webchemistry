@@ -6,7 +6,7 @@ namespace WebChemistry.Framework.Core.Pdb
     using System.Linq;
     using System.Text.RegularExpressions;
     using WebChemistry.Framework.Math;
-    
+
     /// <summary>
     /// Residue secondary structure type.
     /// </summary>

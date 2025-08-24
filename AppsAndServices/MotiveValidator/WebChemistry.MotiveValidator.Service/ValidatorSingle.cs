@@ -1,6 +1,5 @@
 ﻿namespace WebChemistry.MotiveValidator.Service
 {
-    using System;
     using System.IO;
     using System.Linq;
     using WebChemistry.Framework.Core;

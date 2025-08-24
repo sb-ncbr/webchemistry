@@ -1,12 +1,8 @@
 ﻿namespace WebChemistry.Queries.Core.Queries
 {
-    using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Text.RegularExpressions;
     using WebChemistry.Framework.Core;
-    using WebChemistry.Queries.Core.Utils;
-    using System.Reflection;
     using WebChemistry.Tunnels.Core;
 
     /// <summary>

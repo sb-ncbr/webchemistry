@@ -6,12 +6,11 @@
     using QuickGraph;
     using QuickGraph.Algorithms;
     using WebChemistry.Framework.Core;
-    using WebChemistry.Framework.Geometry;
     using WebChemistry.Framework.Math;
     using System.Xml.Linq;
     using System.Globalization;
     using WebChemistry.Framework.Core.Pdb;
-    
+
     /// <summary>
     /// Type of the cavity
     /// </summary>

@@ -2,9 +2,7 @@
 {
     using WebChemistry.Framework.Core;
     using System.Windows.Media.Media3D;
-    using System.ComponentModel;
     using System.Windows.Media;
-    using System.Linq;
 
     class AtomModel
     {

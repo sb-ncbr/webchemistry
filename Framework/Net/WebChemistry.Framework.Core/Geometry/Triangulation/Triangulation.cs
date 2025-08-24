@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using WebChemistry.Framework.Math;
-    
+
     /// <summary>
     /// Triangulation 3D interface.
     /// </summary>

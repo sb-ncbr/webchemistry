@@ -1,9 +1,6 @@
 ﻿
 namespace WebChemistry.Framework.Core
 {
-    using System.Linq;
-    using System.Collections.Generic;
-
     /// <summary>
     /// Extensions for Mol2 format.
     /// </summary>

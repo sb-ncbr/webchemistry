@@ -2,14 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.IO;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using WebChemistry.Framework.Core;
-    using WebChemistry.Framework.Core.MdlMol;
-    using WebChemistry.Framework.Core.Pdb;
     using WebChemistry.Framework.Math;
     using WebChemistry.MotiveValidator.DataModel;
     using WebChemistry.SiteBinder.Core;

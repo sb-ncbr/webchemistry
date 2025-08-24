@@ -1,10 +1,6 @@
 ﻿namespace WebChemistry.MotiveValidator.Service
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
-    using System.Text;
     using WebChemistry.Framework.Core.Pdb;
     using WebChemistry.MotiveValidator.Database;
     using WebChemistry.MotiveValidator.DataModel;

@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using WebChemistry.Charges.Service.DataModel;
-using WebChemistry.Platform;
-
-namespace WebChemistry.Charges.Service
+﻿namespace WebChemistry.Charges.Service
 {
     class Program
     {

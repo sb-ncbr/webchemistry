@@ -1,14 +1,6 @@
 ﻿namespace WebChemistry.Framework.Core
 {
     using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.IO;
-    using System.Linq;
-    using System.Xml.Linq;
-    using WebChemistry.Framework.Core.Pdb;
-    using WebChemistry.Framework.Geometry;
-    using WebChemistry.Framework.Math;
 
     public static partial class ElementAndBondInfo
     {

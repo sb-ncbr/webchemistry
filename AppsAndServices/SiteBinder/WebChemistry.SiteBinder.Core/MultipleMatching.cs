@@ -3,12 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using WebChemistry.Framework.Core;
     using WebChemistry.Framework.Math;
     using System.Threading.Tasks;
     using System.Threading;
-    
+
     public static class MultipleMatching
     {
         public static Dictionary<string, OptimalTransformation> GetTransformation(this MultipleMatching<IAtom> matching, IEnumerable<IStructure> structures)

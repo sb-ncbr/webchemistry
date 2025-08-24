@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using WebChemistry.Platform.Services;
     using WebChemistry.Charges.Service.DataModel;
     using WebChemistry.Charges.Core;

@@ -8,7 +8,7 @@ namespace WebChemistry.Framework.Core
 {
     using System;
     using System.Linq;
-        
+
     /// <summary>
     /// Benchmarking helper.
     /// </summary>

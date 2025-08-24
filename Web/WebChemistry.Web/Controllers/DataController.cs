@@ -1,9 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
 using WebChemistry.Platform;
 using WebChemistry.Platform.MoleculeDatabase;

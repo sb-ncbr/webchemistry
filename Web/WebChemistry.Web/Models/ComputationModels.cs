@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using WebChemistry.Platform.Computation;
+﻿using WebChemistry.Platform.Computation;
 
 namespace WebChemistry.Web.Models
 {

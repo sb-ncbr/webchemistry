@@ -1,9 +1,7 @@
 ﻿namespace WebChemistry.Platform
 {
-    using System;
     using System.IO;
     using Newtonsoft.Json;
-    using System.Collections;
     using ICSharpCode.SharpZipLib.GZip;
     using ICSharpCode.SharpZipLib.Zip;
     using ICSharpCode.SharpZipLib.Zip.Compression.Streams;

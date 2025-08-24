@@ -6,7 +6,7 @@
     using WebChemistry.Framework.Core;
     using WebChemistry.Framework.Geometry;
     using WebChemistry.Framework.Math;
-using WebChemistry.Framework.Core.Pdb;
+    using WebChemistry.Framework.Core.Pdb;
     using System.Collections.Generic;
 
     /// <summary>

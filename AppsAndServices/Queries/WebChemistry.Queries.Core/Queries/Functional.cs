@@ -1,9 +1,7 @@
 ﻿namespace WebChemistry.Queries.Core.Queries
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
-    using WebChemistry.Framework.Core;
 
     /// <summary>
     /// Filters the query.

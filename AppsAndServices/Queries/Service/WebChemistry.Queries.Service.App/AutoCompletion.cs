@@ -1,7 +1,6 @@
 ﻿
 namespace WebChemistry.Queries.Service.App
 {
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using WebChemistry.Framework.Core;

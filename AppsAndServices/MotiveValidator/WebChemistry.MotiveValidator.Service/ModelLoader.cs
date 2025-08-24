@@ -9,7 +9,6 @@
     using WebChemistry.Platform.MoleculeDatabase;
     using ICSharpCode.SharpZipLib.Zip;
     using System.Threading.Tasks;
-    using System.Text.RegularExpressions;
     using System.IO.Compression;
     using System.Text;
 

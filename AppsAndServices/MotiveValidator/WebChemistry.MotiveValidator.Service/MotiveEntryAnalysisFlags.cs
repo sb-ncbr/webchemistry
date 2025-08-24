@@ -1,11 +1,8 @@
 ﻿namespace WebChemistry.MotiveValidator.Service
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using WebChemistry.Framework.Core;
-    using WebChemistry.Framework.Math;
     using WebChemistry.MotiveValidator.DataModel;
 
     static class AnalysisFlags

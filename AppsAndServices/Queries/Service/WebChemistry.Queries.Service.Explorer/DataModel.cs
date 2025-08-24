@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
-    
+
     public class AddStructureEntry
     {
         public string Filename { get; set; }

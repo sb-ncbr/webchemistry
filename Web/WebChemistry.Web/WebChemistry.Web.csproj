@@ -518,7 +518,6 @@
     <Content Include="Views\PatternQuery\_Menu.cshtml" />
     <Content Include="Views\PatternQuery\Index.cshtml" />
     <Content Include="Views\Helpers\_Modals.cshtml" />
-    <Content Include="Views\Shared\CommingSoon.cshtml" />
     <Content Include="Views\MotiveValidator\_Menu.cshtml" />
     <Content Include="Views\MotiveValidator\Index.cshtml" />
     <Content Include="Views\MotiveValidator\Result.cshtml" />

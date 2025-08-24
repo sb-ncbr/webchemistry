@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using WebChemistry.Framework.Core;
     using WebChemistry.Framework.TypeSystem;
     using WebChemistry.Queries.Core.Queries;

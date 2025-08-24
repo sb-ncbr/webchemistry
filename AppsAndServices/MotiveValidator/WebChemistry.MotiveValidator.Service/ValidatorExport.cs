@@ -6,7 +6,6 @@
     using System.Linq;
     using WebChemistry.Framework.Core;
     using WebChemistry.MotiveValidator.DataModel;
-    using WebChemistry.Platform;
     using WebChemistry.Platform.Services;
 
     partial class ValidatorService : ServiceBase<ValidatorService, MotiveValidatorConfig, MotiveValidatorStandaloneConfig, object>

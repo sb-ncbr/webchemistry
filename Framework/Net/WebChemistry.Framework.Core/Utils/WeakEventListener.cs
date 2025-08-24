@@ -13,7 +13,7 @@
 namespace WebChemistry.Framework.Utils
 {
     using System;
-    
+
     /// <summary>
     /// Implements a weak event listener that allows the owner to be garbage
     /// collected if its only remaining link is an event handler.

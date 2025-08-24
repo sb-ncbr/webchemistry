@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using WebChemistry.Platform.MoleculeDatabase;
 using WebChemistry.Platform.Users;
 using WebChemistry.Web.Models;

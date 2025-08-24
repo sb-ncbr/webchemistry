@@ -13,7 +13,6 @@
 namespace WebChemistry.Framework.Utils
 {
     using System;
-    using WebChemistry.Framework.Core;
     using System.ComponentModel;
 
     /// <summary>

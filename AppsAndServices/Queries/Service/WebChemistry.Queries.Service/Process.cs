@@ -1,18 +1,11 @@
 ﻿namespace WebChemistry.Queries.Service
 {
     using System;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.IO;
     using System.Linq;
-    using System.Threading.Tasks;
     using WebChemistry.Framework.Core;
-    using WebChemistry.Framework.Core.Pdb;
-    using WebChemistry.Queries.Core;
     using WebChemistry.Queries.Service.DataModel;
-    using WebChemistry.Platform;
-    using WebChemistry.Platform.MoleculeDatabase;
     using WebChemistry.Platform.Services;
 
     public partial class QueriesService : ServiceBase<QueriesService, QueriesServiceSettings, QueriesStandaloneServiceSettings, QueriesServiceState>

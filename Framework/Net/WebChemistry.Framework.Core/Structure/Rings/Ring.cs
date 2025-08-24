@@ -2,10 +2,9 @@
 {
     using System.Linq;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
     using System;
     using System.Text;
-    
+
     public class Ring : IEquatable<Ring>
     {
 

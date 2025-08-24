@@ -19,7 +19,6 @@ namespace WebChemistry.Framework.Visualization.Visuals
     using System.Collections.Generic;
     using System.Windows.Media;
     using System.Windows.Media.Media3D;
-    using WebChemistry.Framework.Core;
 
     /// <summary>
     /// Creates the 3D model for a particular residue when being displayed in cartoon mode.

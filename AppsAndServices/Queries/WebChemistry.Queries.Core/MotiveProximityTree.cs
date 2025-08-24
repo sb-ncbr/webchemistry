@@ -1,10 +1,9 @@
 ﻿namespace WebChemistry.Queries.Core
 {
-    using System.Linq;
     using WebChemistry.Framework.Core;
     using System.Collections.Generic;
     using WebChemistry.Framework.Geometry;
-    
+
     /// <summary>
     /// Wraps a motive in a kd-tree and recods the maximum radius.
     /// </summary>

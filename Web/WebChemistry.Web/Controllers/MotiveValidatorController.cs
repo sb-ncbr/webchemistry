@@ -1,16 +1,12 @@
 ﻿using ICSharpCode.SharpZipLib.Zip;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebChemistry.Framework.Core;
 using WebChemistry.MotiveValidator.DataModel;
-using WebChemistry.Platform;
 using WebChemistry.Platform.Computation;
 using WebChemistry.Platform.MoleculeDatabase;
 using WebChemistry.Platform.Server;

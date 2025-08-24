@@ -1,14 +1,9 @@
 namespace WebChemistry.MotiveValidator.Service
 {
-    using ICSharpCode.SharpZipLib.Zip;
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.IO;
     using System.Linq;
     using WebChemistry.Framework.Core;
-    using WebChemistry.Queries.Core;
-    using WebChemistry.Queries.Core.Queries;
     using WebChemistry.MotiveValidator.DataModel;
     using WebChemistry.Platform.Services;
 

@@ -7,7 +7,7 @@
     using System.Reflection;
     using System.Text;
     using WebChemistry.Framework.Core;
-    
+
     /// <summary>
     /// Config for help.
     /// </summary>
