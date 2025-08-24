@@ -11,7 +11,8 @@
     <RootNamespace>WebChemistry.Queries.Service</RootNamespace>
     <AssemblyName>WebChemistry.Queries.Service</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\</SolutionDir>
   </PropertyGroup>
@@ -77,9 +78,7 @@
     <Reference Include="System.Reactive.PlatformServices">
       <HintPath>..\..\..\..\packages\Rx-PlatformServices.2.1.30214.0\lib\Net40\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModel.cs" />
@@ -103,10 +102,6 @@
     <ProjectReference Include="..\..\..\MotiveValidator\Database\WebChemistry.MotiveValidator.Database\WebChemistry.MotiveValidator.Database.csproj">
       <Project>{9a962733-4eb8-4f37-ba8d-b31347a6a424}</Project>
       <Name>WebChemistry.MotiveValidator.Database</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MotiveValidator\WebChemistry.MotiveValidator.DataModel\WebChemistry.MotiveValidator.DataModel.csproj">
-      <Project>{a74bdee2-fc1e-4abe-8703-738117a62f53}</Project>
-      <Name>WebChemistry.MotiveValidator.DataModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WebChemistry.Queries.Core\WebChemistry.Queries.Core.csproj">
       <Project>{7439A025-3A82-4270-8647-7E0F006BD065}</Project>

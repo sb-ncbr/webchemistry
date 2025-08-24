@@ -34,25 +34,12 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\AppsAndServices\Queries\WebChemistry.Queries.Core\WebChemistry.Queries.Core.csproj">
-      <Project>{7439a025-3a82-4270-8647-7e0f006bd065}</Project>
-      <Name>WebChemistry.Queries.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\AppsAndServices\Tunnels\WebChemistry.Tunnels.Core\WebChemistry.Tunnels.Core.csproj">
-      <Project>{e6e2bf63-7b87-4c44-96c3-aad4460149fe}</Project>
-      <Name>WebChemistry.Tunnels.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Framework\Net\WebChemistry.Framework.Core\WebChemistry.Framework.Core.csproj">
       <Project>{2a6559f9-cd2b-496c-b774-935fec3ed0e4}</Project>
       <Name>WebChemistry.Framework.Core</Name>
