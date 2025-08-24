@@ -14,13 +14,6 @@ namespace WebChemistry.Web.Controllers
             return View();
         }
 
-        public ActionResult SiteBinder(string operation)
-        {
-            ViewBag.AppIcon = "icon-sitebinder";
-            ViewBag.AppName = "SiteBinder";
-            return View("SiteBinder");
-        }
-
         public ActionResult Mole(string operation)
         {
             ViewBag.AppIcon = "icon-mole";
