@@ -32,6 +32,23 @@
             return CurrentLineText != null;
         }
 
+        static bool IsCommentOrBlank(string s)
+        {
+            if (s == null) return true;
+            var trimmed = s.TrimStart();
+            return trimmed.Length == 0 || trimmed.StartsWith("#", StringComparison.Ordinal);
+        }
+
+        static bool IsConstructStart(string s)
+        {
+            if (string.IsNullOrEmpty(s)) return false;
+            var t = s.TrimStart();
+            return t.StartsWith("_", StringComparison.Ordinal)
+                || t.StartsWith("loop_", StringComparison.OrdinalIgnoreCase)
+                || t.StartsWith("data_", StringComparison.OrdinalIgnoreCase)
+                || t.StartsWith("save_", StringComparison.OrdinalIgnoreCase);
+        }
+
         /// <summary>
         /// Checks if the current line starts with a given value.
         /// </summary>
@@ -125,8 +142,11 @@
         {
             var fields = FieldsBase.CreateLoop<TFields>(this);
 
-            while (CurrentLineText != null && !StartsWith('#'))
+            while (CurrentLineText != null)
             {
+                if (IsCommentOrBlank(CurrentLineText)) { NextLine(); continue; }
+                if (IsConstructStart(CurrentLineText)) break;
+
                 if (!TokenizeLoopElementOrFail()) break;
                 action(fields);
                 NextLine();
@@ -145,8 +165,11 @@
         {
             var fields = FieldsBase.CreateLoop<TFields>(this);
 
-            while (CurrentLineText != null && !StartsWith('#'))
+            while (CurrentLineText != null)
             {
+                if (IsCommentOrBlank(CurrentLineText)) { NextLine(); continue; }
+                if (IsConstructStart(CurrentLineText)) break;
+
                 if (!TokenizeLoopElementOrFail()) break;
                 action(state, fields);
                 NextLine();
@@ -185,7 +208,7 @@
         /// </summary>
         void SkipSection()
         {
-            while (NextLine() && !StartsWith('#'))
+            while (NextLine() && !IsConstructStart(CurrentLineText) && !IsCommentOrBlank(CurrentLineText))
             {
             }
         }
