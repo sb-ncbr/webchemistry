@@ -7,6 +7,7 @@ namespace WebChemistry.Tunnels.Server
     using Microsoft.Scripting;
     using Microsoft.Scripting.Hosting;
     using System;
+    using IronPython.Hosting;
     using WebChemistry.Framework.TypeSystem;
     using WebChemistry.Queries.Core;
     using WebChemistry.Queries.Core.MetaQueries;
@@ -23,7 +24,7 @@ namespace WebChemistry.Tunnels.Server
         {
             var setup = new ScriptRuntimeSetup();
             setup.HostType = typeof(ScriptHost);
-            //setup.LanguageSetups.Add(Python.CreateLanguageSetup(null));
+            setup.LanguageSetups.Add(Python.CreateLanguageSetup(null));
             setup.Options["SearchPaths"] = new string[] { string.Empty };
 
             var runtime = new ScriptRuntime(setup);
