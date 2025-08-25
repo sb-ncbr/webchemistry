@@ -50,11 +50,6 @@
     <Compile Include="Transform.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Readme\MathNet.Numerics.authors.txt" />
-    <Content Include="App_Readme\MathNet.Numerics.copyright.txt" />
-    <Content Include="App_Readme\MathNet.Numerics.readme.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\..\Framework\Net\WebChemistry.Framework.Core\WebChemistry.Framework.Core.csproj">
       <Project>{2a6559f9-cd2b-496c-b774-935fec3ed0e4}</Project>
       <Name>WebChemistry.Framework.Core</Name>
