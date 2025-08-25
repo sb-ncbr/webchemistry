@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.36324.18
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{391DDAAF-F2C2-4D0A-ADC2-AB6C50E0CBD5}"
 EndProject
@@ -65,6 +65,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.Queries.Service.App", "AppsAndServices\Queries\Service\WebChemistry.Queries.Service.App\WebChemistry.Queries.Service.App.csproj", "{2F09E70A-CEEC-4C4C-83CF-12F979896CEF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.Queries.Service.Explorer", "AppsAndServices\Queries\Service\WebChemistry.Queries.Service.Explorer\WebChemistry.Queries.Service.Explorer.csproj", "{7177612F-9714-4282-8212-88800A68B6EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.Tunnels.Server", "AppsAndServices\Tunnels\WebChemistry.Tunnels.Server\WebChemistry.Tunnels.Server.csproj", "{B30221F3-F54E-4B71-A634-816E1CAECA7B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2A6559F9-CD2B-496C-B774-935FEC3ED0E4} = {2A6559F9-CD2B-496C-B774-935FEC3ED0E4}
+		{7439A025-3A82-4270-8647-7E0F006BD065} = {7439A025-3A82-4270-8647-7E0F006BD065}
+		{E6E2BF63-7B87-4C44-96C3-AAD4460149FE} = {E6E2BF63-7B87-4C44-96C3-AAD4460149FE}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -266,6 +273,18 @@ Global
 		{7177612F-9714-4282-8212-88800A68B6EF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{7177612F-9714-4282-8212-88800A68B6EF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{7177612F-9714-4282-8212-88800A68B6EF}.Release|x86.ActiveCfg = Release|Any CPU
+		{B30221F3-F54E-4B71-A634-816E1CAECA7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B30221F3-F54E-4B71-A634-816E1CAECA7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B30221F3-F54E-4B71-A634-816E1CAECA7B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B30221F3-F54E-4B71-A634-816E1CAECA7B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B30221F3-F54E-4B71-A634-816E1CAECA7B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B30221F3-F54E-4B71-A634-816E1CAECA7B}.Debug|x86.Build.0 = Debug|Any CPU
+		{B30221F3-F54E-4B71-A634-816E1CAECA7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B30221F3-F54E-4B71-A634-816E1CAECA7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B30221F3-F54E-4B71-A634-816E1CAECA7B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B30221F3-F54E-4B71-A634-816E1CAECA7B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B30221F3-F54E-4B71-A634-816E1CAECA7B}.Release|x86.ActiveCfg = Release|Any CPU
+		{B30221F3-F54E-4B71-A634-816E1CAECA7B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -299,6 +318,7 @@ Global
 		{C36994CE-A82E-45BC-A2F6-637D0C0C8689} = {CF62D1AB-B316-45C4-8BEA-C2483DCBC6A8}
 		{2F09E70A-CEEC-4C4C-83CF-12F979896CEF} = {CF62D1AB-B316-45C4-8BEA-C2483DCBC6A8}
 		{7177612F-9714-4282-8212-88800A68B6EF} = {CF62D1AB-B316-45C4-8BEA-C2483DCBC6A8}
+		{B30221F3-F54E-4B71-A634-816E1CAECA7B} = {D407E96D-E9AD-4D10-A7B6-DB783F757BB6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {606776B3-2164-48E7-91E9-4D96F9781A45}
