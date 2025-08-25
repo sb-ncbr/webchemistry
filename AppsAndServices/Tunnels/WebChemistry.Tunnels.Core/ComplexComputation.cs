@@ -260,9 +260,10 @@
             return graph;
         }
 
-        static Random rnd = new Random(0);
         Complex Create(ComputationProgress progress)
         {
+            Random rnd = new Random(0);
+
             progress.UpdateStatus("Initializing...");
 
             var structure = Structure;
@@ -274,14 +275,14 @@
 
             IEnumerable<IAtom> pivotsSeq = structure.PdbResidues()
                     // HOH and small residues are evil
-                    .Where(r => r.IsActiveForTunnelComputation() && !r.IsWater /*&& r.Atoms.Count > 3*/)
-                    .SelectMany(r => r.Atoms);
+                    .Where(r => r.ActiveAtomsForTunnelComputation() != null && !r.IsWater /*&& r.Atoms.Count > 3*/)
+                    .SelectMany(r => r.ActiveAtomsForTunnelComputation());
 
             if (Parameters.IgnoreHETAtoms) pivotsSeq = pivotsSeq.Where(a => !a.PdbRecordName().EqualOrdinalIgnoreCase("HETATM"));
             if (Parameters.IgnoreHydrogens) pivotsSeq = pivotsSeq.Where(a => a.ElementSymbol != ElementSymbols.H);
 
             pivots = pivotsSeq.Select(a => new Vertex(a)).ToArray();
-                        
+
             progress.UpdateStatus("Triangulating...");
             VoronoiMesh3D<Vertex, Tetrahedron, Edge> voronoi;
             //voronoi = VoronoiMesh.Create<Vertex, Tetrahedron, Edge>(pivots);
@@ -447,10 +448,10 @@
             return CreateAsync(structure, parameters).RunSynchronously();
         }
 
-        void UpdateOpenings(ComputationProgress p)
+        async void UpdateOpenings(ComputationProgress p)
         {
             p.UpdateStatus("Updating openings...");
-            Cavities.ForEach(ch => ch.UpdateOpenings());
+            await Task.WhenAll(Cavities.Select(ch => Task.Run(() => ch.UpdateOpenings())).ToArray());
         }
         
         /// <summary>

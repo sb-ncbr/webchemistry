@@ -1,4 +1,4 @@
-﻿namespace WebChemistry.Tunnels.Core.Export
+namespace WebChemistry.Tunnels.Core.Export
 {
     using System;
     using System.Collections.Generic;

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using WebChemistry.Framework.Math;
-using System.Collections;
-
 namespace WebChemistry.Tunnels.Core.Geometry
 {
+    using System;
+    using System.Collections.Generic;
+    using WebChemistry.Framework.Math;
+    using System.Collections;
+
     public class IsoSurface
     {
         #region Tables

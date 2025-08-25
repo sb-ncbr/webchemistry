@@ -1,5 +1,4 @@
-﻿
-namespace WebChemistry.Tunnels.Core
+﻿namespace WebChemistry.Tunnels.Core
 {
     using System.Collections.Generic;
     using System.Collections.Specialized;

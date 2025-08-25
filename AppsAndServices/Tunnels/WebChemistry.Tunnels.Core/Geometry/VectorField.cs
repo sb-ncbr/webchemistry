@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using WebChemistry.Framework.Math;
-
-namespace WebChemistry.Tunnels.Core.Geometry
+﻿namespace WebChemistry.Tunnels.Core.Geometry
 {
+    using System;
+    using System.Linq;
+    using WebChemistry.Framework.Math;
+
     public class VectorFieldGrid
     {
         public string Name { get; private set; }

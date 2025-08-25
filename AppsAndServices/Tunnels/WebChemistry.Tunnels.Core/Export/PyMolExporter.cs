@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using WebChemistry.Framework.Math;
-using WebChemistry.Framework.Core;
-using WebChemistry.Tunnels.Core.Geometry;
-
 namespace WebChemistry.Tunnels.Core.Export
 {
-    public enum PyMolSurfaceType
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using WebChemistry.Framework.Math;
+    using WebChemistry.Framework.Core;
+    using WebChemistry.Tunnels.Core.Geometry;
+
+    public enum SurfaceType
     {
         Surface = 0,
         Spheres
@@ -35,7 +35,7 @@ namespace WebChemistry.Tunnels.Core.Export
         TextWriter Writer;
         Vector3D Offset;
 
-        public PyMolExporter AddTunnel(string commandName, Tunnel t, PyMolSurfaceType surfaceType = PyMolSurfaceType.Surface)
+        public PyMolExporter AddTunnel(string commandName, Tunnel t, SurfaceType surfaceType = SurfaceType.Surface)
         {
             Writer.WriteLine("def {0}():", commandName);
             Writer.WriteLine("  model = chempy.models.Indexed()", commandName);
@@ -59,8 +59,8 @@ namespace WebChemistry.Tunnels.Core.Export
                 "cmd.set('mesh_mode', 1)",
                 string.Format("cmd.load_model(model, {0})", nameString),
                 string.Format("cmd.hide('everything', {0})", nameString),
-                surfaceType == PyMolSurfaceType.Surface ? string.Format("cmd.set('surface_color', {0}, {1})", color, nameString) : string.Format("cmd.set('sphere_color', {0}, {1})", color, nameString),
-                surfaceType == PyMolSurfaceType.Surface ? string.Format("cmd.show('surface', {0})", nameString) : string.Format("cmd.show('spheres', {0})", nameString),
+                surfaceType == SurfaceType.Surface ? string.Format("cmd.set('surface_color', {0}, {1})", color, nameString) : string.Format("cmd.set('sphere_color', {0}, {1})", color, nameString),
+                surfaceType == SurfaceType.Surface ? string.Format("cmd.show('surface', {0})", nameString) : string.Format("cmd.show('spheres', {0})", nameString),
             }.ForEach(l => Writer.WriteLine("  " + l));
             Writer.WriteLine("{0}()", commandName);
             Writer.WriteLine("cmd.group('{0}s', [{1}], 'add')", GetCommandName(t), commandName);
@@ -69,7 +69,7 @@ namespace WebChemistry.Tunnels.Core.Export
             return this;
         }
 
-        public PyMolExporter AddCenterlineChargeTunnel(string commandName, string groupName, Tunnel t, string name, double? customMin, double? customMax, PyMolSpectrumPalette spectrum, PyMolSurfaceType surfaceType = PyMolSurfaceType.Surface)
+        public PyMolExporter AddCenterlineChargeTunnel(string commandName, string groupName, Tunnel t, string name, double? customMin, double? customMax, PyMolSpectrumPalette spectrum, SurfaceType surfaceType = SurfaceType.Surface)
         {
             Writer.WriteLine("def {0}():", commandName);
             Writer.WriteLine("  model = chempy.models.Indexed()", commandName);
@@ -100,7 +100,7 @@ namespace WebChemistry.Tunnels.Core.Export
                 string.Format("cmd.load_model(model, {0})", nameString),
                 string.Format("cmd.hide('everything', {0})", nameString),
                 string.Format("cmd.spectrum('pc', '{0}', '{1}', minimum = {2:0.000}, maximum = {3:0.000})", spectrum == PyMolSpectrumPalette.RedWhiteBlue ? "red_white_blue" : "blue_white_red", commandName, customMin.Value, customMax.Value),
-                surfaceType == PyMolSurfaceType.Surface ? string.Format("cmd.show('surface', {0})", nameString) : string.Format("cmd.show('spheres', {0})", nameString),
+                surfaceType == SurfaceType.Surface ? string.Format("cmd.show('surface', {0})", nameString) : string.Format("cmd.show('spheres', {0})", nameString),
             }.ForEach(l => Writer.WriteLine("  " + l));
             Writer.WriteLine("{0}()", commandName);
             Writer.WriteLine("cmd.group('{0}', [{1}], 'add')", groupName, commandName);
@@ -238,6 +238,12 @@ namespace WebChemistry.Tunnels.Core.Export
             return this;
         }
 
+        public PyMolExporter AddStructure(string fileName) {
+            Writer.WriteLine(string.Format("if os.path.isfile('{0}'):", fileName));
+            Writer.WriteLine(string.Format("  cmd.load('{0}')", fileName));
+            return this;
+        }
+
         public string GetCommandName(Tunnel t)
         {
             if (t.Type == TunnelType.Pore) return t.IsMergedPore ? "MergedPore" : "Pore";
@@ -245,7 +251,7 @@ namespace WebChemistry.Tunnels.Core.Export
         }
 
 
-        public PyMolExporter AddTunnels(IEnumerable<Tunnel> tunnels, PyMolSurfaceType surfaceType = PyMolSurfaceType.Surface)
+        public PyMolExporter AddTunnels(IEnumerable<Tunnel> tunnels, SurfaceType surfaceType = SurfaceType.Surface)
         {
             tunnels.ForEach((t, i) => AddTunnel(GetCommandName(t) + (i + 1).ToString(), t, surfaceType));
             return this;
@@ -258,7 +264,7 @@ namespace WebChemistry.Tunnels.Core.Export
             return this;
         }
 
-        public PyMolExporter AddCenterlineChargeTunnels(IEnumerable<Tunnel> tunnels, string fieldName, double? customMin, double? customMax, PyMolSpectrumPalette spectrum, PyMolSurfaceType surfaceType = PyMolSurfaceType.Surface)
+        public PyMolExporter AddCenterlineChargeTunnels(IEnumerable<Tunnel> tunnels, string fieldName, double? customMin, double? customMax, PyMolSpectrumPalette spectrum, SurfaceType surfaceType = SurfaceType.Surface)
         {
             tunnels.ForEach((t, i) => AddCenterlineChargeTunnel(GetCommandName(t) + (i + 1).ToString() + "_" + fieldName + "_centerline", GetCommandName(t) + "s_" + fieldName + "_centerline", 
                 t, fieldName, customMin, customMax, spectrum, surfaceType));
@@ -296,6 +302,8 @@ namespace WebChemistry.Tunnels.Core.Export
             writer.WriteLine("");
             writer.WriteLine("from pymol import cmd");
             writer.WriteLine("from pymol.cgo import *");
+            writer.WriteLine("import chempy");
+            writer.WriteLine("import os");
 
             new[] 
             {

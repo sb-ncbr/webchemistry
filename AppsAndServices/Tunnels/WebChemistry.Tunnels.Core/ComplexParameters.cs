@@ -6,23 +6,25 @@
     using System.Xml.Linq;
     using WebChemistry.Framework.Core;
     using WebChemistry.Framework.Core.Pdb;
+    using System.Collections.Generic;
 
     public static class ResidueEx
     {
         /// <summary>
         /// Used to determine which residues participate in the triangulation.
         /// </summary>
-        public static readonly PropertyDescriptor<bool> IsActiveForTunnelComputationProperty
-            = PropertyHelper.Bool("IsActiveForTunnelComputation", category: "Residue", isImmutable: false);
-        
-        public static bool IsActiveForTunnelComputation(this PdbResidue residue)
+
+        public static readonly PropertyDescriptor<IList<IAtom>> ActiveAtomsForTunnelComputationProperty
+            = PropertyHelper.OfType<IList<IAtom>>("ActiveAtomsForTunnelComputation", category: "Residue", isImmutable: false);
+
+        public static IList<IAtom> ActiveAtomsForTunnelComputation(this PdbResidue residue)
         {
-            return residue.GetProperty(IsActiveForTunnelComputationProperty, true);
+            return residue.GetProperty(ActiveAtomsForTunnelComputationProperty, residue.Atoms);
         }
 
-        public static void SetIsActiveForTunnelComputation(this PdbResidue residue, bool value)
+        public static void SetActiveAtomsForTunnelComputation(this PdbResidue residue, IList<IAtom> atoms)
         {
-            residue.SetProperty(IsActiveForTunnelComputationProperty, value);
+            residue.SetProperty(ActiveAtomsForTunnelComputationProperty, atoms);
         }
     }
 

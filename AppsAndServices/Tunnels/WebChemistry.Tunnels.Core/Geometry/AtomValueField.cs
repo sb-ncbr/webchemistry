@@ -1,14 +1,16 @@
-﻿namespace WebChemistry.Tunnels.Core.Geometry
+namespace WebChemistry.Tunnels.Core.Geometry
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using WebChemistry.Framework.Core;
+    using WebChemistry.Framework.Core.Pdb;
     using WebChemistry.Framework.Geometry;
     using WebChemistry.Framework.Math;
 
     public enum AtomValueFieldInterpolationMethod
     {
+        // Atoms
         NearestValue,
         RadiusSum,
         RadiusSumDividedByDistance,
@@ -18,23 +20,67 @@
         KNearestSumDividedByDistance,
         Lining,
         WholeStructure,
+
+        // Residues
+        RadiusResidueSum,
+        RadiusResidueSumDividedByDistance,
+        KNearestResidueSum,
+        KNearestResidueSumDividedByDistance,
+        AllResidues
     }
     
     public class AtomValueField : FieldBase
     {
-        AtomValueFieldInterpolationMethod Method;
+        public static bool NeedsAtomPivots(AtomValueFieldInterpolationMethod method)
+        {
+            return !NeedsResiduePivots(method);
+        }
+
+        public static bool NeedsResiduePivots(AtomValueFieldInterpolationMethod method)
+        {
+            return (
+                method == AtomValueFieldInterpolationMethod.RadiusResidueSum ||
+                method == AtomValueFieldInterpolationMethod.RadiusResidueSumDividedByDistance ||
+                method == AtomValueFieldInterpolationMethod.KNearestResidueSum ||
+                method == AtomValueFieldInterpolationMethod.KNearestResidueSumDividedByDistance ||
+                method == AtomValueFieldInterpolationMethod.AllResidues);
+        }
+
         IStructure Structure;
         Dictionary<IAtom, double> Values;
-        KDAtomTree Pivots;
+        KDAtomTree AtomPivots;
+        K3DTree<PdbResidue> ResiduePivots;
+        bool IgnoreHydrogens;
         double Radius;
         int K;
         
         Func<Vector3D, double?> InterpolationFuncCenter;
         Func<TunnelProfile.Node, TunnelLayer, double?> InterpolationFuncNode;
 
+        double? GetResidueCharge(PdbResidue residue)
+        {
+            var atoms = residue.Atoms;
+            var len = atoms.Count;
+            double charge = 0;
+            bool present = false;
+            for (int i = 0; i < len; i++)
+            {
+                double value;
+                var a = atoms[i];
+                if (IgnoreHydrogens && a.ElementSymbol == ElementSymbols.H) continue;
+                if (Values.TryGetValue(atoms[i], out value))
+                {
+                    present = true;
+                    charge += value;
+                }
+            }
+            return present ? (double?)charge : null;
+        }
+
+        #region Atoms
         double? InterpolateNearest(Vector3D position)
         {
-            var atom = Pivots.Nearest(position);
+            var atom = AtomPivots.Nearest(position);
             double value;
             if (Values.TryGetValue(atom.Value, out value)) return value;
             return null;
@@ -42,7 +88,7 @@
 
         double? InterpolateRadiusSum(Vector3D position)
         {
-            var atoms = Pivots.NearestRadius(position, Radius);
+            var atoms = AtomPivots.NearestRadius(position, Radius);
             if (atoms.Count == 0) return null;
                         
             double value = 0.0;
@@ -62,7 +108,7 @@
 
         double? InterpolateRadiusSumDividedByDistance(Vector3D position)
         {
-            var atoms = Pivots.NearestRadius(position, Radius);
+            var atoms = AtomPivots.NearestRadius(position, Radius);
             if (atoms.Count == 0) return null;
 
             double value = 0.0;
@@ -84,7 +130,7 @@
         double? InterpolateRadiusMultiplicative(TunnelProfile.Node node, TunnelLayer layer)
         {
             var position = node.Center;
-            var atoms = Pivots.NearestRadius(position, Radius * node.Radius);
+            var atoms = AtomPivots.NearestRadius(position, Radius * node.Radius);
             if (atoms.Count == 0) return null;
 
             double value = 0.0;
@@ -106,7 +152,7 @@
         double? InterpolateRadiusAdditive(TunnelProfile.Node node, TunnelLayer layer)
         {
             var position = node.Center;
-            var atoms = Pivots.NearestRadius(position, Radius + node.Radius);
+            var atoms = AtomPivots.NearestRadius(position, Radius + node.Radius);
             if (atoms.Count == 0) return null;
 
             double value = 0.0;
@@ -127,7 +173,7 @@
 
         double? InterpolateKNearestSum(Vector3D position)
         {
-            var atoms = Pivots.NearestCount(position, K);
+            var atoms = AtomPivots.NearestCount(position, K);
             if (atoms.Count == 0) return null;
 
             double value = 0.0;
@@ -147,7 +193,7 @@
 
         double? InterpolateKNearestSumDividedByDistance(Vector3D position)
         {
-            var atoms = Pivots.NearestCount(position, K);
+            var atoms = AtomPivots.NearestCount(position, K);
             if (atoms.Count == 0) return null;
 
             double value = 0.0;
@@ -202,6 +248,105 @@
             if (present) return ret;
             return null;
         }
+        #endregion
+
+        #region Residues
+        double? InterpolateRadiusResidueSum(Vector3D position)
+        {
+            var residues = ResiduePivots.NearestRadius(position, Radius);
+            if (residues.Count == 0) return null;
+
+            double value = 0.0;
+            bool present = false;
+            int len = residues.Count;
+            for (int i = 0; i < len; i++)
+            {
+                var charge = GetResidueCharge(residues[i].Value);
+                if (charge != null)
+                {
+                    present = true;
+                    value += charge.Value;
+                }
+            }
+            return present ? (double?)value : null;
+        }
+
+        double? InterpolateRadiusResidueSumDividedByDistance(Vector3D position)
+        {
+            var residues = ResiduePivots.NearestRadius(position, Radius);
+            if (residues.Count == 0) return null;
+
+            double value = 0.0;
+            bool present = false;
+            int len = residues.Count;
+            for (int i = 0; i < len; i++)
+            {
+                var r = residues[i];
+                var charge = GetResidueCharge(r.Value);
+                if (charge.HasValue)
+                {
+                    present = true;
+                    value += charge.Value / Math.Sqrt(r.Priority);
+                }
+            }
+            return present ? (double?)value : null;
+        }
+
+        double? InterpolateKNearestResidueSum(Vector3D position)
+        {
+            var residues = ResiduePivots.NearestCount(position, K);
+            if (residues.Count == 0) return null;
+
+            double value = 0.0;
+            bool present = false;
+            int len = residues.Count;
+            for (int i = 0; i < len; i++)
+            {
+                var charge = GetResidueCharge(residues[i].Value);
+                if (charge.HasValue)
+                {
+                    present = true;
+                    value += charge.Value;
+                }
+            }
+            return present ? (double?)value : null;
+        }
+
+        double? InterpolateKNearestResidueSumDividedByDistance(Vector3D position)
+        {
+            var residues = ResiduePivots.NearestCount(position, K);
+            if (residues.Count == 0) return null;
+
+            double value = 0.0;
+            bool present = false;
+            int len = residues.Count;
+            for (int i = 0; i < len; i++)
+            {
+                var r = residues[i];
+                var charge = GetResidueCharge(r.Value);
+                if (charge.HasValue)
+                {
+                    present = true;
+                    value += charge.Value / Math.Sqrt(r.Priority);
+                }
+            }
+            return present ? (double?)value : null;
+        }
+
+        double? InterpolateAllResidues(Vector3D position)
+        {
+            double ret = 0;
+            foreach (var r in Structure.PdbResidues())
+            {
+                var charge = GetResidueCharge(r);
+                if (charge.HasValue)
+                {
+                    ret += charge.Value / r.Atoms.GeometricalCenter().DistanceTo(position);
+                }
+            }
+            return ret;
+        }
+        #endregion
 
         double? WrapNodeToCenter(TunnelProfile.Node node, TunnelLayer layer)
         {
@@ -287,17 +432,18 @@
             throw new ArgumentException(string.Format("Invalid file format in '{0}'. Expected '.*chrg' or '.wprop'.", filename));
         }
 
-        public static AtomValueField FromFile(string name, string filename, IStructure structure, KDAtomTree pivots, AtomValueFieldInterpolationMethod method, double radius = 5.0, int K = 5)
+        public static AtomValueField FromFile(string name, string filename, IStructure structure, bool ignoreHydrogens, KDAtomTree atomPivots, K3DTree<PdbResidue> residuePivots, AtomValueFieldInterpolationMethod method, double radius = 5.0, int K = 5)
         {
-            return FromValues(name, structure, pivots, ReadValues(filename, structure), method, radius, K);
+            return FromValues(name, structure, ignoreHydrogens, atomPivots, residuePivots, ReadValues(filename, structure), method, radius, K);
         }
 
-        public static AtomValueField FromValues(string name, IStructure structure, KDAtomTree pivots, Dictionary<IAtom, double> values, AtomValueFieldInterpolationMethod method, double radius = 5.0, int K = 5)
+        public static AtomValueField FromValues(string name, IStructure structure, bool ignoreHydrogens, KDAtomTree atomPivots, K3DTree<PdbResidue> residuePivots, Dictionary<IAtom, double> values, AtomValueFieldInterpolationMethod method, double radius = 5.0, int K = 5)
         {
             var ret = new AtomValueField(name)
             {
-                Pivots = pivots,
-                Method = method,
+                IgnoreHydrogens = ignoreHydrogens,
+                AtomPivots = atomPivots,
+                ResiduePivots = residuePivots,
                 Radius = radius,
                 Values = values,
                 Structure = structure,
@@ -315,6 +461,11 @@
                 case AtomValueFieldInterpolationMethod.KNearestSumDividedByDistance: ret.InterpolationFuncCenter = ret.InterpolateKNearestSumDividedByDistance; break;
                 case AtomValueFieldInterpolationMethod.WholeStructure: ret.InterpolationFuncCenter = ret.InterpolateWholeStructure; break;
                 case AtomValueFieldInterpolationMethod.Lining: ret.InterpolationFuncNode = ret.InterpolateLining; break;
+                case AtomValueFieldInterpolationMethod.KNearestResidueSum: ret.InterpolationFuncCenter = ret.InterpolateKNearestResidueSum; break;
+                case AtomValueFieldInterpolationMethod.KNearestResidueSumDividedByDistance: ret.InterpolationFuncCenter = ret.InterpolateKNearestResidueSumDividedByDistance; break;
+                case AtomValueFieldInterpolationMethod.RadiusResidueSum: ret.InterpolationFuncCenter = ret.InterpolateRadiusResidueSum; break;
+                case AtomValueFieldInterpolationMethod.RadiusResidueSumDividedByDistance: ret.InterpolationFuncCenter = ret.InterpolateRadiusResidueSumDividedByDistance; break;
+                case AtomValueFieldInterpolationMethod.AllResidues: ret.InterpolationFuncCenter = ret.InterpolateAllResidues; break;
             }
 
             if (ret.InterpolationFuncNode == null) ret.InterpolationFuncNode = ret.WrapNodeToCenter;

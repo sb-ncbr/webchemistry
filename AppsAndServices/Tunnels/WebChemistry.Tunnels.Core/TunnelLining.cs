@@ -54,6 +54,11 @@
         public double FreeRadius { get; internal set; }
 
         /// <summary>
+        /// Radius + average BFactor
+        /// </summary>
+        public double BRadius { get; internal set; }
+
+        /// <summary>
         /// Centerpoint of the layer.
         /// </summary>
         public Vector3D Center { get; internal set; }
@@ -202,7 +207,7 @@
         {
             var exporter = layers.GetExporter(separator);
 
-            for (int i = 0; i < ResidueFlow.Count; i++)
+            /*for (int i = 0; i < ResidueFlow.Count; i++)
             {
                 var r = ResidueFlow[i];
                 if (r.IsBackbone)
@@ -213,19 +218,26 @@
                 {
                     exporter.AddExportableColumn(l => l.NonBackboneLining.Any(t => object.ReferenceEquals(t, r.Residue)) ? "X" : "", ColumnType.String, r.Residue.ToString());
                 }
-            }
+            }*/
 
             exporter
+                .AddExportableColumn(l => l.Index + 1, ColumnType.Number, "LayerId")
                 .AddExportableColumn(l => l.Radius.ToStringInvariant("0.00"), ColumnType.Number, "Radius")
                 .AddExportableColumn(l => l.FreeRadius.ToStringInvariant("0.00"), ColumnType.Number, "FreeRadius")
-                .AddExportableColumn(l => l.IsLocalMinimum ? "1" : "0", ColumnType.Number, "LocalRadiusMinimum")
+                .AddExportableColumn(l => l.BRadius.ToStringInvariant("0.00"), ColumnType.Number, "BRadius")
+                .AddExportableColumn(l => l.IsLocalMinimum ? "1" : "0", ColumnType.Number, "LocalMinimum")                
                 .AddExportableColumn(l => l.StartDistance.ToStringInvariant("0.00"), ColumnType.Number, "StartDistance")
                 .AddExportableColumn(l => l.EndDistance.ToStringInvariant("0.00"), ColumnType.Number, "EndDistance")
                 //.AddExportableColumn(l => l.PhysicoChemicalProperties.Hydratation.ToStringInvariant("0.00"), "Hydratation")
+                .AddExportableColumn(l => l.PhysicoChemicalProperties.Charge, ColumnType.Number, "Charge")
+                .AddExportableColumn(l => l.PhysicoChemicalProperties.Ionizable, ColumnType.Number, "Ionizable")
                 .AddExportableColumn(l => l.PhysicoChemicalProperties.Hydropathy.ToStringInvariant("0.00"), ColumnType.Number, "Hydropathy")
                 .AddExportableColumn(l => l.PhysicoChemicalProperties.Hydrophobicity.ToStringInvariant("0.00"), ColumnType.Number, "Hydrophobicity")
                 .AddExportableColumn(l => l.PhysicoChemicalProperties.Polarity.ToStringInvariant("0.00"), ColumnType.Number, "Polarity")
-                .AddExportableColumn(l => l.PhysicoChemicalProperties.Mutability.ToString(), ColumnType.Number, "Polarity");
+                .AddExportableColumn(l => l.PhysicoChemicalProperties.Mutability.ToString(), ColumnType.Number, "Mutability")
+                .AddExportableColumn(l => l.PhysicoChemicalProperties.LogP.ToStringInvariant("0.00"), ColumnType.Number, "LogP")
+                .AddExportableColumn(l => l.PhysicoChemicalProperties.LogD.ToStringInvariant("0.00"), ColumnType.Number, "LogD")
+                .AddExportableColumn(l => l.PhysicoChemicalProperties.LogS.ToStringInvariant("0.00"), ColumnType.Number, "LogS");
 
             return exporter.ToCsvString();            
         }

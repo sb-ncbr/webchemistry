@@ -1,4 +1,3 @@
-﻿
 namespace WebChemistry.Tunnels.Core
 {
     using WebChemistry.Framework.Core;

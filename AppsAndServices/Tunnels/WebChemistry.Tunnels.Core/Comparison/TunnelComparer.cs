@@ -5,7 +5,6 @@
     using WebChemistry.Framework.Core;
     using WebChemistry.Framework.Core.Pdb;
     using WebChemistry.Framework.Math;
-    //using WebChemistry.SiteBinder;
     using WebChemistry.Framework.Geometry;
 
     public class StructureComparisonInfo

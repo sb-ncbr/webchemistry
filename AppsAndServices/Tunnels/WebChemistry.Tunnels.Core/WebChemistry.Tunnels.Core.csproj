@@ -46,9 +46,10 @@
     <Compile Include="Complex.cs" />
     <Compile Include="ComplexComputation.cs" />
     <Compile Include="ComplexParameters.cs" />
+    <Compile Include="Export\ChimeraExporter.cs" />
     <Compile Include="Export\PyMolExporter.cs" />
     <Compile Include="Export\Utils.cs" />
-    <Compile Include="Export\VmdExporter.cs" />
+    <Compile Include="Export\VMDExporter.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Geometry\AtomValueField.cs" />
     <Compile Include="Geometry\FieldBase.cs" />
@@ -57,7 +58,6 @@
     <Compile Include="Geometry\Surface.cs" />
     <Compile Include="Geometry\TunnelField.cs" />
     <Compile Include="Geometry\VectorField.cs" />
-    <Compile Include="Helpers\Dijkstra.cs" />
     <Compile Include="Helpers\Spline.cs" />
     <Compile Include="Helpers\TunnelExporters.cs" />
     <Compile Include="PathComputation.cs" />
@@ -84,9 +84,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Rx-Linq">
-      <Version>2.1.30214</Version>
-    </PackageReference>
+    <PackageReference Include="Rx-Linq" Version="2.1.30214.0" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

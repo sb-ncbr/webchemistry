@@ -55,12 +55,15 @@
             /// </summary>
             public double FreeRadius { get; private set; }
 
-            internal Node(double t, double distance, double radius, double freeRadius, Vector3D center)
+            public double BRadius { get; private set; }
+
+            internal Node(double t, double distance, double radius, double freeRadius, double bradius, Vector3D center)
             {
                 this.T = t;
                 this.Distance = distance;
                 this.Radius = radius;
                 this.FreeRadius = freeRadius;
+                this.BRadius = bradius;
                 this.Center = center;
             }
         }
@@ -136,6 +139,7 @@
                .AddExportableColumn(p => p.Distance.ToStringInvariant("0.000"), ColumnType.Number, "Distance")
                .AddExportableColumn(p => p.Radius.ToStringInvariant("0.000"), ColumnType.Number, "Radius")
                .AddExportableColumn(p => p.FreeRadius.ToStringInvariant("0.000"), ColumnType.Number, "FreeRadius")
+               .AddExportableColumn(p => p.BRadius.ToStringInvariant("0.000"), ColumnType.Number, "BRadius")
                .AddExportableColumn(p => p.Center.X.ToStringInvariant("0.000"), ColumnType.Number, "X")
                .AddExportableColumn(p => p.Center.Y.ToStringInvariant("0.000"), ColumnType.Number, "Y")
                .AddExportableColumn(p => p.Center.Z.ToStringInvariant("0.000"), ColumnType.Number, "Z");

@@ -1,4 +1,4 @@
-﻿namespace WebChemistry.Tunnels.Core.Geometry
+namespace WebChemistry.Tunnels.Core.Geometry
 {
     using System;
     using System.Globalization;

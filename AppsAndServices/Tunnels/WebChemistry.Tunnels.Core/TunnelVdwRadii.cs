@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="VdwRadii.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace WebChemistry.Tunnels.Core
 {
     using System.Collections.Generic;

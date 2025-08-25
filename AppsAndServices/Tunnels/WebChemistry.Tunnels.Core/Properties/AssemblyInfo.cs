@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("WebChemistry.Tunnels.Core")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("David Sehnal (Masaryk University Brno)")]
 [assembly: AssemblyProduct("WebChemistry.Tunnels.Core")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyCopyright("Copyright © David Sehnal 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8331c713-0d39-430f-a974-e42bf28395e6")]
+[assembly: Guid("0555616a-87ec-4b6d-afe8-6db8ac1810a2")]
 
 // Version information for an assembly consists of the following four values:
 //

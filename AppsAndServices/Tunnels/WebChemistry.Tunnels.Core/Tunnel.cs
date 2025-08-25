@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    //using MathNet.Numerics.Interpolation.Algorithms;
     using WebChemistry.Tunnels.Core.Helpers;
     using WebChemistry.Framework.Core;
     using WebChemistry.Framework.Math;
@@ -23,12 +22,11 @@
     /// Represents a tunnel.
     /// </summary>
     public class Tunnel : InteractiveObject, IEquatable<Tunnel>
-    {       
+    {
         Tetrahedron[] path;
         PdbResidueCollection lining;
         TunnelLining tunnelLayers;
-        CubicSplineInterpolation sX, sY, sZ, sR, sFreeR;
-
+        CubicSplineInterpolation sX, sY, sZ, sR, sFreeR, sBR;
 
         /// <summary>
         /// Tunnel type
@@ -84,12 +82,12 @@
         /// Tunnel profile with the density 8 points per ang.
         /// </summary>
         public TunnelProfile Profile { get { return GetProfile(DefaultProfileDensity); } }
-        
+
         /// <summary>
         /// Length of the tunnel.
         /// </summary>
         public double Length { get; private set; }
-                
+
         //const double defaultProfileDensity = 1.5;
         ///// <summary>
         ///// Default profile (1.5 samples per ang.)
@@ -115,15 +113,15 @@
         /// Fields.
         /// </summary>
         public Dictionary<string, TunnelScalarField> ScalarFields { get; private set; }
-        
+
         int id;
         /// <summary>
         /// Tunnel Id, mutable!! (Assined by TunnelCollection)
         /// </summary>
-        public int Id 
+        public int Id
         {
             get { return id; }
-            internal set 
+            internal set
             {
                 if (id == value) return;
                 id = value;
@@ -136,12 +134,12 @@
             //var t = distance / Length;
             return new Vector3D(sX.Interpolate(t), sY.Interpolate(t), sZ.Interpolate(t));
         }
-        
+
         TunnelProfile.Node GetProfileNode(TunnelProfile.Node prev, double t)
         {
             var p = GetCenterlinePoint(t);
-            var d = prev.Distance +  prev.Center.DistanceTo(p);
-            return new TunnelProfile.Node(t, d, sR.Interpolate(t), sFreeR.Interpolate(t), p);
+            var d = prev.Distance + prev.Center.DistanceTo(p);
+            return new TunnelProfile.Node(t, d, sR.Interpolate(t), sFreeR.Interpolate(t), sBR.Interpolate(t), p);
         }
 
         IEnumerable<IAtom> GetSurroundingAtoms(double t, int count = 3)
@@ -152,6 +150,16 @@
 
         Dictionary<double, TunnelProfile> profileCache = new Dictionary<double, TunnelProfile>();
 
+        TriangulatedSurface surface = null;
+
+        public TriangulatedSurface GetSurface(double density)
+        {
+            if (surface != null) return surface;
+            surface = IsoSurface.Create(this, density);
+            return surface;
+        }
+
+
         /// <summary>
         /// Calculates the tunnel profile.
         /// </summary>
@@ -159,17 +167,17 @@
         /// <returns>Tunnel profile.</returns>
         public TunnelProfile GetProfile(double pointDensityPerAngstrom)
         {
-            if (profileCache.ContainsKey(pointDensityPerAngstrom)) return profileCache[pointDensityPerAngstrom];            
+            if (profileCache.ContainsKey(pointDensityPerAngstrom)) return profileCache[pointDensityPerAngstrom];
 
             var numPoints = (int)(pointDensityPerAngstrom * Length) + 1;
             var dt = 1.0 / (numPoints - 1);
             var ctp = Enumerable.Range(0, numPoints)
-                .Scan(new TunnelProfile.Node(0, 0, sR.Interpolate(0), sFreeR.Interpolate(0), GetCenterlinePoint(0)), (prev, i) => GetProfileNode(prev, dt * i))
+                .Scan(new TunnelProfile.Node(0, 0, sR.Interpolate(0), sFreeR.Interpolate(0), sBR.Interpolate(0), GetCenterlinePoint(0)), (prev, i) => GetProfileNode(prev, dt * i))
                 .ToArray();
 
-                //.Select(i => dt * i)
-                //.Select(d => GetProfileNode(d))
-                //.ToArray();
+            //.Select(i => dt * i)
+            //.Select(d => GetProfileNode(d))
+            //.ToArray();
 
             var ret = new TunnelProfile(ctp, pointDensityPerAngstrom);
             profileCache.Add(pointDensityPerAngstrom, ret);
@@ -180,7 +188,7 @@
         /// Computes the lining layers of the tunnel (surrounding residues from origin to exit)
         /// </summary>
         /// <returns>Lining layers</returns>
-        public TunnelLining GetLiningLayers()        
+        public TunnelLining GetLiningLayers()
         {
             const int samplesPerAngstrom = 3, numSurroundingAtoms = 5;
 
@@ -195,7 +203,7 @@
                 .Scan(new
                 {
                     SurroudingAtoms = GetSurroundingAtoms(0, numSurroundingAtoms),
-                    Profile = new TunnelProfile.Node(0, 0, sR.Interpolate(0), sFreeR.Interpolate(0), GetCenterlinePoint(0)),
+                    Profile = new TunnelProfile.Node(0, 0, sR.Interpolate(0), sFreeR.Interpolate(0), sBR.Interpolate(0), GetCenterlinePoint(0)),
                     //Radius = sR.Interpolate(0)
                 },
                 (prev, i) => new
@@ -216,7 +224,7 @@
                             .Select(g => new { Residue = rs.FromIdentifier(g.Key), IsBackbone = g.All(a => a.IsBackboneAtom()) })
                             .Distinct()
                             .OrderBy(r => r.Residue.Number)
-                 
+
                             //.Take(3)
                             .ToArray()
                     };
@@ -231,31 +239,32 @@
                     Distance = layer.Layer.Profile.Distance,
                     Radius = layer.Layer.Profile.Radius,
                     FreeRadius = layer.Layer.Profile.FreeRadius,
+                    BRadius = layer.Layer.Profile.BRadius,
                     Center = layer.Layer.Profile.Center
                 })
                 .ToArray();
-                // Remember only the layers where the lining residues change
-                //.GroupBy(layer => string.Concat(layer.Lining.Select(r => r.UniqueIdentifier.ToString())))
-                //.Select(group =>
-                //    {
-                //        var layer = group.First();
-                //        var radius = group.Min(l => l.Radius);
+            // Remember only the layers where the lining residues change
+            //.GroupBy(layer => string.Concat(layer.Lining.Select(r => r.UniqueIdentifier.ToString())))
+            //.Select(group =>
+            //    {
+            //        var layer = group.First();
+            //        var radius = group.Min(l => l.Radius);
 
-                //        return new TunnelLayer
-                //        {
-                //            SurroundingAtoms = layer.SurroundingAtoms,
-                //            Lining = layer.Lining,
-                //            BackboneLining = layer.BackboneLining,
-                //            NonBackboneLining = layer.NonBackboneLining,
-                //            Distance = layer.Distance,
-                //            Radius = radius,
-                //            Center = layer.Center,
-                //            StartDistance = layer.Distance,
-                //            EndDistance = group.Last().Distance
-                //        };
-                //    })
-                ////.DistinctUntilChanged(layer => string.Concat(layer.Lining.Select(r => r.UniqueIdentifier.ToString())))
-                //.ToArray();
+            //        return new TunnelLayer
+            //        {
+            //            SurroundingAtoms = layer.SurroundingAtoms,
+            //            Lining = layer.Lining,
+            //            BackboneLining = layer.BackboneLining,
+            //            NonBackboneLining = layer.NonBackboneLining,
+            //            Distance = layer.Distance,
+            //            Radius = radius,
+            //            Center = layer.Center,
+            //            StartDistance = layer.Distance,
+            //            EndDistance = group.Last().Distance
+            //        };
+            //    })
+            ////.DistinctUntilChanged(layer => string.Concat(layer.Lining.Select(r => r.UniqueIdentifier.ToString())))
+            //.ToArray();
 
             var first = layers[0];
             var start = 0;
@@ -266,7 +275,7 @@
             for (int i = 1; i < layers.Length; i++)
             {
                 var l = layers[i];
-                var key = 
+                var key =
                     string.Concat(l.NonBackboneLining.Select(r => r.Identifier.ToString()))
                     + "B" +
                     string.Concat(l.BackboneLining.Select(r => r.Identifier.ToString()));
@@ -278,6 +287,7 @@
                 first.EndDistance = l.Distance;
                 first.Radius = layers.Skip(start).Take(i - start).Min(t => t.Radius);
                 first.FreeRadius = layers.Skip(start).Take(i - start).Min(t => t.FreeRadius);
+                first.BRadius = layers.Skip(start).Take(i - start).Min(t => t.BRadius);
 
                 first = l;
                 start = i;
@@ -289,13 +299,19 @@
             first.EndDistance = layers.Last().Distance;
             first.Radius = layers.Skip(start).Min(t => t.Radius);
             first.FreeRadius = layers.Skip(start).Min(t => t.FreeRadius);
+            first.BRadius = layers.Skip(start).Min(t => t.BRadius);
             ret.ForEach(l => ComputePhysicoChemicalProperties(l));
 
             tunnelLayers = new TunnelLining(ret);
-                       
+
             return tunnelLayers;
         }
-        
+
+        static double BfactorToRmsf(IAtom atom)
+        {
+            return Math.Sqrt(3 * atom.PdbTemperatureFactor() / (8 * Math.PI * Math.PI));
+        }
+
         /// <summary>
         /// Computes splines for centerline and radius.
         /// </summary>
@@ -306,7 +322,7 @@
         static CubicSplineInterpolation[] GetProfileSpline(IEnumerable<Tetrahedron> tetras, Complex complex, out double length)
         {
             var path = tetras.AsList();
-            
+
             var dt = 1.0 / (path.Count - 1);
 
             var ts = Enumerable.Range(0, path.Count).Select(i => dt * i).ToArray();
@@ -320,6 +336,7 @@
 
             List<double> rs = new List<double>();
             List<double> freeRs = new List<double>();
+            List<double> bRs = new List<double>();
             Vector3D u;
 
             for (int i = 0; i < numPoints - 1; i++)
@@ -327,18 +344,28 @@
                 double t0 = d * i, t1 = t0 + d;
                 u = new Vector3D(splineX.Interpolate(t0), splineY.Interpolate(t0), splineZ.Interpolate(t0));
                 var v = new Vector3D(splineX.Interpolate(t1), splineY.Interpolate(t1), splineZ.Interpolate(t1));
-                var radius = complex.KdTree.NearestCount(u, 5).Select(a => a.Value.Position.DistanceTo(u) - a.Value.GetTunnelSpecificVdwRadius()).Min();
+                var near = complex.KdTree.NearestCount(u, 5);
+                var radius = near.Select(a => a.Value.Position.DistanceTo(u) - a.Value.GetTunnelSpecificVdwRadius()).Min();
+                var bRadius = radius + near.Select(a => BfactorToRmsf(a.Value)).Average();
                 var freeRadius = complex.FreeKdTree.NearestCount(u, 5).Select(a => a.Value.Position.DistanceTo(u) - a.Value.GetTunnelSpecificVdwRadius()).Min();
                 rs.Add(Math.Max(radius, 0.01));
                 freeRs.Add(Math.Max(freeRadius, 0.01));
+                bRs.Add(Math.Max(bRadius, 0.01));
                 length += u.DistanceTo(v);
             }
 
             u = new Vector3D(splineX.Interpolate(1), splineY.Interpolate(1), splineZ.Interpolate(1));
-            rs.Add(complex.KdTree.NearestCount(u, 5).Select(a => a.Value.Position.DistanceTo(u) - a.Value.GetTunnelSpecificVdwRadius()).Min());
-            freeRs.Add(complex.FreeKdTree.NearestCount(u, 5).Select(a => a.Value.Position.DistanceTo(u) - a.Value.GetTunnelSpecificVdwRadius()).Min());
+            var near0 = complex.KdTree.NearestCount(u, 5);
+            var r0 = near0.Select(a => a.Value.Position.DistanceTo(u) - a.Value.GetTunnelSpecificVdwRadius()).Min();
+            var bR0 = r0 + near0.Select(a => BfactorToRmsf(a.Value)).Average(); ;
+            rs.Add(Math.Max(r0, 0.01));
+            bRs.Add(Math.Max(bR0, 0.01));
+            freeRs.Add(Math.Max(complex.FreeKdTree.NearestCount(u, 5).Select(a => a.Value.Position.DistanceTo(u) - a.Value.GetTunnelSpecificVdwRadius()).Min(), 0.01));
+
+
             var splineRadius = new CubicSplineInterpolation(Enumerable.Range(0, numPoints).Select(i => d * i).ToArray(), rs);
             var freeSplineRadius = new CubicSplineInterpolation(Enumerable.Range(0, numPoints).Select(i => d * i).ToArray(), freeRs);
+            var bSplineRadius = new CubicSplineInterpolation(Enumerable.Range(0, numPoints).Select(i => d * i).ToArray(), bRs);
 
             return new CubicSplineInterpolation[]
             {
@@ -346,10 +373,11 @@
                 splineY,
                 splineZ,
                 splineRadius,
-                freeSplineRadius
+                freeSplineRadius,
+                bSplineRadius
             };
         }
-        
+
         /// <summary>
         /// Calculates the basic profile. Returns false if the tunnel would end up too short.
         /// </summary>
@@ -360,9 +388,9 @@
             var residues = this.path
                 .SelectMany(t => t.Vertices.Select(v => v.Atom))
                 .Select(a => this.Cavity.Complex.Structure.PdbResidues().FromAtom(a)).ToArray();
-            
+
             residues.ForEach((r, i) => { if (!residueOrder.ContainsKey(r)) residueOrder[r] = i; });
-            
+
             lining = PdbResidueCollection.Create(residues.Distinct().OrderBy(r => residueOrder[r]));
 
             List<Tetrahedron> controlPath = new List<Tetrahedron>();
@@ -400,7 +428,7 @@
 
                 controlPath.RemoveAt(controlPath.Count - 1);
             }
-            
+
             if (Type == TunnelType.Pore)
             {
                 controlPath = controlPath.SkipWhile(t => !t.ContainsPoint(t.VoronoiCenter) || t.VoronoiCenter.DistanceTo(t.Center) > 3).ToList();
@@ -415,6 +443,7 @@
             this.sZ = splines[2];
             this.sR = splines[3];
             this.sFreeR = splines[4];
+            this.sBR = splines[5];
             this.Length = length;
 
             return true;
@@ -424,9 +453,13 @@
         {
             int count = 0;
             int charge = 0;
+            int ionizable = 0;
             double hydropathy = 0.0;
             double hydrophobicity = 0.0;
             double polarity = 0.0;
+            double logP = 0.0;
+            double logD = 0.0;
+            double logS = 0.0;
             //double hydratation = 0.0;
             double mutability = 0.0;
             int positives = 0;
@@ -441,6 +474,7 @@
                 count++;
                 var pc = info.Charge;
                 charge += pc;
+                ionizable += info.Ionizable;
                 if (pc > 0)
                 {
                     positives++;
@@ -462,13 +496,16 @@
             if (count == 0) mutability = 0;
             else mutability /= (double)count;
 
-            PhysicoChemicalPropertyCalculation.CalculateHydrophibilicyPolarityHydropathy(GetLiningLayers(), out hydrophobicity, out polarity, out hydropathy);
+            PhysicoChemicalPropertyCalculation.CalculateHydrophibilicyPolarityHydropathy(GetLiningLayers(), out hydrophobicity, out polarity, out hydropathy, out logP, out logD, out logS);
 
             double wHydropathy = 0.0;
             double wHydrophobicity = 0.0;
             double wPolarity = 0.0;
             double wHydratation = 0.0;
             double wMutability = 0.0;
+            double wLogP = 0.0;
+            double wLogD = 0.0;
+            double wLogS = 0.0;
             double totalWeight = 0.0;
 
             foreach (var l in GetLiningLayers())
@@ -480,6 +517,9 @@
                 wHydrophobicity += w * l.PhysicoChemicalProperties.Hydrophobicity;
                 wPolarity += w * l.PhysicoChemicalProperties.Polarity;
                 wMutability += w * l.PhysicoChemicalProperties.Mutability;
+                wLogP += w * l.PhysicoChemicalProperties.LogP;
+                wLogD += w * l.PhysicoChemicalProperties.LogD;
+                wLogS += w * l.PhysicoChemicalProperties.LogS;
             }
 
             if (totalWeight > 0.00001)
@@ -489,14 +529,21 @@
                 wPolarity /= totalWeight;
                 wHydratation /= totalWeight;
                 wMutability /= totalWeight;
+                wLogP /= totalWeight;
+                wLogD /= totalWeight;
+                wLogS /= totalWeight;
             }
 
             PhysicoChemicalProperties = new TunnelPhysicoChemicalProperties(
                 Charge: charge,
+                Ionizable: ionizable,
                 Polarity: polarity,
                 //Hydratation: hydratation,
                 Hydrophobicity: hydrophobicity,
                 Hydropathy: hydropathy,
+                LogP: logP,
+                LogD: logD,
+                LogS: logS,
                 Mutability: (int)mutability,
                 NumNegatives: negatives,
                 NumPositives: positives
@@ -504,10 +551,14 @@
 
             LayerWeightedPhysicoChemicalProperties = new TunnelPhysicoChemicalProperties(
                 Charge: charge,
+                Ionizable: ionizable,
                 Polarity: wPolarity,
                 //Hydratation: wHydratation,
                 Hydrophobicity: wHydrophobicity,
                 Hydropathy: wHydropathy,
+                LogP: wLogP,
+                LogD: wLogD,
+                LogS: wLogS,
                 Mutability: (int)wMutability,
                 NumNegatives: negatives,
                 NumPositives: positives
@@ -520,8 +571,12 @@
         {
             int count = 0;
             int charge = 0;
+            int ionizable = 0;
             double hydropathy = 0.0;
             double hydrophobicity = 0.0;
+            double logP = 0.0;
+            double logD = 0.0;
+            double logS = 0.0;
             double polarity = 0.0;
             double mutability = 0.0;
             int positives = 0;
@@ -536,6 +591,7 @@
                 count++;
                 var pc = info.Charge;
                 charge += pc;
+                ionizable += info.Ionizable;
                 if (pc > 0)
                 {
                     positives++;
@@ -545,7 +601,6 @@
                     negatives++;
                 }
                 //hydropathy += info.Hydropathy;
-                //hydratation += info.Hydratation;
                 //hydrophobicity += info.Hydrophobicity;
                 //polarity += info.Polarity;
                 mutability += info.Mutability;
@@ -556,13 +611,17 @@
             //polarity /= (double)count;
             if (count > 0) mutability /= (double)count;
 
-            PhysicoChemicalPropertyCalculation.CalculateHydrophibilicyPolarityHydropathy(layer.ToSingletonArray(), out hydrophobicity, out polarity, out hydropathy);
+            PhysicoChemicalPropertyCalculation.CalculateHydrophibilicyPolarityHydropathy(layer.ToSingletonArray(), out hydrophobicity, out polarity, out hydropathy, out logP, out logD, out logS);
 
             layer.PhysicoChemicalProperties = new TunnelPhysicoChemicalProperties(
                 Charge: charge,
+                Ionizable: ionizable,
                 Polarity: polarity,
                 Hydrophobicity: hydrophobicity,
                 Hydropathy: hydropathy,
+                LogP: logP,
+                LogD: logD,
+                LogS: logS,
                 Mutability: (int)mutability,
                 NumNegatives: negatives,
                 NumPositives: positives
@@ -635,7 +694,7 @@
             if (path.Count == 0) return null;
 
             tunnel.path = path.ToArray();
-            
+
             bool ok = tunnel.CalculateProfile();
             if (!ok) return null;
             //tunnel.DefaultProfile = tunnel.GetProfile(defaultProfileDensity);
@@ -771,7 +830,7 @@
             //if (tl < 10) return null;
 
             path = tetras.ToList(); //path.Take(tl + 1).ToList();
-            
+
             if (path.Count == 0) return null;
 
             if (path.Max(t => t.Depth) < 6) return null;
@@ -863,7 +922,7 @@
                 }
 
                 var spline = new CubicSplineInterpolation(ts, values);
-                
+
                 ScalarFields[f.Name] = new TunnelScalarField(this, surface, spline, values.Min(), values.Max());
             }
         }
@@ -872,15 +931,15 @@
         {
             var atoms = GetProfile(densityPerAngstrom)
                 .Select((n, i) => PdbAtom.Create(
-                    atomIdOffset + i + 1, 
-                    ElementSymbols.Empty, 
-                    serialNumber: atomIdOffset + i + 1, 
-                    name: "X", 
-                    residueName: "TUN", 
+                    atomIdOffset + i + 1,
+                    ElementSymbols.Empty,
+                    serialNumber: atomIdOffset + i + 1,
+                    name: "X",
+                    residueName: "TUN",
                     chainIdentifier: Type == TunnelType.Path ? "P" : (Type == TunnelType.Pore ? "T" : "H"),
-                    residueSequenceNumber: this.id, 
-                    occupancy: n.Distance, 
-                    temperatureFactor: n.Radius, 
+                    residueSequenceNumber: this.id,
+                    occupancy: n.Distance,
+                    temperatureFactor: n.Radius,
                     position: n.Center + offset));
             return Structure.Create("tunnel" + this.Id, atoms.ToAtomCollection());
         }
@@ -916,7 +975,7 @@
             string soName = name.ToUpper();  //isPores ? "PORE" : "TUNNEL";
             string nodeName = name; //isPores ? "Pore" : "Tunnel";
             string filePrefix = name.ToLower() + "_";  // isPores ? "pore_" : "tunnel_";
-            
+
             var profileNode = new XElement("Profile");
             var ctp = Profile;
 
@@ -925,22 +984,23 @@
             {
                 charge = ScalarFields[includeCharge].GetValues(Profile);
             }
-            
+
             ctp.Select(p =>
-                {
-                    var ret = new XElement("Node",
-                        new XAttribute("Radius", p.Radius.ToString("0.000", CultureInfo.InvariantCulture)),
-                        new XAttribute("FreeRadius", p.FreeRadius.ToString("0.000", CultureInfo.InvariantCulture)),
-                        new XAttribute("T", p.T.ToString("0.00000", CultureInfo.InvariantCulture)),
-                        new XAttribute("Distance", p.Distance.ToString("0.000", CultureInfo.InvariantCulture)),
-                        new XAttribute("X", (p.Center.X + offset.X).ToString("0.000", CultureInfo.InvariantCulture)),
-                        new XAttribute("Y", (p.Center.Y + offset.Y).ToString("0.000", CultureInfo.InvariantCulture)),
-                        new XAttribute("Z", (p.Center.Z + offset.Z).ToString("0.000", CultureInfo.InvariantCulture)));
+            {
+                var ret = new XElement("Node",
+                    new XAttribute("Radius", p.Radius.ToString("0.000", CultureInfo.InvariantCulture)),
+                    new XAttribute("FreeRadius", p.FreeRadius.ToString("0.000", CultureInfo.InvariantCulture)),
+                    new XAttribute("BRadius", p.BRadius.ToString("0.000", CultureInfo.InvariantCulture)),
+                    new XAttribute("T", p.T.ToString("0.00000", CultureInfo.InvariantCulture)),
+                    new XAttribute("Distance", p.Distance.ToString("0.000", CultureInfo.InvariantCulture)),
+                    new XAttribute("X", (p.Center.X + offset.X).ToString("0.000", CultureInfo.InvariantCulture)),
+                    new XAttribute("Y", (p.Center.Y + offset.Y).ToString("0.000", CultureInfo.InvariantCulture)),
+                    new XAttribute("Z", (p.Center.Z + offset.Z).ToString("0.000", CultureInfo.InvariantCulture)));
 
-                    if (includeCharge != null) ret.Add(new XAttribute("Charge", charge[p].ToStringInvariant("0.000")));
+                if (includeCharge != null) ret.Add(new XAttribute("Charge", charge[p].ToStringInvariant("0.000")));
 
-                    return ret;
-                })
+                return ret;
+            })
                 .ForEach(n => profileNode.Add(n));
 
             var layers = GetLiningLayers();
@@ -951,6 +1011,9 @@
                 //new XAttribute("Hydratation", props.Hydratation.ToStringInvariant("0.00")),
                 new XAttribute("Hydrophobicity", props.Hydrophobicity.ToStringInvariant("0.00")),
                 new XAttribute("Hydropathy", props.Hydropathy.ToStringInvariant("0.00")),
+                new XAttribute("LogP", props.LogP.ToStringInvariant("0.00")),
+                new XAttribute("LogD", props.LogD.ToStringInvariant("0.00")),
+                new XAttribute("LogS", props.LogS.ToStringInvariant("0.00")),
                 new XAttribute("Polarity", props.Polarity.ToStringInvariant("0.00")),
                 new XAttribute("Mutability", props.Mutability));
 
@@ -962,60 +1025,70 @@
             layersNode.Add(wPropertiesNode);
             layers
                 .Select(l =>
-                    {
-                        var asFlow = l.Lining
-                            .Select((r, i) => new FlowResidue(r, isBackbone(l, i)))
-                            .OrderBy(r => layers.GetFlowIndex(r))
-                            .ToArray();
+                {
+                    var asFlow = l.Lining
+                        .Select((r, i) => new FlowResidue(r, isBackbone(l, i)))
+                        .OrderBy(r => layers.GetFlowIndex(r))
+                        .ToArray();
 
-                        var ret = object.ReferenceEquals(l, bneck) ?
-                            new XElement("Layer",
-                                new XAttribute("MinRadius", l.Radius.ToStringInvariant("0.00000")),
-                                new XAttribute("MinFreeRadius", l.FreeRadius.ToStringInvariant("0.00000")),
-                                new XAttribute("StartDistance", l.StartDistance.ToStringInvariant("0.00000")),
-                                new XAttribute("EndDistance", l.EndDistance.ToStringInvariant("0.00000")),
-                                new XAttribute("Bottleneck", "1"))
-                            :
-                            new XElement("Layer",
-                                new XAttribute("MinRadius", l.Radius.ToStringInvariant("0.00000")),
-                                new XAttribute("MinFreeRadius", l.FreeRadius.ToStringInvariant("0.00000")),
-                                new XAttribute("StartDistance", l.StartDistance.ToStringInvariant("0.00000")),
-                                new XAttribute("EndDistance", l.EndDistance.ToStringInvariant("0.00000")));
+                    var ret = object.ReferenceEquals(l, bneck) ?
+                        new XElement("Layer",
+                            new XAttribute("MinRadius", l.Radius.ToStringInvariant("0.00000")),
+                            new XAttribute("MinFreeRadius", l.FreeRadius.ToStringInvariant("0.00000")),
+                            new XAttribute("MinBRadius", l.BRadius.ToStringInvariant("0.00000")),
+                            new XAttribute("StartDistance", l.StartDistance.ToStringInvariant("0.00000")),
+                            new XAttribute("EndDistance", l.EndDistance.ToStringInvariant("0.00000")),
+                            new XAttribute("Bottleneck", "1"))
+                        :
+                        new XElement("Layer",
+                            new XAttribute("MinRadius", l.Radius.ToStringInvariant("0.00000")),
+                            new XAttribute("MinFreeRadius", l.FreeRadius.ToStringInvariant("0.00000")),
+                            new XAttribute("MinBRadius", l.BRadius.ToStringInvariant("0.00000")),
+                            new XAttribute("StartDistance", l.StartDistance.ToStringInvariant("0.00000")),
+                            new XAttribute("EndDistance", l.EndDistance.ToStringInvariant("0.00000")));
 
-                        ret.Add(new XAttribute("LocalMinimum", l.IsLocalMinimum ? "1" : "0"));
+                    ret.Add(new XAttribute("LocalMinimum", l.IsLocalMinimum ? "1" : "0"));
 
-                        var sr = string.Join(",", asFlow.Select(r => frs(r)).ToArray());//  l.Lining.Select((r, i) => rd(l, i)).ToArray());
-                        ret.Add(new XElement("Residues", sr));
+                    var sr = string.Join(",", asFlow.Select(r => frs(r)).ToArray());//  l.Lining.Select((r, i) => rd(l, i)).ToArray());
+                    ret.Add(new XElement("Residues", sr));
 
-                        var flowIndices = string.Join(",", asFlow.Select(r => layers.GetFlowIndex(r).ToString()).ToArray());
-                        ret.Add(new XElement("FlowIndices", flowIndices));
+                    var flowIndices = string.Join(",", asFlow.Select(r => layers.GetFlowIndex(r).ToString()).ToArray());
+                    ret.Add(new XElement("FlowIndices", flowIndices));
 
-                        //l.Lining.Select((r, i) => frs(new TunnelLining.FlowResidue(r, isBackbone(l, i))));
+                    //l.Lining.Select((r, i) => frs(new TunnelLining.FlowResidue(r, isBackbone(l, i))));
 
-                        var prps = l.PhysicoChemicalProperties;
-                        var pn = new XElement("Properties",
-                            new XAttribute("Charge", prps.Charge),
-                            new XAttribute("NumPositives", prps.NumPositives),
-                            new XAttribute("NumNegatives", prps.NumNegatives),
-                            //new XAttribute("Hydratation", prps.Hydratation.ToStringInvariant("0.00")),
-                            new XAttribute("Hydrophobicity", prps.Hydrophobicity.ToStringInvariant("0.00")),
-                            new XAttribute("Hydropathy", prps.Hydropathy.ToStringInvariant("0.00")),
-                            new XAttribute("Polarity", prps.Polarity.ToStringInvariant("0.00")),
-                            new XAttribute("Mutability", prps.Mutability));
-                        ret.Add(pn);
+                    var prps = l.PhysicoChemicalProperties;
+                    var pn = new XElement("Properties",
+                        new XAttribute("Charge", prps.Charge),
+                        new XAttribute("Ionizable", prps.Ionizable),
+                        new XAttribute("NumPositives", prps.NumPositives),
+                        new XAttribute("NumNegatives", prps.NumNegatives),
+                        //new XAttribute("Hydratation", prps.Hydratation.ToStringInvariant("0.00")),
+                        new XAttribute("Hydrophobicity", prps.Hydrophobicity.ToStringInvariant("0.00")),
+                        new XAttribute("Hydropathy", prps.Hydropathy.ToStringInvariant("0.00")),
+                        new XAttribute("LogP", prps.LogP.ToStringInvariant("0.00")),
+                        new XAttribute("LogD", prps.LogD.ToStringInvariant("0.00")),
+                        new XAttribute("LogS", prps.LogS.ToStringInvariant("0.00")),
+                        new XAttribute("Polarity", prps.Polarity.ToStringInvariant("0.00")),
+                        new XAttribute("Mutability", prps.Mutability));
+                    ret.Add(pn);
 
-                        return ret;
-                    })
+                    return ret;
+                })
                 .ForEach(l => layersNode.Add(l));
 
             props = PhysicoChemicalProperties;
             var propertiesNode = new XElement("Properties",
                 new XAttribute("Charge", props.Charge),
+                new XAttribute("Ionizable", props.Ionizable),
                 new XAttribute("NumPositives", props.NumPositives),
                 new XAttribute("NumNegatives", props.NumNegatives),
                 //new XAttribute("Hydratation", props.Hydratation.ToStringInvariant("0.00")),
                 new XAttribute("Hydrophobicity", props.Hydrophobicity.ToStringInvariant("0.00")),
                 new XAttribute("Hydropathy", props.Hydropathy.ToStringInvariant("0.00")),
+                new XAttribute("LogP", props.LogP.ToStringInvariant("0.00")),
+                new XAttribute("LogD", props.LogD.ToStringInvariant("0.00")),
+                new XAttribute("LogS", props.LogS.ToStringInvariant("0.00")),
                 new XAttribute("Polarity", props.Polarity.ToStringInvariant("0.00")),
                 new XAttribute("Mutability", props.Mutability));
 
@@ -1056,7 +1129,145 @@
 
             return rootNode;
         }
-        
+
+        public object ToJson(Vector3D offset = new Vector3D(), int? customId = null, string includeCharge = null)
+        {
+            Func<TunnelLayer, int, string> rd = (l, i) =>
+            {
+                string ret = "";
+                if (i < l.Lining.Count)
+                {
+                    var r = l.Lining[i];
+                    ret = r.ToString();
+                    if (l.BackboneLining.Contains(r) && !l.NonBackboneLining.Contains(r)) ret += " Backbone";
+                }
+                return ret;
+            };
+
+            Func<TunnelLayer, int, bool> isBackbone = (l, i) =>
+            {
+                if (i < l.Lining.Count)
+                {
+                    var r = l.Lining[i];
+                    if (l.BackboneLining.Contains(r) && !l.NonBackboneLining.Contains(r)) return true;
+                }
+                return false;
+            };
+
+            Func<FlowResidue, string> frs = r => r.IsBackbone ? r.Residue.ToString() + " Backbone" : r.Residue.ToString();
+
+            var name = this.Type.ToString();
+
+            string soName = name.ToUpper();  //isPores ? "PORE" : "TUNNEL";
+            string nodeName = name; //isPores ? "Pore" : "Tunnel";
+            string filePrefix = name.ToLower() + "_";  // isPores ? "pore_" : "tunnel_";
+
+            var ctp = this.Profile;
+
+            Dictionary<TunnelProfile.Node, double> charge = null;
+            if (includeCharge != null)
+            {
+                charge = ScalarFields[includeCharge].GetValues(this.Profile);
+            }
+
+            var Profile = ctp.Select(p => new
+            {
+                Radius = Math.Round(p.Radius, 3),
+                FreeRadius = Math.Round(p.FreeRadius, 3),
+                BRadius = Math.Round(p.BRadius, 3),
+                T = Math.Round(p.T, 6),
+                Distance = Math.Round(p.Distance, 3),
+                X = Math.Round(p.Center.X + offset.X, 3),
+                Y = Math.Round(p.Center.Y + offset.Y, 3),
+                Z = Math.Round(p.Center.Z + offset.Z, 3),
+                Charge = includeCharge != null ? Math.Round(charge[p], 3) : 0.0
+            }).ToArray();
+
+            var layers = GetLiningLayers();
+            var bneck = layers.Count() > 1 ? layers.Skip(1).MinBy(l => l.Radius)[0] : null;
+
+            var props = LayerWeightedPhysicoChemicalProperties;
+            var Layers = new
+            {
+                ResidueFlow = layers.ResidueFlow.Select(r => frs(r)).ToArray(),
+                HetResidues = HetResidues.Select(r => r.ToString()).ToArray(),
+                LayerWeightedProperties = new
+                {
+                    Hydrophobicity = Math.Round(props.Hydrophobicity, 2),
+                    Hydropathy = Math.Round(props.Hydropathy, 2),
+                    Polarity = Math.Round(props.Polarity, 2),
+                    LogP = Math.Round(props.LogP, 2),
+                    LogD = Math.Round(props.LogD, 2),
+                    LogS = Math.Round(props.LogS, 2),
+                    Mutability = props.Mutability
+                },
+                LayersInfo = layers
+                    .Select(l =>
+                    {
+                        var asFlow = l.Lining
+                            .Select((r, i) => new FlowResidue(r, isBackbone(l, i)))
+                            .OrderBy(r => layers.GetFlowIndex(r))
+                            .ToArray();
+
+                        return new
+                        {
+                            LayerGeometry = object.ReferenceEquals(l, bneck) ?
+                                (object)new
+                                {
+                                    MinRadius = Math.Round(l.Radius, 3),
+                                    MinFreeRadius = Math.Round(l.FreeRadius, 3),
+                                    MinBRadius = Math.Round(l.BRadius, 3),
+                                    StartDistance = Math.Round(l.StartDistance, 3),
+                                    EndDistance = Math.Round(l.EndDistance, 3),
+                                    LocalMinimum = l.IsLocalMinimum,
+                                    Bottleneck = true
+                                } :
+                                (object)new
+                                {
+                                    MinRadius = Math.Round(l.Radius, 3),
+                                    MinFreeRadius = Math.Round(l.FreeRadius, 3),
+                                    MinBRadius = Math.Round(l.BRadius, 3),
+                                    StartDistance = Math.Round(l.StartDistance, 3),
+                                    EndDistance = Math.Round(l.EndDistance, 3),
+                                    LocalMinimum = l.IsLocalMinimum,
+
+                                },
+                            Residues = asFlow.Select(r => frs(r)).ToArray(),
+                            FlowIndices = asFlow.Select(r => layers.GetFlowIndex(r).ToString()).ToArray(),
+                            Properties = l.PhysicoChemicalProperties.ToJson()
+                        };
+                    }).ToArray()
+            };
+
+            props = PhysicoChemicalProperties;
+            var Properties = PhysicoChemicalProperties.ToJson();
+
+
+            bool auto = false;
+            if (Type == TunnelType.Pore) auto = IsMergedPore;
+            else if (Type == TunnelType.Pore) auto = StartPoint.Type == TunnelOriginType.Computed;
+
+            //var surface = this.GetSurface(1.33);
+
+            return new
+            {
+                Type = nodeName,
+                Id = this.Id.ToString(),
+                Fingerprint = GetTunnelFp(this),
+                Cavity = Cavity != null ? Cavity.Id.ToString() : null,
+                Auto = auto,
+                Properties = Properties,
+                Profile = Profile,
+                Layers = Layers
+                //Mesh = surface.ToJson()
+            };
+        }
+
+        private string GetTunnelFp(Tunnel t)
+        {
+            return "L" + t.Length.ToString("0.00");
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -1071,7 +1282,7 @@
         /// <param name="other"></param>
         /// <returns></returns>
         public bool Equals(Tunnel other)
-        {            
+        {
             if (other == null) return false;
 
             if (this.lining.Count() != other.lining.Count()) return false;
@@ -1099,6 +1310,6 @@
             if (obj is Tunnel)
                 return Equals(obj as Tunnel);
             return false;
-        } 
+        }
     }
 }

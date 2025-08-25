@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using WebChemistry.Framework.Math;
-using WebChemistry.Framework.Core;
-
-namespace WebChemistry.Tunnels.Core.Geometry
+﻿namespace WebChemistry.Tunnels.Core.Geometry
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using WebChemistry.Framework.Math;
+    using WebChemistry.Framework.Core;
+
     public class SurfaceVertex
     {
         public int Id;
@@ -82,15 +83,38 @@ namespace WebChemistry.Tunnels.Core.Geometry
             return new TriangulatedSurface(vertices, tris);
         }
 
-        public static TriangulatedSurface FromCavity(Cavity c)
-        {
-            return FromFacets(c.Boundary);
-        }
-
         public static void FromCavity(Cavity c, out TriangulatedSurface inner, out TriangulatedSurface boundary)
         {
-            inner = FromFacets(c.Boundary.Where(f => !f.IsBoundary));
-            boundary = FromFacets(c.Boundary.Where(f => f.IsBoundary));
+            inner = FromFacets(c.Boundary.Where(f => !f.IsBoundary).AsList());
+            boundary = FromFacets(c.Boundary.Where(f => f.IsBoundary).AsList());
+        }
+
+        public object ToJson()
+        {
+            var verticies = new double[Vertices.Length * 3];
+            var tris = new int[Triangles.Length * 3];
+
+            int o = 0;
+            foreach (var v in Vertices)
+            {
+                verticies[o++] = Math.Round(v.Position.X, 2);
+                verticies[o++] = Math.Round(v.Position.Y, 2);
+                verticies[o++] = Math.Round(v.Position.Z, 2);
+            }
+
+            o = 0;
+            foreach (var t in Triangles)
+            {
+                tris[o++] = t.A.Id;
+                tris[o++] = t.B.Id;
+                tris[o++] = t.C.Id;
+            }
+
+            return new
+            {
+                Vertices = verticies,
+                Triangles = tris
+            };
         }
 
         public TriangulatedSurface(IList<SurfaceVertex> vertices, IList<SurfaceTriangle> triangles)

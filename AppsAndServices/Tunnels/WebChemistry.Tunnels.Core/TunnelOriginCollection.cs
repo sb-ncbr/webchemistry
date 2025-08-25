@@ -193,6 +193,11 @@
                 NotifyCollectionChanged(NotifyCollectionChangedAction.Add, dbs);
             }
         }
+
+        public object ToJson()
+        {
+            return this.Select(o => o.ToJson()).ToArray();
+        }
         
         void FromCavity(Cavity cavity)
         {

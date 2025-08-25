@@ -417,6 +417,36 @@
             return ret;
         }
 
+        public object ToJson()
+        {
+            Geometry.TriangulatedSurface inner, boundary;
+            Geometry.TriangulatedSurface.FromCavity(this, out inner, out boundary);
+
+
+            return new
+            {
+                Type = Type.ToString(),
+                Volume = System.Math.Round(Volume, 3),
+                Depth = Depth,
+                DepthLength = DepthLength,
+                Id = Id,
+                Boundary = new {
+                    Residues = BoundaryResidues.Select(r => r.ToString()).ToArray(),
+                    Properties = BoundaryProperties.ToJson()
+                },
+                Inner = new
+                {
+                    Residues = InnerResidues.Select(r => r.ToString()).ToArray(),
+                    Properties = InnerProperties.ToJson()
+                },
+                Properties = GlobalProperties.ToJson(),
+                Mesh = new {
+                    Inner = inner.ToJson(),
+                    Boundary = boundary.ToJson(),
+                }
+            };
+        }
+
         private Cavity()
         {
         }

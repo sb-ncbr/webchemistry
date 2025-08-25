@@ -1,4 +1,3 @@
-﻿
 namespace WebChemistry.Tunnels.Core.Geometry
 {
     using WebChemistry.Framework.Math;

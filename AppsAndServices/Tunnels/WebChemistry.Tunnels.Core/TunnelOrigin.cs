@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using WebChemistry.Framework.Math;
-using WebChemistry.Framework.Core;
-
 namespace WebChemistry.Tunnels.Core
 {
+    using System;
+    using System.Linq;
+    using WebChemistry.Framework.Math;
+    using WebChemistry.Framework.Core;
+
     /// <summary>
     /// Represents the type of the origin.
     /// </summary>
@@ -69,6 +69,19 @@ namespace WebChemistry.Tunnels.Core
             //var tetra = Complex.SurfaceCavity.KdTetra.Nearest(point);            
             //var cavity = Complex.Cavities.FirstOrDefault(c => c.Tetrahedrons.Contains(Tetrahedron));
             //this.Cavity = cavity ?? Complex.SurfaceCavity;
+        }
+
+        public object ToJson()
+        {
+            return new
+            {
+                Id = Id,
+                CavityId = Cavity.Id,
+                Depth = Tetrahedron.Depth,
+                X = System.Math.Round(Tetrahedron.Center.X, 2),
+                Y = System.Math.Round(Tetrahedron.Center.Y, 2),
+                Z = System.Math.Round(Tetrahedron.Center.Z, 2)
+            };
         }
 
         /// <summary>
