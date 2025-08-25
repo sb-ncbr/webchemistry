@@ -33,9 +33,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="QuickGraph">
-      <HintPath>..\..\..\Libs\Net40\QuickGraph.dll</HintPath>
-    </Reference>
+  <PackageReference Include="QuickGraph" Version="3.3.51106.0" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
