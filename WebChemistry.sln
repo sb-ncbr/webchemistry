@@ -50,8 +50,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.MotiveValidato
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.MotiveValidator.Service", "AppsAndServices\MotiveValidator\WebChemistry.MotiveValidator.Service\WebChemistry.MotiveValidator.Service.csproj", "{5AB677C9-B20F-4700-9002-CCBF7EFEFDDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.Tunnels.DataModel", "AppsAndServices\Tunnels\WebChemistry.Tunnels.DataModel\WebChemistry.Tunnels.DataModel.csproj", "{BE67FA20-A65B-4E76-98ED-83977E33CA1E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.MotiveValidator.Converter", "AppsAndServices\MotiveValidator\WebChemistry.MotiveValidator.Converter\WebChemistry.MotiveValidator.Converter.csproj", "{A4FAD1BE-A7D6-47CC-A798-F70378C59550}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChemistry.Charges.Service", "AppsAndServices\Charges\Service\WebChemistry.Charges.Service\WebChemistry.Charges.Service.csproj", "{CF8507EF-290C-482A-A391-7502337ABD0B}"
@@ -188,16 +186,6 @@ Global
 		{5AB677C9-B20F-4700-9002-CCBF7EFEFDDC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{5AB677C9-B20F-4700-9002-CCBF7EFEFDDC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5AB677C9-B20F-4700-9002-CCBF7EFEFDDC}.Release|x86.ActiveCfg = Release|Any CPU
-		{BE67FA20-A65B-4E76-98ED-83977E33CA1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE67FA20-A65B-4E76-98ED-83977E33CA1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BE67FA20-A65B-4E76-98ED-83977E33CA1E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{BE67FA20-A65B-4E76-98ED-83977E33CA1E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{BE67FA20-A65B-4E76-98ED-83977E33CA1E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BE67FA20-A65B-4E76-98ED-83977E33CA1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BE67FA20-A65B-4E76-98ED-83977E33CA1E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BE67FA20-A65B-4E76-98ED-83977E33CA1E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{BE67FA20-A65B-4E76-98ED-83977E33CA1E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{BE67FA20-A65B-4E76-98ED-83977E33CA1E}.Release|x86.ActiveCfg = Release|Any CPU
 		{A4FAD1BE-A7D6-47CC-A798-F70378C59550}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A4FAD1BE-A7D6-47CC-A798-F70378C59550}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4FAD1BE-A7D6-47CC-A798-F70378C59550}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -303,7 +291,6 @@ Global
 		{E6E2BF63-7B87-4C44-96C3-AAD4460149FE} = {D407E96D-E9AD-4D10-A7B6-DB783F757BB6}
 		{A74BDEE2-FC1E-4ABE-8703-738117A62F53} = {48CE057E-1634-4E40-8BEC-27952C88C62F}
 		{5AB677C9-B20F-4700-9002-CCBF7EFEFDDC} = {48CE057E-1634-4E40-8BEC-27952C88C62F}
-		{BE67FA20-A65B-4E76-98ED-83977E33CA1E} = {D407E96D-E9AD-4D10-A7B6-DB783F757BB6}
 		{A4FAD1BE-A7D6-47CC-A798-F70378C59550} = {48CE057E-1634-4E40-8BEC-27952C88C62F}
 		{CF8507EF-290C-482A-A391-7502337ABD0B} = {2ECCD395-5950-4805-99D4-6AA4F80621B5}
 		{D075E715-0DDC-47AE-9285-3712CA69B6CC} = {2ECCD395-5950-4805-99D4-6AA4F80621B5}
