@@ -282,11 +282,8 @@
             var fields = FieldsBase.CreateLoop<AtomSiteFields>(this);
             var modelNumbers = new HashSet<string>(StringComparer.Ordinal);
 
-            while (CurrentLineText != null)
+            while (CurrentLineText != null && !StartsWith('#'))
             {
-                if (IsCommentOrBlank(CurrentLineText)) { NextLine(); continue; }
-                if (IsConstructStart(CurrentLineText)) break;
-
                 // If the first model was already loaded, skip the rest of the atoms.
                 if (modelNumbers.Count > 1)
                 {
