@@ -346,7 +346,7 @@
       <Version>1.1.10823</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>6.0.6</Version>
+      <Version>13.0.3</Version>
     </PackageReference>
     <PackageReference Include="Rx-Linq">
       <Version>2.1.30214</Version>
@@ -355,7 +355,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="220441c8-7056-4efe-8689-4e038e1b1d04" />
+      <UserProperties ProjectLinkReference="220441c8-7056-4efe-8689-4e038e1b1d04" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
