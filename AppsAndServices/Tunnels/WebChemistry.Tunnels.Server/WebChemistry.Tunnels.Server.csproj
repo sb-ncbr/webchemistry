@@ -61,9 +61,9 @@
     <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="IronPython" Version="2.7.5" />
+    <PackageReference Include="IronPython" Version="2.7.12" />
     <PackageReference Include="Newtonsoft.Json" Version="6.0.6" />
-    <PackageReference Include="QuickGraph" Version="3.3.51106.0" />
+    <PackageReference Include="QuickGraph" Version="3.6.61119.7" />
     <PackageReference Include="Ix_Experimental-Main" Version="1.1.10823" />
     <Reference Include="System" />
     <Reference Include="System.Core" />

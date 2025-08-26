@@ -56,7 +56,7 @@
     <PackageReference Include="WebGrease" Version="1.3.0" />
     <PackageReference Include="EntityFramework" Version="5.0.0" />
     <PackageReference Include="ICSharpCode.SharpZipLib.dll" Version="0.85.4.369" />
-    <PackageReference Include="IronPython" Version="2.7.5" />
+    <PackageReference Include="IronPython" Version="2.7.12" />
     <PackageReference Include="Newtonsoft.Json" Version="6.0.6" />
     <PackageReference Include="Ix_Experimental-Main" Version="1.1.10823" />
     <PackageReference Include="Microsoft.Bcl" Version="1.1.10" />
@@ -66,7 +66,7 @@
     <PackageReference Include="Rx-Interfaces" Version="2.1.30214.0" />
     <PackageReference Include="Rx-Linq" Version="2.1.30214.0" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="4.0.20710.0" />
-    <PackageReference Include="Microsoft.AspNet.Web.Optimization" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNet.Web.Optimization" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNet.Razor" Version="2.0.20715.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="4.0.20710.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.WebHost" Version="4.0.20710.0" />
