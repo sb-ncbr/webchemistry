@@ -69,16 +69,6 @@
             return trimmed.Length == 0 || trimmed.StartsWith("#", StringComparison.Ordinal);
         }
 
-        static bool IsConstructStart(string s)
-        {
-            if (string.IsNullOrEmpty(s)) return false;
-            var t = s.TrimStart();
-            return t.StartsWith("_", StringComparison.Ordinal) ||
-                   t.StartsWith("loop_", StringComparison.OrdinalIgnoreCase) ||
-                   t.StartsWith("data_", StringComparison.OrdinalIgnoreCase) ||
-                   t.StartsWith("save_", StringComparison.OrdinalIgnoreCase);
-        }
-
         /// <summary>
         /// Represents a record info.
         /// </summary>
@@ -237,20 +227,46 @@
         void HandleSingleRecord()
         {
             var type = GetRecordType();
+            var sectionKey = type.Key; // e.g. "_atom_site"
+            var isKnown = type.Type != RecordType.Unknown;
 
-            // Skip records that are not useful.
-            if (type.Type == RecordType.Unknown)
+            FieldsBase fields = null;
+            Action<string, string, bool> assign;
+            Action<FieldsBase> finalize = _ => { };
+
+            if (isKnown)
             {
-                SkipSection();
-                return;
+                var infoLocal = RecordsInfo[type.Type];
+                fields = FieldsBase.CreateSingle(infoLocal.FieldsType, this);
+                assign = (n, v, m) => fields.AssignFieldValue(n, v, m);
+                finalize = fb => infoLocal.OnSingleBase(fb);
+            }
+            else
+            {
+                // Discard everything but still parse correctly.
+                assign = (n, v, m) => { };
             }
 
-            var info = RecordsInfo[type.Type];
-
-            // Read the fields
-            var fields = FieldsBase.CreateSingle(info.FieldsType, this);
-            while (CurrentLineText != null && !StartsWith('#'))
+            while (CurrentLineText != null)
             {
+                if (IsCommentOrBlank(CurrentLineText))
+                {
+                    NextLine();
+                    continue;
+                }
+
+                // Not a data name? That's a boundary. Leave the line for the outer loop.
+                if (!CurrentLineText.TrimStart().StartsWith("_", StringComparison.Ordinal))
+                    break;
+
+                // It's a data name; ensure it's still the same category.
+                var here = GetRecordType();
+                if (!string.Equals(here.Key, sectionKey, StringComparison.OrdinalIgnoreCase))
+                {
+                    // Start of the next section -> leave line for the outer loop.
+                    break;
+                }
+
                 var spaceIndex = CurrentLineText.IndexOf(' ');
                 if (spaceIndex < 0) spaceIndex = CurrentLineText.IndexOf('\t');
 
@@ -276,7 +292,7 @@
                 // Check if the actual value is on the next line.
                 if (string.IsNullOrEmpty(value) && NextLine())
                 {              
-                    // multi-line string separated by ; at at start of lines.
+                    // multi-line string separated by ; at start of lines.
                     if (StartsWith(';'))
                     {
                         var field = new StringBuilder();
@@ -285,22 +301,22 @@
                         {
                             field.Append(CurrentLineText);
                         }
-                        fields.AssignFieldValue(name, field.ToString(), true);
+                        assign(name, field.ToString(), true);
                     }                          
                     else // value at the entire line
                     {
-                        fields.AssignFieldValue(name, CurrentLineText.Trim(), false);
+                        assign(name, CurrentLineText.Trim(), false);
                     }          
                 }
                 else
                 {
-                    fields.AssignFieldValue(name, value, false);
+                    assign(name, value, false);
                 }
                 NextLine();
             }
 
             // Execute the fields action
-            info.OnSingleBase(fields);
+            finalize(fields);
         }
         
         /// <summary>
@@ -318,9 +334,10 @@
             {
                 var numDataEntries = 0;
 
-                while (NextLine())
+                NextLine();
+                while (CurrentLineText != null)
                 {
-                    if (CurrentLineText.Length == 0) continue;
+                    if (IsCommentOrBlank(CurrentLineText)) { NextLine(); continue; }
 
                     if (CurrentLineText[0] == '_') HandleSingleRecord();
                     else if (StartWithIgnoreCase("loop_")) HandleLoop();
@@ -331,7 +348,12 @@
                         {
                             Warnings.Add(new StructureReaderWarning("The file contains multiple structures (data_ entries). Only the first structure was loaded. To load all structures, please split them into standalone files."));
                             break;
-                        }                                
+                        }
+                        NextLine();
+                    }
+                    else
+                    {
+                        NextLine();
                     }
                 }
 
