@@ -62,6 +62,23 @@
             return CurrentLineText.StartsWith(value, StringComparison.OrdinalIgnoreCase);
         }
 
+        static bool IsCommentOrBlank(string s)
+        {
+            if (s == null) return true;
+            var trimmed = s.TrimStart();
+            return trimmed.Length == 0 || trimmed.StartsWith("#", StringComparison.Ordinal);
+        }
+
+        static bool IsConstructStart(string s)
+        {
+            if (string.IsNullOrEmpty(s)) return false;
+            var t = s.TrimStart();
+            return t.StartsWith("_", StringComparison.Ordinal) ||
+                   t.StartsWith("loop_", StringComparison.OrdinalIgnoreCase) ||
+                   t.StartsWith("data_", StringComparison.OrdinalIgnoreCase) ||
+                   t.StartsWith("save_", StringComparison.OrdinalIgnoreCase);
+        }
+
         /// <summary>
         /// Represents a record info.
         /// </summary>
