@@ -378,6 +378,7 @@
         /// <returns></returns>
         StructureReaderResult ReadPdbX()
         {
+            UseAuthTags = Parameters.UseAuth;
             InitRecordsInfo();
 
             this.CompBonds = new List<CompBondElement>();

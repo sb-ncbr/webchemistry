@@ -10,6 +10,10 @@
     {
         #region Base
 
+        internal static bool UseAuthTags { get; set; } = true;
+        internal static string Scheme => UseAuthTags ? "auth" : "label";
+        internal static string Tag(string template) => template.Replace("{scheme}", Scheme);
+
         class FieldElement
         {
             public string Text;
@@ -305,15 +309,15 @@
 
             public readonly FieldElementInfo RecordName = new FieldElementInfo("_atom_site.group_PDB", "HETATM");
             public readonly FieldElementInfo ElementSymbol = new FieldElementInfo("_atom_site.type_symbol");
-            public readonly FieldElementInfo Name = new FieldElementInfo("_atom_site.auth_atom_id");
+            public readonly FieldElementInfo Name = new FieldElementInfo(Tag("_atom_site.{scheme}_atom_id"));
 
             public readonly FieldElementInfo AltLoc = new FieldElementInfo("_atom_site.label_alt_id", "");
 
             public readonly FieldElementInfo EntityId = new FieldElementInfo("_atom_site.label_entity_id");
 
-            public readonly FieldElementInfo ResidueName = new FieldElementInfo("_atom_site.auth_comp_id");
-            public readonly FieldElementInfo ResidueSeqNumber = new FieldElementInfo("_atom_site.auth_seq_id");
-            public readonly FieldElementInfo ChainIdentifier = new FieldElementInfo("_atom_site.auth_asym_id", defaultValue: "");
+            public readonly FieldElementInfo ResidueName = new FieldElementInfo(Tag("_atom_site.{scheme}_comp_id"));
+            public readonly FieldElementInfo ResidueSeqNumber = new FieldElementInfo(Tag("_atom_site.{scheme}_seq_id"));
+            public readonly FieldElementInfo ChainIdentifier = new FieldElementInfo(Tag("_atom_site.{scheme}_asym_id"), defaultValue: "");
             public readonly FieldElementInfo InsertionCode = new FieldElementInfo("_atom_site.pdbx_PDB_ins_code", " ");
 
             public readonly FieldElementInfo Occupancy = new FieldElementInfo("_atom_site.occupancy", 1.0);
@@ -433,11 +437,11 @@
 
         class HelixFields : FieldsBase<SecondaryElementInfo, HelixFields>
         {
-            public readonly FieldElementInfo StartResidueSeqNumber = new FieldElementInfo("_struct_conf.beg_auth_seq_id");
-            public readonly FieldElementInfo StartChainIdentifier = new FieldElementInfo("_struct_conf.beg_auth_asym_id");
+            public readonly FieldElementInfo StartResidueSeqNumber = new FieldElementInfo(Tag("_struct_conf.beg_{scheme}_seq_id"));
+            public readonly FieldElementInfo StartChainIdentifier = new FieldElementInfo(Tag("_struct_conf.beg_{scheme}_asym_id"));
 
-            public readonly FieldElementInfo EndResidueSeqNumber = new FieldElementInfo("_struct_conf.end_auth_seq_id");
-            public readonly FieldElementInfo EndChainIdentifier = new FieldElementInfo("_struct_conf.end_auth_asym_id");
+            public readonly FieldElementInfo EndResidueSeqNumber = new FieldElementInfo(Tag("_struct_conf.end_{scheme}_seq_id"));
+            public readonly FieldElementInfo EndChainIdentifier = new FieldElementInfo(Tag("_struct_conf.end_{scheme}_asym_id"));
             
             public override SecondaryElementInfo GetElement()
             {
@@ -452,11 +456,11 @@
 
         class SheetFields : FieldsBase<SecondaryElementInfo, SheetFields>
         {
-            public readonly FieldElementInfo StartResidueSeqNumber = new FieldElementInfo("_struct_sheet_range.beg_auth_seq_id");
-            public readonly FieldElementInfo StartChainIdentifier = new FieldElementInfo("_struct_sheet_range.beg_auth_asym_id");
+            public readonly FieldElementInfo StartResidueSeqNumber = new FieldElementInfo(Tag("_struct_sheet_range.beg_{scheme}_seq_id"));
+            public readonly FieldElementInfo StartChainIdentifier = new FieldElementInfo(Tag("_struct_sheet_range.beg_{scheme}_asym_id"));
 
-            public readonly FieldElementInfo EndResidueSeqNumber = new FieldElementInfo("_struct_sheet_range.end_auth_seq_id");
-            public readonly FieldElementInfo EndChainIdentifier = new FieldElementInfo("_struct_sheet_range.end_auth_asym_id");
+            public readonly FieldElementInfo EndResidueSeqNumber = new FieldElementInfo(Tag("_struct_sheet_range.end_{scheme}_seq_id"));
+            public readonly FieldElementInfo EndChainIdentifier = new FieldElementInfo(Tag("_struct_sheet_range.end_{scheme}_asym_id"));
             
             public override SecondaryElementInfo GetElement()
             {
@@ -676,8 +680,8 @@
 
         class ModifiedResiduesFields : FieldsBase<ModifiedResidueInfo, ModifiedResiduesFields>
         {
-            public readonly FieldElementInfo Chain = new FieldElementInfo("_pdbx_struct_mod_residue.auth_asym_id", defaultValue: "");
-            public readonly FieldElementInfo Number = new FieldElementInfo("_pdbx_struct_mod_residue.auth_seq_id", defaultValue: "0");
+            public readonly FieldElementInfo Chain = new FieldElementInfo(Tag("_pdbx_struct_mod_residue.{scheme}_asym_id"), defaultValue: "");
+            public readonly FieldElementInfo Number = new FieldElementInfo(Tag("_pdbx_struct_mod_residue.{scheme}_seq_id"), defaultValue: "0");
             public readonly FieldElementInfo InsCode = new FieldElementInfo("_pdbx_struct_mod_residue.PDB_ins_code", defaultValue: " ");
             public readonly FieldElementInfo ModifiedFrom = new FieldElementInfo("_pdbx_struct_mod_residue.parent_comp_id", defaultValue: "");
 

@@ -85,7 +85,13 @@
         /// Id of the structure.
         /// </summary>
         public string Id { get; set; }
-        
+
+        /// <summary>
+        /// Use auth records (true) or label records (false) in PdbX
+        /// </summary>
+        public bool UseAuth { get; set; }
+
+
         /// <summary>
         /// Loads only the first model. Default is true.
         /// </summary>
@@ -103,6 +109,7 @@
         {
             LoadFirstModelOnly = true;
             Type = StructureType.Pdb;
+            UseAuth = true;
         }
     }
 
