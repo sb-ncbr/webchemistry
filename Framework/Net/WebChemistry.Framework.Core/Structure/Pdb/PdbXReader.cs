@@ -100,26 +100,51 @@
         /// <returns></returns>
         RecordTypeInfo ReadLoopFields()
         {
-            bool firstLine = true;
+            bool sawFirstTag = false;
             RecordTypeInfo loopType = null;
             int fieldIndex = 0;
+
+            // Only allocate the map if the loop is known; case-insensitive is safer for CIF tags.
+            Dictionary<string, int> map = null;
+
             while (true)
             {
-                NextLine();
-                if (firstLine)
-                {
-                    loopType = GetRecordType();
-                    if (loopType.Type == RecordType.Unknown) return loopType;
-                    firstLine = false;
-                    LoopRecordMap = new Dictionary<string, int>(131, StringComparer.Ordinal);
-                }
-                if (!StartsWith('_')) break;
+                if (!NextLine()) break;
+                if (IsCommentOrBlank(CurrentLineText)) continue;
 
-                LoopRecordMap[CurrentLineText.Trim()] = fieldIndex;
+                if (!StartsWith('_')) break; // we've reached the first value line; leave it in CurrentLineText
+
+                var tagType = GetRecordType(); // classifies CurrentLineText (a tag line)
+
+                if (!sawFirstTag)
+                {
+                    loopType = tagType;
+                    sawFirstTag = true;
+
+                    if (loopType.Type != RecordType.Unknown)
+                        LoopRecordMap = map = new Dictionary<string, int>(131, StringComparer.OrdinalIgnoreCase);
+                }
+                else
+                {
+                    // Enforce single-category loops only when known
+                    if (loopType.Type != RecordType.Unknown &&
+                        !string.Equals(loopType.Key, tagType.Key, StringComparison.OrdinalIgnoreCase))
+                    {
+                        throw new InvalidOperationException(
+                            $"Loop spans multiple categories ('{loopType.Key}' vs '{tagType.Key}'); not supported in this mode.");
+                    }
+                }
+
+                // Record mapping only for known loops
+                map?.Add(CurrentLineText.Trim(), fieldIndex);
                 fieldIndex++;
             }
+
+            if (!sawFirstTag)
+                throw new FormatException("Malformed 'loop_': no data names provided.");
+
             LoopFieldCount = fieldIndex;
-            return loopType;
+            return loopType ?? new RecordTypeInfo { Key = string.Empty, Type = RecordType.Unknown };
         }
 
         /// <summary>
@@ -488,19 +513,23 @@
         int AddFieldTokenToBuffer(int index, string text, int start, int count, bool escaped)
         {
             if (index >= LoopFieldCount) throw new InvalidOperationException("The number of records does not match the defined fields.");
-            var item = LoopFields[index];
 
-            if (item != null)
+            var fields = LoopFields;
+            if (fields != null && index < fields.Length)
             {
-                var elem = item.Element;
-                elem.Start = start;
-                elem.Count = count;
-                elem.IsEscaped = escaped;
-                elem.Text = text;
+                var item = fields[index];
+                if (item != null)
+                {
+                    var elem = item.Element;
+                    elem.Start = start;
+                    elem.Count = count;
+                    elem.IsEscaped = escaped;
+                    elem.Text = text;
+                }
             }
             return index + 1;
         }
-        
+
         /// <summary>
         /// Tokenize the current line.
         /// </summary>
