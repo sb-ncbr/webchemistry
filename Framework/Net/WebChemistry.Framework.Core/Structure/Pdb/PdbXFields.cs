@@ -566,7 +566,7 @@
         {
             public readonly FieldElementInfo Id = new FieldElementInfo("_entity.id");
             public readonly FieldElementInfo Type = new FieldElementInfo("_entity.type");
-            public readonly FieldElementInfo SrcMethod = new FieldElementInfo("_entity.src_method");
+            public readonly FieldElementInfo SrcMethod = new FieldElementInfo("_entity.src_method", isRequired: false);
             public readonly FieldElementInfo Weight = new FieldElementInfo("_entity.formula_weight", isRequired: false);
             public readonly FieldElementInfo NumberOfMolecules = new FieldElementInfo("_entity.pdbx_number_of_molecules", isRequired: false);
             public readonly FieldElementInfo Ec = new FieldElementInfo("_entity.pdbx_ec", isRequired: false);
