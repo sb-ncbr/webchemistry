@@ -84,7 +84,11 @@
                 // DEFAULT / EMPTY
                 { 
                     RecordType.Unknown, 
-                    null
+                    new RecordInfo<NullFields>
+                    {
+                        OnLoop = ReadLoopElementsNoOp,
+                        OnSingle = nf => { ;}
+                    }
                 },
 
                 // ATOM SITE
@@ -101,7 +105,7 @@
                     RecordType.AtomComp, 
                     new RecordInfo<CompAtomFields>  
                     {
-                        OnLoop = () => { IsComp = true; ReadLoopElements<CompAtomFields>(CompAtomLoop); },
+                        OnLoop = () => { IsComp = true; ReadLoopElements<object, CompAtomFields>(null, (_, f) => CompAtomLoop(f)); },
                         OnSingle = fields => { IsComp = true; CompAtomLoop(fields); }
                     }
                 },
@@ -282,35 +286,36 @@
             var fields = FieldsBase.CreateLoop<AtomSiteFields>(this);
             var modelNumbers = new HashSet<string>(StringComparer.Ordinal);
 
-            while (CurrentLineText != null && !StartsWith('#'))
+            // Start at the first value line
+            SyncPastLoopTags();
+
+            while (true)
             {
-                // If the first model was already loaded, skip the rest of the atoms.
-                if (modelNumbers.Count > 1)
-                {
-                    NextLine();
-                    continue;
-                }
+                if (!AdvancePastBlanksAndComments()) return;
 
-                // Tokenize the element.
-                if (!TokenizeLoopElementOrFail()) break;
+                if (AtLoopBoundary())
+                    break; // leave boundary unconsumed
 
-                // Parse the atom and add it to the atom list.
-                var atom = fields.GetElement();
-                modelNumbers.Add(atom.ModelNumber);
-                if (modelNumbers.Count > 1)
-                {
+                if (!TokenizeLoopElementOrFail())
+                    break;
+
+                var site = fields.GetElement();
+                var wasNew = modelNumbers.Add(site.ModelNumber);
+
+                // Warn exactly once when we first see a second model
+                if (wasNew && modelNumbers.Count == 2)
                     Warnings.Add(new OnlyFirstModelLoadedReaderWarning(CurrentLine));
-                }
-                else if (HandleDuplicates(atom.Atom))
+
+                if (modelNumbers.Count == 1)
                 {
-                    Atoms.Add(atom.Atom);
+                    if (HandleDuplicates(site.Atom)) Atoms.Add(site.Atom);
                 }
 
-                // Move to the next line.
-                NextLine();
+                if (!NextLine()) return;
             }
         }
-        
+
+
         void CompAtomLoop(CompAtomFields fields)
         {
             var atom = fields.GetElement();

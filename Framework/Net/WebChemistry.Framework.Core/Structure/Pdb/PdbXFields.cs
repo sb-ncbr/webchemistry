@@ -287,9 +287,14 @@
         {
             public string Text, PdbXKeywords;
         }
-        
+
         #endregion
-        
+
+        sealed class NullFields : FieldsBase
+        {
+            protected override FieldElementInfo[] AllFields() => Array.Empty<FieldElementInfo>();
+        }
+
         class AtomSiteFields : FieldsBase<AtomSiteElement, AtomSiteFields>
         {
             public readonly FieldElementInfo Id = new FieldElementInfo("_atom_site.id");

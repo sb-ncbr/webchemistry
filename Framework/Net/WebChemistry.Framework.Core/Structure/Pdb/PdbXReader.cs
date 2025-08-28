@@ -32,6 +32,15 @@
             return CurrentLineText != null;
         }
 
+        static bool IsKeyword(string s)
+        {
+            if (string.IsNullOrEmpty(s)) return false;
+            var t = s.TrimStart();
+            return t.StartsWith("loop_", StringComparison.OrdinalIgnoreCase) ||
+                   t.StartsWith("data_", StringComparison.OrdinalIgnoreCase) ||
+                   t.StartsWith("save_", StringComparison.OrdinalIgnoreCase);
+        }
+
         /// <summary>
         /// Checks if the current line starts with a given value.
         /// </summary>
@@ -148,24 +157,6 @@
         }
 
         /// <summary>
-        /// Wrapper procedure for reading loop fields.
-        /// </summary>
-        /// <typeparam name="TFields"></typeparam>
-        /// <param name="action"></param>
-        void ReadLoopElements<TFields>(Action<TFields> action)
-            where TFields : FieldsBase, new()
-        {
-            var fields = FieldsBase.CreateLoop<TFields>(this);
-
-            while (CurrentLineText != null && !StartsWith('#'))
-            {
-                if (!TokenizeLoopElementOrFail()) break;
-                action(fields);
-                NextLine();
-            }
-        }
-
-        /// <summary>
         /// Wrapper procedure for reading loop fields that require state.
         /// </summary>
         /// <typeparam name="TState"></typeparam>
@@ -176,13 +167,7 @@
             where TFields : FieldsBase, new()
         {
             var fields = FieldsBase.CreateLoop<TFields>(this);
-
-            while (CurrentLineText != null && !StartsWith('#'))
-            {
-                if (!TokenizeLoopElementOrFail()) break;
-                action(state, fields);
-                NextLine();
-            }
+            ForEachLoopRow(() => action(state, fields));
         }
 
         /// <summary>
@@ -212,14 +197,63 @@
             return elements;
         }
 
-        /// <summary>
-        /// Skips the current section by finding a # that is not inside a text block.
-        /// </summary>
-        void SkipSection()
+
+        bool AdvancePastBlanksAndComments()
         {
-            while (NextLine() && !StartsWith('#'))
+            while (CurrentLineText != null && IsCommentOrBlank(CurrentLineText))
             {
+                if (!NextLine()) return false;
             }
+            return CurrentLineText != null;
+        }
+
+        // If ReadLoopFields() left us on leftover TAG lines (unknown loop path), skip them.
+        void SyncPastLoopTags()
+        {
+            while (true)
+            {
+                if (!AdvancePastBlanksAndComments()) return;
+                var t = CurrentLineText.TrimStart();
+                if (t.StartsWith("_", StringComparison.Ordinal) && t.IndexOf('.') > 0)
+                {
+                    if (!NextLine()) return;
+                    continue;
+                }
+                break;
+            }
+        }
+
+        // A boundary for loop rows: either a new data name (tag) or loop/data/save keyword
+        bool AtLoopBoundary()
+        {
+            var t = CurrentLineText.TrimStart();
+            return (t.StartsWith("_", StringComparison.Ordinal) && t.IndexOf('.') > 0) || IsKeyword(t);
+        }
+
+        void ForEachLoopRow(Action perRow)
+        {
+            // Position on the first value line (handles unknown loops too)
+            SyncPastLoopTags();
+
+            while (true)
+            {
+                if (!AdvancePastBlanksAndComments()) return;
+
+                if (AtLoopBoundary())
+                    break;                          // do NOT consume; outer loop/handler will dispatch
+
+                if (!TokenizeLoopElementOrFail())
+                    break;                          // malformed row / early boundary (e.g., whitespace + '#')
+
+                perRow();                           // deliver/drain the row
+
+                if (!NextLine()) return;            // advance one physical line
+            }
+        }
+
+        void ReadLoopElementsNoOp()
+        {
+            ForEachLoopRow(() => { /* discard */ });
         }
 
         /// <summary>
@@ -230,18 +264,12 @@
             // Determine the loop type.
             var type = ReadLoopFields();
 
-            // Check if the loop is useful.
-            if (type.Type == RecordType.Unknown)
-            {
-                SkipSection();
-                return;
-            }
-
             // Read the loop.
             var action = RecordsInfo[type.Type].OnLoop;
             if (action != null) action();
             else
             {
+                ReadLoopElementsNoOp();
                 Warnings.Add(new StructureReaderWarning(string.Concat("A loop of '{0}' is not supported.", type.Key)));
             }
         }
