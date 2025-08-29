@@ -42,7 +42,7 @@ namespace WebChemistry.Tunnels.Server
                 return;
             }
 
-            Console.WriteLine("WebChemistry Tunnels {0}, (c) 2013 - 2024, David Sehnal", Complex.Version);
+            Console.WriteLine("WebChemistry Tunnels {0}, (c) 2013 - 2025, David Sehnal", Complex.Version);
 
             //args = new[] { "--no-details", "testinput.xml" };
             //args = new[] { "testinput.xml" };

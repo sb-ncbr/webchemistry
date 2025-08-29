@@ -10,7 +10,7 @@
     /// </summary>
     public partial class Complex
     {
-        public static readonly AppVersion Version = new AppVersion(2, 5, 24, 6, 8);
+        public static readonly AppVersion Version = new AppVersion(2, 5, 25, 8, 28);
 
         /// <summary>
         /// Gets the structure this complex is computed from.
