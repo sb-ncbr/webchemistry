@@ -16,6 +16,15 @@ namespace WebChemistry.Tunnels.Server
     using WebChemistry.Framework.Core.Pdb;
     using WebChemistry.Queries.Core;
 
+    static class Extensions {
+        public static HashSet<T> ToHashSet<T>(
+            this IEnumerable<T> source,
+            IEqualityComparer<T>? comparer = null)
+        {
+            return CoreEx.ToHashSet(source, comparer);
+        }
+    }
+
     class TunnelsComputation
     {
         ExecutionContext queryCtx;
