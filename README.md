@@ -1,3 +1,19 @@
+# MOLE2
+
+This branch is targetted at improving MOLE2 outside of the main branch. It features an improved mmCIF parser and allows building MOLE2 as a modern .NET application.
+
+To build MOLE2, use:
+
+`
+docker build -f Dockerfile.mole2 -t mole2:latest
+`
+
+To test the MOLE2, run:
+
+`
+docker run -v ./MoleExample:/data mole2 /data/test.xml
+`
+
 # Webchemistry
 
 Webchemistry is a set of tools and efficient data structures developed in C# by David Sehnal at co. at Masaryk University, Brno Czech Republic. 
