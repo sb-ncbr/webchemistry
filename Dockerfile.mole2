@@ -1,0 +1,35 @@
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+
+RUN dotnet tool install -g upgrade-assistant
+ENV PATH=$PATH:/root/.dotnet/tools
+
+ENV DOTNET_UPGRADEASSISTANT_TELEMETRY_OPTOUT=1
+
+WORKDIR /src
+
+COPY Framework/Net/WebChemistry.Framework.Core/ ./Framework/Net/WebChemistry.Framework.Core/
+COPY AppsAndServices/Queries/WebChemistry.Queries.Core/ ./AppsAndServices/Queries/WebChemistry.Queries.Core/
+COPY AppsAndServices/Tunnels/WebChemistry.Tunnels.Core/ ./AppsAndServices/Tunnels/WebChemistry.Tunnels.Core/
+COPY AppsAndServices/Tunnels/WebChemistry.Tunnels.Server/ ./AppsAndServices/Tunnels/WebChemistry.Tunnels.Server/
+
+RUN while read -r project; do \
+      upgrade-assistant upgrade --non-interactive -f net10.0 -o Inplace "$project"; \
+    done << 'EOF'
+./Framework/Net/WebChemistry.Framework.Core/WebChemistry.Framework.Core.csproj
+./AppsAndServices/Queries/WebChemistry.Queries.Core/WebChemistry.Queries.Core.csproj
+./AppsAndServices/Tunnels/WebChemistry.Tunnels.Core/WebChemistry.Tunnels.Core.csproj
+./AppsAndServices/Tunnels/WebChemistry.Tunnels.Server/WebChemistry.Tunnels.Server.csproj
+EOF
+
+RUN dotnet publish AppsAndServices/Tunnels/WebChemistry.Tunnels.Server/WebChemistry.Tunnels.Server.csproj \
+    -c Release \
+    -r linux-x64 \
+    -o /app/publish \
+    /p:GenerateAssemblyInfo=false
+
+
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
+WORKDIR /app
+COPY --from=build /app/publish .
+
+ENTRYPOINT ["./mole2"]
