@@ -7,10 +7,10 @@
     <Tunnel SurfaceCoverRadius="10" OriginRadius="5" />
   </Params>
   <Export>
-    <Formats Mesh="1" PyMol="1" CSV="1" PDBProfile="1" PDBStructure="1" />
+    <Formats Mesh="1" PyMol="1" CSV="1" JSON="1" PDBProfile="1" PDBStructure="1" />
     <Types Cavities="1" Tunnels="1" />
     <Mesh Density="1.33" Compress="1" />
-    <PyMol PDBId="1TQN" SurfaceType="Surface"  />
+    <PyMol PDBId="1TQN" SurfaceType="Surface" />
   </Export>
   <Origins Auto="1">
   </Origins>
