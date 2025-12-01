@@ -23,7 +23,6 @@ EOF
 
 RUN dotnet publish AppsAndServices/Tunnels/WebChemistry.Tunnels.Server/WebChemistry.Tunnels.Server.csproj \
     -c Release \
-    -r linux-x64 \
     -o /app/publish \
     /p:GenerateAssemblyInfo=false
 
