@@ -12,14 +12,16 @@ COPY AppsAndServices/Queries/WebChemistry.Queries.Core/ ./AppsAndServices/Querie
 COPY AppsAndServices/Tunnels/WebChemistry.Tunnels.Core/ ./AppsAndServices/Tunnels/WebChemistry.Tunnels.Core/
 COPY AppsAndServices/Tunnels/WebChemistry.Tunnels.Server/ ./AppsAndServices/Tunnels/WebChemistry.Tunnels.Server/
 
-RUN while read -r project; do \
-      upgrade-assistant upgrade --non-interactive -f net10.0 -o Inplace "$project"; \
-    done << 'EOF'
+RUN <<EOF_RUN
+while read -r project; do
+  upgrade-assistant upgrade --non-interactive -f net10.0 -o Inplace "$project";
+done <<"EOF"
 ./Framework/Net/WebChemistry.Framework.Core/WebChemistry.Framework.Core.csproj
 ./AppsAndServices/Queries/WebChemistry.Queries.Core/WebChemistry.Queries.Core.csproj
 ./AppsAndServices/Tunnels/WebChemistry.Tunnels.Core/WebChemistry.Tunnels.Core.csproj
 ./AppsAndServices/Tunnels/WebChemistry.Tunnels.Server/WebChemistry.Tunnels.Server.csproj
 EOF
+EOF_RUN
 
 RUN dotnet publish AppsAndServices/Tunnels/WebChemistry.Tunnels.Server/WebChemistry.Tunnels.Server.csproj \
     -c Release \
