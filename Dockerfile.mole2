@@ -31,4 +31,8 @@ FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/publish .
 
+RUN chown -R app:app /app
+
+USER app
+
 ENTRYPOINT ["./mole2"]

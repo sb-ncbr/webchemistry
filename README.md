@@ -11,7 +11,7 @@ docker build -f Dockerfile.mole2 -t mole2:latest
 To test the MOLE2, run:
 
 `
-docker run -v ./MoleExample:/data mole2 /data/test.xml
+docker run -u root -v ./MoleExample:/data mole2 /data/test.xml
 `
 
 # Webchemistry
