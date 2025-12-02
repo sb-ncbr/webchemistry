@@ -37,4 +37,4 @@ RUN chown -R app:app /app
 
 USER app
 
-ENTRYPOINT ["./mole2"]
+ENTRYPOINT ["/app/mole2"]
