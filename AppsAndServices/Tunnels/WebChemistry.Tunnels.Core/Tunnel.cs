@@ -1004,7 +1004,7 @@
                 .ForEach(n => profileNode.Add(n));
 
             var layers = GetLiningLayers();
-            var bneck = layers.Count() > 1 ? layers.Skip(1).MinBy(l => l.Radius)[0] : null;
+            var bneck = layers.Count() > 1 ? layers.Skip(1).MinByWithTies(l => l.Radius).First() : null;
 
             var props = LayerWeightedPhysicoChemicalProperties;
             var wPropertiesNode = new XElement("LayerWeightedProperties",
@@ -1184,7 +1184,7 @@
             }).ToArray();
 
             var layers = GetLiningLayers();
-            var bneck = layers.Count() > 1 ? layers.Skip(1).MinBy(l => l.Radius)[0] : null;
+            var bneck = layers.Count() > 1 ? layers.Skip(1).MinByWithTies(l => l.Radius).First() : null;
 
             var props = LayerWeightedPhysicoChemicalProperties;
             var Layers = new

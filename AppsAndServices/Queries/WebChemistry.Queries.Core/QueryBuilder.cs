@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using WebChemistry.Queries.Core.MetaQueries;
 using WebChemistry.Queries.Core.Queries;
 using WebChemistry.Queries.Core.Symbols;
@@ -87,6 +88,16 @@ namespace WebChemistry.Queries.Core
     public abstract class QueryBuilderElement : DynamicObject
     {
         public abstract MetaQuery ToMetaQueryInternal(QueryBuilderContext context);
+
+        public override bool Equals(object obj)
+        {
+            return ReferenceEquals(this, obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return RuntimeHelpers.GetHashCode(this);
+        }
 
         public override string ToString()
         {

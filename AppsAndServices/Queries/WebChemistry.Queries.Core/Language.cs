@@ -138,7 +138,7 @@
                 }
             }
 
-            var splitElements = xs.MinBy(x => x.Label == "InfixOp" ? infixOperatorPrioties[x.Text.Trim()] : int.MaxValue);
+            var splitElements = xs.MinByWithTies(x => x.Label == "InfixOp" ? infixOperatorPrioties[x.Text.Trim()] : int.MaxValue);
 
             var splitElement = splitElements[0];
 

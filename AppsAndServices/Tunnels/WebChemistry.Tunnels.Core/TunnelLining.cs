@@ -146,11 +146,11 @@
 
             if (candidates.Length == 0)                 
             {
-                BottleneckLayer = layers.Skip(1).MinBy(l => l.Radius)[0]; 
+                BottleneckLayer = layers.Skip(1).MinByWithTies(l => l.Radius).First();
                 return;
             }
 
-            BottleneckLayer = candidates.MinBy(l => l.Radius)[0];
+            BottleneckLayer = candidates.MinByWithTies(l => l.Radius).First();
             BottleneckLayer.IsLocalMinimum = true;
         }
 

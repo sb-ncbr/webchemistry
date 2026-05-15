@@ -244,7 +244,7 @@
 
                 if (candidates.Length == 0) return;
 
-                candidates = candidates.MaxBy(v => v.Depth)
+                candidates = candidates.MaxByWithTies(v => v.Depth)
                     .ToArray();
                 
                 int added = 0;

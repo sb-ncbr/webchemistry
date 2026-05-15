@@ -21,7 +21,7 @@
 
         public CavityOpening(IEnumerable<Tetrahedron> faces)
         {
-            this.Pivot = faces.MaxBy(f => f.MaxClearance)[0];
+            this.Pivot = faces.MaxByWithTies(f => f.MaxClearance).First();
         }
 
         public CavityOpening(Tetrahedron pivot)
@@ -87,7 +87,7 @@
                 var component = candidates.Where(c => comps[c] == i).ToList();
                 //var mainPivot = component.MaxBy(f => f.MaxClearance);
 
-                poreExitList.Add(new CavityOpening(component.MaxBy(t => t.Volume)[0]));
+                poreExitList.Add(new CavityOpening(component.MaxByWithTies(t => t.Volume).First()));
 
                 List<Tetrahedron> pivots = new List<Tetrahedron>();
 
@@ -103,7 +103,7 @@
 
         static void Cover(List<Tetrahedron> component, double radius, List<Tetrahedron> pivots)
         {
-            var pivot = component.MaxBy(f => f.MaxClearance)[0];
+            var pivot = component.MaxByWithTies(f => f.MaxClearance).First();
             pivots.Add(pivot);
 
             var uncovered = component.Where(t => t.Center.DistanceTo(pivot.Center) > radius).ToList();
