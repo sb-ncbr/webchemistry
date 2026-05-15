@@ -18,8 +18,7 @@
     <ProjectReference Include="..\..\..\..\Framework\Net\WebChemistry.Framework.Core\WebChemistry.Framework.Core.csproj" />
     <ProjectReference Include="..\..\WebChemistry.Queries.Core\WebChemistry.Queries.Core.csproj" />
     <ProjectReference Include="..\WebChemistry.Queries.Service.DataModel\WebChemistry.Queries.Service.DataModel.csproj" />
-    <PackageReference Include="ICSharpCode.SharpZipLib.dll" Version="0.85.4.369" />
-    <PackageReference Include="IronPython" Version="2.7.12" />
+    <PackageReference Include="IronPython" Version="3.4.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
   <ItemGroup>

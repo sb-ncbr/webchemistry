@@ -5,11 +5,11 @@ namespace WebChemistry.Queries.Service
     using System.ComponentModel;
     using System.Diagnostics;
     using System.IO;
+    using System.IO.Compression;
     using System.Linq;
     using System.Reflection;
     using System.Text;
     using System.Threading;
-    using ICSharpCode.SharpZipLib.Zip;
     using Newtonsoft.Json;
     using WebChemistry.Framework.Core;
 
@@ -144,8 +144,7 @@ namespace WebChemistry.Queries.Service
         public sealed class ZipWrapper : IDisposable
         {
             readonly FileStream stream;
-            readonly ZipOutputStream zip;
-            readonly StreamWriter writer;
+            readonly ZipArchive zip;
             bool disposed;
 
             static string NormalizePath(string path)
@@ -160,26 +159,25 @@ namespace WebChemistry.Queries.Service
 
             public void AddEntry(string name, Action<TextWriter> content)
             {
-                zip.PutNextEntry(new ZipEntry(NormalizePath(name)));
-                content(writer);
-                writer.Flush();
-                zip.Flush();
-                zip.CloseEntry();
+                var entry = zip.CreateEntry(NormalizePath(name), CompressionLevel.Optimal);
+                using (var entryStream = entry.Open())
+                using (var writer = new StreamWriter(entryStream, Encoding.UTF8))
+                {
+                    content(writer);
+                    writer.Flush();
+                }
             }
 
             public ZipWrapper(string filename)
             {
-                System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
                 stream = File.Create(filename);
-                zip = new ZipOutputStream(stream);
-                writer = new StreamWriter(zip);
+                zip = new ZipArchive(stream, ZipArchiveMode.Create);
             }
 
             public void Dispose()
             {
                 if (disposed) return;
                 disposed = true;
-                writer.Dispose();
                 zip.Dispose();
                 stream.Dispose();
             }

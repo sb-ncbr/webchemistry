@@ -33,11 +33,9 @@
     <WarningLevel>3</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="IronPython" Version="2.7.12" />
+    <PackageReference Include="IronPython" Version="3.4.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-    <PackageReference Include="DynamicLanguageRuntime.Net40.Unofficial" Version="2.6.1003.1" />
-    <PackageReference Include="Microsoft.CompilerServices.AsyncTargetingPack" Version="1.0.0" />
-    <PackageReference Include="System.Reactive" Version="6.0.1" />
+    <PackageReference Include="System.Reactive" Version="6.1.0" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
