@@ -20,9 +20,7 @@
     <ProjectReference Include="..\WebChemistry.Queries.Service.DataModel\WebChemistry.Queries.Service.DataModel.csproj" />
     <PackageReference Include="ICSharpCode.SharpZipLib.dll" Version="0.85.4.369" />
     <PackageReference Include="IronPython" Version="2.7.12" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="10.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="changelog.txt">

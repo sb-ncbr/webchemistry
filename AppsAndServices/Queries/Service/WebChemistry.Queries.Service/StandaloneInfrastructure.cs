@@ -341,9 +341,8 @@ namespace WebChemistry.Queries.Service
         }
     }
 
-    public abstract class ServiceBase<TService, TSettings, TStandaloneSettings, TCustomState>
-        where TService : ServiceBase<TService, TSettings, TStandaloneSettings, TCustomState>, new()
-        where TSettings : class
+    public abstract class ServiceBase<TService, TStandaloneSettings, TCustomState>
+        where TService : ServiceBase<TService, TStandaloneSettings, TCustomState>, new()
         where TStandaloneSettings : class, new()
         where TCustomState : class, new()
     {
@@ -354,18 +353,11 @@ namespace WebChemistry.Queries.Service
         StreamWriter logWriter;
         string standaloneWorkingFolder;
 
-        public bool IsStandalone { get { return true; } }
         public JsonComputationStatus Status { get; private set; }
         public TCustomState CustomState { get; private set; }
-        public TSettings Settings { get; private set; }
         public TStandaloneSettings StandaloneSettings { get; private set; }
         protected string ResultFolder { get; private set; }
         protected bool SuppressProgressUpdate { get; set; }
-
-        protected virtual void RunHostedInternal()
-        {
-            throw new NotSupportedException("Hosted execution is not available in the standalone build.");
-        }
 
         protected abstract void RunStandaloneInternal();
         public abstract AppVersion GetVersion();

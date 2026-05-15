@@ -35,15 +35,12 @@
   <ItemGroup>
     <PackageReference Include="IronPython" Version="2.7.12" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-    <PackageReference Include="QuickGraph" Version="3.6.61119.7" />
     <PackageReference Include="DynamicLanguageRuntime.Net40.Unofficial" Version="2.6.1003.1" />
     <PackageReference Include="Microsoft.CompilerServices.AsyncTargetingPack" Version="1.0.0" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Rx-Core" Version="2.1.30214" />
     <PackageReference Include="Rx-Interfaces" Version="2.1.30214" />
     <PackageReference Include="Rx-PlatformServices" Version="2.1.30214" />
     <PackageReference Include="Rx-Linq" Version="2.1.30214.0" />
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

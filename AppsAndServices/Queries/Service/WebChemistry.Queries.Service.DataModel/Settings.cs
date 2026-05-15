@@ -31,39 +31,6 @@
     /// <summary>
     /// Service settings.
     /// </summary>
-    public class QueriesServiceSettings
-    {
-        /// <summary>
-        /// The queries.
-        /// </summary>
-        public QueryInfo[] Queries { get; set; }
-
-        /// <summary>
-        /// Maximum number of patterns that can be found during one run.
-        /// </summary>
-        public int MotiveCountLimit { get; set; }
-
-        /// <summary>
-        /// Maximum number of patterns that can be identified in a single computation.
-        /// </summary>
-        public long AtomCountLimit { get; set; }
-
-        /// <summary>
-        /// Maximum degree of parallelism.
-        /// </summary>
-        public int MaxParallelism { get; set; }
-
-        public QueriesServiceSettings()
-        {
-            MotiveCountLimit = int.MaxValue;
-            AtomCountLimit = long.MaxValue;
-            MaxParallelism = 8;
-        }
-    }
-
-    /// <summary>
-    /// Service settings.
-    /// </summary>
     public class QueriesStandaloneServiceSettings
     {
         /// <summary>

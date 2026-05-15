@@ -13,7 +13,7 @@
     using WebChemistry.Queries.Core;
     using WebChemistry.Queries.Service.DataModel;
 
-    public partial class QueriesService : ServiceBase<QueriesService, QueriesServiceSettings, QueriesStandaloneServiceSettings, QueriesServiceState>
+    public partial class QueriesService : ServiceBase<QueriesService, QueriesStandaloneServiceSettings, QueriesServiceState>
     {
         public override AppVersion GetVersion()
         {
@@ -25,11 +25,6 @@
             return "Queries";
         }
         
-        string GetMotiveName(string parentId, int index)
-        {
-            return parentId + "_" + index;
-        }
-
         int MaxParallelism = 8;
 
         const int CacheSize = 10000;
@@ -350,11 +345,6 @@
 
                 Log("Found {0} patterns in {1}.", PatternsFoundTotal, totalTime.Elapsed);
             }
-        }
-
-        protected override void RunHostedInternal()
-        {
-            throw new NotSupportedException("Hosted PatternQuery execution depends on the removed Platform project. Use standalone mode instead.");
         }
 
         protected override void RunStandaloneInternal()

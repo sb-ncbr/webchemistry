@@ -8,7 +8,7 @@
     using WebChemistry.Framework.Core;
     using WebChemistry.Queries.Service.DataModel;
 
-    public partial class QueriesService : ServiceBase<QueriesService, QueriesServiceSettings, QueriesStandaloneServiceSettings, QueriesServiceState>
+    public partial class QueriesService : ServiceBase<QueriesService, QueriesStandaloneServiceSettings, QueriesServiceState>
     {
         static string ReadMe = new string[] 
         {
