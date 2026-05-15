@@ -7,7 +7,6 @@
     using System.Linq;
     using WebChemistry.Framework.Core;
     using WebChemistry.Queries.Service.DataModel;
-    using WebChemistry.Platform.Services;
 
     public partial class QueriesService : ServiceBase<QueriesService, QueriesServiceSettings, QueriesStandaloneServiceSettings, QueriesServiceState>
     {

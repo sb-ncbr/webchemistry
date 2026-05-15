@@ -6,8 +6,6 @@
     using WebChemistry.Framework.Core;
     using WebChemistry.Queries.Core;
     using WebChemistry.Queries.Service.DataModel;
-    using WebChemistry.MotiveValidator.Database;
-    using WebChemistry.Platform;
 
     class QueryWrap
     {
@@ -140,97 +138,17 @@
     {
         public bool FailedToInit { get; private set; }
 
-        bool DoValidation;
-        MotiveValidatorDatabaseApp App;
-        MotiveValidatorDatabaseDataInterface Db;
-        
-        readonly HashSet<string> IgnoredNames = new HashSet<string>(new[] {
-            "ALA", "ARG", "ASP", "CYS", "GLN", "GLU", "GLY", "HIS", "ILE", "LEU", "LYS", "MET", "PHE", "PRO", "SER", "THR", "TRP", "TYR", "VAL", "ASN",
-            "A", "C", "G", "T", "U", "DA", "DC", "DG", "DT", "DU", "HOH", "MSE", "UNK"
-        }, StringComparer.OrdinalIgnoreCase);
-
         public void Validate(StructureResultWrap result, 
             Dictionary<string, ComputationStructureWithMetadataEntry> entries, 
             Dictionary<string, QueryWrap> queries,
             QueriesService svc)
         {
-            //svc.Log()
-
-            if (!DoValidation || result.Structure == null || entries.Count == 0) return;
-            
-            var rs = result.Structure.PdbResidues();
-            var toValidate = result.Results
-                .SelectMany(r => r.Motives.SelectMany(m => m.Item1.PdbResidues().Select(x => x)))
-                .Where(r => !r.IsAmino && !r.IsWater && !IgnoredNames.Contains(r.Name))                
-                .Distinct()
-                .GroupBy(r => r.Name)
-                .ToDictionary(g => g.Key, g => g.Select(r => r.Identifier).ToArray(), StringComparer.OrdinalIgnoreCase);
-
-
-            if (toValidate.Count == 0) return;
-
-            var flags = App.GetValidationFlags(result.Structure.Id, toValidate, Db);
-
-            //svc.Log("Validing {0} residues in {1} with {2} results.",
-            //    toValidate.Keys.JoinBy(), result.Structure.Id, flags.Count);
-
-            var flagsInPattern = new HashSet<string>();
-            foreach (var r in result.Results)
-            {
-                var q = queries[r.Query.Id];
-
-                ComputationStructureWithMetadataEntry entry;
-                if (!entries.TryGetValue(r.Query.Id, out entry)) continue;
-
-                ValidationFlagsHelper helper = q.ValidationFlags;
-
-                foreach (var t in r.Motives)
-                {                    
-                    flagsInPattern.Clear();
-                    foreach (var residue in t.Item1.PdbResidues())
-                    {
-                        string[] fs;
-                        if (!flags.TryGetValue(residue.Identifier, out fs) || fs.Length == 0) continue;
-                        entry.ResidueValidationIds[residue.ToString()] = helper.IncludeFlags(fs);
-                        foreach (var f in fs) flagsInPattern.Add(f);
-                    }
-                    if (flagsInPattern.Count > 0)
-                    {
-                        t.Item2.ValidationFlagsId = helper.IncludeFlags(
-                            flagsInPattern.OrderBy(f => f, StringComparer.Ordinal).ToArray());
-                    }
-                }
-            }
+            return;
         }
 
-        public ValidationHelper(bool doValidation, EntityId appId)
+        public ValidationHelper(bool doValidation)
         {
-            if (!doValidation)
-            {
-                DoValidation = false;
-                return;
-            }
-
-            this.DoValidation = true;
-            this.App = MotiveValidatorDatabaseApp.TryLoad(appId);
-
-            if (App == null)
-            {
-                FailedToInit = true;
-                DoValidation = false;
-                return;
-            }
-
-            try
-            {
-                this.Db = new MotiveValidatorDatabaseDataInterface(App, false);
-            }
-            catch
-            {
-                FailedToInit = true;
-                DoValidation = false;
-                return;
-            }
+            FailedToInit = false;
         }
     }
 }

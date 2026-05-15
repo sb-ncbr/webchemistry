@@ -12,10 +12,6 @@
     using WebChemistry.Framework.Core.Pdb;
     using WebChemistry.Queries.Core;
     using WebChemistry.Queries.Service.DataModel;
-    using WebChemistry.Platform;
-    using WebChemistry.Platform.MoleculeDatabase;
-    using WebChemistry.Platform.Services;
-    using WebChemistry.Platform.Users;
 
     public partial class QueriesService : ServiceBase<QueriesService, QueriesServiceSettings, QueriesStandaloneServiceSettings, QueriesServiceState>
     {
@@ -308,7 +304,7 @@
                 {
                     var message = string.Join(",", e.InnerExceptions.Select(x => x.Message).ToArray());
                     Log("Errors ({0}): {1}", e.InnerExceptions.Count, message);
-                    Status.State = Platform.Computation.ComputationState.Failed;
+                    Status.State = ComputationState.Failed;
                     Status.Message = message;
                     SaveStatus();
                     error = true;
@@ -316,7 +312,7 @@
                 catch (Exception e)
                 {
                     Log("Error: {0}", e.Message);
-                    Status.State = Platform.Computation.ComputationState.Failed;
+                    Status.State = ComputationState.Failed;
                     Status.Message = e.Message;
                     SaveStatus();
                     error = true;
@@ -358,41 +354,14 @@
 
         protected override void RunHostedInternal()
         {
-            MaxParallelism = Settings.MaxParallelism;
-            Validator = new ValidationHelper(
-                Settings.DoValidation && Settings.ValidatorId.HasValue, 
-                Settings.ValidatorId.HasValue ? Settings.ValidatorId.Value : new EntityId());
-            Status.Message = "Initializing...";
-            Status.IsIndeterminate = true;
-            SaveStatus();
-
-            if (Settings.MotiveCountLimit > 0) this.PatternCountLimit = Settings.MotiveCountLimit;
-            if (Settings.AtomCountLimit > 0) this.AtomCountLimit = Settings.AtomCountLimit;
-
-            InitQueries(Settings.Queries);
-            var snapshot = DatabaseSnapshot.Load(Computation.GetInputDirectoryId().GetChildId("data"));
-            var structures = snapshot.Snapshot().Select(e => new StructureEntry 
-                {
-                    Provider = () => e.ReadStructure(),
-                    FilenameId = e.FilenameId
-                })
-                .ToArray();
-
-            Execute(structures);
-
-            if (Settings.NotifyUser)
-            {
-                Log("Notifying the user...");
-                if (UserComputationFinishedNotification.TrySend(Settings.NotifyUserConfig, Computation.ShortId)) Log("User notified.");
-                else Log("User notification failed.");
-            }
+            throw new NotSupportedException("Hosted PatternQuery execution depends on the removed Platform project. Use standalone mode instead.");
         }
 
         protected override void RunStandaloneInternal()
         {
             StatisticsOnly = StandaloneSettings.StatisticsOnly;
             MaxParallelism = StandaloneSettings.MaxParallelism;
-            Validator = new ValidationHelper(false, new EntityId());
+            Validator = new ValidationHelper(false);
 
             Status.Message = "Initializing...";
             Status.IsIndeterminate = true;
@@ -416,7 +385,6 @@
             var structures = StandaloneSettings.InputFolders.Select(f => new
                 {
                     Folder = f,
-                    Name = new string(f.Replace('\\', '/').Where(c => EntityId.IsLegalChar(c)).ToArray()),
                     Files = Directory.GetFiles(f).Where(x => StructureReader.IsStructureFilename(x)).ToArray()
                 })
                 .SelectMany(d => d.Files.Select(f => new  StructureEntry

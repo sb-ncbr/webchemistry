@@ -6,7 +6,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Framework\Net\WebChemistry.Framework.Core\WebChemistry.Framework.Core.csproj" />
-    <ProjectReference Include="..\..\..\..\Plaftorm\WebChemistry.Platform\WebChemistry.Platform.csproj" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
 </Project>

@@ -1,8 +1,6 @@
 ﻿namespace WebChemistry.Queries.Service.DataModel
 {
     using System.ComponentModel;
-    using WebChemistry.Platform;
-    using WebChemistry.Platform.Services;
 
     /// <summary>
     /// Query info.
@@ -55,26 +53,6 @@
         /// </summary>
         public int MaxParallelism { get; set; }
 
-        /// <summary>
-        /// Do pattern validation?
-        /// </summary>
-        public bool DoValidation { get; set; }
-
-        /// <summary>
-        /// The entity ID of the validator app.
-        /// </summary>
-        public EntityId? ValidatorId { get; set; }
-
-        /// <summary>
-        /// Notify the user that the computation has finished?
-        /// </summary>
-        public bool NotifyUser { get; set; }
-
-        /// <summary>
-        /// Configuration for user notification.
-        /// </summary>
-        public WebChemistry.Platform.Users.UserComputationFinishedNotificationConfig NotifyUserConfig { get; set; }
-        
         public QueriesServiceSettings()
         {
             MotiveCountLimit = int.MaxValue;
