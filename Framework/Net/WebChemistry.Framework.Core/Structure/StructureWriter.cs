@@ -198,7 +198,6 @@
         /// <param name="structure"></param>
         /// <param name="filename"></param>
         /// <param name="sortAtoms"></param>
-        /// <param name="includeAllConnects"></param>
         public static void WritePdb(this IStructure structure, string filename, bool sortAtoms = true)
         {
             using (var file = File.CreateText(filename)) structure.WritePdb(file, sortAtoms);
@@ -239,7 +238,6 @@
         /// <param name="structure"></param>
         /// <param name="chargeSelector"></param>
         /// <param name="sortAtoms"></param>
-        /// <param name="remark"></param>
         /// <returns></returns>
         public static string ToPqrString(this IStructure structure, Func<IAtom, double> chargeSelector = null, bool sortAtoms = true)
         {

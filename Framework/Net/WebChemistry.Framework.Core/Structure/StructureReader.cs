@@ -355,7 +355,6 @@
         /// </summary>
         /// <param name="filename"></param>
         /// <param name="customId"></param>
-        /// <param name="readerProvider"></param>
         /// <returns></returns>
         public static Maybe<StructureReaderResult> TryRead(string filename, Func<Stream> baseStreamProvider, string customId = null, StructureReaderType customType = StructureReaderType.Auto)
         {
@@ -375,7 +374,6 @@
         /// The current implementation is INCOMPLETE IMPLEMENTATION OF PDB FORMAT (loads only ATOM and HETATM records)!
         /// </summary>
         /// <param name="filename"></param>
-        /// <param name="reader">Reader</param>
         /// <param name="parameters"></param>
         /// <returns>Structure constructed from the file. INCOMPLETE IMPLEMENTATION OF PDB FORMAT!</returns>
         static StructureReaderResult ReadPdb(string filename, Func<TextReader> readerProvider, PdbReaderParams parameters)
@@ -391,7 +389,6 @@
         /// Read PDBQt file.
         /// </summary>
         /// <param name="filename"></param>
-        /// <param name="reader"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
         static StructureReaderResult ReadPdbQt(string filename, Func<TextReader> readerProvider, PdbReaderParams parameters)
@@ -534,7 +531,6 @@
         /// The current implementation is INCOMPLETE IMPLEMENTATION OF MOL1 FORMAT!
         /// If the file contains partial charges, saves them to the "PartialCharge" property.
         /// </summary>
-        /// <param name="reader">input stream</param>
         /// <returns>Structure constructed from the file. INCOMPLETE IMPLEMENTATION OF MOL2 FORMAT!</returns>
         static StructureReaderResult ReadMol2(string filename, Func<TextReader> readerProvider, string customId = null)
         {

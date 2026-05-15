@@ -149,7 +149,6 @@
         /// <summary>
         /// Returns the first child node with the given label.
         /// </summary>
-        /// <param name="name"></param>
         /// <returns></returns>
         public Node GetNode(string label)
         {

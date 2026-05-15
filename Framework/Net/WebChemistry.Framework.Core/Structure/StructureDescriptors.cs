@@ -16,7 +16,6 @@
         /// Get properties.
         /// </summary>
         /// <param name="s"></param>
-        /// <param name="name"></param>
         /// <returns></returns>
         public static StructureDescriptors Descriptors(this IStructure s)
         {
@@ -60,7 +59,6 @@
         /// Try to get the descriptor.
         /// Null if the property does not exist.
         /// </summary>
-        /// <param name="atom"></param>
         /// <returns></returns>
         public object TryGetDescriptor(string name)
         {
@@ -94,8 +92,6 @@
         /// <summary>
         /// create the class.
         /// </summary>
-        /// <param name="parentId"></param>
-        /// <param name="name"></param>
         internal StructureDescriptors()
         {
         }

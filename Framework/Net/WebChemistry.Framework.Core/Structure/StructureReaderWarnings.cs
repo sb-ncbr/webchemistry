@@ -186,12 +186,10 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="a"></param>
         /// <param name="b"></param>
-        /// <param name="message"></param>
-        /// <param name="type"></param>
         public ConectBondLengthReaderWarning(IAtom a, IAtom b)
             : base("Unusual bond length given by CONECT record.", -1)
         {

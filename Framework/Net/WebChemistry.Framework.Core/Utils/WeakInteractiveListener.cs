@@ -54,7 +54,6 @@ namespace WebChemistry.Framework.Utils
         /// <summary>
         /// Initializes a new instances of the WeakEventListener class.
         /// </summary>
-        /// <param name="rootInstance">Instance subscribing to the event.</param>
         public WeakInteractiveListener(TInstance instance, IInteractive source)
         {
             if (null == instance)

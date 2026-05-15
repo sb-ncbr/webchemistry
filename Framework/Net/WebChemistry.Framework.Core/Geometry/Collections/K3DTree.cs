@@ -353,7 +353,6 @@
         /// Finds the nearest element. Priority is squared distance.
         /// </summary>
         /// <param name="pivot"></param>
-        /// <param name="n"></param>
         /// <returns></returns>
         public PriorityValuePair<double, TValue> Nearest(Vector3D pivot)
         {

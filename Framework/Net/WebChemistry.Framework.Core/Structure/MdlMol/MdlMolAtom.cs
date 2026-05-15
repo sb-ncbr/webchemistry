@@ -67,7 +67,6 @@
         /// </summary>
         /// <param name="id"></param>
         /// <param name="elementSymbol"></param>
-        /// <param name="partialCharge"></param>
         private MdlMolAtom(int id,
                         ElementSymbol elementSymbol, Vector3D invariantPosition)
             : base(id, elementSymbol, invariantPosition)
@@ -79,7 +78,6 @@
         /// </summary>
         /// <param name="id"></param>
         /// <param name="elementSymbol"></param>
-        /// <param name="partialCharge"></param>
         /// <returns></returns>
         public static IAtom Create(int id,
                         ElementSymbol elementSymbol,

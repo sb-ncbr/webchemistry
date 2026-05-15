@@ -56,7 +56,6 @@ namespace WebChemistry.Framework.Utils
         /// <summary>
         /// Initializes a new instances of the WeakEventListener class.
         /// </summary>
-        /// <param name="rootInstance">Instance subscribing to the event.</param>
         public WeakNotifyPropertyChangedListener(TInstance instance, TSource source)
         {
             if (null == instance)

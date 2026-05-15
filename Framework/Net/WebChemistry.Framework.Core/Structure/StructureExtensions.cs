@@ -149,7 +149,6 @@
         /// Translates the structure by the given vector.
         /// </summary>
         /// <param name="structure"></param>
-        /// <param name="by"></param>
         public static void TransformAtomPositions(this IStructure structure, Func<IAtom, Vector3D> newPosition)
         {
             foreach (Atom a in structure.Atoms)

@@ -85,7 +85,6 @@
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="elementSymbol"></param>
-        /// <param name="partialCharge"></param>
         private Mol2Atom(int id,
                         ElementSymbol elementSymbol, string atomType,
                         string name,
