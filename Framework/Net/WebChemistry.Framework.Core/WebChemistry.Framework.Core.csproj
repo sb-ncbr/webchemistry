@@ -18,7 +18,6 @@
     <NoWarn>1591,1572,1573,1574</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Structure\Trajectory\" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Rx-Linq" Version="2.1.30214" />
     <PackageReference Include="System.Interactive" Version="3.0.0" />

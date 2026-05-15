@@ -168,44 +168,6 @@
         }
 
         /// <summary>
-        /// Return a structure type from filename.
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
-        public static StructureType GetStructureType(string filename)
-        {
-            if (filename.EndsWith(".gz", StringComparison.OrdinalIgnoreCase)) filename = filename.Substring(0, filename.Length - 3);
-
-            string ext = filename.Substring(filename.LastIndexOf('.')).ToLowerInvariant();
-            if (!ext.EqualOrdinalIgnoreCase(".pdbqt") && ext.StartsWith(".pdb", StringComparison.OrdinalIgnoreCase))
-            {
-                return StructureType.Pdb;
-            }
-            switch (ext)
-            {
-                case ".mol":
-                case ".mdl":
-                case ".sdf":
-                case ".sd":
-                    return StructureType.Mol;
-                case ".pdbqt":
-                    return StructureType.PdbQt;
-                case ".ml2":
-                case ".mol2":
-                    return StructureType.Mol2;
-                case ".pqr":
-                    return StructureType.Pqr;
-                case ".mmcif":
-                case ".cif":
-                    return StructureType.Pdb;
-                default:
-                    break;
-            }
-
-            return StructureType.Unknown;
-        }
-
-        /// <summary>
         /// The file name without extension.
         /// </summary>
         /// <param name="filename"></param>
