@@ -144,10 +144,10 @@
         MotiveValidatorDatabaseApp App;
         MotiveValidatorDatabaseDataInterface Db;
         
-        readonly HashSet<string> IgnoredNames = new[] {
+        readonly HashSet<string> IgnoredNames = new HashSet<string>(new[] {
             "ALA", "ARG", "ASP", "CYS", "GLN", "GLU", "GLY", "HIS", "ILE", "LEU", "LYS", "MET", "PHE", "PRO", "SER", "THR", "TRP", "TYR", "VAL", "ASN",
             "A", "C", "G", "T", "U", "DA", "DC", "DG", "DT", "DU", "HOH", "MSE", "UNK"
-        }.ToHashSet(StringComparer.OrdinalIgnoreCase);
+        }, StringComparer.OrdinalIgnoreCase);
 
         public void Validate(StructureResultWrap result, 
             Dictionary<string, ComputationStructureWithMetadataEntry> entries, 
@@ -234,4 +234,3 @@
         }
     }
 }
-
