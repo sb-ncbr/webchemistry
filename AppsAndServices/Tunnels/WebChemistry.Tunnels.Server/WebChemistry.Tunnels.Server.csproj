@@ -1,25 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TargetFramework>net10.0</TargetFramework>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B30221F3-F54E-4B71-A634-816E1CAECA7B}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebChemistry.Tunnels.Server</RootNamespace>
     <AssemblyName>mole2</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
-    <FileAlignment>512</FileAlignment>
     <SccProjectName>Svn</SccProjectName>
     <SccLocalPath>Svn</SccLocalPath>
     <SccAuxPath>Svn</SccAuxPath>
     <SccProvider>SubversionScc</SccProvider>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -35,67 +24,26 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
     <DebugType>none</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
     <WarningLevel>3</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="IronPython" Version="2.7.12" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="QuickGraph" Version="3.6.61119.7" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Computation.cs" />
-    <Compile Include="Config.cs" />
-    <Compile Include="Export.cs" />
-    <Compile Include="PatternQueryHelper.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="DynamicLanguageRuntime.Net40.Unofficial">
-      <Version>2.6.1003.1</Version>
-    </PackageReference>
+    <PackageReference Include="DynamicLanguageRuntime.Net40.Unofficial" Version="2.6.1003.1" />
     <PackageReference Include="Microsoft.CompilerServices.AsyncTargetingPack" Version="1.0.0" />
-    <PackageReference Include="Rx-Core">
-      <Version>2.1.30214</Version>
-    </PackageReference>
-    <PackageReference Include="Rx-Interfaces">
-      <Version>2.1.30214</Version>
-    </PackageReference>
-    <PackageReference Include="Rx-PlatformServices">
-      <Version>2.1.30214</Version>
-    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Rx-Core" Version="2.1.30214" />
+    <PackageReference Include="Rx-Interfaces" Version="2.1.30214" />
+    <PackageReference Include="Rx-PlatformServices" Version="2.1.30214" />
     <PackageReference Include="Rx-Linq" Version="2.1.30214.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -105,29 +53,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Framework\Net\WebChemistry.Framework.Core\WebChemistry.Framework.Core.csproj">
-      <Project>{2a6559f9-cd2b-496c-b774-935fec3ed0e4}</Project>
-      <Name>WebChemistry.Framework.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Queries\WebChemistry.Queries.Core\WebChemistry.Queries.Core.csproj">
-      <Project>{7439a025-3a82-4270-8647-7e0f006bd065}</Project>
-      <Name>WebChemistry.Queries.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebChemistry.Tunnels.Core\WebChemistry.Tunnels.Core.csproj">
-      <Project>{e6e2bf63-7b87-4c44-96c3-aad4460149fe}</Project>
-      <Name>WebChemistry.Tunnels.Core</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\..\Framework\Net\WebChemistry.Framework.Core\WebChemistry.Framework.Core.csproj" />
+    <ProjectReference Include="..\..\Queries\WebChemistry.Queries.Core\WebChemistry.Queries.Core.csproj" />
+    <ProjectReference Include="..\WebChemistry.Tunnels.Core\WebChemistry.Tunnels.Core.csproj" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
