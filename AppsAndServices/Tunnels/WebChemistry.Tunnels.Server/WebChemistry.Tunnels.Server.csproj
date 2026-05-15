@@ -37,10 +37,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="DynamicLanguageRuntime.Net40.Unofficial" Version="2.6.1003.1" />
     <PackageReference Include="Microsoft.CompilerServices.AsyncTargetingPack" Version="1.0.0" />
-    <PackageReference Include="Rx-Core" Version="2.1.30214" />
-    <PackageReference Include="Rx-Interfaces" Version="2.1.30214" />
-    <PackageReference Include="Rx-PlatformServices" Version="2.1.30214" />
-    <PackageReference Include="Rx-Linq" Version="2.1.30214.0" />
+    <PackageReference Include="System.Reactive" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

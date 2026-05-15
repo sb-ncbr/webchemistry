@@ -6,7 +6,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="QuickGraph" Version="3.6.61119.7" />
-    <PackageReference Include="Rx-Linq" Version="2.1.30214.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework\Net\WebChemistry.Framework.Core\WebChemistry.Framework.Core.csproj" />
