@@ -195,6 +195,8 @@ namespace WebChemistry.Queries.Service
         public string ExecutableName { get; set; }
         public AppVersion Version { get; set; }
         public object Example { get; set; }
+        public string ExampleJson { get; set; }
+        public string Description { get; set; }
         public HelpOutputStructure OutputStructure { get; set; }
     }
 
@@ -509,19 +511,27 @@ namespace WebChemistry.Queries.Service
         public static void Run(string[] commandLineArgs)
         {
             var svc = new TService();
+            var appName = AppDomain.CurrentDomain.FriendlyName;
+
             Console.WriteLine("{0} {1}, (c) David Sehnal", svc.GetName(), svc.GetVersion());
             Console.WriteLine();
 
-            if (commandLineArgs.Length == 0 || commandLineArgs.Length > 3)
+            // Handle no arguments or too many arguments
+            if (commandLineArgs.Length == 0)
             {
-                var appName = AppDomain.CurrentDomain.FriendlyName;
-                Console.WriteLine("== Usage ==");
-                Console.WriteLine("  {0} workingFolder standaloneConfig.json", appName);
-                Console.WriteLine("  {0} --version", appName);
-                Console.WriteLine("  {0} --help", appName);
-                Console.WriteLine("  {0} --wiki-help output.txt", appName);
+                PrintUsage(appName);
                 Console.WriteLine();
-                Console.WriteLine("Hosted Platform mode has been removed from this build.");
+                Console.WriteLine("Error: No arguments provided. Please specify a command.");
+                Environment.Exit(1);
+                return;
+            }
+
+            if (commandLineArgs.Length > 3)
+            {
+                PrintUsage(appName);
+                Console.WriteLine();
+                Console.WriteLine("Error: Too many arguments provided.");
+                Environment.Exit(1);
                 return;
             }
 
@@ -529,32 +539,120 @@ namespace WebChemistry.Queries.Service
             Thread.CurrentThread.CurrentUICulture = svc.invariantCulture;
 
             var firstArg = commandLineArgs[0].ToLowerInvariant();
-            if (firstArg == "--version")
+
+            // Handle global options
+            if (firstArg == "--version" || firstArg == "-v")
             {
                 Console.WriteLine(svc.GetVersion());
                 return;
             }
-            if (firstArg == "--help")
+
+            if (firstArg == "--help" || firstArg == "-h" || firstArg == "/?")
             {
-                svc.ShowHelp();
+                PrintDetailedHelp(appName, svc);
                 return;
             }
+
             if (firstArg == "--wiki-help")
             {
-                File.WriteAllText(commandLineArgs[1], svc.MakeWikiHelp());
-                Console.WriteLine("Help generated.");
+                if (commandLineArgs.Length < 2)
+                {
+                    Console.WriteLine("Error: --wiki-help requires an output file path.");
+                    Console.WriteLine("Usage: {0} --wiki-help <output.txt>", appName);
+                    Environment.Exit(1);
+                    return;
+                }
+
+                try
+                {
+                    var outputPath = commandLineArgs[1];
+                    var outputDir = Path.GetDirectoryName(outputPath);
+                    if (!string.IsNullOrEmpty(outputDir) && !Directory.Exists(outputDir))
+                    {
+                        Directory.CreateDirectory(outputDir);
+                    }
+                    File.WriteAllText(outputPath, svc.MakeWikiHelp());
+                    Console.WriteLine("Wiki help generated successfully at: {0}", Path.GetFullPath(outputPath));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error writing wiki help file: {0}", ex.Message);
+                    Environment.Exit(1);
+                }
                 return;
             }
+
             if (firstArg == "--hosted")
             {
                 Console.WriteLine("Hosted Platform mode has been removed from this build. Use standalone mode instead.");
                 return;
             }
 
+            // Validate run mode arguments
+            if (commandLineArgs.Length != 2)
+            {
+                PrintUsage(appName);
+                Console.WriteLine();
+                Console.WriteLine("Error: Running in standalone mode requires exactly 2 arguments: <workingFolder> <config.json>");
+                Console.WriteLine("       Found {0} argument(s).", commandLineArgs.Length);
+                Environment.Exit(1);
+                return;
+            }
+
+            var workingFolder = commandLineArgs[0];
+            var configPath = commandLineArgs[1];
+
+            // Validate working folder
+            if (string.IsNullOrWhiteSpace(workingFolder))
+            {
+                Console.WriteLine("Error: Working folder path cannot be empty.");
+                Environment.Exit(1);
+                return;
+            }
+
+            try
+            {
+                // Create working folder if it doesn't exist
+                if (!Directory.Exists(workingFolder))
+                {
+                    Console.WriteLine("Creating working folder: {0}", Path.GetFullPath(workingFolder));
+                    Directory.CreateDirectory(workingFolder);
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                Console.WriteLine("Error: Access denied to working folder: {0}", workingFolder);
+                Environment.Exit(1);
+                return;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error accessing working folder '{0}': {1}", workingFolder, ex.Message);
+                Environment.Exit(1);
+                return;
+            }
+
+            // Validate config file
+            if (string.IsNullOrWhiteSpace(configPath))
+            {
+                Console.WriteLine("Error: Configuration file path cannot be empty.");
+                Environment.Exit(1);
+                return;
+            }
+
+            if (!File.Exists(configPath))
+            {
+                Console.WriteLine("Error: Configuration file not found: {0}", Path.GetFullPath(configPath));
+                Console.WriteLine();
+                Console.WriteLine("Please ensure the configuration file exists and the path is correct.");
+                Console.WriteLine("You can create a configuration file based on the example shown in --help.");
+                Environment.Exit(1);
+                return;
+            }
+
             svc.Timer = Stopwatch.StartNew();
             svc.LastUpdatedElapsed = TimeSpan.FromSeconds(0);
-            svc.standaloneWorkingFolder = commandLineArgs[0];
-            if (!Directory.Exists(svc.standaloneWorkingFolder)) Directory.CreateDirectory(svc.standaloneWorkingFolder);
+            svc.standaloneWorkingFolder = workingFolder;
 
             svc.Status = JsonComputationStatus.Open(Path.Combine(svc.standaloneWorkingFolder, "status.json"));
             svc.Status.ServiceVersion = svc.GetVersion().ToString();
@@ -562,12 +660,184 @@ namespace WebChemistry.Queries.Service
             svc.Status.Message = "Running...";
             svc.Status.StartedTime = DateTimeService.GetCurrentTime();
             svc.CustomState = new TCustomState();
-            svc.StandaloneSettings = JsonHelper.ReadJsonFile<TStandaloneSettings>(commandLineArgs[1]);
+
+            try
+            {
+                svc.StandaloneSettings = JsonHelper.ReadJsonFile<TStandaloneSettings>(configPath);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error reading configuration file '{0}': {1}", configPath, ex.Message);
+                Console.WriteLine();
+                Console.WriteLine("Please ensure the configuration file is valid JSON with the correct structure.");
+                Environment.Exit(1);
+                return;
+            }
+
             svc.SaveStatus();
 
             svc.ResultFolder = Path.Combine(svc.standaloneWorkingFolder, "result");
             if (!Directory.Exists(svc.ResultFolder)) Directory.CreateDirectory(svc.ResultFolder);
             svc.RunStandalone();
+        }
+
+        static void PrintUsage(string appName)
+        {
+            Console.WriteLine("== Usage ==");
+            Console.WriteLine();
+            Console.WriteLine("  Standalone Mode:");
+            Console.WriteLine("    {0} <workingFolder> <config.json>", appName);
+            Console.WriteLine();
+            Console.WriteLine("  Options:");
+            Console.WriteLine("    {0} --version, -v              Show version information", appName);
+            Console.WriteLine("    {0} --help, -h, /?             Show detailed help message", appName);
+            Console.WriteLine("    {0} --wiki-help <output.txt>   Generate wiki documentation", appName);
+            Console.WriteLine();
+            Console.WriteLine("Examples:");
+            Console.WriteLine("    {0} ./output ./settings.json", appName);
+            Console.WriteLine("    {0} --help", appName);
+            Console.WriteLine("    {0} --wiki-help documentation.txt", appName);
+        }
+
+        static void PrintDetailedHelp(string appName, TService svc)
+        {
+            var config = MakeDetailedHelpConfig(appName, svc);
+
+            Console.WriteLine("================================================================================");
+            Console.WriteLine("{0} - Pattern Query Service", config.AppName);
+            Console.WriteLine("Version {0}", config.Version);
+            Console.WriteLine("================================================================================");
+            Console.WriteLine();
+
+            Console.WriteLine("== DESCRIPTION ==");
+            Console.WriteLine();
+            Console.WriteLine(config.Description);
+            Console.WriteLine();
+
+            Console.WriteLine("== USAGE ==");
+            Console.WriteLine();
+            Console.WriteLine("  Standalone Mode (Local Execution):");
+            Console.WriteLine("    {0} <workingFolder> <config.json>", appName);
+            Console.WriteLine();
+            Console.WriteLine("    workingFolder  - Directory where results and logs will be stored");
+            Console.WriteLine("    config.json    - JSON configuration file with query definitions");
+            Console.WriteLine();
+
+            Console.WriteLine("  Global Options:");
+            Console.WriteLine("    --version, -v           Display version information and exit");
+            Console.WriteLine("    --help, -h, /?          Display this detailed help message");
+            Console.WriteLine("    --wiki-help <file>      Generate wiki documentation to specified file");
+            Console.WriteLine();
+
+            Console.WriteLine("== EXAMPLES ==");
+            Console.WriteLine();
+            Console.WriteLine("  1. Run with configuration file:");
+            Console.WriteLine("     {0} ./results ./settings.json", appName);
+            Console.WriteLine();
+            Console.WriteLine("  2. Show version:");
+            Console.WriteLine("     {0} --version", appName);
+            Console.WriteLine();
+            Console.WriteLine("  3. Generate wiki documentation:");
+            Console.WriteLine("     {0} --wiki-help ./docs/wiki.txt", appName);
+            Console.WriteLine();
+
+            Console.WriteLine("== CONFIGURATION FILE FORMAT ==");
+            Console.WriteLine();
+            Console.WriteLine("The configuration file must be valid JSON with the following structure:");
+            Console.WriteLine();
+            Console.WriteLine(config.ExampleJson);
+            Console.WriteLine();
+
+            Console.WriteLine("== CONFIGURATION ATTRIBUTES ==");
+            Console.WriteLine();
+            PrintConfigurationAttributes(typeof(TStandaloneSettings));
+
+            Console.WriteLine("== OUTPUT STRUCTURE ==");
+            Console.WriteLine();
+            Console.WriteLine("After successful execution, the working folder will contain:");
+            Console.WriteLine();
+            Console.WriteLine(config.OutputStructure.StandardStructure.FormatToConsole());
+            Console.WriteLine();
+            Console.WriteLine("Application-specific output:");
+            Console.WriteLine(config.OutputStructure.AppSpecificStructure.FormatToConsole());
+            Console.WriteLine();
+
+            Console.WriteLine("== NOTES ==");
+            Console.WriteLine();
+            Console.WriteLine("* The working folder will be created if it does not exist.");
+            Console.WriteLine("* Results are stored in the 'result' subfolder as a ZIP archive.");
+            Console.WriteLine("* Progress and status information is written to 'status.json'.");
+            Console.WriteLine("* All console output is logged to 'log.txt'.");
+            Console.WriteLine("* Hosted Platform mode has been removed from this build.");
+            Console.WriteLine();
+            Console.WriteLine("================================================================================");
+        }
+
+        static class HelpConfig
+        {
+            public static string Description = @"The Pattern Query Service enables fast detection of biomacromolecular
+structural patterns in protein structure files. It processes input structures
+from specified folders and identifies patterns defined by PatternQuery
+expressions, storing results in various formats for further analysis.";
+        }
+
+        static ServiceHelpConfig MakeDetailedHelpConfig(string appName, TService svc)
+        {
+            var sampleSettings = svc.SampleStandaloneSettings();
+            var exampleJson = sampleSettings.ToJsonString(true);
+
+            return new ServiceHelpConfig
+            {
+                AppName = svc.GetName(),
+                ExecutableName = appName,
+                Version = svc.GetVersion(),
+                Example = sampleSettings,
+                ExampleJson = exampleJson,
+                Description = HelpConfig.Description,
+                OutputStructure = new HelpOutputStructure
+                {
+                    StandardStructure = HelpFolder("[WorkingDirectory]", "Working directory of the application.",
+                        HelpFolder("result", "Contains the result of the computation.",
+                            HelpFile("result.zip", "Complete results packaged as a ZIP archive.")),
+                        HelpFile("log.txt", "Contains the console output of the application."),
+                        HelpFile("status.json", "Contains general information about the computation progress and status.")),
+                    AppSpecificStructure = svc.MakeOutputStructure()
+                }
+            };
+        }
+
+        static void PrintConfigurationAttributes(Type type)
+        {
+            foreach (var p in type.GetProperties())
+            {
+                var description = p.GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() as DescriptionAttribute;
+                var defaultValue = p.GetCustomAttributes(typeof(DefaultValueAttribute), false).FirstOrDefault() as DefaultValueAttribute;
+                var typeName = GetTypeName(p);
+
+                Console.WriteLine("* {0} [ {1} ]", p.Name, typeName);
+                if (defaultValue != null)
+                {
+                    Console.WriteLine("  Default value: {0}", defaultValue.Value);
+                }
+                if (description != null)
+                {
+                    Console.WriteLine("  {0}", ServiceHelpGenerator.MakeLines(description.Description, 2));
+                }
+                Console.WriteLine();
+            }
+        }
+
+        static string GetTypeName(PropertyInfo p)
+        {
+            var nameAttribute = p.GetCustomAttributes(false)
+                .FirstOrDefault(a => a.GetType().Name == "HelpTypeNameAttribute");
+            if (nameAttribute != null)
+            {
+                var prop = nameAttribute.GetType().GetProperty("Name");
+                var value = prop != null ? prop.GetValue(nameAttribute) as string : null;
+                if (!string.IsNullOrEmpty(value)) return value;
+            }
+            return p.PropertyType.Name;
         }
     }
 }
