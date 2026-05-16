@@ -374,16 +374,28 @@
 
             InitQueries(StandaloneSettings.Queries);
 
-            var structures = StandaloneSettings.InputFolders.Select(f => new
+            var structures = StandaloneSettings.InputFolders.Select(f => new DirectoryInfo(f))
+                .SelectMany(dir =>
                 {
-                    Folder = f,
-                    Files = Directory.GetFiles(f).Where(x => StructureReader.IsStructureFilename(x)).ToArray()
+                    var files = Directory.GetFiles(dir.FullName, "*", SearchOption.AllDirectories)
+                        .Where(x => StructureReader.IsStructureFilename(x))
+                        .ToArray();
+
+                    return files.Select(file =>
+                    {
+                        var fileInfo = new FileInfo(file);
+                        var relativePath = fileInfo.DirectoryName.Substring(dir.FullName.Length).TrimStart(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+                        var structureId = string.IsNullOrEmpty(relativePath)
+                            ? StructureReader.GetStructureIdFromFilename(file)
+                            : relativePath.Replace(Path.DirectorySeparatorChar, '_').Replace(Path.AltDirectorySeparatorChar, '_') + "__" + StructureReader.GetStructureIdFromFilename(file);
+
+                        return new StructureEntry
+                        {
+                            Provider = () => StructureReader.Read(file, structureId),
+                            FilenameId = structureId
+                        };
+                    });
                 })
-                .SelectMany(d => d.Files.Select(f => new  StructureEntry
-                { 
-                    Provider = () => StructureReader.Read(f),
-                    FilenameId = StructureReader.GetStructureIdFromFilename(f)
-                }))
                 .ToArray();
             Execute(structures);
         }
