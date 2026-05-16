@@ -237,10 +237,11 @@
         public abstract AtomPropertiesBase Renamed(string newName);
 
         /// <summary>
-        /// create the class.
+        /// Creates the class.
         /// </summary>
-        /// <param name="parentId"></param>
-        /// <param name="name"></param>
+        /// <param name="parentId">The parent identifier.</param>
+        /// <param name="name">The name of the property.</param>
+        /// <param name="tag">An optional tag for additional metadata.</param>
         protected AtomPropertiesBase(string parentId, string name, string tag)
         {
             this.ParentId = parentId;

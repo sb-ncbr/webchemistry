@@ -562,8 +562,9 @@
         /// <summary>
         /// Tokenize the current line.
         /// </summary>
-        /// <param name="tokenIndex"></param>
-        /// <returns></returns>
+        /// <param name="tokenIndex">The index of the token to extract.</param>
+        /// <param name="skipFirst">If true, skips the first character of the line.</param>
+        /// <returns>The starting position of the token.</returns>
         int TokenizeCurrentLine(int tokenIndex, bool skipFirst = false)
         {
             var input = skipFirst ? CurrentLineText.Substring(1) : CurrentLineText;

@@ -864,7 +864,7 @@ namespace WebChemistry.Tunnels.Server
             catch (Exception e)
             {
                 Console.WriteLine("Error creating working directory: {0}", e.Message);
-                throw e;
+                throw;
             }
 
             if (Computation.HasError)
@@ -881,7 +881,7 @@ namespace WebChemistry.Tunnels.Server
             catch (Exception e)
             {
                 WriteOutputError(e.Message);
-                throw e;
+                throw;
             }
         }
 

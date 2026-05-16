@@ -90,10 +90,11 @@
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the atom.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="elementSymbol"></param>
+        /// <param name="id">The unique identifier for the atom.</param>
+        /// <param name="elementSymbol">The element symbol of the atom.</param>
+        /// <param name="invariantPosition">The invariant position used for structural comparisons.</param>
         private PdbQtAtom(int id, ElementSymbol elementSymbol, Vector3D invariantPosition)
             : base(id, elementSymbol, invariantPosition)
         {
@@ -103,23 +104,24 @@
         /// <summary>
         /// Creates an instance of a PDBAtom.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="elementSymbol"></param>
-        /// <param name="name"></param>
-        /// <param name="recordName"></param>
-        /// <param name="serialNumber"></param>
-        /// <param name="residueName"></param>
-        /// <param name="residueSequenceNumber"></param>
-        /// <param name="insertionResidueCode"></param>
-        /// <param name="chainIdentifier"></param>
-        /// <param name="alternateLocationIdentifier"></param>
-        /// <param name="occupancy"></param>
-        /// <param name="temperatureFactor"></param>
-        /// <param name="segmentIdentifier"></param>
-        /// <param name="charge"></param>
-        /// <param name="position"></param>
-        /// <param name="partialCharge"></param>
-        /// <returns></returns>
+        /// <param name="id">The unique identifier for the atom.</param>
+        /// <param name="elementSymbol">The element symbol of the atom.</param>
+        /// <param name="name">The name of the atom.</param>
+        /// <param name="recordName">The record name (ATOM or HETATM).</param>
+        /// <param name="serialNumber">The serial number of the atom.</param>
+        /// <param name="entityId">The entity identifier.</param>
+        /// <param name="residueName">The name of the residue.</param>
+        /// <param name="residueSequenceNumber">The residue sequence number.</param>
+        /// <param name="insertionResidueCode">The insertion code for the residue.</param>
+        /// <param name="chainIdentifier">The chain identifier.</param>
+        /// <param name="alternateLocationIdentifier">The alternate location indicator.</param>
+        /// <param name="occupancy">The occupancy value.</param>
+        /// <param name="temperatureFactor">The temperature factor (B-factor).</param>
+        /// <param name="segmentIdentifier">The segment identifier.</param>
+        /// <param name="charge">The charge of the atom.</param>
+        /// <param name="partialCharge">The partial charge of the atom.</param>
+        /// <param name="position">The 3D position of the atom.</param>
+        /// <returns>A new PdbQtAtom instance.</returns>
         public static IAtom Create(int id,
                        ElementSymbol elementSymbol,
                        string name = "",

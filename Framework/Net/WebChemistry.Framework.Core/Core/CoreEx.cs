@@ -164,9 +164,10 @@
         /// <summary>
         /// Creates an observer for an observable collection
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">The type of elements in the collection.</typeparam>
+        /// <param name="collection">The collection to observe.</param>
+        /// <param name="scheduler">The scheduler to use for notifications. If null, the current thread scheduler is used.</param>
+        /// <returns>A new collection changed observer.</returns>
         public static CollectionChangedObserver<T> ObserveCollectionChanged<T>(this INotifyCollectionChanged collection, IScheduler scheduler = null)
         {
             return new CollectionChangedObserver<T>(collection, scheduler);
@@ -175,9 +176,10 @@
         /// <summary>
         /// Creates an observer for an observable collection
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">The type of elements in the collection.</typeparam>
+        /// <param name="collection">The collection to observe.</param>
+        /// <param name="scheduler">The scheduler to use for notifications. If null, the current thread scheduler is used.</param>
+        /// <returns>A new collection changed observer.</returns>
         public static CollectionChangedObserver<T> ObserveCollectionChanged<T>(this ObservableCollection<T> collection, IScheduler scheduler = null)
         {
             return new CollectionChangedObserver<T>(collection, scheduler);
@@ -331,9 +333,10 @@
         /// <summary>
         /// Converts an Enumerable of T to a HashSet of T
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="xs"></param>
-        /// <returns>HashSet of the input enumerable</returns>
+        /// <typeparam name="T">The type of elements in the enumerable.</typeparam>
+        /// <param name="xs">The enumerable to convert.</param>
+        /// <param name="comparer">The equality comparer to use. If null, the default equality comparer is used.</param>
+        /// <returns>A new HashSet containing the elements from the enumerable.</returns>
         public static HashSet<T> ToHashSet<T>(this IEnumerable<T> xs, IEqualityComparer<T> comparer = null)
         {
             if (xs == null) return null;
@@ -353,9 +356,9 @@
         /// <summary>
         /// Converts the enumerable to a randomly ordered array.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="xs"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">The type of elements in the enumerable.</typeparam>
+        /// <param name="xs">The enumerable to reorder.</param>
+        /// <returns>A new array with elements in random order.</returns>
         public static T[] ToRandomlyOrderedArray<T>(this IEnumerable<T> xs)
         {
             var randomOrder = xs.ToArray();
@@ -372,8 +375,8 @@
         /// <summary>
         /// Randomly shuffle elements in the list.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="xs"></param>
+        /// <typeparam name="T">The type of elements in the list.</typeparam>
+        /// <param name="xs">The list to shuffle.</param>
         public static void Shuffle<T>(this IList<T> xs)
         {
             for (int i = xs.Count - 1; i > 0; i--)
@@ -388,8 +391,10 @@
         /// <summary>
         /// Get a random sample from an array.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="xs"></param>
+        /// <typeparam name="T">The type of elements in the array.</typeparam>
+        /// <param name="xs">The array to sample from.</param>
+        /// <param name="count">The number of elements to sample.</param>
+        /// <returns>An array containing the random sample.</returns>
         public static T[] RandomSample<T>(this IList<T> xs, int count)
         {
             var ret = new T[Math.Min(count, xs.Count)];

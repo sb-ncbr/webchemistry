@@ -183,13 +183,12 @@
         /// </summary>
         /// <remarks>
         /// <para>
-        /// This property will be automatically set if <see cref="ReadHeaderRecord"/> or <see cref="ReadHeaderRecordAsync"/> is called. Alternatively, it can be set explicitly in the case where the underlying
+        /// This property will be automatically set if <see cref="ReadHeaderRecord"/> is called. Alternatively, it can be set explicitly in the case where the underlying
         /// data source does not itself contain a header record, but the structure of the data is known.
         /// </para>
         /// <para>
-        /// Any <see cref="DataRecord"/> produced by this <c>CsvReader</c> will have its <see cref="DataRecord.HeaderRecord"/> property set to the value of this property. Setting a header record allows 
+        /// Any <see cref="DataRecord"/> produced by this <c>CsvReader</c> will have its <see cref="DataRecord.HeaderRecord"/> property set to the value of this property. Setting a header record allows
         /// the values within data records to be accessed both by index and by column name.
-        /// <see cref="DataRecord"/>
         /// </para>
         /// <para>
         /// Any attempt to set this property when the first record has already been read will result in an exception.
@@ -335,7 +334,7 @@
         /// </para>
         /// </remarks>
         /// <returns>
-        /// The <see cref="Kent.Boogaart.KBCsv.HeaderRecord"/> that was read, also available via the <see cref="HeaderRecord"/> property. If no records are left, this method returns <see langword="null"/>.
+        /// The <see cref="HeaderRecord"/> that was read, also available via the <see cref="HeaderRecord"/> property. If no records are left, this method returns <see langword="null"/>.
         /// </returns>
         public HeaderRecord ReadHeaderRecord()
         {

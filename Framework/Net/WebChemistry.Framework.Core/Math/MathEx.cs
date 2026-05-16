@@ -85,11 +85,11 @@
         }
 
         /// <summary>
-        /// 
+        /// Computes the angle between two vectors.
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <returns>Angle in radians</returns>
+        /// <param name="a">The first vector.</param>
+        /// <param name="b">The second vector.</param>
+        /// <returns>Angle in radians.</returns>
         public static double Angle(Vector3D a, Vector3D b)
         {
             return System.Math.Acos(Vector3D.DotProduct(a, b) / System.Math.Sqrt(a.LengthSquared * b.LengthSquared));
@@ -98,9 +98,9 @@
         /// <summary>
         /// Adds 2 vectors. Checks dimensions.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="x">The first vector.</param>
+        /// <param name="y">The second vector.</param>
+        /// <returns>The sum of the two vectors.</returns>
         public static Vector Add(this Vector x, Vector y)
         {
             int dim = x.Dimension;
@@ -121,9 +121,10 @@
         /// <summary>
         /// Does not check for dimensions (slightly faster than Add)
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="x">The first vector.</param>
+        /// <param name="y">The second vector.</param>
+        /// <param name="dim">The dimension of the vectors.</param>
+        /// <returns>The sum of the two vectors.</returns>
         public static Vector AddFast(this Vector x, Vector y, int dim)
         {
             double[] ret = new double[dim];
@@ -138,9 +139,9 @@
         /// <summary>
         /// Subtracts 2 vectors. Checks dimensions.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="x">The first vector.</param>
+        /// <param name="y">The second vector.</param>
+        /// <returns>The difference of the two vectors.</returns>
         public static Vector Subtract(this Vector x, Vector y)
         {
             int dim = x.Dimension;
@@ -161,9 +162,10 @@
         /// <summary>
         /// Does not check for dimensions (slightly faster than Subtract)
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="x">The first vector.</param>
+        /// <param name="y">The second vector.</param>
+        /// <param name="dim">The dimension of the vectors.</param>
+        /// <returns>The difference of the two vectors.</returns>
         public static Vector SubtractFast(this Vector x, Vector y, int dim)
         {
             double[] ret = new double[dim];
@@ -178,9 +180,9 @@
         /// <summary>
         /// Dot product. Checks dimensions.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="x">The first vector.</param>
+        /// <param name="y">The second vector.</param>
+        /// <returns>The dot product of the two vectors.</returns>
         public static double Dot(this Vector x, Vector y)
         {
             int dim = x.Dimension;
@@ -207,9 +209,10 @@
         /// <summary>
         /// Does not check for dimensions (slightly faster than Dot)
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="x">The first vector.</param>
+        /// <param name="y">The second vector.</param>
+        /// <param name="dim">The dimension of the vectors.</param>
+        /// <returns>The dot product of the two vectors.</returns>
         public static double DotFast(this Vector x, Vector y, int dim)
         {
             double acc = 0;
@@ -332,7 +335,7 @@
         /// <summary>
         ///   LU decomposition of A.
         /// </summary>
-        /// <param name = "m">The matrix to invert. This matrix is unchanged by this function.</param>
+        /// <param name="m">The matrix to decompose. This matrix is unchanged by this function.</param>
         /// <returns>A matrix of equal size to A that combines the L and U. Here the diagonals belongs to L and the U's diagonal elements are all 1.</returns>
         public static Matrix LUDecomposition(this Matrix m)
         {
@@ -371,7 +374,8 @@
         /// <summary>
         /// Computes LU decomposition of m "in place".
         /// </summary>
-        /// <param name="m"></param>
+        /// <param name="m">The matrix to decompose.</param>
+        /// <param name="dimension">The dimension to use for decomposition. If -1, uses the matrix's row count.</param>
         /// <returns>LU Decomposition of m stored in m.</returns>
         public static Matrix LUDecompositionInPlace(this Matrix m, int dimension = -1)
         {
@@ -470,9 +474,9 @@
         /// <summary>
         /// !!!! This does not work when there are zero diagonal elements, use at own risk.
         /// </summary>
-        /// <param name="m"></param>
-        /// <param name="b"></param>
-        /// <returns></returns>
+        /// <param name="m">The coefficient matrix.</param>
+        /// <param name="b">The right-hand side vector.</param>
+        /// <returns>The solution vector x such that mx = b.</returns>
         public static Vector Solve(this Matrix m, Vector b)
         {
             return m.Inverse().Multiply(b);

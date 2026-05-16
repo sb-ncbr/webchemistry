@@ -191,10 +191,11 @@
         /// <summary>
         /// Atom depth priority based search of a tagged atom.
         /// </summary>
-        /// <param name="start"></param>
-        /// <param name="tag"></param>
-        /// <param name="depth"></param>
-        /// <returns></returns>
+        /// <param name="start">The starting atom for the search.</param>
+        /// <param name="end">The target atom to find a path to.</param>
+        /// <param name="tag">The tag value to search for.</param>
+        /// <param name="depth">The maximum search depth.</param>
+        /// <returns>A list of atoms forming the path, or null if not found.</returns>
         static List<IAtom> FindTag(AtomInfo start, AtomInfo end, int tag, int depth)
         {
             const double maxDistSq = 36;

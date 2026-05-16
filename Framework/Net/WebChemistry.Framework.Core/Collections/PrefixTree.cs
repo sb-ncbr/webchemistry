@@ -21,7 +21,8 @@
         /// <summary>
         /// Adds a word to the tree.
         /// </summary>
-        /// <param name="word"></param>
+        /// <param name="word">The word to add.</param>
+        /// <param name="value">The value associated with the word.</param>
         public void Add(string word, T value)
         {
             word = word.ToLower() + PrefixTreeMapNode<T>.Eow;

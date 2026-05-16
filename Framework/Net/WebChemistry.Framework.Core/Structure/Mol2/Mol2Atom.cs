@@ -82,9 +82,11 @@
         /// <summary>
         /// Create a new instance of the atom.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="elementSymbol"></param>
+        /// <param name="id">The unique identifier for the atom.</param>
+        /// <param name="elementSymbol">The element symbol of the atom.</param>
+        /// <param name="atomType">The MOL2 atom type.</param>
+        /// <param name="name">The name of the atom.</param>
+        /// <param name="invariantPosition">The invariant position used for structural comparisons.</param>
         private Mol2Atom(int id,
                         ElementSymbol elementSymbol, string atomType,
                         string name,
@@ -98,10 +100,15 @@
         /// <summary>
         /// Creates an instance of a Mol2 atom.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="elementSymbol"></param>
-        /// <param name="partialCharge"></param>
-        /// <returns></returns>
+        /// <param name="id">The unique identifier for the atom.</param>
+        /// <param name="elementSymbol">The element symbol of the atom.</param>
+        /// <param name="atomType">The MOL2 atom type.</param>
+        /// <param name="name">The name of the atom.</param>
+        /// <param name="residueIdenfier">Optional residue identifier.</param>
+        /// <param name="residueName">The name of the residue (default: UNK).</param>
+        /// <param name="partialCharge">The partial charge of the atom.</param>
+        /// <param name="position">The 3D position of the atom.</param>
+        /// <returns>A new Mol2Atom instance.</returns>
         public static IAtom Create(int id,
                         ElementSymbol elementSymbol,
                         string atomType,

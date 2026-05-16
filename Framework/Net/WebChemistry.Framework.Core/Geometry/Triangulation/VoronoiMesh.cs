@@ -14,11 +14,12 @@
         /// <summary>
         /// Create the voronoi mesh.
         /// </summary>
-        /// <typeparam name="TVertex"></typeparam>
-        /// <typeparam name="TCell"></typeparam>
-        /// <typeparam name="TEdge"></typeparam>
-        /// <param name="data"></param>
-        /// <returns></returns>
+        /// <typeparam name="TVertex">The type of vertex.</typeparam>
+        /// <typeparam name="TCell">The type of cell.</typeparam>
+        /// <typeparam name="TEdge">The type of edge.</typeparam>
+        /// <param name="data">The input data points.</param>
+        /// <param name="positionSelector">A function to extract the 3D position from a vertex.</param>
+        /// <returns>The created Voronoi mesh.</returns>
         public static VoronoiMesh3D<TVertex, TCell, TEdge> Create<TVertex, TCell, TEdge>(IEnumerable<TVertex> data, Func<TVertex, Vector3D> positionSelector)
             where TCell : TriangulationCell3D<TVertex, TCell>, new()
             where TEdge : VoronoiEdge3D<TVertex, TCell>, new()
@@ -29,9 +30,10 @@
         /// <summary>
         /// Create the voronoi mesh.
         /// </summary>
-        /// <typeparam name="TVertex"></typeparam>
-        /// <param name="data"></param>
-        /// <returns></returns>
+        /// <typeparam name="TVertex">The type of vertex.</typeparam>
+        /// <param name="data">The input data points.</param>
+        /// <param name="positionSelector">A function to extract the 3D position from a vertex.</param>
+        /// <returns>The created Voronoi mesh with default cell and edge types.</returns>
         public static VoronoiMesh3D<TVertex, DefaultTriangulationCell3D<TVertex>, VoronoiEdge3D<TVertex, DefaultTriangulationCell3D<TVertex>>> Create<TVertex>(IEnumerable<TVertex> data, Func<TVertex, Vector3D> positionSelector)
         {
             return VoronoiMesh3D<TVertex, DefaultTriangulationCell3D<TVertex>, VoronoiEdge3D<TVertex, DefaultTriangulationCell3D<TVertex>>>.Create(data, positionSelector);
@@ -40,10 +42,11 @@
         /// <summary>
         /// Create the voronoi mesh.
         /// </summary>
-        /// <typeparam name="TVertex"></typeparam>
-        /// <typeparam name="TCell"></typeparam>
-        /// <param name="data"></param>
-        /// <returns></returns>
+        /// <typeparam name="TVertex">The type of vertex.</typeparam>
+        /// <typeparam name="TCell">The type of cell.</typeparam>
+        /// <param name="data">The input data points.</param>
+        /// <param name="positionSelector">A function to extract the 3D position from a vertex.</param>
+        /// <returns>The created Voronoi mesh with default edge type.</returns>
         public static VoronoiMesh3D<TVertex, TCell, VoronoiEdge3D<TVertex, TCell>> Create<TVertex, TCell>(IEnumerable<TVertex> data, Func<TVertex, Vector3D> positionSelector)
             where TCell : TriangulationCell3D<TVertex, TCell>, new()
         {
@@ -91,7 +94,9 @@
         /// <summary>
         /// Create a voronoi diagram of the input data.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">The input data points.</param>
+        /// <param name="positionSelector">A function to extract the 3D position from a vertex.</param>
+        /// <returns>The created Voronoi mesh.</returns>
         public static VoronoiMesh3D<TVertex, TCell, TEdge> Create(IEnumerable<TVertex> data, Func<TVertex, Vector3D> positionSelector)
         {
             if (data == null) throw new ArgumentNullException("data can't be null");

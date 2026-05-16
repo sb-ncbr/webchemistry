@@ -65,8 +65,9 @@
         /// <summary>
         /// Creates an instance of atom with a given id and element symbol.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="elementSymbol"></param>
+        /// <param name="id">The unique identifier for the atom.</param>
+        /// <param name="elementSymbol">The element symbol of the atom.</param>
+        /// <param name="invariantPosition">The invariant position used for structural comparisons.</param>
         protected Atom(int id, ElementSymbol elementSymbol, Vector3D invariantPosition)
         {
             this.elementSymbol = elementSymbol;

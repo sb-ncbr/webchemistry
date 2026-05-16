@@ -146,9 +146,10 @@
         }
 
         /// <summary>
-        /// Translates the structure by the given vector.
+        /// Transforms the atom positions in the structure using the specified function.
         /// </summary>
-        /// <param name="structure"></param>
+        /// <param name="structure">The structure to transform.</param>
+        /// <param name="newPosition">A function that computes the new position for each atom.</param>
         public static void TransformAtomPositions(this IStructure structure, Func<IAtom, Vector3D> newPosition)
         {
             foreach (Atom a in structure.Atoms)

@@ -65,8 +65,9 @@
         /// <summary>
         /// Create a new instance of the atom.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="elementSymbol"></param>
+        /// <param name="id">The unique identifier for the atom.</param>
+        /// <param name="elementSymbol">The element symbol of the atom.</param>
+        /// <param name="invariantPosition">The invariant position used for structural comparisons.</param>
         private MdlMolAtom(int id,
                         ElementSymbol elementSymbol, Vector3D invariantPosition)
             : base(id, elementSymbol, invariantPosition)
@@ -76,9 +77,11 @@
         /// <summary>
         /// Creates an instance of a Mol2 atom.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="elementSymbol"></param>
-        /// <returns></returns>
+        /// <param name="id">The unique identifier for the atom.</param>
+        /// <param name="elementSymbol">The element symbol of the atom.</param>
+        /// <param name="stereoParity">The stereo parity indicating chirality.</param>
+        /// <param name="position">The 3D position of the atom.</param>
+        /// <returns>A new MdlMolAtom instance.</returns>
         public static IAtom Create(int id,
                         ElementSymbol elementSymbol,
                         MdlMolStereoParity stereoParity,

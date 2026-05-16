@@ -10,7 +10,7 @@ namespace WebChemistry.Framework.Core.Csv
     /// <remarks>
     /// <para>
     /// A <c>DataRecord</c> represents a CSV record that is not the header record. Values in the data record can be accessed by their index. A data record can have an associated
-    /// <see cref="Kent.Boogaart.KBCsv.HeaderRecord"/> (exposed via <see cref="HeaderRecord"/>), in which case values in the data record may also be accessed via a column name.
+    /// <see cref="HeaderRecord"/> (exposed via <see cref="HeaderRecord"/>), in which case values in the data record may also be accessed via a column name.
     /// </para>
     /// </remarks>
     public sealed class DataRecord : RecordBase, IEquatable<DataRecord>
@@ -32,11 +32,11 @@ namespace WebChemistry.Framework.Core.Csv
         /// Initializes a new instance of the DataRecord class.
         /// </summary>
         /// <remarks>
-        /// The resultant data record will have no values, but is not read-only. It will use the specified <see cref="Kent.Boogaart.KBCsv.HeaderRecord"/> (which will therefore
+        /// The resultant data record will have no values, but is not read-only. It will use the specified <see cref="HeaderRecord"/> (which will therefore
         /// be returned from <see cref="HeaderRecord"/>).
         /// </remarks>
         /// <param name="headerRecord">
-        /// An optional <see cref="Kent.Boogaart.KBCsv.HeaderRecord"/> associated with this <c>DataRecord</c>.
+        /// An optional <see cref="HeaderRecord"/> associated with this <c>DataRecord</c>.
         /// </param>
         public DataRecord(HeaderRecord headerRecord)
             : this(headerRecord, false)
@@ -47,11 +47,11 @@ namespace WebChemistry.Framework.Core.Csv
         /// Initializes a new instance of the DataRecord class.
         /// </summary>
         /// <remarks>
-        /// The resultant data record will the specified values, and is not read-only. It will use the specified <see cref="Kent.Boogaart.KBCsv.HeaderRecord"/> (which will therefore
+        /// The resultant data record will the specified values, and is not read-only. It will use the specified <see cref="HeaderRecord"/> (which will therefore
         /// be returned from <see cref="HeaderRecord"/>).
         /// </remarks>
         /// <param name="headerRecord">
-        /// An optional <see cref="Kent.Boogaart.KBCsv.HeaderRecord"/> associated with this <c>DataRecord</c>.
+        /// An optional <see cref="HeaderRecord"/> associated with this <c>DataRecord</c>.
         /// </param>
         /// <param name="values">
         /// The values comprising this <c>DataRecord</c>.
@@ -65,11 +65,11 @@ namespace WebChemistry.Framework.Core.Csv
         /// Initializes a new instance of the DataRecord class.
         /// </summary>
         /// <remarks>
-        /// The resultant data record will have the specified values, and may or may not be read-only. It will use the specified <see cref="Kent.Boogaart.KBCsv.HeaderRecord"/> (which will therefore
+        /// The resultant data record will have the specified values, and may or may not be read-only. It will use the specified <see cref="HeaderRecord"/> (which will therefore
         /// be returned from <see cref="HeaderRecord"/>).
         /// </remarks>
         /// <param name="headerRecord">
-        /// An optional <see cref="Kent.Boogaart.KBCsv.HeaderRecord"/> associated with this <c>DataRecord</c>.
+        /// An optional <see cref="HeaderRecord"/> associated with this <c>DataRecord</c>.
         /// </param>
         /// <param name="readOnly">
         /// <see langword="true"/> to mark this <c>DataRecord</c> as read-only.
@@ -86,11 +86,11 @@ namespace WebChemistry.Framework.Core.Csv
         /// Initializes a new instance of the DataRecord class.
         /// </summary>
         /// <remarks>
-        /// The resultant data record will the specified values, and is not read-only. It will use the specified <see cref="Kent.Boogaart.KBCsv.HeaderRecord"/> (which will therefore
+        /// The resultant data record will the specified values, and is not read-only. It will use the specified <see cref="HeaderRecord"/> (which will therefore
         /// be returned from <see cref="HeaderRecord"/>).
         /// </remarks>
         /// <param name="headerRecord">
-        /// An optional <see cref="Kent.Boogaart.KBCsv.HeaderRecord"/> associated with this <c>DataRecord</c>.
+        /// An optional <see cref="HeaderRecord"/> associated with this <c>DataRecord</c>.
         /// </param>
         /// <param name="values">
         /// The values comprising this <c>DataRecord</c>.
@@ -104,11 +104,11 @@ namespace WebChemistry.Framework.Core.Csv
         /// Initializes a new instance of the DataRecord class.
         /// </summary>
         /// <remarks>
-        /// The resultant data record will have the specified values, and may or may not be read-only. It will use the specified <see cref="Kent.Boogaart.KBCsv.HeaderRecord"/> (which will therefore
+        /// The resultant data record will have the specified values, and may or may not be read-only. It will use the specified <see cref="HeaderRecord"/> (which will therefore
         /// be returned from <see cref="HeaderRecord"/>).
         /// </remarks>
         /// <param name="headerRecord">
-        /// An optional <see cref="Kent.Boogaart.KBCsv.HeaderRecord"/> associated with this <c>DataRecord</c>.
+        /// An optional <see cref="HeaderRecord"/> associated with this <c>DataRecord</c>.
         /// </param>
         /// <param name="readOnly">
         /// <see langword="true"/> to mark this <c>DataRecord</c> as read-only.
@@ -130,10 +130,10 @@ namespace WebChemistry.Framework.Core.Csv
         }
 
         /// <summary>
-        /// Gets the <see cref="Kent.Boogaart.KBCsv.HeaderRecord"/> in use by this data record.
+        /// Gets the <see cref="HeaderRecord"/> in use by this data record.
         /// </summary>
         /// <remarks>
-        /// In order to get or set values in a data record via their column name, a header record must be provided. This property gets the <see cref="Kent.Boogaart.KBCsv.HeaderRecord"/> that
+        /// In order to get or set values in a data record via their column name, a header record must be provided. This property gets the <see cref="HeaderRecord"/> that
         /// this data record uses to resolve column indexes given a column name.
         /// </remarks>
         public HeaderRecord HeaderRecord

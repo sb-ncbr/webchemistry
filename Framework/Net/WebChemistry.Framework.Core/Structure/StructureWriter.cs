@@ -69,9 +69,10 @@
         /// <summary>
         /// Get the PQR atom record.
         /// </summary>
-        /// <param name="atom"></param>
-        /// <param name="charge"></param>
-        /// <returns></returns>
+        /// <param name="atom">The atom to convert to a PQR record.</param>
+        /// <param name="charge">The partial charge of the atom.</param>
+        /// <param name="emptyChainId">The character to use for atoms without a chain identifier.</param>
+        /// <returns>The PQR atom record string.</returns>
         public static string GetPqrAtomRecord(IAtom atom, double charge, char emptyChainId)
         {
 

@@ -137,12 +137,13 @@
 
 
         /// <summary>
-        /// Adds a columns.
+        /// Adds a column.
         /// </summary>
-        /// <param name="func"></param>
-        /// <param name="type"></param>
-        /// <param name="headerString"></param>
-        /// <returns></returns>
+        /// <param name="func">The function to get the value from the item.</param>
+        /// <param name="type">The type of the column (Number or String).</param>
+        /// <param name="headerString">The header text for the column.</param>
+        /// <param name="desctiption">Optional description of the column.</param>
+        /// <returns>The exporter instance for chaining.</returns>
         public ListExporter<T> AddExportableColumn(
             Func<T, Object> func,
             ColumnType type,
@@ -154,11 +155,12 @@
         }
 
         /// <summary>
-        /// Adds a numeric column
+        /// Adds a numeric column.
         /// </summary>
-        /// <param name="func"></param>
-        /// <param name="headerString"></param>
-        /// <returns></returns>
+        /// <param name="func">The function to get the numeric value from the item.</param>
+        /// <param name="headerString">The header text for the column.</param>
+        /// <param name="desctiption">Optional description of the column.</param>
+        /// <returns>The exporter instance for chaining.</returns>
         public ListExporter<T> AddNumericColumn(
             Func<T, Object> func,
             string headerString,
@@ -178,7 +180,7 @@
         /// <summary>
         /// Automatically add columns for each property.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The exporter instance for chaining.</returns>
         public ListExporter<T> AddPropertyColumns()
         {
             foreach (var prop in typeof(T).GetProperties())
@@ -197,10 +199,11 @@
         }
 
         /// <summary>
-        /// Adds a columns for a specific property/
+        /// Adds a column for a specific property.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="name">The name of the property.</param>
+        /// <param name="desctiption">Optional description of the column.</param>
+        /// <returns>The exporter instance for chaining.</returns>
         public ListExporter<T> AddPropertyColumn(string name, string desctiption = "")
         {
             var prop = typeof(T).GetProperty(name);
@@ -219,9 +222,10 @@
         /// <summary>
         /// Adds a string column.
         /// </summary>
-        /// <param name="func"></param>
-        /// <param name="headerString"></param>
-        /// <returns></returns>
+        /// <param name="func">The function to get the string value from the item.</param>
+        /// <param name="headerString">The header text for the column.</param>
+        /// <param name="desctiption">Optional description of the column.</param>
+        /// <returns>The exporter instance for chaining.</returns>
         public ListExporter<T> AddStringColumn(
             Func<T, Object> func,
             string headerString,

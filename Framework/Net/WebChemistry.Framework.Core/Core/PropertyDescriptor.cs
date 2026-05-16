@@ -34,12 +34,13 @@
         public readonly Func<AtomCollection, BondCollection, object, object> OnClone;
 
         /// <summary>
-        /// 
+        /// Creates a property descriptor.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="isImmutable"></param>
-        /// <param name="category"></param>
-        /// <param name="onClone"></param>
+        /// <param name="name">The name of the property.</param>
+        /// <param name="isImmutable">If true, the property can only be set once.</param>
+        /// <param name="category">The category for grouping properties.</param>
+        /// <param name="autoClone">If true, the property value is automatically cloned.</param>
+        /// <param name="onClone">A function called during cloning to transform the value.</param>
         internal PropertyDescriptor(string name, bool isImmutable = true, string category = PropertyHelper.DefaultCategory, bool autoClone = true, Func<AtomCollection, BondCollection, object, object> onClone = null)
         {
             this.Name = name;
@@ -70,12 +71,13 @@
     public class PropertyDescriptor<T> : PropertyDescriptor
     {
         /// <summary>
-        /// Crates are property descriptor.
+        /// Creates a property descriptor.
         /// </summary>
-        /// <param name="name">Name of the property.</param>
-        /// <param name="isImmutable">Is set to true, the property can only be set once.</param>
-        /// <param name="category"></param>
-        /// <param name="onClone"></param>
+        /// <param name="name">The name of the property.</param>
+        /// <param name="isImmutable">If true, the property can only be set once.</param>
+        /// <param name="category">The category for grouping properties.</param>
+        /// <param name="autoClone">If true, the property value is automatically cloned.</param>
+        /// <param name="onClone">A function called during cloning to transform the value.</param>
         public PropertyDescriptor(string name, bool isImmutable = true, string category = PropertyHelper.DefaultCategory, bool autoClone = true, Func<AtomCollection, BondCollection, object, object> onClone = null)
             : base(name, isImmutable, category, autoClone, onClone)
         {

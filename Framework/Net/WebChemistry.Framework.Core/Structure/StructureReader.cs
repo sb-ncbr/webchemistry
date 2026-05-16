@@ -197,20 +197,22 @@
         /// <summary>
         /// Read a structure from a file.
         /// </summary>
-        /// <param name="filename"></param>
-        /// <param name="customId"></param>
-        /// <returns></returns>
+        /// <param name="filename">The path to the structure file.</param>
+        /// <param name="customId">Optional custom identifier for the structure.</param>
+        /// <param name="customType">The type of structure reader to use. Defaults to auto-detection.</param>
+        /// <returns>The result of reading the structure.</returns>
         public static StructureReaderResult Read(string filename, string customId = null, StructureReaderType customType = StructureReaderType.Auto)
         {
             return Read(filename, () => File.OpenRead(filename), customId, customType);
         }
 
         /// <summary>
-        /// Read a structure from a file.
+        /// Try to read a structure from a file.
         /// </summary>
-        /// <param name="filename"></param>
-        /// <param name="customId"></param>
-        /// <returns></returns>
+        /// <param name="filename">The path to the structure file.</param>
+        /// <param name="customId">Optional custom identifier for the structure.</param>
+        /// <param name="customType">The type of structure reader to use. Defaults to auto-detection.</param>
+        /// <returns>A Maybe containing the result if successful, or Nothing if an exception occurred.</returns>
         public static Maybe<StructureReaderResult> TryRead(string filename, string customId = null, StructureReaderType customType = StructureReaderType.Auto)
         {
             return TryRead(filename, () => File.OpenRead(filename), customId, customType);
@@ -265,11 +267,11 @@
         /// <summary>
         /// Read a structure from the provided stream.
         /// </summary>
-        /// <param name="filename"></param>
-        /// <param name="baseStreamProvider"></param>
-        /// <param name="customId"></param>
-        /// <param name="customType"></param>
-        /// <returns></returns>
+        /// <param name="filename">The path or identifier for the structure.</param>
+        /// <param name="baseStreamProvider">A function providing the input stream.</param>
+        /// <param name="customId">Optional custom identifier for the structure.</param>
+        /// <param name="customType">The type of structure reader to use. Defaults to auto-detection.</param>
+        /// <returns>The result of reading the structure.</returns>
         public static StructureReaderResult Read(string filename, Func<Stream> baseStreamProvider, string customId = null, StructureReaderType customType = StructureReaderType.Auto)
         {
             return ReadInternal(filename, GetReader(filename, baseStreamProvider), customId, customType);
@@ -278,11 +280,11 @@
         /// <summary>
         /// Reads a structure from string source.
         /// </summary>
-        /// <param name="filename"></param>
-        /// <param name="source"></param>
-        /// <param name="customId"></param>
-        /// <param name="customType"></param>
-        /// <returns></returns>
+        /// <param name="filename">The path or identifier for the structure.</param>
+        /// <param name="source">The string content containing the structure data.</param>
+        /// <param name="customId">Optional custom identifier for the structure.</param>
+        /// <param name="customType">The type of structure reader to use. Defaults to auto-detection.</param>
+        /// <returns>The result of reading the structure.</returns>
         public static StructureReaderResult ReadString(string filename, string source, string customId = null, StructureReaderType customType = StructureReaderType.Auto)
         {
             if (filename.EndsWith(".gz", StringComparison.OrdinalIgnoreCase)) throw new InvalidOperationException(".gz files are not supported by StructureReader.ReadString().");
@@ -290,12 +292,13 @@
         }
 
         /// <summary>
-        /// Read a structure from a stream.
+        /// Read a structure from a stream using the provided reader.
         /// </summary>
-        /// <param name="filename"></param>
-        /// <param name="customId"></param>
-        /// <param name="readerProvider"></param>
-        /// <returns></returns>
+        /// <param name="filename">The path or identifier for the structure.</param>
+        /// <param name="readerProvider">A function providing the text reader.</param>
+        /// <param name="customId">Optional custom identifier for the structure.</param>
+        /// <param name="customType">The type of structure reader to use. Defaults to auto-detection.</param>
+        /// <returns>The result of reading the structure.</returns>
         static StructureReaderResult ReadInternal(string filename, Func<TextReader> readerProvider, string customId = null, StructureReaderType customType = StructureReaderType.Auto)
         {
             StructureReaderResult s = null;
@@ -351,11 +354,13 @@
         }
 
         /// <summary>
-        /// Try read a structure from a stream.
+        /// Try to read a structure from a stream.
         /// </summary>
-        /// <param name="filename"></param>
-        /// <param name="customId"></param>
-        /// <returns></returns>
+        /// <param name="filename">The path or identifier for the structure.</param>
+        /// <param name="baseStreamProvider">A function providing the input stream.</param>
+        /// <param name="customId">Optional custom identifier for the structure.</param>
+        /// <param name="customType">The type of structure reader to use. Defaults to auto-detection.</param>
+        /// <returns>A Maybe containing the result if successful, or Nothing if an exception occurred.</returns>
         public static Maybe<StructureReaderResult> TryRead(string filename, Func<Stream> baseStreamProvider, string customId = null, StructureReaderType customType = StructureReaderType.Auto)
         {
             try
@@ -373,8 +378,9 @@
         /// Loads structure from PDB format - see  http://deposit.rcsb.org/adit/docs/pdb_atom_format.html for more details about the format.
         /// The current implementation is INCOMPLETE IMPLEMENTATION OF PDB FORMAT (loads only ATOM and HETATM records)!
         /// </summary>
-        /// <param name="filename"></param>
-        /// <param name="parameters"></param>
+        /// <param name="filename">The path or identifier for the structure.</param>
+        /// <param name="readerProvider">A function providing the text reader.</param>
+        /// <param name="parameters">The PDB reader parameters.</param>
         /// <returns>Structure constructed from the file. INCOMPLETE IMPLEMENTATION OF PDB FORMAT!</returns>
         static StructureReaderResult ReadPdb(string filename, Func<TextReader> readerProvider, PdbReaderParams parameters)
         {
@@ -388,9 +394,10 @@
         /// <summary>
         /// Read PDBQt file.
         /// </summary>
-        /// <param name="filename"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+        /// <param name="filename">The path or identifier for the structure.</param>
+        /// <param name="readerProvider">A function providing the text reader.</param>
+        /// <param name="parameters">The PDB reader parameters.</param>
+        /// <returns>The result of reading the PDBQt structure.</returns>
         static StructureReaderResult ReadPdbQt(string filename, Func<TextReader> readerProvider, PdbReaderParams parameters)
         {
             using (var r = readerProvider())
