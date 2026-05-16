@@ -452,8 +452,168 @@
             }
             return sb.ToString();
         }
-        #endregion 
+        #endregion
+
+        #region mmCIF
+        /// <summary>
+        /// Writes a structure in mmCIF (PDBx) format.
+        /// </summary>
+        /// <param name="structure">The structure to write.</param>
+        /// <param name="writer">The text writer to write to.</param>
+        public static void WriteMmcif(this IStructure structure, TextWriter writer)
+        {
+            var ci = InvariantCulture;
+            var atoms = structure.Atoms.OrderBy(a => a.PdbChainIdentifier()).ThenBy(a => a.PdbSerialNumber());
+
+            // Get unique chains and residues for category data blocks
+            var chains = atoms.Select(a => a.PdbChainIdentifier()).Distinct().OrderBy(c => c).ToList();
+
+            writer.WriteLine("data_" + structure.Id.Replace(" ", "_"));
+            writer.WriteLine();
+
+            // Save file header
+            writer.WriteLine("#");
+            writer.WriteLine("_entry.id " + structure.Id);
+            writer.WriteLine("#");
+            writer.WriteLine();
+
+            // atom_site category
+            writer.WriteLine("loop_");
+            writer.WriteLine("_atom_site.group_PDB");
+            writer.WriteLine("_atom_site.id");
+            writer.WriteLine("_atom_site.type_symbol");
+            writer.WriteLine("_atom_site.label_atom_id");
+            writer.WriteLine("_atom_site.label_alt_id");
+            writer.WriteLine("_atom_site.label_comp_id");
+            writer.WriteLine("_atom_site.label_asym_id");
+            writer.WriteLine("_atom_site.label_entity_id");
+            writer.WriteLine("_atom_site.label_seq_id");
+            writer.WriteLine("_atom_site.pdbx_PDB_ins_code");
+            writer.WriteLine("_atom_site.Cartn_x");
+            writer.WriteLine("_atom_site.Cartn_y");
+            writer.WriteLine("_atom_site.Cartn_z");
+            writer.WriteLine("_atom_site.occupancy");
+            writer.WriteLine("_atom_site.B_iso_or_equiv");
+            writer.WriteLine("_atom_site.pdbx_PDB_model_num");
+            writer.WriteLine();
+
+            int atomIndex = 1;
+            foreach (var a in atoms)
+            {
+                string recordName = a.PdbRecordName(); // ATOM or HETATM
+                int serial = a.PdbSerialNumber() % 100000;
+                string element = a.ElementSymbol.ToString().ToUpperInvariant();
+                string atomName = a.PdbName();
+                char altLoc = a.PdbAlternateLocationIdentifier();
+                string residueName = a.PdbResidueName();
+                string chainId = string.IsNullOrWhiteSpace(a.PdbChainIdentifier()) ? "." : a.PdbChainIdentifier();
+                int entityId = PdbEx.PdbEntityId(a);
+                int seqNum = a.PdbResidueSequenceNumber() % 10000;
+                char insCode = a.PdbInsertionResidueCode();
+                double x = a.Position.X;
+                double y = a.Position.Y;
+                double z = a.Position.Z;
+                double occupancy = a.PdbOccupancy();
+                double bFactor = a.PdbTemperatureFactor();
+                int modelNum = 1;
+
+                string altLocStr = altLoc == ' ' ? "." : altLoc.ToString();
+                string insCodeStr = insCode == ' ' ? "." : insCode.ToString();
+
+                writer.WriteLine(string.Format(ci, "{0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10:F3} {11:F3} {12:F3} {13:F2} {14:F2} {15}",
+                    recordName,
+                    atomIndex++,
+                    element,
+                    atomName,
+                    altLocStr,
+                    residueName,
+                    chainId,
+                    entityId,
+                    seqNum,
+                    insCodeStr,
+                    x, y, z,
+                    occupancy,
+                    bFactor,
+                    modelNum));
+            }
+
+            writer.WriteLine("#");
+            writer.WriteLine();
+
+            // Write bond information if available
+            if (structure.Bonds.Count > 0)
+            {
+                writer.WriteLine("loop_");
+                writer.WriteLine("_struct_conn.id");
+                writer.WriteLine("_struct_conn.ptnr1_label_atom_id");
+                writer.WriteLine("_struct_conn.ptnr1_label_comp_id");
+                writer.WriteLine("_struct_conn.ptnr1_label_asym_id");
+                writer.WriteLine("_struct_conn.ptnr2_label_atom_id");
+                writer.WriteLine("_struct_conn.ptnr2_label_comp_id");
+                writer.WriteLine("_struct_conn.ptnr2_label_asym_id");
+                writer.WriteLine("_struct_conn.pdbx_value_order");
+                writer.WriteLine();
+
+                int connIndex = 1;
+                foreach (var b in structure.Bonds)
+                {
+                    string bondType = GetMmcifBondType(b.Type);
+                    writer.WriteLine(string.Format(ci, "{0} {1} {2} {3} {4} {5} {6} {7}",
+                        connIndex++,
+                        b.A.PdbName(),
+                        b.A.PdbResidueName(),
+                        string.IsNullOrWhiteSpace(b.A.PdbChainIdentifier()) ? "." : b.A.PdbChainIdentifier(),
+                        b.B.PdbName(),
+                        b.B.PdbResidueName(),
+                        string.IsNullOrWhiteSpace(b.B.PdbChainIdentifier()) ? "." : b.B.PdbChainIdentifier(),
+                        bondType));
+                }
+                writer.WriteLine("#");
+            }
+            writer.WriteLine("#");
+        }
         
+        static string GetMmcifBondType(BondType type)
+        {
+            switch (type)
+            {
+                case BondType.Single: return "S";
+                case BondType.Double: return "D";
+                case BondType.Triple: return "T";
+                case BondType.Aromatic: return "A";
+                default: return "?";
+            }
+        }
+
+        /// <summary>
+        /// Writes a structure in mmCIF format to a file.
+        /// </summary>
+        /// <param name="structure">The structure to write.</param>
+        /// <param name="filename">The output filename.</param>
+        public static void WriteMmcif(this IStructure structure, string filename)
+        {
+            using (var file = File.CreateText(filename))
+            {
+                structure.WriteMmcif(file);
+            }
+        }
+
+        /// <summary>
+        /// Converts a structure to an mmCIF string.
+        /// </summary>
+        /// <param name="structure">The structure to convert.</param>
+        /// <returns>The mmCIF formatted string.</returns>
+        public static string ToMmcifString(this IStructure structure)
+        {
+            StringBuilder sb = new StringBuilder();
+            using (var w = new StringWriter(sb))
+            {
+                structure.WriteMmcif(w);
+            }
+            return sb.ToString();
+        }
+        #endregion
+
         #region MOL
         /// <summary>
         /// Convert to SDF/MOL format.

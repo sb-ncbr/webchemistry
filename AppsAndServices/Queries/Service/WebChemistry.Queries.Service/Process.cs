@@ -108,7 +108,10 @@
 
                         if (!StatisticsOnly)
                         {
-                            Zip.AddEntry(Path.Combine(r.Query.Id, "patterns", structure.Id + ".pdb"), w => structure.WritePdb(w));
+                            if (OutputMMCIF)
+                                Zip.AddEntry(Path.Combine(r.Query.Id, "patterns", structure.Id + ".cif"), w => structure.WriteMmcif(w));
+                            else
+                                Zip.AddEntry(Path.Combine(r.Query.Id, "patterns", structure.Id + ".pdb"), w => structure.WritePdb(w));
                         }
                                                 
                         r.Query.Patterns.Add(motive);

@@ -52,6 +52,12 @@
         public bool StatisticsOnly { get; set; }
 
         /// <summary>
+        /// Output patterns in mmCIF format instead of PDB.
+        /// </summary>
+        [Description("If `true`, pattern files are exported in mmCIF format (.cif) instead of PDB format (.pdb).")]
+        public bool OutputMMCIF { get; set; }
+
+        /// <summary>
         /// Path to the CSA datafile.
         /// </summary>
         [Description("Optional path to a file with CSA database that allows the CSA() query to work. The file is a CSV file that must contain the columns `PdbID, SiteNumber, ?, ?, ChainId, ResidueNumber, ...`")]
@@ -67,6 +73,7 @@
         public QueriesStandaloneServiceSettings()
         {
             MaxParallelism = 8;
+            OutputMMCIF = false;
         }
     }
 }

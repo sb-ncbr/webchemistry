@@ -30,6 +30,7 @@
         const int CacheSize = 10000;
         
         bool StatisticsOnly = false;
+        bool OutputMMCIF = false;
 
         int PatternCountLimit = int.MaxValue;
         long AtomCountLimit = long.MaxValue;
@@ -350,6 +351,7 @@
         protected override void RunStandaloneInternal()
         {
             StatisticsOnly = StandaloneSettings.StatisticsOnly;
+            OutputMMCIF = StandaloneSettings.OutputMMCIF;
             MaxParallelism = StandaloneSettings.MaxParallelism;
             Validator = new ValidationHelper(false);
 
@@ -405,12 +407,13 @@
             return new QueriesStandaloneServiceSettings
             {
                 InputFolders = new string[] { @"c:\TestData\PDB\SampleSet1" },
-                Queries = new QueryInfo[] 
-                { 
+                Queries = new QueryInfo[]
+                {
                     new QueryInfo { Id = "NAGs", QueryString = "Residues(\"NAG\")" } ,
-                    new QueryInfo { Id = "MANs", QueryString = "Residues('MAN')" } 
+                    new QueryInfo { Id = "MANs", QueryString = "Residues('MAN')" }
                 },
                 StatisticsOnly = false,
+                OutputMMCIF = false,
                 CSAPath = @"c:\data\csa.dat",
                 MaxParallelism = 8
             };
