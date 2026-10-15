@@ -271,10 +271,13 @@ namespace WebChemistry.Tunnels.Server
             ExportTunnels(data.MergedPores, "pores_merged.xml", "MergedPores");
             ExportTunnels(data.Paths, "paths.xml", "Paths");
 
-            ExportTunnelsCSV(data.Tunnels, "tunnels.csv");
-            ExportTunnelsCSV(data.Pores, "pores.csv");
-            ExportTunnelsCSV(data.MergedPores, "merged_pores.csv");
-            ExportTunnelsCSV(data.Paths, "paths.csv");
+            if (Config.Export.Parameters.FormatCSV)
+            {
+                ExportTunnelsCSV(data.Tunnels, "tunnels.csv");
+                ExportTunnelsCSV(data.Pores, "pores.csv");
+                ExportTunnelsCSV(data.MergedPores, "merged_pores.csv");
+                ExportTunnelsCSV(data.Paths, "paths.csv");
+            }
 
             var xCavities = new XElement("Cavities", new XAttribute("Version", Complex.Version));
             foreach (var cavity in Computation.Complex.Cavities) xCavities.Add(cavity.ToXml());
