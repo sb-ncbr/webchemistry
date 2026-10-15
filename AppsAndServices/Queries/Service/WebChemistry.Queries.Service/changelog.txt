@@ -1,4 +1,12 @@
-﻿== 1.1.25.8.19 ==
+﻿== 1.1.26.10.15 ==
+* Runs on .NET 10 (Linux, Windows, macOS); Docker image available.
+* Python scripting updated to IronPython 3.4 (Python 3 syntax).
+* More robust mmCIF parser.
+* Added option to export patterns in mmCIF format (OutputMMCIF).
+* Input folders are searched recursively.
+* Improved command line handling (--help, --version).
+
+== 1.1.25.8.19 ==
 * Fixed a bug in the Near query.
 
 == 1.1.23.12.27 ==
