@@ -109,6 +109,7 @@ namespace WebChemistry.Tunnels.Server
                     foreach (var e in cfg.Item2) Console.Error.WriteLine(e);
                     Console.WriteLine();
                     Console.WriteLine("mole2 --help might be of help.");
+                    Environment.ExitCode = 1;
                 }
                 else
                 {
@@ -127,6 +128,7 @@ namespace WebChemistry.Tunnels.Server
                 Console.WriteLine();
                 Console.WriteLine("Error:");
                 Console.Error.WriteLine(e.Message);
+                Environment.ExitCode = 1;
             }
         }
     }
