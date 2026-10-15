@@ -1,59 +1,62 @@
-# MOLE2
-
-This branch is targetted at improving MOLE2 outside of the main branch. It features an improved mmCIF parser and allows building MOLE2 as a modern .NET application.
-
-To build MOLE2, use:
-
-`
-docker build -f Dockerfile.mole2 -t mole2:latest
-`
-
-To test the MOLE2, run:
-
-`
-docker run -u root -v ./MoleExample:/data mole2 /data/test.xml
-`
-
 # Webchemistry
 
-Webchemistry is a set of tools and efficient data structures developed in C# by David Sehnal at co. at Masaryk University, Brno Czech Republic. 
+Webchemistry is a set of tools and efficient data structures developed in C# by David Sehnal at co. at Masaryk University, Brno Czech Republic.
 
-The toolkit employs and implements algorithms for comprehensive detection, analysis, and validation of 3D molecular patterns mainly comming from the [Protein Data Bank](https://www.wwpdb.org/) and supports state of the art [mmCIF format](https://en.wikipedia.org/wiki/Macromolecular_Crystallographic_Information_File).
+The toolkit employs and implements algorithms for comprehensive detection, analysis, and validation of 3D molecular patterns mainly coming from the [Protein Data Bank](https://www.wwpdb.org/) and supports state of the art [mmCIF format](https://en.wikipedia.org/wiki/Macromolecular_Crystallographic_Information_File).
 
-## Installation
+This repository maintains two of the tools, both built as .NET 10 applications:
 
-Run install-packages.bat or .ps1 in powershell (its enough to copy/paste it there - there is some silly default no script running policy).
+* **MOLE 2.5** (`mole2`) - location and characterization of channels, tunnels and pores in biomacromolecules.
+* **PatternQuery** (`WebChemistry.Queries.Service`) - detection of structural patterns in biomacromolecular structures.
 
-To compile all projects:
-* Visual Studio 2017 recommended.
-* IIS Express to debug the web.
-* (Optional) [7-zip](https://www.7-zip.org/) for helper service deployment scripts.
+The other Webchemistry software (the Webchemistry web and platform, MotiveValidator, AtomicChargeCalculator, SiteBinder) targets .NET Framework and is no longer maintained. Its last version is available under the `legacy-netframework` tag.
 
-Use msbuild /t:Restore to install the deps.
+## Building
 
-To deploy the web, use Publish option for the Webchemistry.Web project in Visual Studio. Use `Default Web Site\Platform` as AppPath.
+Using Docker:
 
-To update services, use the commands in `DeployHelper` directory. After copying the new binaries to the WebChemUtils directory at E:\, run the Bootstrapper to update the versions of the services.
+```
+docker build -f Dockerfile.mole2 -t mole2 .
+docker build -f Dockerfile.patternquery -t patternquery .
+```
+
+Without Docker, using the .NET 10 SDK:
+
+```
+dotnet publish AppsAndServices/Tunnels/WebChemistry.Tunnels.Server/WebChemistry.Tunnels.Server.csproj -c Release -o out/mole2
+dotnet publish AppsAndServices/Queries/Service/WebChemistry.Queries.Service/WebChemistry.Queries.Service.csproj -c Release -o out/patternquery
+```
+
+## Running
+
+MOLE 2.5 reads its input and parameters from an XML file, see `mole2 --help`. To run the included example:
+
+```
+docker run -u root -v ./MoleExample:/data mole2 /data/test.xml
+```
+
+The results are written to `MoleExample/test_output`. The container runs as a non-root user by default, `-u root` allows it to write into the mounted folder.
+
+PatternQuery reads the queries from a JSON configuration file, see `WebChemistry.Queries.Service --help` for its format:
+
+```
+docker run -u root -v ./work:/work patternquery /work/results /work/config.json
+```
 
 ## Web services
 
-Majority of these tools are available as webservices either in [WebChemistry](https://webchem.ncbr.muni.cz/) or [MOLEonline](https://moleonline.cz/).
+MOLE is available as a web service at [MOLEonline](https://moleonline.cz/) and PatternQuery at [PatternQuery](https://webchem.ncbr.muni.cz/Platform/PatternQuery/).
 
 ## How to cite
 Should you find this toolkit useful please cite one of the publications based on what you used:
 
 ### Detection - PatternQuery
-* Sehnal, D., Pravda, L., Ionescu C.-M., Svobodová Vařeková, R. and Koča, J. (2015) [PatternQuery: web application for fast detection of biomacromolecular structural patterns in the entire Protein Data Bank]((https://dx.doi.org/10.1093/nar/gkv561)). Nucleic Acids Res., 43, W383–W388.
-
-### Validation
-* Svobodová Vařeková, R., Jaiswal, D., Sehnal, D., Ionescu, C.-M., Geidl, S., Pravda, L., Horský, V., Wimmerová, M. and Koča, J. (2014) [MotiveValidator: interactive web-based validation of ligand and residue structure in biomolecular complexes](https://dx.doi.org/10.1093/nar/gku426). Nucleic Acids Res., 42, W227–33.
-
-* Sehnal, D., Svobodová Vařeková, R., Pravda, L., Ionescu, C.-M., Geidl, S., Horský, V., Jaiswal, D., Wimmerová, M. and Koča, J. (2015) [ValidatorDB: database of up-to-date validation results for ligands and non-standard residues from the Protein Data Bank](https://dx.doi.org/10.1093/nar/gku1118). Nucleic Acids Res. 43, D369–D375.
+* Sehnal, D., Pravda, L., Ionescu C.-M., Svobodová Vařeková, R. and Koča, J. (2015) [PatternQuery: web application for fast detection of biomacromolecular structural patterns in the entire Protein Data Bank](https://doi.org/10.1093/nar/gkv561). Nucleic Acids Res., 43, W383–W388.
 
 ### Analysis - MOLE
-* Sehnal, D., Vařeková, R.S., Berka, K., Pravda, L., Navrátilová, V., Banáš, P., Ionescu, C.M., Otyepka, M. and Koča, J. (2013) [MOLE 2.0: Advanced approach for analysis of biomacromolecular channels](https://dx.doi.org/10.1186/1758-2946-5-39). J. Cheminform., 5, 39.
+* Sehnal, D., Vařeková, R.S., Berka, K., Pravda, L., Navrátilová, V., Banáš, P., Ionescu, C.M., Otyepka, M. and Koča, J. (2013) [MOLE 2.0: Advanced approach for analysis of biomacromolecular channels](https://doi.org/10.1186/1758-2946-5-39). J. Cheminform., 5, 39.
 
-* Ionescu,C.-M., Sehnal,D., Falginella,F.L., Pant,P., Pravda,L., Bouchal,T., Vařeková,R.S., Geidl,S. and and Koča,J. (2015) [AtomicChargeCalculator: Interactive Web-based calculation of atomic charges in large biomolecular complexes and drug like molecules](https://dx.doi.org/10.1186/s13321-015-0099-x). J. Cheminform., 7, 50.
+### Web service - MOLEonline
+* Raček, T., Vel’ký, D., Bučeková, G., Schindler, O., Hutařová Vařeková, I., Špačková, A., Bazgier, V., Berka, K. and Svobodová, R. (2025) [MOLEonline: a web-based tool for analysing channels, tunnels, and pores (2025 update)](https://doi.org/10.1093/bioinformatics/btaf486). Bioinformatics, 41(9), btaf486.
 
-* Sehnal, D., Svobodová Vařeková, R., Huber, H. J., Geidl, S., Ionescu, C. M., Wimmerová, M. and Koča, J. (2012) [SiteBinder: An improved approach for comparing multiple protein structural motifs](https://dx.doi.org/10.1021/ci200444d). J. Chem. Inf. Model., 52(2), 343–359.
-
+* Pravda, L., Sehnal, D., Toušek, D., Navrátilová, V., Bazgier, V., Berka, K., Svobodová Vařeková, R., Koča, J. and Otyepka, M. (2018) [MOLEonline: a web-based tool for analyzing channels, tunnels and pores (2018 update)](https://doi.org/10.1093/nar/gky309). Nucleic Acids Res., 46, W368–W373.
