@@ -630,6 +630,15 @@
             //Lining.Where(r => r.IsB)
         }
 
+        /// <summary>
+        /// Computes the lining-dependent properties (physico-chemical properties and HET residues).
+        /// </summary>
+        internal void ComputeLiningProperties()
+        {
+            ComputePhysicoChemicalProperties();
+            FindHetResidues();
+        }
+
         void FindHetResidues()
         {
             var tree = Cavity.Complex.Structure.InvariantKdAtomTree();
@@ -699,8 +708,7 @@
             if (!ok) return null;
             //tunnel.DefaultProfile = tunnel.GetProfile(defaultProfileDensity);
 
-            tunnel.ComputePhysicoChemicalProperties();
-            tunnel.FindHetResidues();
+            // Lining properties are computed by ComputeLiningProperties only for tunnels that survive filtering.
 
             return tunnel;
         }

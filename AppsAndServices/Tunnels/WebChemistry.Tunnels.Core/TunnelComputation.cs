@@ -129,7 +129,16 @@
             //}
             //if (tunnels.Count() > 0) ret.Add(tunnels.Last());
 
-            return FilterTunnels(forbidden, ret);
+            var filtered = FilterTunnels(forbidden, ret);
+
+            // Computed only for the new tunnels that survived filtering (the filters use only paths and profiles).
+            foreach (var t in filtered)
+            {
+                // Reference check: Tunnel.Equals compares lining residues, not identity.
+                if (!forbidden.Any(f => ReferenceEquals(f, t))) t.ComputeLiningProperties();
+            }
+
+            return filtered;
         }
 
         private IEnumerable<Tunnel> FilterTunnels(Tunnel[] forbidden, List<Tunnel> ret)
