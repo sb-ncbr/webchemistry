@@ -307,11 +307,18 @@
 
             readerProvider = WrapReader(readerProvider);
 
+            bool isPdbX = ext.EqualOrdinalIgnoreCase(".cif") || ext.EqualOrdinalIgnoreCase(".mmcif");
+            bool readAllModels = false;
+
             switch (customType)
             {
                 case StructureReaderType.Pdb: ext = ".pdb"; break;
                 case StructureReaderType.PdbQt: ext = ".pdbqt"; break;
-                case StructureReaderType.PdbAssembly: ext = ".pdb0"; break;
+                case StructureReaderType.PdbAssembly:
+                    // PDBx/mmCIF files keep their reader; anything else is read as a PDB file with all models.
+                    if (isPdbX) readAllModels = true;
+                    else ext = ".pdb0";
+                    break;
                 case StructureReaderType.PdbX: ext = ".cif"; break;
                 case StructureReaderType.Mol: ext = ".mol"; break;
                 case StructureReaderType.Mol2: ext = ".mol2"; break;
@@ -340,7 +347,7 @@
                     break;
                 case ".cif":
                 case ".mmcif":
-                    s = StructureReader.ReadPdb(filename, readerProvider, new PdbReaderParams { LoadFirstModelOnly = true, Id = customId ?? StructureReader.GetStructureIdFromFilename(filename), Type = PdbReaderParams.StructureType.PdbX });
+                    s = StructureReader.ReadPdb(filename, readerProvider, new PdbReaderParams { LoadFirstModelOnly = !readAllModels, Id = customId ?? StructureReader.GetStructureIdFromFilename(filename), Type = PdbReaderParams.StructureType.PdbX });
                     break;
                 case ".ml2":
                 case ".mol2":

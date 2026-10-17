@@ -304,7 +304,11 @@
 
                 // Warn exactly once when we first see a second model
                 if (wasNew && modelNumbers.Count == 2)
+                {
+                    if (!Parameters.LoadFirstModelOnly)
+                        throw new NotSupportedException("Reading all models is not supported for PDBx/mmCIF files with more than one model.");
                     Warnings.Add(new OnlyFirstModelLoadedReaderWarning(CurrentLine));
+                }
 
                 if (modelNumbers.Count == 1)
                 {

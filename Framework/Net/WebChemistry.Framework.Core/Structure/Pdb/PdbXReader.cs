@@ -419,6 +419,10 @@
                 if (IsComp && !HasAtomSite) return CreateCompStructure();
                 return CreateStructure(FilterAtoms(Atoms));
             }
+            catch (NotSupportedException)
+            {
+                throw;
+            }
             catch (Exception e)
             {
                 throw new IOException(string.Format("Invalid PDBx/mmCIF format. First error at line {0}: {1}", CurrentLine, e.Message));
