@@ -31,6 +31,7 @@ namespace WebChemistry.Tunnels.Server
         TunnelsConfig Config;
 
         List<Tuple<Tetrahedron, Tetrahedron>> PathSpecs = new List<Tuple<Tetrahedron, Tetrahedron>>();
+        List<Tuple<Vector3D, Vector3D>> AxisPathSpecs = new List<Tuple<Vector3D, Vector3D>>();
 
         public IStructure Structure { get; set; }
         public ExecutionContext QueryExecutionContext { get { return queryCtx ?? (queryCtx = ExecutionContext.Create(Structure)); } }
@@ -264,6 +265,19 @@ namespace WebChemistry.Tunnels.Server
             {
                 WriteDetails("");
                 WriteDetails("Path");
+                if (p.Axis)
+                {
+                    var axisStart = p.Start.ToPoints(Structure, () => QueryExecutionContext);
+                    var axisEnd = p.End.ToPoints(Structure, () => QueryExecutionContext);
+                    if (axisStart.Length != 1 || axisEnd.Length != 1)
+                    {
+                        throw new InvalidOperationException(string.Format(
+                            "An axis <Path> needs exactly one point for its <Start> and <End>, got {0} and {1}.", axisStart.Length, axisEnd.Length));
+                    }
+                    AxisPathSpecs.Add(Tuple.Create(axisStart[0], axisEnd[0]));
+                    WriteDetails("  Axis {0} -> {1}", p.Start.ToString(), p.End.ToString());
+                    continue;
+                }
                 var starts = ResolveSurfaceTetrahedrons(p.Start);
                 var ends = ResolveSurfaceTetrahedrons(p.End);
 
@@ -364,10 +378,11 @@ namespace WebChemistry.Tunnels.Server
 
         void ComputePaths()
         {
-            if (PathSpecs.Count == 0) return;
+            if (PathSpecs.Count == 0 && AxisPathSpecs.Count == 0) return;
 
             Console.Write("Computing paths... ");
             Complex.ComputePaths(PathSpecs);
+            foreach (var axis in AxisPathSpecs) Complex.ComputeAxisPath(axis.Item1, axis.Item2);
             Console.WriteLine("{0} found.", Complex.Paths.Count);
         }
 

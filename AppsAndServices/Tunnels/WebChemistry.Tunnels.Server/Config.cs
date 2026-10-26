@@ -1198,10 +1198,20 @@ namespace WebChemistry.Tunnels.Server
         public TriangulationPoint Start { get; set; }
         public TriangulationPoint End { get; set; }
 
+        /// <summary>
+        /// Axis="1": Start and End are points of an axis, and the path runs along it through the whole structure
+        /// (Complex.ComputeAxisPath) instead of between the cavity points nearest to them.
+        /// </summary>
+        public bool Axis { get; set; }
+
         public static PathConfig FromXml(XElement xml, List<string> errors)
         {
             TriangulationPoint start = null, end = null;
             bool hasError = false;
+
+            // other attributes are ignored, as before Axis
+            var axisAttribute = xml.Attribute("Axis");
+            bool axis = axisAttribute != null && (bool)ConfigBase.GetBool(axisAttribute.Value);
 
             foreach (var elem in xml.Elements())
             {
@@ -1252,12 +1262,12 @@ namespace WebChemistry.Tunnels.Server
                 throw new InvalidOperationException(string.Format("Errors in path specification <{0}>.", xml.Name.LocalName));
             }
 
-            return new PathConfig { Start = start, End = end };
+            return new PathConfig { Start = start, End = end, Axis = axis };
         }
 
         public void Print()
         {
-            Console.WriteLine("  <Path>");
+            Console.WriteLine(Axis ? "  <Path Axis=\"1\">" : "  <Path>");
             Start.Print(      "    Start: ");
             End.Print(        "    End:   ");
         }
