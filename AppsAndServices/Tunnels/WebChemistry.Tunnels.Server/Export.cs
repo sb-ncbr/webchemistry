@@ -108,7 +108,7 @@ namespace WebChemistry.Tunnels.Server
             "REMARK 920  Berka, K; Hanak, O; Sehnal, D; Banas, P; Navratilova, V; Jaiswal, D; Ionescu, C-M; Svobodova Varekova, R; Koca, J; Otyepka M:",
             "REMARK 920  MOLEonline 2.0: Interactive Web-based Analysis of Biomacromolecular Channels. Nucleic Acid Research, 2012, doi:10.1093/nar/GKS363",
             "REMARK 920   ",
-            "REMARK ATOM  NAM RES   TUNID     X       Y       Z    Distnm RadiusA "
+            "REMARK ATOM  NAM RES   TUNID     X       Y       Z     DistA RadiusA "
         };
 
         TunnelsConfig Config;
@@ -321,11 +321,7 @@ namespace WebChemistry.Tunnels.Server
                     exp.AddTunnels(data.MergedPores, Config.Export.Parameters.PyMolSurfaceType);
                     exp.AddTunnels(data.Pores, Config.Export.Parameters.PyMolSurfaceType);
                     exp.AddCavities("Interior", Computation.Complex.Cavities);
-                    exp.AddStructure(Path.GetFileName(Config.Input.Filename));
-                    if (!string.IsNullOrEmpty(Config.Export.Parameters.PyMolPDBId))
-                    {
-                        exp.AddFetch(Config.Export.Parameters.PyMolPDBId);
-                    }
+                    exp.AddStructure(Path.GetFileName(Config.Input.Filename), Config.Export.Parameters.PyMolPDBId);
                     File.WriteAllText(Path.Combine(PymolPath, "complex.py"), w.ToString());
                 }
             }

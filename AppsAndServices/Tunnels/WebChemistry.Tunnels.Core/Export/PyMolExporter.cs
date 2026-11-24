@@ -54,16 +54,16 @@ namespace WebChemistry.Tunnels.Core.Export
                 "  b = chempy.Bond()",
                 "  b.index = [a,a+1]",
                 "  model.bond.append(b)",
-                "cmd.set('surface_mode', 1)",
-                "cmd.set('sphere_mode', 5)",
-                "cmd.set('mesh_mode', 1)",
                 string.Format("cmd.load_model(model, {0})", nameString),
+                string.Format("cmd.set('surface_mode', 1, {0})", nameString),
+                string.Format("cmd.set('mesh_mode', 1, {0})", nameString),
                 string.Format("cmd.hide('everything', {0})", nameString),
-                surfaceType == SurfaceType.Surface ? string.Format("cmd.set('surface_color', {0}, {1})", color, nameString) : string.Format("cmd.set('sphere_color', {0}, {1})", color, nameString),
+                // an atom colour, not an object setting, so that a later cmd.spectrum or cmd.color shows
+                string.Format("cmd.color({0}, {1})", color, nameString),
                 surfaceType == SurfaceType.Surface ? string.Format("cmd.show('surface', {0})", nameString) : string.Format("cmd.show('spheres', {0})", nameString),
             }.ForEach(l => Writer.WriteLine("  " + l));
             Writer.WriteLine("{0}()", commandName);
-            Writer.WriteLine("cmd.group('{0}s', [{1}], 'add')", GetCommandName(t), commandName);
+            Writer.WriteLine("cmd.group('{0}s', '{1}', 'add')", GetCommandName(t), commandName);
             Writer.WriteLine("");
             
             return this;
@@ -94,21 +94,20 @@ namespace WebChemistry.Tunnels.Core.Export
                 "  b = chempy.Bond()",
                 "  b.index = [a,a+1]",
                 "  model.bond.append(b)",
-                "cmd.set('surface_mode', 1)",
-                "cmd.set('sphere_mode', 5)",
-                "cmd.set('mesh_mode', 1)",
                 string.Format("cmd.load_model(model, {0})", nameString),
+                string.Format("cmd.set('surface_mode', 1, {0})", nameString),
+                string.Format("cmd.set('mesh_mode', 1, {0})", nameString),
                 string.Format("cmd.hide('everything', {0})", nameString),
                 string.Format("cmd.spectrum('pc', '{0}', '{1}', minimum = {2:0.000}, maximum = {3:0.000})", spectrum == PyMolSpectrumPalette.RedWhiteBlue ? "red_white_blue" : "blue_white_red", commandName, customMin.Value, customMax.Value),
                 surfaceType == SurfaceType.Surface ? string.Format("cmd.show('surface', {0})", nameString) : string.Format("cmd.show('spheres', {0})", nameString),
             }.ForEach(l => Writer.WriteLine("  " + l));
             Writer.WriteLine("{0}()", commandName);
-            Writer.WriteLine("cmd.group('{0}', [{1}], 'add')", groupName, commandName);
+            Writer.WriteLine("cmd.group('{0}', '{1}', 'add')", groupName, commandName);
             Writer.WriteLine("");
 
             return this;
         }
-        
+
         void WriteVertex(string offset, Vector3D position)
         {
             Writer.WriteLine(string.Format(Culture, "{0}VERTEX,{1:0.000},{2:0.000},{3:0.000},", offset, position.X + Offset.X, position.Y + Offset.Y, position.Z + Offset.Z));
@@ -207,7 +206,7 @@ namespace WebChemistry.Tunnels.Core.Export
             Writer.WriteLine("  cmd.load_cgo(data,'{0}')", commandName);
             Writer.WriteLine("  cmd.hide('everything', '{0}')", commandName);
             Writer.WriteLine("{0}()", commandName);
-            Writer.WriteLine("cmd.group('Interior', [{0}], 'add')", commandName);
+            Writer.WriteLine("cmd.group('Interior', '{0}', 'add')", commandName);
             Writer.WriteLine("");
 
             return this;
@@ -226,7 +225,7 @@ namespace WebChemistry.Tunnels.Core.Export
             Writer.WriteLine("  cmd.load_cgo(data,'{0}')", commandName);
             Writer.WriteLine("  cmd.hide('everything', '{0}')", commandName);
             Writer.WriteLine("{0}()", commandName);
-            Writer.WriteLine("cmd.group('{0}', [{1}], 'add')", groupName, commandName);
+            Writer.WriteLine("cmd.group('{0}', '{1}', 'add')", groupName, commandName);
             Writer.WriteLine("cmd.show('cgo', '{0}')", commandName);
             Writer.WriteLine("");
             return this;
@@ -238,9 +237,18 @@ namespace WebChemistry.Tunnels.Core.Export
             return this;
         }
 
-        public PyMolExporter AddStructure(string fileName) {
+        /// <summary>
+        /// Loads the structure from the file next to the script, or without it fetches the PDB entry, if any.
+        /// </summary>
+        public PyMolExporter AddStructure(string fileName, string pdbId = null)
+        {
             Writer.WriteLine(string.Format("if os.path.isfile('{0}'):", fileName));
             Writer.WriteLine(string.Format("  cmd.load('{0}')", fileName));
+            if (!string.IsNullOrEmpty(pdbId))
+            {
+                Writer.WriteLine("else:");
+                Writer.WriteLine("  cmd.fetch('{0}')", pdbId.ToUpperInvariant());
+            }
             return this;
         }
 
@@ -311,6 +319,9 @@ namespace WebChemistry.Tunnels.Core.Export
                 "  a = chempy.Atom()",
                 "  a.name = name",
                 "  a.vdw = vdw",
+                "  a.b = vdw",  // the radius also as the B-factor, as in the profile PDB, so that colouring by B-factor works
+                "  a.resn = 'TUN'",
+                "  a.hetatm = 1",
                 "  a.coord = [x, y, z]",
                 "  a.partial_charge = partialCharge",
                 "  model.atom.append(a)"
